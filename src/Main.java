@@ -1,4 +1,3 @@
-package com.downwithoop;
 
 public class Main {
 

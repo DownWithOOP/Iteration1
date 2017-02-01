@@ -2,4 +2,4 @@
 
 This is our repo for iteration1. 
 
-It's set up for IntelliJ IDEA, so to open the project, simply open intellij and go to open project > Iteration1 folder. 
+To open in IntelliJ, select import project > import from existing sources. 

@@ -30,9 +30,10 @@
 /out/
 .idea/
 oop.iml
-
+Iteration1.iml
 # mpeltonen/sbt-idea plugin
 .idea_modules/
+*.class
 
 # JIRA plugin
 atlassian-ide-plugin.xml

@@ -26,4 +26,9 @@ public class StructureViewController extends Controller {
     protected void initialize() {
 
     }
+
+    @Override
+    protected boolean updateView() {
+        return false;
+    }
 }

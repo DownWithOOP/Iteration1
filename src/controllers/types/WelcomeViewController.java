@@ -28,4 +28,9 @@ public class WelcomeViewController extends Controller {
     protected void initialize() {
 
     }
+
+    @Override
+    protected boolean updateView() {
+        return false;
+    }
 }

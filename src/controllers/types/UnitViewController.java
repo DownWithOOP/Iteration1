@@ -8,7 +8,7 @@ import controllers.StateManager;
  */
 public class UnitViewController extends Controller {
 
-    public UnitViewController(StateManager stateManager){
+    public UnitViewController(StateManager stateManager) {
         super(stateManager);
 
     }
@@ -26,5 +26,10 @@ public class UnitViewController extends Controller {
     @Override
     protected void initialize() {
 
+    }
+
+    @Override
+    protected boolean updateView() {
+        return false;
     }
 }

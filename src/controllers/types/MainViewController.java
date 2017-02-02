@@ -4,6 +4,8 @@ import controllers.Controller;
 import controllers.StateManager;
 import model.actions.Action;
 import model.actions.controllerActions.ChangeViewAction;
+import view.View;
+import view.types.MainView;
 
 import java.util.HashMap;
 
@@ -11,10 +13,10 @@ import java.util.HashMap;
  * Created by jordi on 2/1/2017.
  */
 public class MainViewController extends Controller {
-//    TODO: GameManager gameManager;
- HashMap<Integer,Action> mainControllerInput;
- final String array[]={"2","s","g","j"};
-    public MainViewController(StateManager stateManager){
+    //    TODO: GameManager gameManager;
+    private final MainView mainView = new MainView();
+
+    public MainViewController(StateManager stateManager) {
         super(stateManager);
     }
 
@@ -30,15 +32,31 @@ public class MainViewController extends Controller {
     protected boolean changeController() {
         return false;
     }
+
     Action a;
+
     @Override
     protected void initialize() {
-        a= new ChangeViewAction(this);
+        a = new ChangeViewAction(this);
         //mainControllerInput.put(5,a);
-       // super.addControllerActions();
+        // super.addControllerActions();
+        setView();
+    }
+
+    @Override
+    protected void setView() {
+        super.view = mainView;
+    }
+
+    @Override
+    protected boolean updateView() {
+        return false;
     }
     //TODO: add game model reference UML diagram
 
-
+    @Override
+    protected void setControllerActions() {
+        //        super.controllerActions.put()
+    }
 
 }

@@ -1,7 +1,8 @@
 package model.entity.unit;
+package model.common;
 
 public class FighterUnit extends Unit {
-    private Army army;
+    //private Army army;
 
     public FighterUnit() {
 
@@ -12,6 +13,10 @@ public class FighterUnit extends Unit {
     }
 
     public boolean joinArmy() {
+        return true;
+    }
+
+    public boolean moveUnit(Location location) {
         return true;
     }
 }

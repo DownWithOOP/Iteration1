@@ -1,12 +1,12 @@
-package src.model.entity.unit;
-package src.model.common;
+package model.entity.unit;
+//package model.common;
 
 abstract public class Unit {
-    private ArrayList<Location> currentPath;
-    private Location currentLocation;
+    //private ArrayList<Location> currentPath;
+    //private Location currentLocation;
 
     public Unit() {
-        currentPath = new ArrayList<Location>();
+        //currentPath = new ArrayList<Location>();
 
     }
 

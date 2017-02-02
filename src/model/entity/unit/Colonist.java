@@ -6,8 +6,8 @@ public class Colonist extends FighterUnit {
 
     }
 
-    public Base buildStructure(int rowPosition, int columnPosition) {
-        return new Base(rowPosition, columnPosition);
-    }
+//    public Base buildStructure(int rowPosition, int columnPosition) {
+//        return new Base(rowPosition, columnPosition);
+//    }
 
 }

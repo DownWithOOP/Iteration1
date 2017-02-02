@@ -3,8 +3,7 @@ package model.map.tile;
 /**
  * Created by cduica on 2/1/17.
  */
-public enum ResourceType {
-    CATFOOD,
-    WOOD,
-    CRYSTAL
+public enum DecalType {
+    SKULLS_AND_CROSSBONES,
+    RED_CROSS
 }

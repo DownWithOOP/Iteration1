@@ -4,9 +4,9 @@ import java.awt.event.*;
 import java.awt.geom.*;
 
 public abstract class View extends Frame{
-    final int VERT_RES;
-    final int HORIZ_RES;
     protected boolean guiInitialized;
+    private final int VERT_RES;
+    private final int HORIZ_RES;
 
     protected View(){
     	super("Space Cats"); // create GUI 

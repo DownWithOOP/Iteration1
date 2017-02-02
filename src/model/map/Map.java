@@ -15,20 +15,30 @@ public class Map {
 
     private Tile[][] tileArray;
 
-    Map(){
+    public Map(){
         tileArray = new Tile[GRID_HEIGHT][GRID_WIDTH];
+        createTileGrid();
     }
 
     public Tile getTile(Location location){
 
-        return new Tile();
+        return new Tile(null, null, null, null);
     }
 
-    public ArrayList<Location> findPath(){
+    /**
+     * Utilizes path finding algorithm to tell a unit how to get to a particular area.
+     * @param startPoint
+     * @param endPoint
+     * @return List of movements.
+     */
+    public ArrayList<Location> findPath(Location startPoint, Location endPoint){
 
         return new ArrayList<>();
     }
 
+    /**
+     * Initializes tile array from external XML file.
+     */
     private void createTileGrid(){
 
     }

@@ -8,8 +8,9 @@ public class Colonist extends FighterUnit {
 
     }
 
-    public Base buildStructure(int rowPosition, int columnPosition, int visionRadius) {
-        return new Base(rowPosition, columnPosition,visionRadius);
-    }
+
+//    public Base buildStructure(int rowPosition, int columnPosition, int visionRadius) {
+//        return new Base(rowPosition, columnPosition,visionRadius);
+//    }
 
 }

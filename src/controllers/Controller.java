@@ -1,5 +1,6 @@
 package controllers;
 
+import controllers.kyeboardInputHandler.TypeOfActions;
 import model.actions.Action;
 import model.actions.AvailableActions;
 import view.View;
@@ -9,10 +10,10 @@ import java.util.HashMap;
 abstract public class Controller {
     protected View view;
     protected StateManager stateManager;
-    protected HashMap<Integer, Action> controllerActions;
-    protected AvailableActions availableActions = new AvailableActions();
+    protected HashMap<TypeOfActions, Action> controllerActions;
+    protected static AvailableActions availableActions = new AvailableActions();
 
-    protected Controller( StateManager stateManager) {
+    protected Controller(StateManager stateManager) {
         this.stateManager = stateManager;
         controllerActions = new HashMap<>();
         initialize();
@@ -22,34 +23,40 @@ abstract public class Controller {
 
     abstract protected boolean changeController();
 
-    abstract protected void initialize();
-
     abstract protected void setView();
 
     abstract protected void setControllerActions();
 
     abstract protected boolean updateView();
+
+
+
     //TODO: check if the below method makes sense
     /*protected boolean updateView() {
         boolean returnValue = false;
         returnValue = view.update();
         return returnValue;
     }*/
-
-    protected boolean addAvailabeActions() {
-        boolean returnValue = false;
-        //returnValue=availableActions.addActions(controllerActions);
-        return returnValue;
+    protected void initialize() {
+        setView();
+        setControllerActions();
+        resumeController();
     }
 
-    protected void addControllerActions(HashMap<Integer, Action> customizedControl) {
-        controllerActions = customizedControl;
+    protected void addAvailabeActions() {
+        availableActions.addActions(controllerActions);
     }
 
-    protected boolean removeAvailableActions() {
-        boolean returnValue = false;
-        //returnValue=availableActions.removeActions(controllerActions);
-        return returnValue;
+    protected void removeAvailableActions() {
+        availableActions.removeActions(controllerActions);
+    }
+
+    protected void resumeController() {
+        addAvailabeActions();
+    }
+
+    protected void leaveController() {
+        removeAvailableActions();
     }
 
     protected boolean onKeyPressed(int input) {
@@ -57,5 +64,6 @@ abstract public class Controller {
         //returnValue=availableActions.executeAction(input);
         return returnValue;
     }
+
 
 }

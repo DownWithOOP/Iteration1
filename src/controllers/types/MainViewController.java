@@ -3,6 +3,7 @@ package controllers.types;
 import controllers.Controller;
 import controllers.StateManager;
 import controllers.kyeboardInputHandler.KeyBoardMapManager;
+import controllers.kyeboardInputHandler.TypeOfActions;
 import model.actions.Action;
 import model.actions.controllerActions.ChangeViewAction;
 import sun.applet.Main;
@@ -20,6 +21,7 @@ public class MainViewController extends Controller {
 
     public MainViewController(StateManager stateManager) {
         super(stateManager);
+        a = new ChangeViewAction(this);
     }
 
     @Override
@@ -32,18 +34,12 @@ public class MainViewController extends Controller {
 
     @Override
     protected boolean changeController() {
+        super.leaveController();
         return false;
     }
 
     Action a;
 
-    @Override
-    protected void initialize() {
-        a = new ChangeViewAction(this);
-        //mainControllerInput.put(5,a);
-        // super.addControllerActions();
-        setView();
-    }
 
     @Override
     protected void setView() {
@@ -54,23 +50,27 @@ public class MainViewController extends Controller {
     protected boolean updateView() {
         return false;
     }
+
+
     //TODO: add game model reference UML diagram
 
     @Override
     protected void setControllerActions() {
-        //        super.controllerActions.put()
+        ChangeViewAction changeViewAction= new ChangeViewAction(this);
+        super.controllerActions.put(TypeOfActions.changeView,changeViewAction);
     }
 
-    private void interpretInput(KeyBoardMapManager keyBoardMapManager,int input){
+    private void handleInput(KeyBoardMapManager keyBoardMapManager, int input) {
         keyBoardMapManager.processInput(input);
     }
 
-    //TODO: delete this one
+    //TODO: delete this one, take care of handleInput
 //    public static void main(String[] args) {
 //        StateManager stateManager= new StateManager();
 //        MainViewController mainViewController = new MainViewController(stateManager);
 //        KeyBoardMapManager keyBoardMapManager = new KeyBoardMapManager();
 //        keyBoardMapManager.updatePlayerId("Player1");
-//        mainViewController.interpretInput(keyBoardMapManager,1);
+//        mainViewController.handleInput(keyBoardMapManager,1);
+//        mainViewController.changeController();
 //    }
 }

@@ -34,6 +34,7 @@ Iteration1.iml
 # mpeltonen/sbt-idea plugin
 .idea_modules/
 *.class
+/src/.DS_Store
 
 # JIRA plugin
 atlassian-ide-plugin.xml

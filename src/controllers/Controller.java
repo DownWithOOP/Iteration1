@@ -1,16 +1,19 @@
-package Controllers;
+package controllers;
+
+import Model.actions.Action;
+import Model.actions.AvailableActions;
 
 import java.util.HashMap;
 
 abstract public class Controller{
 //    protected View view;
-//    protected StateManager stateManager;
-//    protected HashMap<Integer, Action> controllerActions;
-//    protected AvailableActions availableActions= new AvailableActions();
-    Controller(/*View view, StateManager stateManager, */){
+    protected StateManager stateManager;
+    protected HashMap<Integer, Action> controllerActions;
+    protected AvailableActions availableActions= new AvailableActions();
+    Controller(/*View view,*/ StateManager stateManager){
         //this.view=view;
-//        this.stateManager= stateManager;
-//        controllerActions= new HashMap<Integer,Action>();
+        this.stateManager= stateManager;
+        controllerActions= new HashMap<>();
         initialize();
     }
     abstract public boolean update();
@@ -29,9 +32,9 @@ abstract public class Controller{
         return returnValue;
     }
 
-//    protected boolean addControllerActions(HashMap<Integer,Action> customizedControl ){
-//
-//    }
+    protected void addControllerActions(HashMap<Integer,Action> customizedControl ){
+        controllerActions=customizedControl;
+    }
 
     protected boolean removeAvailableActions(){
         boolean returnValue=false;

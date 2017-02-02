@@ -1,13 +1,19 @@
-package Controllers;
+package controllers;
+
+import Model.actions.Action;
+import Model.actions.controllerActions.ChangeViewAction;
+
+import java.util.HashMap;
 
 /**
  * Created by jordi on 2/1/2017.
  */
 public class MainController extends Controller {
 //    TODO: GameManager gameManager;
-
-    MainController(){
-        super();
+ HashMap<Integer,Action> mainControllerInput;
+ final String array[]={"2","s","g","j"};
+    public MainController(StateManager stateManager){
+        super(stateManager);
     }
 
 
@@ -28,7 +34,10 @@ public class MainController extends Controller {
 
     @Override
     protected void initialize() {
-//        super.addControllerActions();
+        Action a= new ChangeViewAction(this);
+        a.execute();
+        //mainControllerInput.put(5,a);
+       // super.addControllerActions();
     }
     //TODO: add game model reference UML diagram
 

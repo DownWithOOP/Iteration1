@@ -1,7 +1,10 @@
+import controllers.MainController;
+import controllers.StateManager;
 
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("hello world");
+        MainController a= new MainController(new StateManager());
+
     }
 }

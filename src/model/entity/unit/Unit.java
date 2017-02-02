@@ -15,7 +15,7 @@ abstract public class Unit extends Entity {
     private UnitStats unitStats;
 
     public Unit(int offensiveDamage, int defensiveDamage, int armor, int movement, int health, int upkeep, int visionRadius) {
-        super();
+        super(visionRadius);
         unitStats = new UnitStats(offensiveDamage, defensiveDamage, armor, movement, health, upkeep, visionRadius);
         currentPath = new ArrayList<Location>();
 

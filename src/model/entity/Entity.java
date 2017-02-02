@@ -14,10 +14,12 @@ abstract public class Entity {
     // Queue of user selected commands for each entity to perform in a # of turns
     private Queue<Action> commandQueue;
 
+    private int visionRadius;
 
-    public Entity() {
+    public Entity(int visionRadius) {
         entityID = UUID.randomUUID();
         commandQueue = new LinkedList<Action>();
+        this.visionRadius = visionRadius;
     }
 
     abstract public Location getLocation();

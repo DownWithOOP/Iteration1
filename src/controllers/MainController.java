@@ -1,7 +1,7 @@
 package controllers;
 
-import Model.actions.Action;
-import Model.actions.controllerActions.ChangeViewAction;
+import model.actions.Action;
+import model.actions.controllerActions.ChangeViewAction;
 
 import java.util.HashMap;
 

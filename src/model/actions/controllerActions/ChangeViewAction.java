@@ -1,6 +1,6 @@
-package Model.actions.controllerActions;
+package model.actions.controllerActions;
 
-import Model.actions.ControllerAction;
+import model.actions.ControllerAction;
 import controllers.Controller;
 
 /**

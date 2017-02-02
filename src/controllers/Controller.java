@@ -1,7 +1,7 @@
 package controllers;
 
-import Model.actions.Action;
-import Model.actions.AvailableActions;
+import model.actions.Action;
+import model.actions.AvailableActions;
 
 import java.util.HashMap;
 

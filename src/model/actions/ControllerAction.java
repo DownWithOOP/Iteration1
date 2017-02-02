@@ -1,4 +1,4 @@
-package Model.actions;
+package model.actions;
 
 import controllers.Controller;
 

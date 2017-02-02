@@ -1,12 +1,12 @@
-package src.model.entity.stats;
+package model.entity.stats;
 
 public class Stats {
-    private int offensiveDamage;
-    private int defensiveDamage;
-    private int armor;
-    private int movement;
-    private int health;
-    private int upkeep;
+    private int offensiveDamage;    // damage dealt when attacking
+    private int defensiveDamage;    // damage dealt when fending off an attack
+    private int armor;              // absorbs a fixed amount of damage
+    private int movement;           // the max distance a unit may move in one turn
+    private int health;             // when reaches zero, unit is destroyed
+    private int upkeep;             // resources required to keep unit at full health
 
     public Stats(int offensiveDamage, int defensiveDamage, int armor, int movement, int health, int upkeep) {
         this.offensiveDamage = offensiveDamage;

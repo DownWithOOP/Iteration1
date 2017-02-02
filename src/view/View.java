@@ -4,8 +4,8 @@ import java.awt.event.*;
 import java.awt.geom.*;
 
 public abstract class View {
-    final int VERT_RES;
-    final int HORIZ_RES;
+    private final int VERT_RES;
+    private final int HORIZ_RES;
 
     protected View(){
     	// protected construtor for view

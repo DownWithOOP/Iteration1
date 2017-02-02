@@ -1,10 +1,10 @@
 import controllers.MainController;
 import controllers.StateManager;
 
-public class Main {
+public class Game {
 
     public static void main(String[] args) {
-        MainController a= new MainController(new StateManager());
-
+        StateManager sm= new StateManager();
+        sm.startGame();
     }
 }

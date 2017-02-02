@@ -20,6 +20,7 @@ public class MainController extends Controller {
 
     @Override
     public boolean update() {
+        a.execute();
         //TODO: call gameManager.update();
         //TODO: super.view.update(pass parameters);
         return false;
@@ -31,11 +32,10 @@ public class MainController extends Controller {
     protected boolean changeController() {
         return false;
     }
-
+    Action a;
     @Override
     protected void initialize() {
-        Action a= new ChangeViewAction(this);
-        a.execute();
+        a= new ChangeViewAction(this);
         //mainControllerInput.put(5,a);
        // super.addControllerActions();
     }

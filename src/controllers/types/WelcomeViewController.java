@@ -30,6 +30,16 @@ public class WelcomeViewController extends Controller {
     }
 
     @Override
+    protected void setView() {
+
+    }
+
+    @Override
+    protected void setControllerActions() {
+
+    }
+
+    @Override
     protected boolean updateView() {
         return false;
     }

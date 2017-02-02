@@ -1,11 +1,14 @@
 package model.entity;
-package model.entity.stats;
+
+import model.actions.Action;
+import model.common.Location;
 //package src.model.common;
 import java.util.Queue;
 
 abstract public class Entity {
     private int entityID;
-    private Queue<Action> commandQueue = new Queue<Action>();
+    //TODO: my ide was giving me an error that is why I commented this one out, Jordi
+    //private Queue<Action> commandQueue = new Queue<Action>();
     private int visionRadius; //the amount of tiles on any side that an entity can see
 
     public Entity(int visionRadius) {

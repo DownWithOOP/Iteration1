@@ -2,8 +2,10 @@ package controllers.types;
 
 import controllers.Controller;
 import controllers.StateManager;
+import controllers.kyeboardInputHandler.KeyBoardMapManager;
 import model.actions.Action;
 import model.actions.controllerActions.ChangeViewAction;
+import sun.applet.Main;
 import view.View;
 import view.types.MainView;
 
@@ -59,4 +61,16 @@ public class MainViewController extends Controller {
         //        super.controllerActions.put()
     }
 
+    private void interpretInput(KeyBoardMapManager keyBoardMapManager,int input){
+        keyBoardMapManager.processInput(input);
+    }
+
+    //TODO: delete this one
+//    public static void main(String[] args) {
+//        StateManager stateManager= new StateManager();
+//        MainViewController mainViewController = new MainViewController(stateManager);
+//        KeyBoardMapManager keyBoardMapManager = new KeyBoardMapManager();
+//        keyBoardMapManager.updatePlayerId("Player1");
+//        mainViewController.interpretInput(keyBoardMapManager,1);
+//    }
 }

@@ -1,7 +1,6 @@
-package controllers.kyeboardInputHandler;
+package controllers.keyboardInputHandler;
 
 import model.actions.AvailableActions;
-import model.player.Player;
 
 import java.util.HashMap;
 

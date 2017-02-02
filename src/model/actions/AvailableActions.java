@@ -1,6 +1,6 @@
 package model.actions;
 
-import controllers.kyeboardInputHandler.TypeOfActions;
+import controllers.keyboardInputHandler.TypeOfActions;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,6 +1,6 @@
 package controllers;
 
-import controllers.kyeboardInputHandler.TypeOfActions;
+import controllers.keyboardInputHandler.TypeOfActions;
 import model.actions.Action;
 import model.actions.AvailableActions;
 import view.View;

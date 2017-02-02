@@ -2,15 +2,11 @@ package controllers.types;
 
 import controllers.Controller;
 import controllers.StateManager;
-import controllers.kyeboardInputHandler.KeyBoardMapManager;
-import controllers.kyeboardInputHandler.TypeOfActions;
+import controllers.keyboardInputHandler.KeyBoardMapManager;
+import controllers.keyboardInputHandler.TypeOfActions;
 import model.actions.Action;
 import model.actions.controllerActions.ChangeViewAction;
-import sun.applet.Main;
-import view.View;
 import view.types.MainView;
-
-import java.util.HashMap;
 
 /**
  * Created by jordi on 2/1/2017.

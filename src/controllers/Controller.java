@@ -10,7 +10,8 @@ abstract public class Controller{
     protected StateManager stateManager;
     protected HashMap<Integer, Action> controllerActions;
     protected AvailableActions availableActions= new AvailableActions();
-    Controller(/*View view,*/ StateManager stateManager){
+
+    public Controller(/*View view,*/ StateManager stateManager){
         //this.view=view;
         this.stateManager= stateManager;
         controllerActions= new HashMap<>();

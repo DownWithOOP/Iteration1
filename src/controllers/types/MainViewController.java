@@ -1,5 +1,7 @@
-package controllers;
+package controllers.types;
 
+import controllers.Controller;
+import controllers.StateManager;
 import model.actions.Action;
 import model.actions.controllerActions.ChangeViewAction;
 
@@ -8,15 +10,13 @@ import java.util.HashMap;
 /**
  * Created by jordi on 2/1/2017.
  */
-public class MainController extends Controller {
+public class MainViewController extends Controller {
 //    TODO: GameManager gameManager;
  HashMap<Integer,Action> mainControllerInput;
  final String array[]={"2","s","g","j"};
-    public MainController(StateManager stateManager){
+    public MainViewController(StateManager stateManager){
         super(stateManager);
     }
-
-
 
     @Override
     public boolean update() {
@@ -25,8 +25,6 @@ public class MainController extends Controller {
         //TODO: super.view.update(pass parameters);
         return false;
     }
-
-
 
     @Override
     protected boolean changeController() {

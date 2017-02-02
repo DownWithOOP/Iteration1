@@ -1,4 +1,3 @@
-import controllers.MainController;
 import controllers.StateManager;
 
 public class Game {

@@ -1,23 +1,36 @@
 package controllers;
 
 
-import com.sun.org.apache.xpath.internal.SourceTree;
+import controllers.types.MainViewController;
+import controllers.types.StructureViewController;
+import controllers.types.UnitViewController;
+import controllers.types.WelcomeViewController;
+
+import java.util.HashMap;
 
 /**
  * Created by jordi on 2/1/2017.
  */
 public class StateManager {
-    final Controller[] controllerArray = new Controller[4];
 
+    private HashMap<TypeOfControllers, Controller> controllerMap = new HashMap<>();       //used for controller change, so that access is O(1)
     private boolean gameOn;
-    public final long FPS = 1;                            //frames per second
+    public final long FPS = 30;                            //frames per second
     final long LOOP_TIME = 1000l / FPS;                   //how long an update should take 1000 miliseconds/ FPS
+    private Controller activeController;
 
+    /**
+     * when class is initialized the controllers are too and the WelcomeViewController is activated
+     */
     public StateManager() {
-        MainController a = new MainController(this);
-        controllerArray[0] = a;
+        initializeControllers();
+        activeController = controllerMap.get(TypeOfControllers.WelcomeViewController);
     }
 
+    /**
+     * game basically starts
+     * //TODO:ask if needed for the first screen
+     */
     private void startGameLoop() {
         while (gameOn) {
             long timeStart = System.currentTimeMillis();
@@ -31,7 +44,10 @@ public class StateManager {
         startGameLoop();
     }
 
-    //Ensures the amount of frames per second of the game
+    /**
+     * Ensures the amount of frames per second of the game
+     * @param timeStart the time at which the function started
+     */
     public void calculateLoopSleepTime(long timeStart) {
         long timeEnd = System.currentTimeMillis();
         long sleepTime = LOOP_TIME - (timeEnd - timeStart);
@@ -46,12 +62,43 @@ public class StateManager {
         }
     }
 
+    /**
+     * will update the active controller
+     */
     private void update() {
-        controllerArray[0].update();
+        activeController.update();
     }
+
 
     public void stopGame() {
         gameOn = false;
     }
+
+    /**
+     * as the function express it initializes the controllers and places them on a map
+     * it uses the enum TypeOfControllers for the key
+     */
+    private void initializeControllers() {
+        MainViewController mainViewController = new MainViewController(this);
+        StructureViewController structureViewController = new StructureViewController(this);
+        UnitViewController unitViewController = new UnitViewController(this);
+        WelcomeViewController welcomeViewController = new WelcomeViewController(this);
+
+        controllerMap.put(TypeOfControllers.MainViewController, mainViewController);
+        controllerMap.put(TypeOfControllers.StructureViewController, structureViewController);
+        controllerMap.put(TypeOfControllers.UnitViewController, unitViewController);
+        controllerMap.put(TypeOfControllers.WelcomeViewController, welcomeViewController);
+    }
+
+    public void changeController(TypeOfControllers typeOfControllers) {
+
+        if (controllerMap.containsKey(typeOfControllers)) {
+            Controller controller = controllerMap.get(typeOfControllers);
+            activeController = controller;
+            controller.changeController();
+        }
+    }
+
+
 
 }

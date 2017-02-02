@@ -1,7 +1,8 @@
-package src.model.entity.stats;
+package model.entity.stats;
 
 public class StructureStats extends Stats {
-    private int productionRates;
+
+    private int productionRates;    // the # of turns required to produce a unit of a specific type
 
     public StructureStats(int offensiveDamage, int defensiveDamage, int armor, int movement, int health, int upkeep, int productionRates) {
         super(offensiveDamage, defensiveDamage, armor, movement, health, upkeep);

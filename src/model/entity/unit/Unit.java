@@ -1,21 +1,18 @@
 package model.entity.unit;
-//package model.common;
+import model.common.Location;
 
-//package src.model.entity.unit;
-
-//package src.model.common;
 import java.util.ArrayList;
 
 
 abstract public class Unit {
     //private ArrayList<Location> currentPath;
-    //private Location currentLocation;
+    private Location currentLocation;
 
     public Unit() {
         //currentPath = new ArrayList<Location>();
 
     }
 
-    //abstract public boolean moveUnit(Location targetLocation);
+    abstract public boolean moveUnit(Location targetLocation);
 
 }

@@ -2,6 +2,8 @@ package model.map;
 
 import model.common.Location;
 import model.map.tile.*;
+import model.map.tile.areaeffect.AreaEffect;
+import model.map.tile.areaeffect.AreaEffectFactory;
 import utilities.XMLParser;
 
 import java.util.ArrayList;
@@ -12,20 +14,20 @@ import java.util.HashMap;
  */
 public class Map {
 
-    private final int GRID_HEIGHT = 10;
-    private final int GRID_WIDTH = 10;
-    private final String MAPXML_PATH = "../res/map/Map.xml";
+    private final int GRID_HEIGHT = 3;
+    private final int GRID_WIDTH = 3;
+    private final String MAP_XML_PATH = "../res/map/Map.xml";
 
     private Tile[][] tileArray;
 
     public Map(){
         tileArray = new Tile[GRID_HEIGHT][GRID_WIDTH];
-        createTileGrid();
+        ArrayList<Tile> tiles = retrieveTileList();
+        createTileGrid(tiles);
     }
 
-    public Tile getTile(Location location){
-
-        return new Tile(null, null, null, null);
+    public Tile getTile(int row, int col){
+        return tileArray[row][col];
     }
 
     /**
@@ -40,13 +42,13 @@ public class Map {
     }
 
     /**
-     * Initializes tile array from external XML file.
+     * Obtains a list of tiles from an XML file.
      */
-    private void createTileGrid(){
+    private ArrayList<Tile> retrieveTileList(){
 
         XMLParser xmlParser = new XMLParser();
         try {
-            xmlParser.loadDocument(MAPXML_PATH);
+            xmlParser.loadDocument(MAP_XML_PATH);
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -54,16 +56,38 @@ public class Map {
 
         ArrayList<Tile> tiles = new ArrayList<>();
 
-        //TODO: finish this
         for(int i = 0; i < tileList.size(); i++){
-            ResourceType resourceType = ResourceType.valueOf(tileList.get(i).get("Resource").toUpperCase());
-            TerrainType terrainType = TerrainType.valueOf(tileList.get(i).get("Terrain").toUpperCase());
-            DecalType decalType = DecalType.valueOf(tileList.get(i).get("Decal").toUpperCase());
-            Terrain terrain = new Terrain(terrainType, decalType);
-        }
+            ResourceType resourceType = ResourceType.valueOf(tileList.get(i).get("Resource"));
+            TerrainType terrainType = TerrainType.valueOf(tileList.get(i).get("Terrain"));
+            DecalType decalType = DecalType.valueOf(tileList.get(i).get("Decal"));
 
+            AreaEffectFactory areaEffectFactory = new AreaEffectFactory();
+            AreaEffect areaEffect = areaEffectFactory.createAreaEffect(tileList.get(i).get("AreaEffect"));
+
+            Tile tile = new Tile(
+                    new Terrain(terrainType, decalType),
+                    areaEffect,
+                    new Resource(resourceType),
+                    null
+            );
+
+            tiles.add(tile);
+        }
+        return tiles;
     }
 
-
+    /**
+     * Creates a 2d array from the list of tiles.
+     * @param tiles
+     */
+    private void createTileGrid(ArrayList<Tile> tiles){
+        int k = 0;
+        for(int i = 0; i < GRID_HEIGHT; i++){
+            for(int j = 0; j < GRID_WIDTH; j++){
+                tileArray[i][j] = tiles.get(k);
+                k++;
+            }
+        }
+    }
 
 }

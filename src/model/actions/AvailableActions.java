@@ -1,7 +1,5 @@
 package model.actions;
-
 import controllers.keyboardInputHandler.TypeOfActions;
-
 import java.util.HashMap;
 import java.util.Map;
 

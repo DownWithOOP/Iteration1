@@ -17,6 +17,13 @@ public class WelcomeViewController extends Controller {
     @Override
     protected void handleKeyPressed(KeyEvent e) {
         System.out.println("=================================== Welcome View Controller event handler");
+        if(e.getKeyChar() == 'c'){
+            System.out.println("Changing to MAIN VIEW CONTROLLER");
+            this.changeController(); // doesn't work correctly yet
+            super.stateManager.changeController(TypeOfControllers.MainViewController);
+        }
+        System.out.println(e.toString());
+
     }
 
     @Override
@@ -27,12 +34,11 @@ public class WelcomeViewController extends Controller {
     @Override
     public boolean update() {
         boolean checkIfControllerWasChanged=changeController();
-        return checkIfControllerWasChanged;
+        return false;
     }
 
     @Override
     protected boolean changeController() {
-        super.stateManager.changeController(TypeOfControllers.MainViewController);
         return false;
     }
 

@@ -18,11 +18,6 @@ public class PauseViewController extends Controller {
     }
 
     @Override
-    protected void changeController() {
-
-    }
-
-    @Override
     protected void initialize() {
 
     }

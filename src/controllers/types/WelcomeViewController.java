@@ -14,14 +14,8 @@ public class WelcomeViewController extends Controller {
 
     @Override
     public void update() {
-        changeController();
     }
 
-    @Override
-    protected void changeController() {
-        super.stateManager.changeController(TypeOfControllers.MainViewController);
-
-    }
 
     @Override
     protected void initialize() {

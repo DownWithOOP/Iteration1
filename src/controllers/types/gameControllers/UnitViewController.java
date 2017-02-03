@@ -25,11 +25,6 @@ public class UnitViewController extends GameController {
     }
 
     @Override
-    protected void changeController() {
-
-    }
-
-    @Override
     protected void initialize() {
 
     }

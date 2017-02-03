@@ -19,11 +19,6 @@ public class StructureViewController extends GameController {
     }
 
     @Override
-    protected void changeController() {
-
-    }
-
-    @Override
     protected void initialize() {
 
     }

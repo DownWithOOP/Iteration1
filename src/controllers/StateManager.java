@@ -83,7 +83,7 @@ public class StateManager {
         StructureViewController structureViewController = new StructureViewController(this);
         UnitViewController unitViewController = new UnitViewController(this);
         WelcomeViewController welcomeViewController = new WelcomeViewController(this);
-
+//      TODO:CREATE TypeOfController.PauseView
         controllerMap.put(TypeOfControllers.MainViewController, mainViewController);
         controllerMap.put(TypeOfControllers.StructureViewController, structureViewController);
         controllerMap.put(TypeOfControllers.UnitViewController, unitViewController);
@@ -95,7 +95,7 @@ public class StateManager {
         if (controllerMap.containsKey(typeOfControllers)) {
             Controller controller = controllerMap.get(typeOfControllers);
             activeController = controller;
-            controller.changeController();
+            controller.resumeController();
         }
     }
 

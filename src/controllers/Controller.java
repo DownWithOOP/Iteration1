@@ -24,7 +24,7 @@ abstract public class Controller implements ContainsActions {
 
     abstract public void update();
 
-    abstract protected void changeController();
+
 
     abstract protected void setView();
 
@@ -57,7 +57,12 @@ abstract public class Controller implements ContainsActions {
         addAvailableActions();
     }
 
-    protected void leaveController() {
+    protected void changeView(TypeOfControllers typeOfControllers){
+        leaveController();
+        stateManager.changeController(typeOfControllers);
+    }
+
+    protected void leaveController( ) {
         removeAvailableActions();
     }
 

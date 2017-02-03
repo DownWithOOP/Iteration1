@@ -2,6 +2,7 @@ package controllers.types.gameControllers;
 
 import controllers.Controller;
 import controllers.StateManager;
+import controllers.TypeOfControllers;
 import controllers.keyboardInputHandler.KeyBoardMapManager;
 import controllers.keyboardInputHandler.TypeOfActions;
 import controllers.types.GameController;
@@ -38,13 +39,7 @@ public class MainViewController extends GameController {
     public void update() {
         a.execute();
         updateGameModel();
-        //TODO: super.view.update(pass parameters);
-    }
-
-
-    @Override
-    protected void changeController() {
-        super.leaveController();
+        updateView();
     }
 
     Action a;
@@ -54,6 +49,7 @@ public class MainViewController extends GameController {
         super.view = mainView;
     }
 
+    //TODO: view.update
     @Override
     protected void updateView() {
     }
@@ -65,20 +61,20 @@ public class MainViewController extends GameController {
     }
 
     //TODO: delete this one, take care of handleInput
-//    public static void main(String[] args) {
-//        StateManager stateManager= new StateManager();
-//        MainViewController mainViewController = new MainViewController(stateManager);
-//        KeyBoardMapManager keyBoardMapManager = new KeyBoardMapManager();
-//
-//        HashMap<TypeOfActions,String> playerInput= new HashMap<>();
-//        playerInput.put(TypeOfActions.changeView,"1");
-//
-//        keyBoardMapManager.populatePlayerInputHash("Player1",playerInput);
-//        keyBoardMapManager.updatePlayerId("Player1");
-//
-//        mainViewController.handleInput(keyBoardMapManager,"1");
-//        mainViewController.changeController();
-//    }
+    public static void main(String[] args) {
+        StateManager stateManager= new StateManager();
+        MainViewController mainViewController = new MainViewController(stateManager);
+        KeyBoardMapManager keyBoardMapManager = new KeyBoardMapManager();
+
+        HashMap<TypeOfActions,String> playerInput= new HashMap<>();
+        playerInput.put(TypeOfActions.changeView,"1");
+
+        keyBoardMapManager.populatePlayerInputHash("Player1",playerInput);
+        keyBoardMapManager.updatePlayerId("Player1");
+
+        mainViewController.handleInput(keyBoardMapManager,"1");
+        mainViewController.changeView(TypeOfControllers.MainViewController);
+    }
 }
 
 

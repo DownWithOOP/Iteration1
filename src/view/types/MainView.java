@@ -1,5 +1,6 @@
 package view.types;
 
+import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
 import model.common.GraphicsInfo;
 
@@ -15,8 +16,9 @@ public class MainView extends View {
     View areaViewport;
     View statusViewport;
 
-    public MainView(){
-
+    public MainView(Parent root){
+        super(root);
+        System.out.print("Main view constructor.");
     }
 
     @Override

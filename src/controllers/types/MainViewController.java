@@ -15,11 +15,12 @@ import java.util.HashMap;
  */
 public class MainViewController extends Controller {
     //    TODO: GameManager gameManager;
-    private final MainView mainView = new MainView();
+    private final MainView mainView;
 
     public MainViewController(StateManager stateManager) {
         super(stateManager);
         a = new ChangeViewAction(this);
+        mainView = null;//new MainView(stateManager.getRootNode());
     }
 
     @Override

@@ -7,7 +7,10 @@ import view.View;
 import view.components.AreaViewport;
 import view.components.StatusViewport;
 
-public class MainView extends View {
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+public class MainView extends View implements KeyListener {
 
     //Need to find out about Image type; just put int in for now
     java.util.Map<GraphicsInfo, Integer> graphicsBuffer;
@@ -16,7 +19,17 @@ public class MainView extends View {
     View statusViewport;
 
     public MainView(){
+        super.addKeyListener(this);
+    }
 
+    public void keyTyped(KeyEvent e) {
+    }
+
+    public void keyPressed(KeyEvent e) {
+        System.out.println(" MAIN VIEW KEYBOARD INPUT!!!!!!!!!!!!!!");
+    }
+
+    public void keyReleased(KeyEvent e) {
     }
 
     @Override

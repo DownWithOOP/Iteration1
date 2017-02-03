@@ -8,16 +8,16 @@ import java.util.HashMap;
  * Created by jordi on 2/2/2017.
  */
 public class KeyBoardMapManager {
-    static private HashMap<String, HashMap<Integer, TypeOfActions>> playerInputHash;
+    private HashMap<String, HashMap<String, TypeOfActions>> playerInputHash;
+    private HashMap<String, TypeOfActions> currentInputProcessor= new HashMap<>();
+    private HashMap<String, TypeOfActions> defaultKeyMap= new HashMap<>();
+
     private String currentPlayerId;
-    private HashMap<Integer, TypeOfActions> currentInputProcessor= new HashMap<>();
-    private AvailableActions availableActions = new AvailableActions();
 
     public KeyBoardMapManager(){
         playerInputHash=new HashMap<>();
-        populatePlayerInputHash();
+//        populatePlayerInputHash();
     }
-
 
 
     /**
@@ -26,13 +26,13 @@ public class KeyBoardMapManager {
      *
      * @param inputFromController
      */
-    public void processInput(Integer inputFromController) {
-        TypeOfActions typeOfAction;
-        if (!currentInputProcessor.containsKey(inputFromController)) {
-            return;
+    public TypeOfActions processInput(String inputFromController) {
+        TypeOfActions typeOfAction= null;
+        if (currentInputProcessor.containsKey(inputFromController)) {
+            typeOfAction = currentInputProcessor.get(inputFromController);
         }
-        typeOfAction = currentInputProcessor.get(inputFromController);
-        availableActions.executeAction(typeOfAction);
+//        availableActions.executeAction(typeOfAction);
+        return typeOfAction;
     }
 
     /**
@@ -41,17 +41,32 @@ public class KeyBoardMapManager {
      * @param playerId used to get the new keyboard style of the player
      */
     public void updatePlayerId(String playerId) {
-        currentInputProcessor = playerInputHash.get(playerId);
+        currentPlayerId=playerId;
+        currentInputProcessor = playerInputHash.get(currentPlayerId);
     }
 
     /**
-     * Used at the Welcome View to populate all the players with their customized inputs
-     * The GameManager should call this method and iterate through an  xml file of the players and their controls
+     * Used at the Welcome View to populate a player with their customized inputs
+     * Something should call this method and iterate through an  xml file of the players and their controls
      * TODO:a default iteration of the Dave inputs, change the current implementation
      */
-    private void populatePlayerInputHash(){
-        HashMap<Integer,TypeOfActions> actionInput=new HashMap<>();
-        actionInput.put(1,TypeOfActions.changeView);
-        playerInputHash.put("Player1", actionInput);
+    public void populatePlayerInputHash(String playerId, HashMap<TypeOfActions,String> playerCustomizedControllers){
+        HashMap<String,TypeOfActions> actionInput=new HashMap<>();
+
+        for (TypeOfActions iterator: TypeOfActions.values()){
+            if (playerCustomizedControllers.containsKey(iterator)){
+                String key=playerCustomizedControllers.get(iterator);
+                actionInput.put(key,iterator);
+            }
+        }
+        playerInputHash.put(playerId, actionInput);
+    }
+
+    public void addPlayer(String playerId){
+        playerInputHash.put(playerId,defaultKeyMap);
+    }
+//Todo: check how to do output then do this function
+    private void fillDefaultKeyMap(){
+
     }
 }

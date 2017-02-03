@@ -16,7 +16,10 @@ public class AvailableActions {
         }
     }
 
-    public void addActions(HashMap<TypeOfActions, Action> currentAvailableActions) {
+    public void addActions(ContainsActions actionRelatedClasses) {
+        HashMap<TypeOfActions,Action> currentAvailableActions;
+        currentAvailableActions=actionRelatedClasses.getActions();
+
         for (Map.Entry<TypeOfActions, Action> iterator :
                 currentAvailableActions.entrySet()) {
             TypeOfActions key = iterator.getKey();
@@ -24,7 +27,10 @@ public class AvailableActions {
             actionMap.put(key,value);
         }
     }
-    public void removeActions(HashMap<TypeOfActions, Action> currentAvailableActions) {
+    public void removeActions(ContainsActions actionRelatedClasses) {
+        HashMap<TypeOfActions, Action> currentAvailableActions;
+        currentAvailableActions= actionRelatedClasses.getActions();
+
         for (TypeOfActions iterator :  currentAvailableActions.keySet()) {
             actionMap.remove(iterator);
         }

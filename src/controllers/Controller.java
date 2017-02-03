@@ -1,13 +1,16 @@
 package controllers;
 
+import com.sun.xml.internal.bind.annotation.XmlLocation;
+import controllers.keyboardInputHandler.KeyBoardMapManager;
 import controllers.keyboardInputHandler.TypeOfActions;
 import model.actions.Action;
 import model.actions.AvailableActions;
+import model.actions.ContainsActions;
 import view.View;
 
 import java.util.HashMap;
 
-abstract public class Controller {
+abstract public class Controller implements ContainsActions {
     protected View view;
     protected StateManager stateManager;
     protected HashMap<TypeOfActions, Action> controllerActions;
@@ -29,6 +32,7 @@ abstract public class Controller {
 
     abstract protected boolean updateView();
 
+    abstract protected boolean updateGameManager();
 
 
     //TODO: check if the below method makes sense
@@ -43,16 +47,23 @@ abstract public class Controller {
         resumeController();
     }
 
-    protected void addAvailabeActions() {
-        availableActions.addActions(controllerActions);
+    @Override
+    public void addAvailableActions() {
+        availableActions.addActions(this);
     }
 
-    protected void removeAvailableActions() {
-        availableActions.removeActions(controllerActions);
+    @Override
+    public void removeAvailableActions() {
+        availableActions.removeActions(this);
     }
 
-    protected void resumeController() {
-        addAvailabeActions();
+    @Override
+    public HashMap<TypeOfActions, Action> getActions() {
+        return controllerActions;
+    }
+
+    public void resumeController() {
+        addAvailableActions();
     }
 
     protected void leaveController() {
@@ -63,6 +74,11 @@ abstract public class Controller {
         boolean returnValue = false;
         //returnValue=availableActions.executeAction(input);
         return returnValue;
+    }
+
+    protected void handleInput(KeyBoardMapManager keyBoardMapManager, String input) {
+        TypeOfActions typeOfActions = keyBoardMapManager.processInput(input);
+        availableActions.executeAction(typeOfActions);
     }
 
 

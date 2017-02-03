@@ -1,8 +1,7 @@
 package model.entity;
-//import model.entity.stats.Stats;
+
 import model.actions.Action;
 import model.common.Location;
-
 import java.util.Queue;
 import java.util.LinkedList;
 import java.util.UUID;
@@ -13,7 +12,6 @@ abstract public class Entity {
 
     // Queue of user selected commands for each entity to perform in a # of turns
     private Queue<Action> commandQueue;
-
 
     public Entity() {
         entityID = UUID.randomUUID();

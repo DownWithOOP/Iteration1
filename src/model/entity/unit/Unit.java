@@ -1,4 +1,5 @@
 package model.entity.unit;
+
 import model.entity.Entity;
 import model.entity.stats.UnitStats;
 import model.common.Location;

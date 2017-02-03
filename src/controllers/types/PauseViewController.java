@@ -3,25 +3,24 @@ package controllers.types;
 import controllers.Controller;
 import controllers.StateManager;
 import controllers.TypeOfControllers;
-
 /**
- * Created by jordi on 2/1/2017.
+ * Created by Konrad on 2/2/2017.
  */
-public class WelcomeViewController extends Controller {
-    public WelcomeViewController(StateManager stateManager) {
+public class PauseViewController extends Controller {
+
+    public PauseViewController(StateManager stateManager) {
         super(stateManager);
     }
 
     @Override
     public boolean update() {
-        boolean checkIfControllerWasChanged=changeController();
-        return checkIfControllerWasChanged;
+        return false;
     }
 
     @Override
     protected boolean changeController() {
-        super.stateManager.changeController(TypeOfControllers.MainViewController);
         return false;
+
     }
 
     @Override
@@ -48,4 +47,6 @@ public class WelcomeViewController extends Controller {
     protected boolean updateGameManager() {
         return false;
     }
+
+
 }

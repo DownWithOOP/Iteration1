@@ -47,8 +47,10 @@ public class KeyBoardMapManager {
 
     /**
      * Used at the Welcome View to populate a player with their customized inputs
-     * Something should call this method and iterate through an  xml file of the players and their controls
-     * TODO:a default iteration of the Dave inputs, change the current implementation
+     * Something should call this method and iterate through an  xml file of the players' inputs and their controls
+     * This class is used by Control to parse the inputs
+     * This class is called by the GameManager whenever players are switched
+     * TODO:a default iteration of the Dave's inputs, change the current implementation
      */
     public void populatePlayerInputHash(String playerId, HashMap<TypeOfActions,String> playerCustomizedControllers){
         HashMap<String,TypeOfActions> actionInput=new HashMap<>();

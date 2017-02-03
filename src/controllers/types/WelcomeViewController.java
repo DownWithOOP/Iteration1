@@ -43,4 +43,9 @@ public class WelcomeViewController extends Controller {
     protected boolean updateView() {
         return false;
     }
+
+    @Override
+    protected boolean updateGameManager() {
+        return false;
+    }
 }

@@ -41,4 +41,9 @@ public class StructureViewController extends Controller {
     protected boolean updateView() {
         return false;
     }
+
+    @Override
+    protected boolean updateGameManager() {
+        return false;
+    }
 }

@@ -20,14 +20,18 @@ public class WelcomeViewController extends Controller {
     }
     protected void handleKeyPressed(KeyEvent e) {
         System.out.println("=================================== Welcome View Controller event handler");
+        if(e.getKeyChar() == 'c'){
+            System.out.println("Changing to MAIN VIEW CONTROLLER");
+            super.stateManager.changeController(TypeOfControllers.MainViewController);
+        }
+        System.out.println(e.toString());
+
     }
 
     @Override
     protected void handleKeyReleased(KeyEvent e) {
 
     }
-
-
 
 
     @Override

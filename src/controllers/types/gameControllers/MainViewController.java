@@ -1,9 +1,11 @@
-package controllers.types;
+package controllers.types.gameControllers;
 
 import controllers.Controller;
 import controllers.StateManager;
 import controllers.keyboardInputHandler.KeyBoardMapManager;
 import controllers.keyboardInputHandler.TypeOfActions;
+import controllers.types.GameController;
+import model.GameModel;
 import model.actions.Action;
 import model.actions.controllerActions.ChangeViewAction;
 import view.types.MainView;
@@ -13,31 +15,39 @@ import java.util.HashMap;
 /**
  * Created by jordi on 2/1/2017.
  */
-public class MainViewController extends Controller {
-    //    TODO: GameManager gameManager;
+public class MainViewController extends GameController {
     private final MainView mainView = new MainView();
 
     public MainViewController(StateManager stateManager) {
         super(stateManager);
+        startGameModel();
         a = new ChangeViewAction(this);
     }
 
-    @Override
-    public boolean update() {
-        a.execute();
-        //TODO: call gameManager.update();
-        //TODO: super.view.update(pass parameters);
-        return false;
+    private void startGameModel(){
+        gameModel= new GameModel();
     }
 
     @Override
-    protected boolean changeController() {
+    protected void updateGameModel() {
+//        gameModel.update();
+    }
+
+    //TODO: change public modifier
+    @Override
+    public void update() {
+        a.execute();
+        updateGameModel();
+        //TODO: super.view.update(pass parameters);
+    }
+
+
+    @Override
+    protected void changeController() {
         super.leaveController();
-        return false;
     }
 
     Action a;
-
 
     @Override
     protected void setView() {
@@ -45,23 +55,13 @@ public class MainViewController extends Controller {
     }
 
     @Override
-    protected boolean updateView() {
-        return false;
+    protected void updateView() {
     }
-
-    //TODO: when game manager is created call gameManager.update();
-    @Override
-    protected boolean updateGameManager() {
-        return false;
-    }
-
-
-    //TODO: add game model reference UML diagram
 
     @Override
     protected void setControllerActions() {
-        ChangeViewAction changeViewAction= new ChangeViewAction(this);
-        super.controllerActions.put(TypeOfActions.changeView,changeViewAction);
+        ChangeViewAction changeViewAction = new ChangeViewAction(this);
+        super.controllerActions.put(TypeOfActions.changeView, changeViewAction);
     }
 
     //TODO: delete this one, take care of handleInput

@@ -22,25 +22,16 @@ abstract public class Controller implements ContainsActions {
         initialize();
     }
 
-    abstract public boolean update();
+    abstract public void update();
 
-    abstract protected boolean changeController();
+    abstract protected void changeController();
 
     abstract protected void setView();
 
     abstract protected void setControllerActions();
 
-    abstract protected boolean updateView();
+    abstract protected void updateView();
 
-    abstract protected boolean updateGameManager();
-
-
-    //TODO: check if the below method makes sense
-    /*protected boolean updateView() {
-        boolean returnValue = false;
-        returnValue = view.update();
-        return returnValue;
-    }*/
     protected void initialize() {
         setView();
         setControllerActions();
@@ -70,10 +61,9 @@ abstract public class Controller implements ContainsActions {
         removeAvailableActions();
     }
 
-    protected boolean onKeyPressed(int input) {
+    protected void onKeyPressed(int input) {
         boolean returnValue = false;
         //returnValue=availableActions.executeAction(input);
-        return returnValue;
     }
 
     protected void handleInput(KeyBoardMapManager keyBoardMapManager, String input) {

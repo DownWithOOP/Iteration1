@@ -13,15 +13,14 @@ public class WelcomeViewController extends Controller {
     }
 
     @Override
-    public boolean update() {
-        boolean checkIfControllerWasChanged=changeController();
-        return checkIfControllerWasChanged;
+    public void update() {
+        changeController();
     }
 
     @Override
-    protected boolean changeController() {
+    protected void changeController() {
         super.stateManager.changeController(TypeOfControllers.MainViewController);
-        return false;
+
     }
 
     @Override
@@ -40,12 +39,7 @@ public class WelcomeViewController extends Controller {
     }
 
     @Override
-    protected boolean updateView() {
-        return false;
-    }
+    protected void updateView() {
 
-    @Override
-    protected boolean updateGameManager() {
-        return false;
     }
 }

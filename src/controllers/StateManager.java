@@ -1,9 +1,9 @@
 package controllers;
 
 
-import controllers.types.MainViewController;
-import controllers.types.StructureViewController;
-import controllers.types.UnitViewController;
+import controllers.types.gameControllers.MainViewController;
+import controllers.types.gameControllers.StructureViewController;
+import controllers.types.gameControllers.UnitViewController;
 import controllers.types.WelcomeViewController;
 
 import java.util.HashMap;

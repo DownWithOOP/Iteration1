@@ -1,26 +1,26 @@
-package controllers.types;
+package controllers.types.gameControllers;
 
 import controllers.Controller;
 import controllers.StateManager;
+import controllers.types.GameController;
 
 /**
  * Created by jordi on 2/1/2017.
  */
-public class UnitViewController extends Controller {
+public class StructureViewController extends GameController {
 
-    public UnitViewController(StateManager stateManager) {
+    public StructureViewController(StateManager stateManager) {
         super(stateManager);
+    }
+
+    @Override
+    public void update() {
 
     }
 
     @Override
-    public boolean update() {
-        return false;
-    }
+    protected void changeController() {
 
-    @Override
-    protected boolean changeController() {
-        return false;
     }
 
     @Override
@@ -39,12 +39,12 @@ public class UnitViewController extends Controller {
     }
 
     @Override
-    protected boolean updateView() {
-        return false;
+    protected void updateView() {
+
     }
 
     @Override
-    protected boolean updateGameManager() {
-        return false;
+    protected void updateGameModel() {
+
     }
 }

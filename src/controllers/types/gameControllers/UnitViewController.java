@@ -1,15 +1,22 @@
-package controllers.types;
+package controllers.types.gameControllers;
 
 import controllers.Controller;
 import controllers.StateManager;
-import controllers.TypeOfControllers;
-/**
- * Created by Konrad on 2/2/2017.
- */
-public class PauseViewController extends Controller {
+import controllers.types.GameController;
 
-    public PauseViewController(StateManager stateManager) {
+/**
+ * Created by jordi on 2/1/2017.
+ */
+public class UnitViewController extends GameController {
+
+    public UnitViewController(StateManager stateManager) {
         super(stateManager);
+
+    }
+
+    @Override
+    protected void updateGameModel() {
+
     }
 
     @Override
@@ -41,4 +48,6 @@ public class PauseViewController extends Controller {
     protected void updateView() {
 
     }
+
+
 }

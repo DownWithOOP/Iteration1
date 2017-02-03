@@ -50,7 +50,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource>WOOD</Resource>
+        <Resource>CRYSTAL</Resource>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>

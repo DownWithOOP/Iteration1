@@ -11,6 +11,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.security.Key;
 import java.util.HashMap;
 
 /**
@@ -18,6 +19,7 @@ import java.util.HashMap;
  */
 public class StateManager extends Frame implements KeyListener {
 
+    private int controlKey=0;
     private int screenHeight;
     private int screenWidth;
 
@@ -132,11 +134,43 @@ public class StateManager extends Frame implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) { // all the input that is taken in gets handled here
         // we want to forward this to the currently active controller
-        this.activeController.handleKeyPressed(e);
+//        this.activeController.handleKeyPressed(e);
+        int keyPressed=e.getKeyCode();
+
+        if (keyPressed!=KeyEvent.VK_CONTROL){
+            handleInput(keyPressed);
+        }
+        else{
+            controlKey=keyPressed;
+        }
+
+        System.out.println("control: "+ controlKey);
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        this.activeController.handleKeyReleased(e);
+//        this.activeController.handleKeyReleased(e);
+        if (e.getKeyCode()== KeyEvent.VK_CONTROL){
+            controlKey=0;
+        }
+    }
+
+    private void handleInput(int keyPressed){
+        String handledInput=keyPressed+"";
+        if ((keyPressed==KeyEvent.VK_LEFT || keyPressed==KeyEvent.VK_RIGHT) && controlKey!=KeyEvent.VK_CONTROL ){
+            handledInput= "" + "" + KeyEvent.VK_LEFT + "" + KeyEvent.VK_RIGHT;
+        }
+        if ((keyPressed==KeyEvent.VK_LEFT || keyPressed==KeyEvent.VK_RIGHT) && controlKey==KeyEvent.VK_CONTROL ){
+            handledInput= KeyEvent.VK_CONTROL + "" + KeyEvent.VK_LEFT + "" + KeyEvent.VK_RIGHT;
+        }
+        if ((keyPressed==KeyEvent.VK_UP || keyPressed==KeyEvent.VK_DOWN) && controlKey!=KeyEvent.VK_CONTROL){
+            handledInput="" + "" + KeyEvent.VK_UP + "" + KeyEvent.VK_UP;
+        }
+        if ((keyPressed==KeyEvent.VK_UP || keyPressed==KeyEvent.VK_DOWN) && controlKey==KeyEvent.VK_CONTROL){
+            handledInput=KeyEvent.VK_CONTROL + "" + KeyEvent.VK_UP + "" + KeyEvent.VK_UP;
+        }
+
+        activeController.receiveInput(handledInput);
+
     }
 }

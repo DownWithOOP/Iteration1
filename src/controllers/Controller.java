@@ -16,6 +16,7 @@ abstract public class Controller implements ContainsActions {
     protected StateManager stateManager;
     protected HashMap<TypeOfActions, Action> controllerActions;
     protected static AvailableActions availableActions = new AvailableActions();
+    KeyBoardMapManager keyBoardMapManager=new KeyBoardMapManager();
 
     protected Controller(StateManager stateManager) {
         this.stateManager = stateManager;
@@ -27,11 +28,9 @@ abstract public class Controller implements ContainsActions {
     abstract public void update();
 
 
-    abstract protected void handleKeyPressed(KeyEvent e);
-
-    abstract protected void handleKeyReleased(KeyEvent e);
-
-
+//    abstract protected void handleKeyPressed(KeyEvent e);
+//
+//    abstract protected void handleKeyReleased(KeyEvent e);
 
 
     abstract protected void setView();
@@ -74,9 +73,8 @@ abstract public class Controller implements ContainsActions {
         removeAvailableActions();
     }
 
-    protected void onKeyPressed(int input) {
-        boolean returnValue = false;
-        //returnValue=availableActions.executeAction(input);
+    public void receiveInput(String receivedInput){
+        handleInput(keyBoardMapManager,receivedInput);
     }
 
     protected void handleInput(KeyBoardMapManager keyBoardMapManager, String input) {

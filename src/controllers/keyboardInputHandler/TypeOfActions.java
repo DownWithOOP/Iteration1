@@ -6,9 +6,10 @@ package controllers.keyboardInputHandler;
 public enum TypeOfActions {
     /*controller actions*/changeView,
     /*player actions*/ cycleMode,cycleType, cycleTypeInstance, cycleCommand, selectUnit,
-    /*Entity actions*/ cancelQueue, decomission, powerDown, powerUp,
+    /*Entity actions*/ cancelQueue, decomission, powerDown, powerUp,activateCommand,
     /*Structure actions*/ createUnit, healUnit,
     /*Unit actions*/ moveUnit,
     /*FighterUnit actions*/ joinArmy, abandonArmy,
-    /*Fighter action*/ attack, defend
+    /*Fighter action*/ attack, defend,
+    /*Directions*/ north,south,east,west,northEast,northWest,southEast,southWest
     }

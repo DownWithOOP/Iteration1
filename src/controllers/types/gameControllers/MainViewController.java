@@ -43,15 +43,15 @@ public class MainViewController extends GameController {
         updateView();
     }
 
-    @Override
-    protected void handleKeyPressed(KeyEvent e) {
-
-    }
-
-    @Override
-    protected void handleKeyReleased(KeyEvent e) {
-
-    }
+//    @Override
+//    protected void handleKeyPressed(KeyEvent e) {
+//
+//    }
+//
+//    @Override
+//    protected void handleKeyReleased(KeyEvent e) {
+//
+//    }
 
     Action a;
 

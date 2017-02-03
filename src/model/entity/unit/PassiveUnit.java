@@ -1,21 +1,22 @@
 package model.entity.unit;
 
 import model.common.Location;
-
+import model.entity.stats.UnitStats;
 
 public class PassiveUnit extends Unit {
 
-    public PassiveUnit(int offensiveDamage, int defensiveDamage, int armor, int movement, int health, int upkeep, int visionRadius) {
-        super(offensiveDamage, defensiveDamage, armor, movement, health, upkeep, visionRadius);
+    public PassiveUnit(UnitStats passiveStats) {
+        super (passiveStats);
     }
 
     @Override
-    public Location getLocation(){
-        return null;
+    public boolean moveUnit(int x, int y) {
+        this.setCurrentLocation(x,y);
+        return true;
     }
 
     @Override
-    public boolean moveUnit(Location targetLocation) {
-        return false;
+    public Location getLocation() {
+        return getCurrentLocation();
     }
 }

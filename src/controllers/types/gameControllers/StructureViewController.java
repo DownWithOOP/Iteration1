@@ -4,6 +4,8 @@ import controllers.Controller;
 import controllers.StateManager;
 import controllers.types.GameController;
 
+import java.awt.event.KeyEvent;
+
 /**
  * Created by jordi on 2/1/2017.
  */
@@ -14,7 +16,18 @@ public class StructureViewController extends GameController {
     }
 
     @Override
+
     public void update() {
+
+    }
+
+    @Override
+    protected void handleKeyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    protected void handleKeyReleased(KeyEvent e) {
 
     }
 

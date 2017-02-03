@@ -11,6 +11,7 @@ import model.actions.Action;
 import model.actions.controllerActions.ChangeViewAction;
 import view.types.MainView;
 
+import java.awt.event.KeyEvent;
 import java.util.HashMap;
 
 /**
@@ -40,6 +41,16 @@ public class MainViewController extends GameController {
         a.execute();
         updateGameModel();
         updateView();
+    }
+
+    @Override
+    protected void handleKeyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    protected void handleKeyReleased(KeyEvent e) {
+
     }
 
     Action a;

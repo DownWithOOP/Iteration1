@@ -30,8 +30,8 @@ public class Army extends Entity {
 //    private int
 
 
-    public Army(int visionRadius) {
-        super(visionRadius);
+    public Army() {
+        super();
     }
 
     @Override

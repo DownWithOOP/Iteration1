@@ -1,8 +1,10 @@
 package model.entity.unit;
 
+import model.entity.stats.UnitStats;
+
 public class Melee extends FighterUnit {
 
     public Melee() {
-        super(20, 3, 5, 2, 100, 3, 1);
+        super(new UnitStats(20, 3, 5, 2, 100, 3, 1));
     }
 }

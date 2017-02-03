@@ -7,14 +7,16 @@ public class Stats {
     private int movement;           // the max distance a unit may move in one turn
     private int health;             // when reaches zero, unit is destroyed
     private int upkeep;             // resources required to keep unit at full health
+    private int visionRadius;       // The amount of tiles on any side that an entity can see
 
-    public Stats(int offensiveDamage, int defensiveDamage, int armor, int movement, int health, int upkeep) {
+    public Stats(int offensiveDamage, int defensiveDamage, int armor, int movement, int health, int upkeep, int visionRadius) {
         this.offensiveDamage = offensiveDamage;
         this.defensiveDamage = defensiveDamage;
         this.armor = armor;
         this.movement = movement;
         this.health = health;
         this.upkeep = upkeep;
+        this.visionRadius = visionRadius;
     }
 
     public void setOffensiveDamage(int offensiveDamage) {
@@ -63,6 +65,14 @@ public class Stats {
 
     public int getUpkeep() {
         return upkeep;
+    }
+
+    public int getVisionRadius() {
+        return visionRadius;
+    }
+
+    public void setVisionRadius(int visionRadius) {
+        this.visionRadius = visionRadius;
     }
 }
 

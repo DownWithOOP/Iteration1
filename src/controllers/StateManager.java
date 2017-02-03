@@ -6,12 +6,20 @@ import controllers.types.gameControllers.StructureViewController;
 import controllers.types.gameControllers.UnitViewController;
 import controllers.types.WelcomeViewController;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.HashMap;
 
 /**
  * Created by jordi on 2/1/2017.
  */
-public class StateManager {
+public class StateManager extends Frame implements KeyListener {
+
+    private int screenHeight;
+    private int screenWidth;
 
     private HashMap<TypeOfControllers, Controller> controllerMap = new HashMap<>();       //used for controller change, so that access is O(1)
     private boolean gameOn;
@@ -22,9 +30,24 @@ public class StateManager {
     /**
      * when class is initialized the controllers are too and the WelcomeViewController is activated
      */
-    public StateManager() {
+    public StateManager() { // this is where the GUI is created
+        super("Space Cats");
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        screenHeight = screenSize.height;
+        screenWidth = screenSize.width;
+        setSize(screenWidth,screenHeight);
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent windowEvent){
+                System.exit(0);
+            }
+        });
+        this.setVisible(true);
+        // at this point the GUI is initialized
         initializeControllers();
         activeController = controllerMap.get(TypeOfControllers.WelcomeViewController);
+        // at this point we have all the controllers intitialized
+        // when the game starts, we want to be at the WelcomeViewController
+        super.addKeyListener(this); // bind keylistener to the gui that is running
     }
 
     /**
@@ -66,6 +89,7 @@ public class StateManager {
      * will update the active controller
      */
     private void update() {
+
         activeController.update();
     }
 
@@ -100,5 +124,19 @@ public class StateManager {
     }
 
 
+    @Override
+    public void keyTyped(KeyEvent e) {
 
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) { // all the input that is taken in gets handled here
+        // we want to forward this to the currently active controller
+        this.activeController.handleKeyPressed(e);
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        this.activeController.handleKeyReleased(e);
+    }
 }

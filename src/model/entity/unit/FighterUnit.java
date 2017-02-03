@@ -1,12 +1,14 @@
 package model.entity.unit;
+
+import model.entity.stats.UnitStats;
 import model.common.Location;
 import model.entity.army.Army;
 
 public class FighterUnit extends Unit {
     private Army army;
 
-    public FighterUnit(int offensiveDamage, int defensiveDamage, int armor, int movement, int health, int upkeep, int visionRadius) {
-        super(offensiveDamage, defensiveDamage, armor, movement, health, upkeep, visionRadius);
+    public FighterUnit(UnitStats fighterStats) {
+        super(fighterStats);
     }
 
     public boolean abandonArmy() {
@@ -18,12 +20,13 @@ public class FighterUnit extends Unit {
     }
 
     @Override
-    public boolean moveUnit(Location location) {
+    public boolean moveUnit(int x, int y) {
+        this.setCurrentLocation(x,y);
         return true;
     }
 
     @Override
     public Location getLocation() {
-        return null;
+        return getCurrentLocation();
     }
 }

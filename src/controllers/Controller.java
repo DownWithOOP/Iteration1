@@ -1,5 +1,6 @@
 package controllers;
 
+import java.awt.event.KeyEvent;
 import com.sun.xml.internal.bind.annotation.XmlLocation;
 import controllers.keyboardInputHandler.KeyBoardMapManager;
 import controllers.keyboardInputHandler.TypeOfActions;
@@ -22,7 +23,14 @@ abstract public class Controller implements ContainsActions {
         initialize();
     }
 
+
     abstract public void update();
+
+
+    abstract protected void handleKeyPressed(KeyEvent e);
+
+    abstract protected void handleKeyReleased(KeyEvent e);
+
 
 
 

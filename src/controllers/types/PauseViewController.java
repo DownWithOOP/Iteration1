@@ -19,14 +19,14 @@ public class PauseViewController extends Controller {
     public void update() {
     }
 
-    protected void handleKeyPressed(KeyEvent e) {
-
-    }
-
-    @Override
-    protected void handleKeyReleased(KeyEvent e) {
-
-    }
+//    protected void handleKeyPressed(KeyEvent e) {
+//
+//    }
+//
+//    @Override
+//    protected void handleKeyReleased(KeyEvent e) {
+//
+//    }
 
     @Override
     protected void initialize() {

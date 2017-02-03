@@ -2,6 +2,7 @@ package model.actions.playerActions;
 
 import com.sun.media.jfxmedia.events.PlayerEvent;
 import model.actions.Action;
+import model.actions.ActionModifiers;
 import model.actions.PlayerAction;
 import model.player.Player;
 
@@ -14,8 +15,12 @@ public class SelectUnitAction extends PlayerAction {
     }
 
     @Override
-    public boolean execute() {
+    public void execute() {
 
-        return false;
+    }
+
+    @Override
+    public void addToQueue(ActionModifiers actionModifier) {
+
     }
 }

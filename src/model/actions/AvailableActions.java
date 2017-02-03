@@ -8,10 +8,10 @@ import java.util.Map;
  */
 public class AvailableActions {
     private static HashMap<TypeOfActions, Action> actionMap = new HashMap<>();
-
+//Todo:fix addToQueue
     public void executeAction(TypeOfActions typeOfAction) {
         if (actionMap.containsKey(typeOfAction)) {
-            actionMap.get(typeOfAction).addToQueue();
+            actionMap.get(typeOfAction).addToQueue(ActionModifiers.down);
             actionMap.get(typeOfAction).execute();
         }
     }

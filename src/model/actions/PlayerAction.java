@@ -8,12 +8,4 @@ public abstract class PlayerAction implements Action {
         //this.player = player;
     }
 
-    @Override
-    public abstract boolean execute();
-
-    @Override
-    public boolean addToQueue(){
-        //player.addToQueue()
-        return false;
-    }
 }

@@ -1,5 +1,6 @@
 package model.actions.playerActions;
 
+import model.actions.ActionModifiers;
 import model.actions.PlayerAction;
 import model.player.Player;
 
@@ -9,5 +10,10 @@ public class CycleTypeAction extends PlayerAction {
         super(player);
     }
 
-    public boolean execute() { return false; }
+    public void execute() {  }
+
+    @Override
+    public void addToQueue(ActionModifiers actionModifier) {
+
+    }
 }

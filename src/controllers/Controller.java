@@ -11,6 +11,8 @@ import view.View;
 
 import java.util.HashMap;
 
+//TODO figure out the correct way to hide/show views upon resume/leaveController
+
 abstract public class Controller implements ContainsActions {
     protected View view;
     protected StateManager stateManager;

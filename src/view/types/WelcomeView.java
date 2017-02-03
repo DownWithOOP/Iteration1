@@ -1,6 +1,10 @@
 package view.types;
 
+import java.awt.*;
+
 import view.View;
+
+import javax.swing.*;
 
 
 /**
@@ -9,11 +13,16 @@ import view.View;
 public class WelcomeView extends View {
 
     public WelcomeView() {
+        super();
+    }
+
+    public WelcomeView(LayoutManager layoutManager){
+        super(layoutManager);
     }
 
     @Override
     public void start() {
-
+        setBackground(Color.black);
     }
 
     @Override

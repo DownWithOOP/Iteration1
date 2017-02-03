@@ -1,8 +1,8 @@
 package view.components;
 
-import javax.swing.JPanel;
+import javafx.scene.layout.Pane;
 
-public class StatusViewport extends JPanel {
+public class StatusViewport extends Pane {
     public StatusViewport(){
 
     }

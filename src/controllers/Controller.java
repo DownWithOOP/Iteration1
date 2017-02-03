@@ -11,14 +11,11 @@ import view.View;
 
 import java.util.HashMap;
 
-//TODO figure out the correct way to hide/show views upon resume/leaveController
-
 abstract public class Controller implements ContainsActions {
     protected View view;
     protected StateManager stateManager;
     protected HashMap<TypeOfActions, Action> controllerActions;
     protected static AvailableActions availableActions = new AvailableActions();
-    KeyBoardMapManager keyBoardMapManager=new KeyBoardMapManager();
 
     protected Controller(StateManager stateManager) {
         this.stateManager = stateManager;
@@ -30,9 +27,11 @@ abstract public class Controller implements ContainsActions {
     abstract public void update();
 
 
-//    abstract protected void handleKeyPressed(KeyEvent e);
-//
-//    abstract protected void handleKeyReleased(KeyEvent e);
+    abstract protected void handleKeyPressed(KeyEvent e);
+
+    abstract protected void handleKeyReleased(KeyEvent e);
+
+
 
 
     abstract protected void setView();
@@ -75,8 +74,9 @@ abstract public class Controller implements ContainsActions {
         removeAvailableActions();
     }
 
-    public void receiveInput(String receivedInput){
-        handleInput(keyBoardMapManager,receivedInput);
+    protected void onKeyPressed(int input) {
+        boolean returnValue = false;
+        //returnValue=availableActions.executeAction(input);
     }
 
     protected void handleInput(KeyBoardMapManager keyBoardMapManager, String input) {

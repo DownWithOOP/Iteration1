@@ -20,16 +20,16 @@ public class StructureViewController extends GameController {
     public void update() {
 
     }
-//
-//    @Override
-//    protected void handleKeyPressed(KeyEvent e) {
-//
-//    }
-//
-//    @Override
-//    protected void handleKeyReleased(KeyEvent e) {
-//
-//    }
+
+    @Override
+    protected void handleKeyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    protected void handleKeyReleased(KeyEvent e) {
+
+    }
 
     @Override
     protected void initialize() {

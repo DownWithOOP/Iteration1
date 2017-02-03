@@ -1,6 +1,5 @@
 package model.actions.playerActions;
 
-import model.actions.ActionModifiers;
 import model.actions.PlayerAction;
 import model.player.Player;
 
@@ -10,12 +9,5 @@ public class CycleCommandAction extends PlayerAction {
         super(player);
     }
 
-    @Override
-    public void execute() {
-    }
-
-    @Override
-    public void addToQueue(ActionModifiers actionModifier) {
-
-    }
+    public boolean execute() { return false; }
 }

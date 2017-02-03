@@ -3,20 +3,15 @@ package controllers.types;
 import controllers.Controller;
 import controllers.StateManager;
 import controllers.TypeOfControllers;
-import view.types.WelcomeView;
 
-import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
 
 /**
  * Created by jordi on 2/1/2017.
  */
 public class WelcomeViewController extends Controller {
-    private final WelcomeView welcomeView = new WelcomeView(new BorderLayout());
-
     public WelcomeViewController(StateManager stateManager) {
         super(stateManager);
-        setView();
     }
 
     @Override
@@ -25,10 +20,19 @@ public class WelcomeViewController extends Controller {
     }
     protected void handleKeyPressed(KeyEvent e) {
         System.out.println("=================================== Welcome View Controller event handler");
-
+        if(e.getKeyChar() == 'c'){
+            System.out.println("Changing to MAIN VIEW CONTROLLER");
+            super.stateManager.changeController(TypeOfControllers.MainViewController);
+        }
         System.out.println(e.toString());
 
     }
+
+    @Override
+    protected void handleKeyReleased(KeyEvent e) {
+
+    }
+
 
     @Override
     protected void initialize() {
@@ -37,7 +41,7 @@ public class WelcomeViewController extends Controller {
 
     @Override
     protected void setView() {
-        super.view = welcomeView;
+
     }
 
     @Override

@@ -1,6 +1,5 @@
 package model.actions.controllerActions;
 
-import model.actions.ActionModifiers;
 import model.actions.ControllerAction;
 import controllers.Controller;
 
@@ -15,13 +14,13 @@ public class ChangeViewAction extends ControllerAction {
 
 //TODO:Fix this method, testing for now
     @Override
-    public void execute() {
+    public boolean execute() {
         System.out.println("HelloWorld!");
+        return false;
     }
 
     @Override
-    public void addToQueue(ActionModifiers actionModifier) {
-
+    public boolean addToQueue() {
+        return false;
     }
-
 }

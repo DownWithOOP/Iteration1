@@ -21,14 +21,14 @@ public class UnitViewController extends GameController {
 
     }
 
-//    protected void handleKeyPressed(KeyEvent e) {
-//
-//    }
-//
-//    @Override
-//    protected void handleKeyReleased(KeyEvent e) {
-//
-//    }
+    protected void handleKeyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    protected void handleKeyReleased(KeyEvent e) {
+
+    }
 
     @Override
     public void update() {

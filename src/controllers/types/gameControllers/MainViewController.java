@@ -1,5 +1,6 @@
 package controllers.types.gameControllers;
 
+import controllers.Controller;
 import controllers.StateManager;
 import controllers.TypeOfControllers;
 import controllers.keyboardInputHandler.KeyBoardMapManager;
@@ -10,7 +11,6 @@ import model.actions.Action;
 import model.actions.controllerActions.ChangeViewAction;
 import view.types.MainView;
 
-import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 
@@ -18,7 +18,7 @@ import java.util.HashMap;
  * Created by jordi on 2/1/2017.
  */
 public class MainViewController extends GameController {
-    private final MainView mainView = new MainView(new BorderLayout());
+    private final MainView mainView = new MainView();
 
     public MainViewController(StateManager stateManager) {
         super(stateManager);
@@ -43,17 +43,17 @@ public class MainViewController extends GameController {
         updateView();
     }
 
-//    @Override
-//    protected void handleKeyPressed(KeyEvent e) {
-//
-//    }
-//
-//    @Override
-//    protected void handleKeyReleased(KeyEvent e) {
-//
-//    }
+    @Override
+    protected void handleKeyPressed(KeyEvent e) {
 
-    Action a; //TODO used for testing purposes
+    }
+
+    @Override
+    protected void handleKeyReleased(KeyEvent e) {
+
+    }
+
+    Action a;
 
     @Override
     protected void setView() {
@@ -63,7 +63,6 @@ public class MainViewController extends GameController {
     //TODO: view.update
     @Override
     protected void updateView() {
-        mainView.update();
     }
 
     @Override

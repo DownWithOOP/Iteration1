@@ -1,11 +1,12 @@
 package view.components;
 
-import javax.swing.JPanel;
-import java.awt.Rectangle;
-import java.util.ArrayList;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
+
+import java.util.*;
 import java.util.List;
 
-public class AreaViewport extends JPanel {
+public class AreaViewport extends Pane {
 
     private List<List<Rectangle>> tiles = new ArrayList<>();
 

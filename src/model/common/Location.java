@@ -8,7 +8,7 @@ public class Location {
     private int xCoord;
     private int yCoord;
 
-    Location(int xCoord, int yCoord){
+    public Location(int xCoord, int yCoord){
         this.xCoord = xCoord;
         this.yCoord = yCoord;
     }

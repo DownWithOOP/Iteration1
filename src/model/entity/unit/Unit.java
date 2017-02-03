@@ -40,4 +40,8 @@ abstract public class Unit extends Entity {
         currentLocation.setxCoord(xPosition);
         currentLocation.setyCoord(yPosition);
     }
+
+    public UnitStats getUnitStats() {
+        return unitStats;
+    }
 }

@@ -1,8 +1,7 @@
 package model.entity;
-//import model.entity.stats.Stats;
+
 import model.actions.Action;
 import model.common.Location;
-
 import java.util.Queue;
 import java.util.LinkedList;
 import java.util.UUID;
@@ -14,12 +13,9 @@ abstract public class Entity {
     // Queue of user selected commands for each entity to perform in a # of turns
     private Queue<Action> commandQueue;
 
-    private int visionRadius;
-
-    public Entity(int visionRadius) {
+    public Entity() {
         entityID = UUID.randomUUID();
         commandQueue = new LinkedList<Action>();
-        this.visionRadius = visionRadius;
     }
 
     abstract public Location getLocation();

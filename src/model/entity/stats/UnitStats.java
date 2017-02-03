@@ -9,4 +9,12 @@ public class UnitStats extends Stats {
         super(offensiveDamage, defensiveDamage, armor, movement, health, upkeep);
         this.visionRadius = visionRadius;
     }
+
+    public int getVisionRadius() {
+        return visionRadius;
+    }
+
+    public void setVisionRadius(int visionRadius) {
+        this.visionRadius = visionRadius;
+    }
 }

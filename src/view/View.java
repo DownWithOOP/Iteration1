@@ -1,38 +1,34 @@
 package view;
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.geom.*;
 
-public abstract class View extends Frame{
+import javafx.event.EventHandler;
+import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+
+public abstract class View extends Stage{
     protected boolean guiInitialized;
-    private final int VERT_RES;
-    private final int HORIZ_RES;
 
     protected View(){
-    	super("Space Cats"); // create GUI 
-    	System.out.println("ABSTRACT CLASS IS INITLIAZED");
-    	// protected construtor for view
-    	// uses toolkit to get resolution of the device that it is running on
-    	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    	this.VERT_RES = screenSize.height;
-      	this.HORIZ_RES = screenSize.width;
+    	super(); // create GUI
+    	System.out.println("ABSTRACT VIEW CLASS IS INITIALIZED");
+    	// protected constructor for view
+    	Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+    	this.setX((int)primaryScreenBounds.getMinX());
+		this.setY((int)primaryScreenBounds.getMinY());
       	this.guiInitialized = true;
+		this.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			public void handle(WindowEvent we) {
+				System.out.println("Stage is closing");
+			}
+            });
+        }
 
-      	setSize(this.HORIZ_RES,this.VERT_RES);
-     		 addWindowListener(new WindowAdapter() {
-     		 	// event handler so when the game is closed, program stops
-         		public void windowClosing(WindowEvent windowEvent){
-           		 System.exit(0);
-        	 }        
-      	}); 
-     	this.setVisible(true);
-    }
+    public abstract void start();
 
-    public abstract boolean start();
+    protected abstract void render();
 
-    protected abstract boolean render();
+    public abstract void update();
 
-    public abstract boolean update();
-
-    public abstract boolean close();
+    public abstract void close();
 }

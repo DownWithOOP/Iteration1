@@ -1,28 +1,44 @@
 package view.types;
 
+import javafx.scene.layout.Pane;
+import model.common.GraphicsInfo;
+
 import view.View;
+import view.components.AreaViewport;
+import view.components.StatusViewport;
 
-/**
- * Created by jordi on 2/1/2017.
- */
 public class MainView extends View {
-    @Override
-    public boolean start() {
-        return false;
+
+    //Need to find out about Image type; just put int in for now
+    java.util.Map<GraphicsInfo, Integer> graphicsBuffer;
+
+    View areaViewport;
+    View statusViewport;
+
+    public MainView(){
+
     }
 
     @Override
-    protected boolean render() {
-        return false;
+    public void start() {
+        Pane areaViewport = new AreaViewport();
+        Pane statusViewport = new StatusViewport();
+
+        //this.add(areaViewport);
+        //this.add(statusViewport);
     }
 
     @Override
-    public boolean update() {
-        return false;
+    protected void render() {
+        //areaViewport.repaint();
+        //statusViewport.repaint();
     }
 
     @Override
-    public boolean close() {
-        return false;
-    }
+    public void update() { }
+
+    @Override
+    public void close() { }
+
+
 }

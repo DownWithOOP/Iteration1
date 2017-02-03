@@ -1,28 +1,27 @@
 package view;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.geom.*;
 
-import javafx.event.EventHandler;
-import javafx.geometry.Rectangle2D;
-import javafx.stage.Screen;
-import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
+public abstract class View extends Frame {
 
-public abstract class View extends Stage{
-    protected boolean guiInitialized;
+    private int screenHeight;
+    private int screenWidth;
 
     protected View(){
-    	super(); // create GUI
-    	System.out.println("ABSTRACT VIEW CLASS IS INITIALIZED");
-    	// protected constructor for view
-    	Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-    	this.setX((int)primaryScreenBounds.getMinX());
-		this.setY((int)primaryScreenBounds.getMinY());
-      	this.guiInitialized = true;
-		this.setOnCloseRequest(new EventHandler<WindowEvent>() {
-			public void handle(WindowEvent we) {
-				System.out.println("Stage is closing");
-			}
-            });
-        }
+                super("Space Cats");
+                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                screenHeight = screenSize.height;
+                screenWidth = screenSize.width;
+
+                setSize(screenWidth,screenHeight);
+                addWindowListener(new WindowAdapter() {
+                    public void windowClosing(WindowEvent windowEvent){
+                        System.exit(0);
+                    }
+                });
+                this.setVisible(true);
+    }
 
     public abstract void start();
 

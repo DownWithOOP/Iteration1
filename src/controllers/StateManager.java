@@ -5,31 +5,19 @@ import controllers.types.MainViewController;
 import controllers.types.StructureViewController;
 import controllers.types.UnitViewController;
 import controllers.types.WelcomeViewController;
-import javafx.application.Application;
-import javafx.event.EventHandler;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.Group;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.stage.Screen;
-import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 import java.util.HashMap;
 
 /**
  * Created by jordi on 2/1/2017.
  */
-public class StateManager extends Application{
+public class StateManager {
 
     private HashMap<TypeOfControllers, Controller> controllerMap = new HashMap<>();       //used for controller change, so that access is O(1)
     private boolean gameOn;
     public final long FPS = 30;                            //frames per second
     final long LOOP_TIME = 1000l / FPS;                   //how long an update should take 1000 miliseconds/ FPS
     private Controller activeController;
-    private Group root = new Group();
 
     /**
      * when class is initialized the controllers are too and the WelcomeViewController is activated
@@ -38,28 +26,6 @@ public class StateManager extends Application{
         initializeControllers();
         activeController = controllerMap.get(TypeOfControllers.WelcomeViewController);
     }
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-        Scene scene = new Scene(root, primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
-        scene.setFill(null);
-        Rectangle r = new Rectangle(0, 0, 250, 250);
-        r.setFill(Color.BLUE);
-        root.getChildren().add(r);
-
-        primaryStage.setScene(scene);
-        primaryStage.show();
-        //primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            //public void handle(WindowEvent we) {
-                //System.out.println("Stage is closing");
-            //}
-        //});
-        //gameOn = true;
-        //startGameLoop();
-    }
-
-    public Parent getRootNode(){ return root;}
 
     /**
      * game basically starts

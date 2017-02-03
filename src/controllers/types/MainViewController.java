@@ -8,6 +8,7 @@ import model.actions.Action;
 import model.actions.controllerActions.ChangeViewAction;
 import view.types.MainView;
 
+import java.awt.event.KeyEvent;
 import java.util.HashMap;
 
 /**
@@ -20,6 +21,16 @@ public class MainViewController extends Controller {
     public MainViewController(StateManager stateManager) {
         super(stateManager);
         a = new ChangeViewAction(this);
+    }
+
+    @Override
+    protected void handleKeyPressed(KeyEvent e) {
+        System.out.println("=================================== Main View Controller event handler");       
+    }
+
+    @Override
+    protected void handleKeyReleased(KeyEvent e) {
+
     }
 
     @Override

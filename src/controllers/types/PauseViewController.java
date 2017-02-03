@@ -3,6 +3,9 @@ package controllers.types;
 import controllers.Controller;
 import controllers.StateManager;
 import controllers.TypeOfControllers;
+
+import java.awt.event.KeyEvent;
+
 /**
  * Created by Konrad on 2/2/2017.
  */
@@ -10,6 +13,16 @@ public class PauseViewController extends Controller {
 
     public PauseViewController(StateManager stateManager) {
         super(stateManager);
+    }
+
+    @Override
+    protected void handleKeyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    protected void handleKeyReleased(KeyEvent e) {
+
     }
 
     @Override

@@ -6,7 +6,9 @@ import controllers.types.gameControllers.StructureViewController;
 import controllers.types.gameControllers.UnitViewController;
 import controllers.types.WelcomeViewController;
 
-import java.awt.*;
+import javax.swing.JFrame;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
@@ -16,7 +18,7 @@ import java.util.HashMap;
 /**
  * Created by jordi on 2/1/2017.
  */
-public class StateManager extends Frame implements KeyListener {
+public class StateManager extends JFrame implements KeyListener {
 
     private int screenHeight;
     private int screenWidth;

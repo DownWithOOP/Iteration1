@@ -1,6 +1,5 @@
 package controllers.types.gameControllers;
 
-import controllers.Controller;
 import controllers.StateManager;
 import controllers.TypeOfControllers;
 import controllers.keyboardInputHandler.KeyBoardMapManager;

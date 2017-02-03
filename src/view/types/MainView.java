@@ -16,7 +16,6 @@ public class MainView extends View {
     View statusViewport;
 
     public MainView(){
-
     }
 
     @Override

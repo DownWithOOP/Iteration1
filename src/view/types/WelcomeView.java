@@ -8,6 +8,9 @@ import view.View;
  */
 public class WelcomeView extends View {
 
+    public WelcomeView() {
+    }
+
     @Override
     public void start() {
 

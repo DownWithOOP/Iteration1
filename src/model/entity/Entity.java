@@ -14,8 +14,8 @@ abstract public class Entity {
     private Queue<Action> commandQueue;
 
     public Entity() {
-        entityID = UUID.randomUUID();
-        commandQueue = new LinkedList<Action>();
+        this.entityID = UUID.randomUUID();
+        this.commandQueue = new LinkedList<Action>();
     }
 
     abstract public Location getLocation();

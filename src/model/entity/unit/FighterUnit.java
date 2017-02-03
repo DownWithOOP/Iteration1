@@ -6,9 +6,11 @@ import model.entity.army.Army;
 
 public class FighterUnit extends Unit {
     private Army army;
+    private String fighterUnitType;
 
-    public FighterUnit(UnitStats fighterStats) {
+    public FighterUnit(String fighterUnitType, UnitStats fighterStats) {
         super(fighterStats);
+        this.fighterUnitType = fighterUnitType;
     }
 
     public boolean abandonArmy() {
@@ -28,5 +30,9 @@ public class FighterUnit extends Unit {
     @Override
     public Location getLocation() {
         return getCurrentLocation();
+    }
+
+    public String getFighterUnitType() {
+        return fighterUnitType;
     }
 }

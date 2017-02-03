@@ -1,17 +1,24 @@
 package model.entity;
-
+//import model.entity.stats.Stats;
 import model.actions.Action;
 import model.common.Location;
-//package src.model.common;
+
 import java.util.Queue;
+import java.util.LinkedList;
+import java.util.UUID;
 
 abstract public class Entity {
-    private int entityID;
-    //TODO: my ide was giving me an error that is why I commented this one out, Jordi
-    //private Queue<Action> commandQueue = new Queue<Action>();
-    private int visionRadius; //the amount of tiles on any side that an entity can see
+    // Unique ID for each created Entity
+    private UUID entityID;
+
+    // Queue of user selected commands for each entity to perform in a # of turns
+    private Queue<Action> commandQueue;
+
+    private int visionRadius;
 
     public Entity(int visionRadius) {
+        entityID = UUID.randomUUID();
+        commandQueue = new LinkedList<Action>();
         this.visionRadius = visionRadius;
     }
 
@@ -22,11 +29,17 @@ abstract public class Entity {
     }
 
     public boolean addToQueue(Action action) {
-        return true;
+        if (commandQueue.add(action) == true) {
+            return true;
+        }
+        return false;   // adding command to queue was not successful
     }
 
     public boolean cancelQueue() {
-        return true;
+        while (!commandQueue.isEmpty()) {
+            commandQueue.poll();
+        }
+        return true;   // canceling queue command wasn't successful
     }
 
     public boolean powerUp() {
@@ -37,23 +50,17 @@ abstract public class Entity {
         return true;
     }
 
+    //do we need this method?
     public void changeStat(int stat, int statOffset) {
 
     }
 
-    public void setEntityID(int entityID) {
+    public void setEntityID(UUID entityID) {
         this.entityID = entityID;
     }
 
-    public int getEntityID() {
+    public UUID getEntityID() {
         return entityID;
     }
 
-    public void setVisionRadius(int visionRadius) {
-        this.visionRadius = visionRadius;
-    }
-
-    public int getVisionRadius() {
-        return visionRadius;
-    }
 }

@@ -7,7 +7,7 @@ import controllers.Controller;
  */
 public abstract class ControllerAction implements Action {
 
-    public ControllerAction(Controller controller){
+    public ControllerAction(Controller controller) {
 
     }
 

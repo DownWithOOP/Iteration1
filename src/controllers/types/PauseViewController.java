@@ -1,7 +1,9 @@
 package controllers.types;
 
+import controllers.types.GameController;
 import controllers.Controller;
 import controllers.StateManager;
+
 import controllers.TypeOfControllers;
 
 import java.awt.event.KeyEvent;
@@ -18,15 +20,6 @@ public class PauseViewController extends Controller {
 
     public void update() {
     }
-
-//    protected void handleKeyPressed(KeyEvent e) {
-//
-//    }
-//
-//    @Override
-//    protected void handleKeyReleased(KeyEvent e) {
-//
-//    }
 
     protected void initializePauseViewController() {
 

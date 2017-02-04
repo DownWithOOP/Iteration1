@@ -6,5 +6,5 @@ package model.map.tile;
 public enum ResourceType {
     CATFOOD,
     CRYSTAL,
-    POTION
+    RESEARCH
 }

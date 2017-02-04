@@ -3,6 +3,7 @@ package model.entity.unit;
 import controllers.keyboardInputHandler.TypeOfActions;
 import model.actions.Action;
 import model.entity.stats.UnitStats;
+import model.player.Player;
 
 import java.util.HashMap;
 
@@ -11,9 +12,9 @@ public class Melee extends FighterUnit {
     protected HashMap<TypeOfActions, Action> meleeActions = new HashMap<>();
 
 
-    public Melee() {
+    public Melee(Player player) {
 
-        super("Melee",new UnitStats(20, 3, 5, 2, 100, 3, 1));
+        super("Melee",new UnitStats(20, 3, 5, 2, 100, 3, 1),player);
         initializeMelee();
     }
 
@@ -23,16 +24,6 @@ public class Melee extends FighterUnit {
         addAllActions(meleeActions);
     }
 
-
-    @Override
-    public void abandonArmy() {
-
-    }
-
-    @Override
-    public void joinArmy() {
-
-    }
 
     protected void setMeleeActions(){
         /**

@@ -28,4 +28,15 @@ public class Location {
     public void setyCoord(int yCoord) {
         this.yCoord = yCoord;
     }
+
+    public boolean equals(Location location){
+        int xCoord=location.getxCoord();
+        int yCoord=location.getyCoord();
+
+        if (this.xCoord==xCoord && this.yCoord==yCoord){
+            return true;
+        }
+        return false;
+    }
+
 }

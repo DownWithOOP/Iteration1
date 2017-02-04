@@ -18,6 +18,10 @@ public class GameModel {
 
     }
 
+    public void update(){
+
+    }
+
     public boolean passAction(String action){
         return false;
     }

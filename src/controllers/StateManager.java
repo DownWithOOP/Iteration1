@@ -51,9 +51,9 @@ public class StateManager implements KeyListener {
      */
     public StateManager() { // this is where the GUI is created
         super(/*"Space Cats"*/);
-       /* fillActionModifiers();
+        fillActionModifiers();
         initGui();
-        // at this point the GUI is initialized*/
+        // at this point the GUI is initialized
         initializeControllers();
         // at this point we have all the controllers intitialized
         activeController = controllerMap.get(TypeOfControllers.WelcomeViewController);
@@ -168,6 +168,16 @@ public class StateManager implements KeyListener {
         actionModifierMap.put(KeyEvent.VK_DOWN,ActionModifiers.down);
         actionModifierMap.put(KeyEvent.VK_LEFT,ActionModifiers.left);
         actionModifierMap.put(KeyEvent.VK_RIGHT,ActionModifiers.right);
+        actionModifierMap.put(KeyEvent.VK_0,ActionModifiers.zero);
+        actionModifierMap.put(KeyEvent.VK_1,ActionModifiers.one);
+        actionModifierMap.put(KeyEvent.VK_2,ActionModifiers.two);
+        actionModifierMap.put(KeyEvent.VK_3,ActionModifiers.three);
+        actionModifierMap.put(KeyEvent.VK_4,ActionModifiers.four);
+        actionModifierMap.put(KeyEvent.VK_5,ActionModifiers.five);
+        actionModifierMap.put(KeyEvent.VK_6,ActionModifiers.six);
+        actionModifierMap.put(KeyEvent.VK_7,ActionModifiers.seven);
+        actionModifierMap.put(KeyEvent.VK_8,ActionModifiers.eight);
+        actionModifierMap.put(KeyEvent.VK_9,ActionModifiers.nine);
     }
 
     @Override

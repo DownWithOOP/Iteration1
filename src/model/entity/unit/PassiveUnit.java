@@ -2,11 +2,12 @@ package model.entity.unit;
 
 import model.common.Location;
 import model.entity.stats.UnitStats;
+import model.player.Player;
 
 public class PassiveUnit extends Unit {
 
-    public PassiveUnit(UnitStats passiveStats) {
-        super (passiveStats);
+    public PassiveUnit(UnitStats passiveStats, Player player) {
+        super (passiveStats,player);
     }
 
     @Override

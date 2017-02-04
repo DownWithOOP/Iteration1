@@ -28,6 +28,7 @@ public class Player extends ContainsActions {
     private final int MAX_MELEES     = 10;
     private final int MAX_RANGED     = 10;
 
+    private String playerId;
     private ArrayList<Entity> allEntities;
     private ArrayList<Unit> units;
     private ArrayList<Structure> structures;
@@ -37,7 +38,8 @@ public class Player extends ContainsActions {
 
     private HashMap<Integer, Action> actionMap;
 
-    public Player(){
+    /*TODO:Set player id*/
+    public Player(String playerId){
         allEntities = new ArrayList<Entity>();
         units       = new ArrayList<Unit>();
         structures  = new ArrayList<Structure>();
@@ -45,9 +47,10 @@ public class Player extends ContainsActions {
         actionMap   = new HashMap<Integer, Action>();
 
         //Each player starts the game with 2 Explorers and 1 Colonist
-        units.add(new Explorer());
-        units.add(new Explorer());
-        units.add(new Colonist());
+        units.add(new Explorer(this));
+        units.add(new Explorer(this));
+        units.add(new Colonist(this));
+        this.playerId=playerId;
     }
 
     @Override
@@ -111,5 +114,8 @@ public class Player extends ContainsActions {
         if (armies.remove(army) && allEntities.remove(army)) return true;
         return false;
 
+    }
+    public String getPlayerId(){
+        return playerId;
     }
 }

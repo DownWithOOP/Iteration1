@@ -4,8 +4,11 @@ import model.common.Location;
 import model.map.tile.*;
 import model.map.tile.areaeffect.AreaEffect;
 import model.map.tile.areaeffect.AreaEffectFactory;
+import model.map.tile.item.ObstacleItem;
+import utilities.PathFinder;
 import utilities.XMLParser;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -16,9 +19,10 @@ public class Map {
 
     private final int GRID_HEIGHT = 3;
     private final int GRID_WIDTH = 3;
-    private final String MAP_XML_PATH = "../res/map/Map.xml";
+    private final String MAP_XML_PATH = "/map/Map.xml";
 
     private Tile[][] tileArray;
+    private boolean[][] obstacleGrid;
 
     public Map(){
         tileArray = new Tile[GRID_HEIGHT][GRID_WIDTH];
@@ -37,8 +41,8 @@ public class Map {
      * @return List of movements.
      */
     public ArrayList<Location> findPath(Location startPoint, Location endPoint){
-
-        return new ArrayList<>();
+        PathFinder pathFinder = new PathFinder(obstacleGrid);
+        return pathFinder.findPath(startPoint, endPoint);
     }
 
     /**
@@ -78,13 +82,18 @@ public class Map {
 
     /**
      * Creates a 2d array from the list of tiles.
+     * Creates an obstacle grid for path finding purposes where 'true' represents an obstacle.
      * @param tiles
      */
     private void createTileGrid(ArrayList<Tile> tiles){
         int k = 0;
         for(int i = 0; i < GRID_HEIGHT; i++){
             for(int j = 0; j < GRID_WIDTH; j++){
-                tileArray[i][j] = tiles.get(k);
+                Tile tile = tiles.get(k);
+                tileArray[i][j] = tile;
+                if(tile.getItem() instanceof ObstacleItem || tile.getTerrain().getTerrainType() == TerrainType.WATER){
+                    obstacleGrid[i][j] = true;
+                }
                 k++;
             }
         }

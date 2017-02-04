@@ -22,6 +22,14 @@ public class Resource {
      */
     public int mine(){
         //TODO: perform operations with level
-        return 0;
+        int mined = (int)Math.random()*100;
+        if(level - mined > 0){
+            level -= mined;
+            return mined;
+        } else {
+            int temp = level;
+            level = 0;
+            return temp;
+        }
     }
 }

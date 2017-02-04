@@ -43,6 +43,13 @@ public class Player extends ContainsActions {
 
     private HashMap<Integer, Action> actionMap;
 
+    /**
+     * Resource levels
+     */
+    private int catfoodLevel;
+    private int crystalLevel;
+    private int researchLevel;
+
     /*TODO:Set player id*/
     public Player(String playerId){
         allEntities = new EntityList<Entity>();
@@ -168,5 +175,32 @@ public class Player extends ContainsActions {
 
     public Entity getSelectedEntity() {
         return selectedEntity;
+    }
+
+    public int catfoodResourceLevel(){
+        return catfoodLevel;
+    }
+
+    public int crystalResourceLevel(){
+        return crystalLevel;
+    }
+
+    public int researchResourceLevel(){
+        return researchLevel;
+    }
+
+    /**
+     * Setters
+     */
+    public void setCatfoodResourceLevel(int level){
+        this.catfoodLevel = level;
+    }
+
+    public void setCrystalResourceLevel(int level){
+        this.crystalLevel = level;
+    }
+
+    public void setResearchResourceLevel(int level){
+        this.researchLevel = level;
     }
 }

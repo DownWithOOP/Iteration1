@@ -16,7 +16,7 @@ public abstract class FighterUnit extends Unit implements Fighter{
     private String fighterUnitType;
 
     public FighterUnit(String fighterUnitType, UnitStats fighterStats, Player player) {
-        super(fighterStats, player);
+        super(null,fighterStats, player);
         initializeFighterUnit();
         this.fighterUnitType = fighterUnitType;
 

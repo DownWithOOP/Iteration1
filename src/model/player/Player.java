@@ -7,9 +7,8 @@ import model.actions.ContainsActions;
 import model.entity.Entity;
 import model.entity.army.Army;
 import model.entity.structure.Structure;
-import model.entity.unit.Explorer;
-import model.entity.unit.Colonist;
-import model.entity.unit.Unit;
+import model.entity.unit.*;
+import utilities.EntityList;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,16 +19,22 @@ import java.util.HashMap;
 
 public class Player extends ContainsActions {
 
+    /**
+     * Max numbers
+     */
     private final int MAX_STRUCTURES = 10;
     private final int MAX_ARMIES     = 10;
     private final int MAX_UNITS      = 25;
     private final int MAX_COLONISTS  = 10;
     private final int MAX_EXPLORERS  = 10;
-    private final int MAX_MELEES     = 10;
+    private final int MAX_MELEE     = 10;
     private final int MAX_RANGED     = 10;
 
+    /**
+     * Attributes
+     */
     private String playerId;
-    private ArrayList<Entity> allEntities;
+    private EntityList<Entity> allEntities;
     private ArrayList<Unit> units;
     private ArrayList<Structure> structures;
     private ArrayList<Army> armies;
@@ -40,7 +45,7 @@ public class Player extends ContainsActions {
 
     /*TODO:Set player id*/
     public Player(String playerId){
-        allEntities = new ArrayList<Entity>();
+        allEntities = new EntityList<Entity>();
         units       = new ArrayList<Unit>();
         structures  = new ArrayList<Structure>();
         armies      = new ArrayList<Army>();
@@ -50,9 +55,12 @@ public class Player extends ContainsActions {
         units.add(new Explorer(this));
         units.add(new Explorer(this));
         units.add(new Colonist(this));
-        this.playerId=playerId;
+        this.playerId = playerId;
     }
 
+    /**
+     * Action related methods
+     */
     @Override
     public HashMap<TypeOfActions, Action> getActions() {
 
@@ -78,17 +86,39 @@ public class Player extends ContainsActions {
 
     }
 
-
+    /**
+     * Methods for adding and removing entities
+     */
     public boolean addStructure(Structure structure){
         if (structures.size() < MAX_STRUCTURES) {
-            if (structures.add(structure) && allEntities.add(structure)) return true;
+            return structures.add(structure) && allEntities.add(structure);
         }
         return false;
     }
 
     public boolean addUnit(Unit unit){
         if (units.size() < MAX_UNITS) {
-            if (units.add(unit) && allEntities.add(unit)) return true;
+            switch(unit.getUnitType()){
+                case COLONIST:
+                    if(allEntities.numColonists() >= MAX_COLONISTS)
+                        return false;
+                    break;
+                case EXPLORER:
+                    if(allEntities.numExplorers() >= MAX_EXPLORERS)
+                        return false;
+                    break;
+                case MELEE:
+                    if(allEntities.numMelee() >= MAX_MELEE)
+                        return false;
+                    break;
+                case RANGED:
+                    if(allEntities.numRanged() >= MAX_RANGED)
+                        return false;
+                    break;
+                default:
+                    return false;
+            }
+            return units.add(unit) && allEntities.add(unit);
         }
         return false;
     }
@@ -101,21 +131,42 @@ public class Player extends ContainsActions {
     }
 
     public boolean removeStructure(Structure structure){
-        if (structures.remove(structure) && allEntities.remove(structure)) return true;
-        return false;
+        return structures.remove(structure) && allEntities.remove(structure);
     }
 
     public boolean removeUnit(Unit unit){
-        if (units.remove(unit) && allEntities.remove(structures)) return true;
-        return false;
+        return units.remove(unit) && allEntities.remove(unit);
     }
 
     public boolean removeArmy(Army army){
-        if (armies.remove(army) && allEntities.remove(army)) return true;
-        return false;
+        return armies.remove(army) && allEntities.remove(army);
 
     }
+
+    /**
+     * Getters
+     */
     public String getPlayerId(){
         return playerId;
+    }
+
+    public EntityList<Entity> getAllEntities() {
+        return allEntities;
+    }
+
+    public ArrayList<Unit> getUnits() {
+        return units;
+    }
+
+    public ArrayList<Structure> getStructures() {
+        return structures;
+    }
+
+    public ArrayList<Army> getArmies() {
+        return armies;
+    }
+
+    public Entity getSelectedEntity() {
+        return selectedEntity;
     }
 }

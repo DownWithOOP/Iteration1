@@ -31,8 +31,8 @@ public class StructureViewController extends GameController {
 //
 //    }
 
-    @Override
-    protected void initialize() {
+
+    protected void initializeStructureView() {
 
     }
 
@@ -41,8 +41,8 @@ public class StructureViewController extends GameController {
 
     }
 
-    @Override
-    protected void setActions() {
+
+    protected void setStructureViewControllerActions() {
 
     }
 

@@ -28,8 +28,7 @@ public class PauseViewController extends Controller {
 //
 //    }
 
-    @Override
-    protected void initialize() {
+    protected void initializePauseViewController() {
 
     }
 
@@ -38,8 +37,7 @@ public class PauseViewController extends Controller {
 
     }
 
-    @Override
-    protected void setActions() {
+    protected void setPauseViewControllerActions() {
 
     }
 

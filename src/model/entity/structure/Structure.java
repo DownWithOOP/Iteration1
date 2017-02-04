@@ -21,19 +21,17 @@ public abstract class Structure extends Entity{
 
     public Structure(StructureStats structureStats, int xPosition, int yPosition) {
         super();
-        this.initialize();
+        initializeStructure();
         this.structureStats = structureStats;
         fixedLocation = new Location(xPosition, yPosition);
     }
 
-    @Override
-    protected void initialize() {
-        setActions();
+    protected void initializeStructure() {
+        setStructureActions();
         addAllActions(structureActions);
     }
 
-    @Override
-    protected  void setActions(){
+    protected  void setStructureActions(){
         /**
          *         structureActions.put(TypeOfActions.powerUp,PowerUpAction(this));
          * */

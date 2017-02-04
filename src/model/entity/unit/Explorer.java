@@ -14,13 +14,13 @@ public class Explorer extends FighterUnit {
     public Explorer() {
 
         super("Explorer",new UnitStats(2, 1, 0, 5, 50, 1, 5));
-        this.initialize();
+        this.initializeExplorer();
     }
 
 
-    @Override
-    protected void initialize() {
-        setActions();
+
+    protected void initializeExplorer() {
+        setExplorerActions();
         addAllActions(explorerActions);
     }
 
@@ -39,8 +39,7 @@ public class Explorer extends FighterUnit {
 
     }
 
-    @Override
-    protected void setActions(){
+    private void setExplorerActions(){
         /**
          *         explorerActions.put(TypeOfActions.powerUp,PowerUpAction(this));
          * */

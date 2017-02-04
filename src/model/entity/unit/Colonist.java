@@ -15,13 +15,12 @@ public class Colonist extends FighterUnit {
     public Colonist() {
         super("Colonist", new UnitStats(2, 1, 0, 3, 50, 1, 5));
 
-        this.initialize();
+        initializeColonist();
     }
 
 
-    @Override
-    protected void initialize() {
-        setActions();
+    protected void initializeColonist() {
+        setColonistActions();
         addAllActions(colonistActions);
     }
 
@@ -36,8 +35,7 @@ public class Colonist extends FighterUnit {
 
     }
 
-    @Override
-    protected void setActions(){
+    private void setColonistActions(){
         /**
          *         colonistActions.put(TypeOfActions.powerUp,PowerUpAction(this));
          * */

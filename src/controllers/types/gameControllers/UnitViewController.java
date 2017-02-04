@@ -35,8 +35,7 @@ public class UnitViewController extends GameController {
 
     }
 
-    @Override
-    protected void initialize() {
+    protected void initializeUnitViewController() {
 
     }
 
@@ -45,8 +44,7 @@ public class UnitViewController extends GameController {
 
     }
 
-    @Override
-    protected void setActions() {
+    protected void setUnitViewControlleActions() {
 
     }
 

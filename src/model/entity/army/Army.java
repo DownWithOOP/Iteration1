@@ -16,7 +16,7 @@ public class Army extends Entity {
 
 
     //add all the Actions of an army here
-    protected final HashMap<TypeOfActions,Action> armyActions=new HashMap<>();
+    protected final HashMap<TypeOfActions, Action> armyActions = new HashMap<>();
 
 
     private int visionRadius;
@@ -42,17 +42,15 @@ public class Army extends Entity {
 
     public Army() {
         super();
-        this.initialize();
+        initializeArmy();
     }
 
-    @Override
-    protected void initialize() {
-        setActions();
+    protected void initializeArmy() {
+        setArmyActions();
         addAllActions(armyActions);
     }
 
-    @Override
-    protected void setActions() {
+    protected void setArmyActions() {
 
     }
 
@@ -62,13 +60,15 @@ public class Army extends Entity {
     }
 
 
-    public void disbandArmy(){
+    public void disbandArmy() {
 
     }
-    public void registerFighter(/*Fighter fighter*/){
+
+    public void registerFighter(/*Fighter fighter*/) {
 
     }
-    public void removeFighter(/*Fighter fighter*/){
+
+    public void removeFighter(/*Fighter fighter*/) {
 
     }
 //    public void (){

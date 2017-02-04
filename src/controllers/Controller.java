@@ -6,6 +6,7 @@ import model.actions.Action;
 import model.actions.ActionModifiers;
 import model.actions.AvailableActions;
 import model.actions.ContainsActions;
+import model.actions.controllerActions.ChangeViewAction;
 import view.View;
 
 import java.util.HashMap;
@@ -18,12 +19,12 @@ abstract public class Controller extends ContainsActions {
     protected View view;
     protected StateManager stateManager;
     protected static AvailableActions availableActions = new AvailableActions();
-    KeyBoardMapManager keyBoardMapManager=new KeyBoardMapManager();
+    protected static KeyBoardMapManager keyBoardMapManager=new KeyBoardMapManager();
 
     protected Controller(StateManager stateManager) {
         this.stateManager = stateManager;
         actionsMap = new HashMap<>();
-        this.initialize();
+        intitializeC();
     }
 
 
@@ -33,14 +34,21 @@ abstract public class Controller extends ContainsActions {
 
     abstract protected void updateView();
 
-    @Override
-    protected void initialize(){
+
+    protected void intitializeC(){
+        setActionsControllerActions();
+        addAllActions(actionsMap);
         initializeController();
     }
 
     protected void initializeController() {
         setView();
         resumeController();
+    }
+
+    protected void setActionsControllerActions() {
+        ChangeViewAction changeViewAction = new ChangeViewAction(this);
+        actionsMap.put(TypeOfActions.changeView, changeViewAction);
     }
 
     @Override

@@ -30,8 +30,7 @@ public class WelcomeViewController extends Controller {
 
     }
 
-    @Override
-    protected void initialize() {
+    protected void initializeWelcomeViewController() {
 
     }
 
@@ -40,8 +39,7 @@ public class WelcomeViewController extends Controller {
         super.view = welcomeView;
     }
 
-    @Override
-    protected void setActions() {
+    protected void setWelcomeViewActions() {
 
     }
 

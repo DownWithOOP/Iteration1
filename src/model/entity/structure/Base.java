@@ -16,7 +16,7 @@ public class Base extends Structure {
 
     public Base(StructureStats baseStats, int xPosition, int yPosition) {
         super(baseStats, xPosition, yPosition);
-        this.initialize();
+        initializeBase();
     }
 
     @Override
@@ -24,17 +24,16 @@ public class Base extends Structure {
         return getFixedLocation();
     }
 
-    @Override
-    protected void initialize() {
-        setActions();
+    protected void initializeBase() {
+        setBaseActions();
         addAllActions(baseActions);
     }
 
     /**
      * TODO:Place the innate actions here
      * */
-    @Override
-    protected void setActions(){
+
+    private void setBaseActions(){
         //baseActions.put()
     }
 

@@ -51,9 +51,9 @@ public class StateManager implements KeyListener {
      */
     public StateManager() { // this is where the GUI is created
         super(/*"Space Cats"*/);
-        fillActionModifiers();
+       /* fillActionModifiers();
         initGui();
-        // at this point the GUI is initialized
+        // at this point the GUI is initialized*/
         initializeControllers();
         // at this point we have all the controllers intitialized
         activeController = controllerMap.get(TypeOfControllers.WelcomeViewController);

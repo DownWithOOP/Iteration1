@@ -24,20 +24,17 @@ abstract public class Unit extends Entity {
 
     public Unit(UnitStats unitStats) {
         super();
+        initializeUnit();
         this.unitStats = unitStats;
         currentPath = new ArrayList<Location>();
-        this.initialize();
-
     }
 
-    @Override
-    protected void initialize() {
-        setActions();
+    protected void initializeUnit() {
+        setUnitActions();
         addAllActions(unitActions);
     }
 
-    @Override
-    protected void setActions(){
+    protected void setUnitActions(){
         /**
          *         unitActions.put(TypeOfActions.powerUp,PowerUpAction(this));
          * */

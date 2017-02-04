@@ -14,13 +14,12 @@ public class Melee extends FighterUnit {
     public Melee() {
 
         super("Melee",new UnitStats(20, 3, 5, 2, 100, 3, 1));
-        this.initialize();
+        initializeMelee();
     }
 
 
-    @Override
-    protected void initialize() {
-        setActions();
+    protected void initializeMelee() {
+        setMeleeActions();
         addAllActions(meleeActions);
     }
 
@@ -35,8 +34,7 @@ public class Melee extends FighterUnit {
 
     }
 
-    @Override
-    protected void setActions(){
+    protected void setMeleeActions(){
         /**
          *         meleeActions.put(TypeOfActions.powerUp,PowerUpAction(this));
          * */

@@ -67,13 +67,11 @@ public class Player extends ContainsActions {
     }
 
 
-    @Override
-    protected void setActions() {
+    protected void setPlayerActions() {
 
     }
 
-    @Override
-    protected void initialize() {
+    protected void initializePlayer() {
 
     }
 

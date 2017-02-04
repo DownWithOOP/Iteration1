@@ -13,7 +13,6 @@ public abstract class ContainsActions {
     protected HashMap<TypeOfActions, Action> actionsMap = new HashMap<>();
 
     protected ContainsActions(){
-        initializeContainsActions();
     }
 
     public HashMap<TypeOfActions,Action> getActions(){
@@ -21,16 +20,13 @@ public abstract class ContainsActions {
     };
     protected abstract void addAvailableActions();
     protected abstract void removeAvailableActions();
-    protected abstract void setActions();
-    protected abstract void initialize();
 
-    protected void initializeContainsActions(){
-        setActions();
-        initialize();
-    }
 
     protected void addAllActions( HashMap<TypeOfActions,Action> actionsMap){
-        this.actionsMap.putAll(actionsMap);
+
+        if (actionsMap !=null) {
+            this.actionsMap.putAll(actionsMap);
+        }
     }
 
 }

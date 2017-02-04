@@ -24,19 +24,17 @@ abstract public class Entity extends ContainsActions {
     public Entity() {
         entityID = UUID.randomUUID();
         commandQueue = new LinkedList<Action>();
-        this.initialize();
+        initializeEntity();
     }
 
 
-    @Override
-    protected void initialize() {
-        setActions();
+    protected void initializeEntity() {
+        setEntityActions();
         addAllActions(entityActions);
     }
 
 
-    @Override
-    protected void setActions(){
+    protected void setEntityActions(){
         /**
          *         entityActions.put(TypeOfActions.powerUp,PowerUpAction(this));
          * */

@@ -15,14 +15,14 @@ public abstract class FighterUnit extends Unit {
 
     public FighterUnit(String fighterUnitType, UnitStats fighterStats) {
         super(fighterStats);
-        this.initialize();
+        initializeFighterUnit();
         this.fighterUnitType = fighterUnitType;
 
     }
 
-    @Override
-    protected void initialize() {
-        setActions();
+
+    protected void initializeFighterUnit() {
+        setFighterUnitActions();
         addAllActions(fighterActions);
     }
 
@@ -30,8 +30,7 @@ public abstract class FighterUnit extends Unit {
 
     public abstract void joinArmy() ;
 
-    @Override
-    protected void setActions(){
+    private void setFighterUnitActions(){
         /**
          *         entityAction.put(TypeOfActions.powerUp,PowerUpAction(this));
          * */

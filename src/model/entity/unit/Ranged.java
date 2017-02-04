@@ -14,13 +14,12 @@ public class Ranged extends FighterUnit {
     public Ranged() {
 
         super ("Ranged",new UnitStats(10, 3, 3, 3, 100, 3, 3));
-        this.initialize();
+        this.initializeRanged();
     }
 
 
-    @Override
-    protected void initialize() {
-        setActions();
+    protected void initializeRanged() {
+        setRangedActions();
         addAllActions(rangedActions);
     }
 
@@ -34,8 +33,7 @@ public class Ranged extends FighterUnit {
 
     }
 
-    @Override
-    protected void setActions(){
+    private void setRangedActions(){
         /**
          *         rangedActions.put(TypeOfActions.powerUp,PowerUpAction(this));
          * */

@@ -13,8 +13,11 @@ public class Resource {
         this.level = 100;
     }
 
-    private ResourceType getResourceType(){
-        return resourceType;
+    /**
+     * Returns the specific resource
+     */
+    private String getResourceType(){
+        return resourceType.toString();
     }
 
     /**
@@ -32,4 +35,10 @@ public class Resource {
             return temp;
         }
     }
+
+    public int getLevel() {
+        return level;
+    }
+
+
 }

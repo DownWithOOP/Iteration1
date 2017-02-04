@@ -24,9 +24,12 @@ abstract public class Unit extends Entity {
     private Location currentLocation;
     private UnitStats unitStats;
 
-    public Unit(UnitStats unitStats,Player player) {
+    private UnitType unitType;
+
+    public Unit(UnitType unitType, UnitStats unitStats,Player player) {
         super(player);
         initializeUnit();
+        this.unitType = unitType;
         this.unitStats = unitStats;
         currentPath = new ArrayList<Location>();
     }
@@ -65,5 +68,8 @@ abstract public class Unit extends Entity {
         return unitStats;
     }
 
+    public UnitType getUnitType(){
+        return unitType;
+    }
 
 }

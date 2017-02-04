@@ -1,22 +1,37 @@
 package model.entity.unit;
 
+import controllers.keyboardInputHandler.TypeOfActions;
+import model.actions.Action;
 import model.entity.stats.UnitStats;
 import model.common.Location;
 import model.entity.army.Army;
 
-public class FighterUnit extends Unit {
+import java.util.HashMap;
+
+public abstract class FighterUnit extends Unit {
     private Army army;
+    protected final HashMap<TypeOfActions,Action> fighterActions= new HashMap<>();
 
     public FighterUnit(UnitStats fighterStats) {
         super(fighterStats);
+        this.initialize();
     }
 
-    public boolean abandonArmy() {
-        return true;
+    @Override
+    protected void initialize() {
+        setActions();
+        addAllActions(fighterActions);
     }
 
-    public boolean joinArmy() {
-        return true;
+    public abstract void abandonArmy() ;
+
+    public abstract void joinArmy() ;
+
+    @Override
+    protected void setActions(){
+        /**
+         *         entityAction.put(TypeOfActions.powerUp,PowerUpAction(this));
+         * */
     }
 
     @Override
@@ -29,4 +44,7 @@ public class FighterUnit extends Unit {
     public Location getLocation() {
         return getCurrentLocation();
     }
+
+
+
 }

@@ -1,13 +1,20 @@
 package model.entity.unit;
 
+import controllers.keyboardInputHandler.TypeOfActions;
+import model.actions.Action;
 import model.entity.Entity;
 import model.entity.stats.UnitStats;
 import model.common.Location;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 abstract public class Unit extends Entity {
+
+    protected HashMap<TypeOfActions, Action> unitActions = new HashMap<>();
+
+
     // currentPath stores each tile coordinate for the current path the unit is moving in
     private ArrayList<Location> currentPath;
 
@@ -19,7 +26,21 @@ abstract public class Unit extends Entity {
         super();
         this.unitStats = unitStats;
         currentPath = new ArrayList<Location>();
+        this.initialize();
 
+    }
+
+    @Override
+    protected void initialize() {
+        setActions();
+        addAllActions(unitActions);
+    }
+
+    @Override
+    protected void setActions(){
+        /**
+         *         unitActions.put(TypeOfActions.powerUp,PowerUpAction(this));
+         * */
     }
 
     abstract public boolean moveUnit(int x, int y);
@@ -44,4 +65,6 @@ abstract public class Unit extends Entity {
     public UnitStats getUnitStats() {
         return unitStats;
     }
+
+
 }

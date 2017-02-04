@@ -42,7 +42,7 @@ public class StructureViewController extends GameController {
     }
 
     @Override
-    protected void setControllerActions() {
+    protected void setActions() {
 
     }
 

@@ -1,7 +1,11 @@
 package model.entity.army;
 
+import controllers.keyboardInputHandler.TypeOfActions;
+import model.actions.Action;
 import model.common.Location;
 import model.entity.Entity;
+
+import java.util.HashMap;
 
 /**
  * Created by jordi on 2/2/2017.
@@ -9,6 +13,12 @@ import model.entity.Entity;
 
 //TODO: vision radius ask about why the base should know about the vision Radius
 public class Army extends Entity {
+
+
+    //add all the Actions of an army here
+    protected final HashMap<TypeOfActions,Action> armyActions=new HashMap<>();
+
+
     private int visionRadius;
     //TODO: reinforcements
     //TODO: battleGroup
@@ -32,12 +42,25 @@ public class Army extends Entity {
 
     public Army() {
         super();
+        this.initialize();
+    }
+
+    @Override
+    protected void initialize() {
+        setActions();
+        addAllActions(armyActions);
+    }
+
+    @Override
+    protected void setActions() {
+
     }
 
     @Override
     public Location getLocation() {
         return null;
     }
+
 
     public void disbandArmy(){
 

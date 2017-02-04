@@ -1,6 +1,5 @@
 package controllers.types.gameControllers;
 
-import controllers.Controller;
 import controllers.StateManager;
 import controllers.TypeOfControllers;
 import controllers.keyboardInputHandler.KeyBoardMapManager;
@@ -8,16 +7,18 @@ import controllers.keyboardInputHandler.TypeOfActions;
 import controllers.types.GameController;
 import model.GameModel;
 import model.actions.Action;
+import model.actions.ActionModifiers;
 import model.actions.controllerActions.ChangeViewAction;
 import view.types.MainView;
 
-import java.awt.event.KeyEvent;
 import java.util.HashMap;
 
 /**
  * Created by jordi on 2/1/2017.
  */
 public class MainViewController extends GameController {
+    protected HashMap<TypeOfActions, Action> mainViewControllerActions= new HashMap<>();
+
     private final MainView mainView = new MainView();
 
     public MainViewController(StateManager stateManager) {
@@ -43,15 +44,6 @@ public class MainViewController extends GameController {
         updateView();
     }
 
-//    @Override
-//    protected void handleKeyPressed(KeyEvent e) {
-//
-//    }
-//
-//    @Override
-//    protected void handleKeyReleased(KeyEvent e) {
-//
-//    }
 
     Action a;
 
@@ -66,9 +58,9 @@ public class MainViewController extends GameController {
     }
 
     @Override
-    protected void setControllerActions() {
+    protected void setActions() {
         ChangeViewAction changeViewAction = new ChangeViewAction(this);
-        super.controllerActions.put(TypeOfActions.changeView, changeViewAction);
+        actionsMap.put(TypeOfActions.changeView, changeViewAction);
     }
 
     //TODO: delete this one, take care of handleInput
@@ -83,8 +75,10 @@ public class MainViewController extends GameController {
         keyBoardMapManager.populatePlayerInputHash("Player1",playerInput);
         keyBoardMapManager.updatePlayerId("Player1");
 
-        mainViewController.handleInput(keyBoardMapManager,"1");
+        mainViewController.handleInput(keyBoardMapManager,"1", ActionModifiers.down);
         mainViewController.changeView(TypeOfControllers.MainViewController);
+
+
     }
 }
 

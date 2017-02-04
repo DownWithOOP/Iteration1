@@ -46,7 +46,7 @@ public class UnitViewController extends GameController {
     }
 
     @Override
-    protected void setControllerActions() {
+    protected void setActions() {
 
     }
 

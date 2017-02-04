@@ -16,7 +16,7 @@ import java.util.HashMap;
 /**
  * Created by CRISTIAN aka Batman
  */
-public class Player implements ContainsActions {
+public class Player extends ContainsActions {
 
     @Override
     public HashMap<TypeOfActions, Action> getActions() {
@@ -33,6 +33,17 @@ public class Player implements ContainsActions {
     public void removeAvailableActions() {
 
     }
+
+    @Override
+    protected void setActions() {
+
+    }
+
+    @Override
+    protected void initialize() {
+
+    }
+
     private ArrayList<Entity> allEntities;
     private ArrayList<Unit> units;
     private ArrayList<Structure> structures;

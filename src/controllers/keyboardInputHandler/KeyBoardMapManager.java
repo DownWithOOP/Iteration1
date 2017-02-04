@@ -73,8 +73,8 @@ public class KeyBoardMapManager {
 
     //Todo: check how to do output then do this function
     private void fillDefaultKeyMap() {
-        defaultKeyMap.put(KeyEvent.VK_CONTROL + "" + KeyEvent.VK_UP + "" + KeyEvent.VK_UP, TypeOfActions.cycleMode);
-        defaultKeyMap.put("" + "" + KeyEvent.VK_UP + "" + KeyEvent.VK_UP, TypeOfActions.cycleCommand);
+        defaultKeyMap.put(KeyEvent.VK_CONTROL + "" + KeyEvent.VK_DOWN + "" + KeyEvent.VK_UP, TypeOfActions.cycleMode);
+        defaultKeyMap.put("" + "" + KeyEvent.VK_DOWN + "" + KeyEvent.VK_UP, TypeOfActions.cycleCommand);
         defaultKeyMap.put(KeyEvent.VK_CONTROL + "" + KeyEvent.VK_LEFT + "" + KeyEvent.VK_RIGHT, TypeOfActions.cycleType);
         defaultKeyMap.put("" + "" + KeyEvent.VK_LEFT + "" + KeyEvent.VK_RIGHT, TypeOfActions.cycleTypeInstance);
         defaultKeyMap.put(KeyEvent.VK_NUMPAD8+"",TypeOfActions.north);

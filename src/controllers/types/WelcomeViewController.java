@@ -45,7 +45,7 @@ public class WelcomeViewController extends Controller {
     }
 
     @Override
-    protected void setControllerActions() {
+    protected void setActions() {
 
     }
 

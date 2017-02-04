@@ -5,6 +5,8 @@ import controllers.types.gameControllers.MainViewController;
 import controllers.types.gameControllers.StructureViewController;
 import controllers.types.gameControllers.UnitViewController;
 import controllers.types.WelcomeViewController;
+import model.actions.Action;
+import model.actions.ActionModifiers;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -19,6 +21,7 @@ import java.util.HashMap;
  */
 public class StateManager extends Frame implements KeyListener {
 
+    private HashMap<Integer,ActionModifiers> actionModifierMap=new HashMap<>();
     private int controlKey=0;
     private int screenHeight;
     private int screenWidth;
@@ -34,6 +37,7 @@ public class StateManager extends Frame implements KeyListener {
      */
     public StateManager() { // this is where the GUI is created
         super("Space Cats");
+        fillActionModifiers();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         screenHeight = screenSize.height;
         screenWidth = screenSize.width;
@@ -125,6 +129,12 @@ public class StateManager extends Frame implements KeyListener {
         }
     }
 
+    private void fillActionModifiers(){
+        actionModifierMap.put(KeyEvent.VK_UP,ActionModifiers.up);
+        actionModifierMap.put(KeyEvent.VK_DOWN,ActionModifiers.down);
+        actionModifierMap.put(KeyEvent.VK_LEFT,ActionModifiers.left);
+        actionModifierMap.put(KeyEvent.VK_RIGHT,ActionModifiers.right);
+    }
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -157,6 +167,7 @@ public class StateManager extends Frame implements KeyListener {
 
     private void handleInput(int keyPressed){
         String handledInput=keyPressed+"";
+        ActionModifiers actionModifier=ActionModifiers.none;
         if ((keyPressed==KeyEvent.VK_LEFT || keyPressed==KeyEvent.VK_RIGHT) && controlKey!=KeyEvent.VK_CONTROL ){
             handledInput= "" + "" + KeyEvent.VK_LEFT + "" + KeyEvent.VK_RIGHT;
         }
@@ -164,13 +175,16 @@ public class StateManager extends Frame implements KeyListener {
             handledInput= KeyEvent.VK_CONTROL + "" + KeyEvent.VK_LEFT + "" + KeyEvent.VK_RIGHT;
         }
         if ((keyPressed==KeyEvent.VK_UP || keyPressed==KeyEvent.VK_DOWN) && controlKey!=KeyEvent.VK_CONTROL){
-            handledInput="" + "" + KeyEvent.VK_UP + "" + KeyEvent.VK_UP;
+            handledInput="" + "" + KeyEvent.VK_DOWN + "" + KeyEvent.VK_UP;
         }
         if ((keyPressed==KeyEvent.VK_UP || keyPressed==KeyEvent.VK_DOWN) && controlKey==KeyEvent.VK_CONTROL){
-            handledInput=KeyEvent.VK_CONTROL + "" + KeyEvent.VK_UP + "" + KeyEvent.VK_UP;
+            handledInput=KeyEvent.VK_CONTROL + "" + KeyEvent.VK_DOWN + "" + KeyEvent.VK_UP;
+        }
+        if (actionModifierMap.containsKey(keyPressed)){
+            actionModifier=actionModifierMap.get(keyPressed);
         }
 
-        activeController.receiveInput(handledInput);
+        activeController.receiveInput(handledInput, actionModifier);
 
     }
 }

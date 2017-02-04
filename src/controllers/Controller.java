@@ -1,64 +1,54 @@
 package controllers;
 
-import java.awt.event.KeyEvent;
-import com.sun.xml.internal.bind.annotation.XmlLocation;
 import controllers.keyboardInputHandler.KeyBoardMapManager;
 import controllers.keyboardInputHandler.TypeOfActions;
 import model.actions.Action;
+import model.actions.ActionModifiers;
 import model.actions.AvailableActions;
 import model.actions.ContainsActions;
 import view.View;
 
 import java.util.HashMap;
 
-abstract public class Controller implements ContainsActions {
+abstract public class Controller extends ContainsActions {
     protected View view;
     protected StateManager stateManager;
-    protected HashMap<TypeOfActions, Action> controllerActions;
     protected static AvailableActions availableActions = new AvailableActions();
     KeyBoardMapManager keyBoardMapManager=new KeyBoardMapManager();
 
     protected Controller(StateManager stateManager) {
         this.stateManager = stateManager;
-        controllerActions = new HashMap<>();
-        initialize();
+        actionsMap = new HashMap<>();
+        this.initialize();
     }
 
 
     abstract public void update();
 
-
-//    abstract protected void handleKeyPressed(KeyEvent e);
-//
-//    abstract protected void handleKeyReleased(KeyEvent e);
-
-
     abstract protected void setView();
-
-    abstract protected void setControllerActions();
 
     abstract protected void updateView();
 
-    protected void initialize() {
+    @Override
+    protected void initialize(){
+        initializeController();
+    }
+
+    protected void initializeController() {
         setView();
-        setControllerActions();
         resumeController();
     }
 
     @Override
-    public void addAvailableActions() {
+    protected void addAvailableActions() {
         availableActions.addActions(this);
     }
 
     @Override
-    public void removeAvailableActions() {
+    protected void removeAvailableActions() {
         availableActions.removeActions(this);
     }
 
-    @Override
-    public HashMap<TypeOfActions, Action> getActions() {
-        return controllerActions;
-    }
 
     public void resumeController() {
         addAvailableActions();
@@ -73,13 +63,14 @@ abstract public class Controller implements ContainsActions {
         removeAvailableActions();
     }
 
-    public void receiveInput(String receivedInput){
-        handleInput(keyBoardMapManager,receivedInput);
+    public void receiveInput(String receivedInput, ActionModifiers actionModifier){
+        handleInput(keyBoardMapManager,receivedInput, actionModifier);
+
     }
 
-    protected void handleInput(KeyBoardMapManager keyBoardMapManager, String input) {
+    protected void handleInput(KeyBoardMapManager keyBoardMapManager, String input, ActionModifiers actionModifier) {
         TypeOfActions typeOfActions = keyBoardMapManager.processInput(input);
-        availableActions.executeAction(typeOfActions);
+        availableActions.executeAction(typeOfActions, actionModifier);
     }
 
 

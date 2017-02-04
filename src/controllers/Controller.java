@@ -63,6 +63,7 @@ abstract public class Controller implements ContainsActions {
 
     public void resumeController() {
         addAvailableActions();
+
     }
 
     protected void changeView(TypeOfControllers typeOfControllers){

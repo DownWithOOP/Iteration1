@@ -1,14 +1,9 @@
 package view;
+import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.awt.geom.*;
+
 
 public abstract class View {
-
-
-    protected View(){
-
-    }
 
     public abstract void start();
 

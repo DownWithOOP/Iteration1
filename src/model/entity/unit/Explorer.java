@@ -13,7 +13,7 @@ public class Explorer extends FighterUnit {
 
     public Explorer() {
 
-        super(new UnitStats(2, 1, 0, 5, 50, 1, 5));
+        super("Explorer",new UnitStats(2, 1, 0, 5, 50, 1, 5));
         this.initialize();
     }
 

@@ -13,7 +13,7 @@ public class Melee extends FighterUnit {
 
     public Melee() {
 
-        super(new UnitStats(20, 3, 5, 2, 100, 3, 1));
+        super("Melee",new UnitStats(20, 3, 5, 2, 100, 3, 1));
         this.initialize();
     }
 

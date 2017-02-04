@@ -50,7 +50,7 @@ public class StateManager implements KeyListener {
      * when class is initialized the controllers are too and the WelcomeViewController is activated
      */
     public StateManager() { // this is where the GUI is created
-        super("Space Cats");
+        super(/*"Space Cats"*/);
         fillActionModifiers();
         initGui();
         // at this point the GUI is initialized

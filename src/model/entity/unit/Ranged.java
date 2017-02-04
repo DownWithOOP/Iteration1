@@ -13,7 +13,7 @@ public class Ranged extends FighterUnit {
 
     public Ranged() {
 
-        super (new UnitStats(10, 3, 3, 3, 100, 3, 3));
+        super ("Ranged",new UnitStats(10, 3, 3, 3, 100, 3, 3));
         this.initialize();
     }
 

@@ -1,11 +1,13 @@
 package view.types;
 
-import javafx.scene.layout.Pane;
 import model.common.GraphicsInfo;
 
 import view.View;
 import view.components.AreaViewport;
 import view.components.StatusViewport;
+
+import javax.swing.*;
+import java.awt.*;
 
 public class MainView extends View {
 
@@ -15,30 +17,49 @@ public class MainView extends View {
     View areaViewport;
     View statusViewport;
 
-    public MainView(){
+    //Temporary
+    JLabel testName = new JLabel("Main view");
+    JTextField testTyping = new JTextField(300);
 
+    public MainView(){
+        super();
+        start();
+    }
+
+    public MainView(LayoutManager layoutManager){
+        super(layoutManager);
+        start();
     }
 
     @Override
     public void start() {
-        Pane areaViewport = new AreaViewport();
-        Pane statusViewport = new StatusViewport();
+        setBackground(Color.black);
 
-        //this.add(areaViewport);
-        //this.add(statusViewport);
+        JPanel areaViewport = new AreaViewport();
+        JPanel statusViewport = new StatusViewport();
+
+        System.out.print("Main View startingggggggggggggggggggg\ngggggggg\ng\ng\ng\ng\ng.");
+
+        this.add(testName);
+        this.add(testTyping);
+        this.add(areaViewport);
+        this.add(statusViewport);
     }
 
     @Override
     protected void render() {
-        //areaViewport.repaint();
-        //statusViewport.repaint();
+        areaViewport.repaint();
+        statusViewport.repaint();
     }
 
     @Override
-    public void update() { }
+    public void update() {
+        setVisible(true);
+    }
 
     @Override
     public void close() { }
+
 
 
 }

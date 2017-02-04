@@ -11,6 +11,8 @@ import model.actions.ActionModifiers;
 import model.actions.controllerActions.ChangeViewAction;
 import view.types.MainView;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.HashMap;
 
 /**
@@ -19,7 +21,7 @@ import java.util.HashMap;
 public class MainViewController extends GameController {
     protected HashMap<TypeOfActions, Action> mainViewControllerActions= new HashMap<>();
 
-    private final MainView mainView = new MainView();
+    private final MainView mainView = new MainView(new BorderLayout());
 
     public MainViewController(StateManager stateManager) {
         super(stateManager);
@@ -45,7 +47,7 @@ public class MainViewController extends GameController {
     }
 
 
-    Action a;
+    Action a; //TODO used for testing purposes
 
     @Override
     protected void setView() {
@@ -55,6 +57,7 @@ public class MainViewController extends GameController {
     //TODO: view.update
     @Override
     protected void updateView() {
+        mainView.update();
     }
 
     @Override

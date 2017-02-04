@@ -11,10 +11,13 @@ import java.util.HashMap;
 public abstract class FighterUnit extends Unit {
     private Army army;
     protected final HashMap<TypeOfActions,Action> fighterActions= new HashMap<>();
+    private String fighterUnitType;
 
-    public FighterUnit(UnitStats fighterStats) {
+    public FighterUnit(String fighterUnitType, UnitStats fighterStats) {
         super(fighterStats);
         this.initialize();
+        this.fighterUnitType = fighterUnitType;
+
     }
 
     @Override
@@ -46,5 +49,7 @@ public abstract class FighterUnit extends Unit {
     }
 
 
-
+    public String getFighterUnitType() {
+        return fighterUnitType;
+    }
 }

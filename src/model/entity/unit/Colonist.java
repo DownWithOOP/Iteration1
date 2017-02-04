@@ -13,7 +13,8 @@ public class Colonist extends FighterUnit {
 
 
     public Colonist() {
-        super(new UnitStats(2, 1, 0, 3, 50, 1, 5));
+        super("Colonist", new UnitStats(2, 1, 0, 3, 50, 1, 5));
+
         this.initialize();
     }
 
@@ -44,7 +45,7 @@ public class Colonist extends FighterUnit {
 
 
 //    public Base buildStructure(int rowPosition, int columnPosition) {
-//        return new Base(rowPosition, columnPosition,visionRadius);
+//        return new Base(new structureStats(),rowPosition, columnPosition);
 //    }
 
 }

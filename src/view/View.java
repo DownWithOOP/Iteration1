@@ -1,13 +1,14 @@
 package view;
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.geom.*;
+import javax.swing.JPanel;
+import java.awt.LayoutManager;
 
-public abstract class View {
-
+public abstract class View extends JPanel{
 
     protected View(){
-
+        super();
+    }
+    protected View(LayoutManager layoutManager){
+        super(layoutManager);
     }
 
     public abstract void start();

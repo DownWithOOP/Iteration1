@@ -10,7 +10,11 @@ import view.View;
 
 import java.util.HashMap;
 
+
 abstract public class Controller extends ContainsActions {
+
+//TODO figure out the correct way to hide/show views upon resume/leaveController
+
     protected View view;
     protected StateManager stateManager;
     protected static AvailableActions availableActions = new AvailableActions();

@@ -40,6 +40,7 @@ abstract public class Entity extends ContainsActions {
         /**
          *         entityActions.put(TypeOfActions.powerUp,PowerUpAction(this));
          * */
+
     }
 
     abstract public Location getLocation();

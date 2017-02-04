@@ -2,33 +2,41 @@ package model.entity.unit;
 
 import controllers.keyboardInputHandler.TypeOfActions;
 import model.actions.Action;
+import model.entity.Fighter;
 import model.entity.stats.UnitStats;
 import model.common.Location;
 import model.entity.army.Army;
+import model.player.Player;
 
 import java.util.HashMap;
 
-public abstract class FighterUnit extends Unit {
-    private Army army;
+public abstract class FighterUnit extends Unit implements Fighter{
+    private Army army= null;
     protected final HashMap<TypeOfActions,Action> fighterActions= new HashMap<>();
     private String fighterUnitType;
 
-    public FighterUnit(String fighterUnitType, UnitStats fighterStats) {
-        super(fighterStats);
+    public FighterUnit(String fighterUnitType, UnitStats fighterStats, Player player) {
+        super(fighterStats, player);
         initializeFighterUnit();
         this.fighterUnitType = fighterUnitType;
 
     }
-
 
     protected void initializeFighterUnit() {
         setFighterUnitActions();
         addAllActions(fighterActions);
     }
 
-    public abstract void abandonArmy() ;
+    public void abandonArmy() {
+        army.removeFighter(this);
+    }
 
-    public abstract void joinArmy() ;
+    public void joinArmy(Army army) {
+        if (playerId==army.getPlayerId()){
+            this.army=army;
+            army.registerFighter(this);
+        }
+    }
 
     private void setFighterUnitActions(){
         /**
@@ -51,4 +59,15 @@ public abstract class FighterUnit extends Unit {
     public String getFighterUnitType() {
         return fighterUnitType;
     }
+
+
+    @Override
+    public void attack(){
+
+    }
+    @Override
+    public void defend(){
+
+    }
+
 }

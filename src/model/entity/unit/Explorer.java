@@ -3,6 +3,7 @@ package model.entity.unit;
 import controllers.keyboardInputHandler.TypeOfActions;
 import model.actions.Action;
 import model.entity.stats.UnitStats;
+import model.player.Player;
 
 import java.util.HashMap;
 
@@ -11,9 +12,9 @@ public class Explorer extends FighterUnit {
     protected HashMap<TypeOfActions, Action> explorerActions = new HashMap<>();
 
 
-    public Explorer() {
+    public Explorer(Player player) {
 
-        super("Explorer",new UnitStats(2, 1, 0, 5, 50, 1, 5));
+        super("Explorer",new UnitStats(2, 1, 0, 5, 50, 1, 5), player);
         this.initializeExplorer();
     }
 
@@ -26,16 +27,6 @@ public class Explorer extends FighterUnit {
 
 
     public void findResource() {
-
-    }
-
-    @Override
-    public void abandonArmy() {
-
-    }
-
-    @Override
-    public void joinArmy() {
 
     }
 

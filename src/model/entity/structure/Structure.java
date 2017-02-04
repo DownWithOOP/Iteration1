@@ -5,6 +5,7 @@ import model.actions.Action;
 import model.entity.Entity;
 import model.entity.stats.StructureStats;
 import model.common.Location;
+import model.player.Player;
 
 import java.util.HashMap;
 
@@ -19,8 +20,8 @@ public abstract class Structure extends Entity{
     private final Location fixedLocation;
     private StructureStats structureStats;
 
-    public Structure(StructureStats structureStats, int xPosition, int yPosition) {
-        super();
+    public Structure(StructureStats structureStats, int xPosition, int yPosition, Player player) {
+        super(player);
         initializeStructure();
         this.structureStats = structureStats;
         fixedLocation = new Location(xPosition, yPosition);

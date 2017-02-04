@@ -48,8 +48,10 @@ public class MainViewController extends GameController {
 
     @Override
     protected void updateGameModel() {
-//        gameModel.update();
+        gameModel.update();
     }
+
+    Action a; //TODO used for testing purposes
 
     //TODO: change public modifier
     @Override
@@ -59,8 +61,6 @@ public class MainViewController extends GameController {
         updateView();
     }
 
-
-    Action a; //TODO used for testing purposes
 
     @Override
     protected void setView() {
@@ -80,23 +80,23 @@ public class MainViewController extends GameController {
     }
 
     //TODO: delete this one, take care of handleInput
-    public static void main(String[] args) {
-        StateManager stateManager = new StateManager();
-        MainViewController mainViewController = new MainViewController(stateManager);
-        KeyBoardMapManager keyBoardMapManager = new KeyBoardMapManager();
-
-//        HashMap<TypeOfActions,String> playerInput= new HashMap<>();
-//        playerInput.put(TypeOfActions.changeView,"1");
+//    public static void main(String[] args) {
+//        StateManager stateManager = new StateManager();
+//        MainViewController mainViewController = new MainViewController(stateManager);
+//        KeyBoardMapManager keyBoardMapManager = new KeyBoardMapManager();
 //
-//        keyBoardMapManager.populatePlayerInputHash("Player1",playerInput);
-//        keyBoardMapManager.updatePlayerId("Player1");
+////        HashMap<TypeOfActions,String> playerInput= new HashMap<>();
+////        playerInput.put(TypeOfActions.changeView,"1");
+////
+////        keyBoardMapManager.populatePlayerInputHash("Player1",playerInput);
+////        keyBoardMapManager.updatePlayerId("Player1");
+////
+////        mainViewController.handleInput(keyBoardMapManager,"1", ActionModifiers.down);
+////        mainViewController.changeView(TypeOfControllers.MainViewController);
+//        StructureStats structureStats= new StructureStats(5,6,7,8,9,9,9,9);
+//        Base base=new Base(structureStats,5,7);
 //
-//        mainViewController.handleInput(keyBoardMapManager,"1", ActionModifiers.down);
-//        mainViewController.changeView(TypeOfControllers.MainViewController);
-        StructureStats structureStats= new StructureStats(5,6,7,8,9,9,9,9);
-        Base base=new Base(structureStats,5,7);
-
-    }
+//    }
 }
 
 

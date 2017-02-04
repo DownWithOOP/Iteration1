@@ -5,6 +5,7 @@ import model.actions.Action;
 import model.entity.unit.*;
 import model.common.Location;
 import model.entity.stats.StructureStats;
+import model.player.Player;
 
 import java.util.HashMap;
 
@@ -14,8 +15,8 @@ import java.util.HashMap;
 public class Base extends Structure {
     protected HashMap<TypeOfActions, Action> baseActions = new HashMap<>();
 
-    public Base(StructureStats baseStats, int xPosition, int yPosition) {
-        super(baseStats, xPosition, yPosition);
+    public Base(StructureStats baseStats, int xPosition, int yPosition, Player player) {
+        super(baseStats, xPosition, yPosition, player);
         initializeBase();
     }
 
@@ -46,19 +47,19 @@ public class Base extends Structure {
         Unit newUnit;
 
         if (unitType.equals("COLONIST")) {
-            newUnit = new Colonist();
+            newUnit = new Colonist(player);
             return true;
         }
         else if (unitType.equals("EXPLORER")) {
-            newUnit = new Explorer();
+            newUnit = new Explorer(player);
             return true;
         }
         else if (unitType.equals("MELEE")) {
-            newUnit = new Melee();
+            newUnit = new Melee(player);
             return true;
         }
         else if (unitType.equals("RANGED")) {
-            newUnit = new Ranged();
+            newUnit = new Ranged(player);
             return true;
         }
         else {

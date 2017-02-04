@@ -19,6 +19,10 @@ public class GameModel {
         players = new HashMap<>();
     }
 
+    public void update(){
+
+    }
+
     public boolean passAction(String action){
         if(actionMap.containsKey(action)){
             //do something wit dat action

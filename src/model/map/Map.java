@@ -8,7 +8,6 @@ import model.map.tile.item.ObstacleItem;
 import utilities.PathFinder;
 import utilities.XMLParser;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -26,7 +25,7 @@ public class Map {
     private boolean[][] obstacleGrid;
 
     public Map(){
-        tileArray = new Tile[GRID_HEIGHT][GRID_WIDTH];
+        this.tileArray = new Tile[GRID_HEIGHT][GRID_WIDTH];
         ArrayList<Tile> tiles = retrieveTileList();
         createTileGrid(tiles);
     }

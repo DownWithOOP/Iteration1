@@ -1,6 +1,5 @@
 package model.map.tile;
 
-
 import model.entity.unit.EntityType;
 import model.entity.unit.Explorer;
 import model.map.tile.areaeffect.AreaEffect;
@@ -14,6 +13,7 @@ public class Tile {
 
     private boolean hasEntity;
     private boolean isPassable;
+    private boolean isVisible;
 
     private Terrain terrain;
     private AreaEffect areaEffect;
@@ -27,6 +27,7 @@ public class Tile {
         this.resource = resource;
         this.item = item;
         this.isPassable = terrain.isPassable();
+        this.isVisible = false;
     }
 
     /**
@@ -58,6 +59,10 @@ public class Tile {
         return isPassable;
     }
 
+    public boolean isVisible(){
+        return isVisible;
+    }
+
     public Terrain getTerrain() {
         return terrain;
     }
@@ -78,4 +83,11 @@ public class Tile {
         return entity;
     }
 
+    /**
+     * Setters
+     */
+
+    public void setVisible(boolean isVisible){
+        this.isVisible = isVisible;
+    }
 }

@@ -8,9 +8,11 @@ import model.common.Location;
  */
 public abstract class Item {
 	public Location location;
+	public int itemType; //0 for ObstacleItem, 1 for OneShotItem
 	
-	public Item(Location location){
-			this.location = location;
+	public Item(Location location, int itemType){
+		this.location = location;
+		this.itemType = itemType;
 	}
 	
 	public Location getLocation(){
@@ -19,6 +21,6 @@ public abstract class Item {
 	
 	public void setLocation(int xPosition, int yPosition){
 		this.location.setxCoord(xPosition);
-        this.location.setyCoord(yPosition);
+        	this.location.setyCoord(yPosition);
 	}
 }

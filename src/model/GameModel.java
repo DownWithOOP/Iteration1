@@ -2,6 +2,7 @@ package model;
 
 import model.actions.Action;
 import model.actions.AvailableActions;
+import model.common.GraphicsInfo;
 import model.player.Player;
 
 import java.util.HashMap;
@@ -11,6 +12,7 @@ import java.util.HashMap;
  */
 public class GameModel {
 
+    private GraphicsInfo graphicsInfo;
     private Player activePlayer;
     private HashMap<Integer, Action> actionMap;
     private HashMap<String, Player> players;
@@ -21,7 +23,7 @@ public class GameModel {
     }
 
     public void update(){
-
+        //graphicsInfo.update(activePlayer, activePlayer.getPlayerMap());
     }
 
     public boolean passAction(String action){
@@ -51,8 +53,8 @@ public class GameModel {
         return true;
     }
 
-    public Player getActivePlayer(){
-        return activePlayer;
+    public GraphicsInfo getGraphcicsInfo(){
+        return graphicsInfo;
     }
 
 }

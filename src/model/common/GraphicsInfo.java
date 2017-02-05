@@ -13,7 +13,13 @@ public class GraphicsInfo {
     Map map;
     Player player;
 
-    GraphicsInfo(){
+    public GraphicsInfo(Map activeMap, Player activePlayer){
+        this.player = activePlayer;
+        this.map = activeMap;
+    }
 
+    public void update(Map activeMap, Player activePlayer){
+        this.player = activePlayer;
+        this.map = activeMap;
     }
 }

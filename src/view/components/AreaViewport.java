@@ -1,7 +1,9 @@
 package view.components;
 
+import model.map.Map;
+
 import javax.swing.JPanel;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +17,12 @@ public class AreaViewport extends JPanel {
         tiles.add(rectList);
     }
 
-    /*@Override
-    protected void paintComponent(Grahics g) {
+    public void update(Map map){
+
+    }
+
+    @Override
+    public void paintComponent(Graphics g){
         super.paintComponent(g);//do I need this???
         Graphics2D g2 = (Graphics2D) g;
         for(List<Rectangle> row : tiles){
@@ -24,5 +30,6 @@ public class AreaViewport extends JPanel {
                 g2.draw(tile);
             }
         }
-    }*/
+        System.out.println("PAINTING AREA VIEWPORT");
+    }
 }

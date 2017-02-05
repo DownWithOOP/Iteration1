@@ -191,6 +191,8 @@ public class Player extends ContainsActions {
         return selectedEntity;
     }
 
+    public Map getPlayerMap() {return playerMap;}
+
     public int catfoodResourceLevel() {
         return catfoodLevel;
     }

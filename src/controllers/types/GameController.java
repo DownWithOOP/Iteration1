@@ -15,4 +15,5 @@ public abstract class GameController extends Controller {
         super(stateManager);
     }
     abstract protected void updateGameModel();
+    abstract protected void updateView();
 }

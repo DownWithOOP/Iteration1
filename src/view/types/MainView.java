@@ -6,15 +6,19 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Line2D;
 
-import javafx.scene.layout.Pane;
+import model.map.Map;
+import model.player.Player;
 import view.View;
+import view.components.AreaViewport;
 
 
 public class MainView extends View {
 
+    private AreaViewport areaViewport;
 
     public MainView(){
-
+        areaViewport = new AreaViewport();
+        this.add(areaViewport);
     }
 
     @Override
@@ -32,6 +36,11 @@ public class MainView extends View {
 
     }
 
+    public void update(Player player, Map map) {
+        areaViewport.update(map);
+        //statusViewport.update(player);
+    }
+
     @Override
     public void close() {
 
@@ -42,7 +51,7 @@ public class MainView extends View {
         g.setFont(new Font("TimesRoman", Font.BOLD, 200));
         g.setColor(Color.BLACK);
         Toolkit tool = Toolkit.getDefaultToolkit();
-        Image image = tool.getImage("res/images/background1.jpg");
+        Image image = tool.getImage("res/images/background1.jpg"); //TODO wrap file opening in try catch
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
         g.setFont(new Font("TimesRoman", Font.BOLD, (int)(super.getWidth()*0.05)));
         g.setColor(Color.WHITE);
@@ -81,6 +90,8 @@ public class MainView extends View {
 
         g.drawString("-Area ViewPort-",(int)(super.getWidth()*0.45),(int)(super.getHeight()*0.05));
 
+        areaViewport.paintComponent(g);
+        //statusViewport.paintComponent(g);
     }
 
 

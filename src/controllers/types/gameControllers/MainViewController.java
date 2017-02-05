@@ -15,6 +15,8 @@ import model.common.Location;
 import model.entity.stats.StructureStats;
 import model.entity.structure.Base;
 import model.entity.structure.Structure;
+import model.map.Map;
+import model.player.Player;
 import view.View;
 import view.types.MainView;
 
@@ -57,11 +59,16 @@ public class MainViewController extends GameController {
         //gameModel.update();
     }
 
+    @Override
+    protected void updateView() {
+
+    }
+
     //TODO: change public modifier
     @Override
     public void update() {
         updateGameModel();
-        updateView();
+        //updateView(gameModel.getActivePlayer(), gameModel.getActivePlayer().getPlayerMap()); TODO use render object
     }
 
 
@@ -72,10 +79,8 @@ public class MainViewController extends GameController {
 
     }
 
-    //TODO: view.update
-    @Override
-    protected void updateView() {
-
+    protected void updateView(Player viewPlayer, Map viewMap) {
+        mainView.update(viewPlayer, viewMap);
     }
 
     @Override

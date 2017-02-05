@@ -19,8 +19,8 @@ public class Base extends Structure {
     RallyPoint unitsRallyPoint;
 
 
-    public Base(StructureStats baseStats, int xPosition, int yPosition, Player player) {
-        super(EntityType.BASE,baseStats, xPosition, yPosition, player);
+    public Base(StructureStats baseStats, Location location, Player player) {
+        super(EntityType.BASE,baseStats, location, player);
         initializeBase();
     }
 

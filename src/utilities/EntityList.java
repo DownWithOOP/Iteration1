@@ -53,13 +53,13 @@ public class EntityList<Entity> extends ArrayList<Entity> {
                 numStructures--;
             } else {
                 numUnits--;
-                if (((Unit) o).getEntityID().getId().equals(EntityType.COLONIST)) {
+                if (((Unit) o).getEntityID().getEntityType().equals(EntityType.COLONIST)) {
                     numColonists--;
-                } else if (((Unit) o).getEntityID().getId().equals(EntityType.EXPLORER)) {
+                } else if (((Unit) o).getEntityID().getEntityType().equals(EntityType.EXPLORER)) {
                     numExplorers--;
-                } else if (((Unit) o).getEntityID().getId().equals(EntityType.MELEE)) {
+                } else if (((Unit) o).getEntityID().getEntityType().equals(EntityType.MELEE)) {
                     numMelee--;
-                } else if (((Unit) o).getEntityID().getId().equals(EntityType.RANGED)) {
+                } else if (((Unit) o).getEntityID().getEntityType().equals(EntityType.RANGED)) {
                     numRanged--;
                 }
             }

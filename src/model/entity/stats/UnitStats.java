@@ -5,9 +5,12 @@ public class UnitStats extends Stats {
     int range;
     private int movement;           // the max distance a unit may move in one turn
 
-    public UnitStats(int offensiveDamage, int defensiveDamage, int armor, int movement, int health,
+    public UnitStats(int offensiveDamage, int defensiveDamage,
+                     int armor, int movement, int health,
                      int upkeep, int visionRadius, int range) {
-        super(offensiveDamage, defensiveDamage, armor, movement, health, upkeep, visionRadius);
+        super(offensiveDamage, defensiveDamage, armor,
+                movement, health, upkeep, visionRadius);
+
         this.range=range;
     }
     public int getRange(){

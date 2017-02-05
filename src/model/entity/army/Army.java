@@ -8,6 +8,7 @@ import model.entity.Entity;
 import model.entity.Fighter;
 import model.entity.stats.DefaultArmyStats;
 import model.entity.stats.Stats;
+import model.entity.stats.UnitStats;
 import model.entity.unit.Explorer;
 import model.entity.unit.FighterUnit;
 import model.entity.unit.Ranged;
@@ -30,24 +31,14 @@ public class Army extends Entity implements Fighter {
 
     protected final HashMap<TypeOfActions, Action> armyActions = new HashMap<>();                       //add all the Actions of an army here
     private static DefaultArmyStats initialStats = new DefaultArmyStats();
-    private Stats armyStats = new Stats(initialStats.offensiveDamage, initialStats.defensiveDamage,
+    private UnitStats armyStats = new UnitStats(initialStats.offensiveDamage, initialStats.defensiveDamage,
             initialStats.armor, initialStats.movement, initialStats.health,
-            initialStats.upkeep, initialStats.visionRadius);
+            initialStats.upkeep, initialStats.visionRadius,initialStats.range);
 
-    private int visionRadius;
     HashMap<UUID, FighterUnit> reinforcements = new HashMap<>();
     HashMap<UUID, FighterUnit> battleGroup = new HashMap<>();
-    //TODO: tell the Entity class to enforce the passing of the player ID
-
-
-    private int totalMovement;
-    private int batteGroupTotalAttack;
-    private int batteGroupTotalDefense;
     private RallyPoint rallyPoint;
 
-    //TODO:check for resource levels before performing an action
-    private int totalResourceConsumption;
-    private int battleGroupAttackRange = 0;
 //    private int
 //    private int
 //    private int

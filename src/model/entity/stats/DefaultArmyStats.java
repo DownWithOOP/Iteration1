@@ -11,6 +11,7 @@ public class DefaultArmyStats {
     public int health;             // when reaches zero, unit is destroyed
     public int upkeep;             // resources required to keep unit at full health
     public int visionRadius;
+    public int range;
 
     public DefaultArmyStats(){
         offensiveDamage=0;
@@ -20,5 +21,6 @@ public class DefaultArmyStats {
         health= 0;
         upkeep=0;
         visionRadius=0;
+        range=0;
     }
 }

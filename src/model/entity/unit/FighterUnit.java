@@ -83,4 +83,13 @@ public abstract class FighterUnit extends Unit implements Fighter{
         //TODO: run search algorithm there
     }
 
+
+    //TODO: apply the same function of decommission here
+    @Override
+    public boolean decommission(){
+        abandonArmy();
+        
+        return true;
+    }
+
 }

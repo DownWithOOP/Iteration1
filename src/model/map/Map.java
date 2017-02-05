@@ -2,13 +2,12 @@ package model.map;
 
 import model.common.Location;
 import model.map.tile.*;
-import model.map.tile.areaEffect.AreaEffect;
-import model.map.tile.areaEffect.AreaEffectFactory;
+import model.map.tile.areaeffect.AreaEffect;
+import model.map.tile.areaeffect.AreaEffectFactory;
 import model.map.tile.item.ObstacleItem;
 import utilities.PathFinder;
 import utilities.XMLParser;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 

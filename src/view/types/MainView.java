@@ -39,13 +39,17 @@ public class MainView extends View {
         super.paintComponent(g);
         g.setFont(new Font("TimesRoman", Font.BOLD, 200));
         g.setColor(Color.BLACK);
-        g.drawString("Main View!!! HURRAH",(int)(super.getWidth()*0.2),(int)(super.getHeight()*0.8));
-        g.setFont(new Font("TimesRoman", Font.BOLD, 50));
-        g.setColor(Color.BLACK);
-        g.drawString("1) Pause View",(int)(super.getWidth()*0.7),(int)(super.getHeight()*0.2));
-        g.drawString("2) Structure Overview",(int)(super.getWidth()*0.7),(int)(super.getHeight()*0.3));
-        g.drawString("3) Unit Overview",(int)(super.getWidth()*0.7),(int)(super.getHeight()*0.4));
-        g.drawString("4) Exit ",(int)(super.getWidth()*0.7),(int)(super.getHeight()*0.5));
+        Toolkit tool = Toolkit.getDefaultToolkit();
+        Image image = tool.getImage("res/images/background1.jpg");
+        g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+        g.setFont(new Font("TimesRoman", Font.BOLD, (int)(super.getWidth()*0.05)));
+        g.setColor(Color.WHITE);
+        g.drawString("-Main View-",(int)(super.getWidth()*0.3),(int)(super.getHeight()*0.1));
+        g.setFont(new Font("TimesRoman", Font.BOLD, (int)(super.getWidth()*0.01)));
+        g.drawString("1) Pause",(int)(super.getWidth()*0.05),(int)(super.getHeight()*0.1));
+        g.drawString("2) Structure OverView",(int)(super.getWidth()*0.05),(int)(super.getHeight()*0.12));
+        g.drawString("3) Unit Overview",(int)(super.getWidth()*0.05),(int)(super.getHeight()*0.14));
+        g.drawString("4) Exit",(int)(super.getWidth()*0.05),(int)(super.getHeight()*0.16));
     }
 
 

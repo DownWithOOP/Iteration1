@@ -3,10 +3,7 @@ package view;
 import java.util.*;
 import java.awt.*;
 import javax.swing.*;
-import view.View;
-import view.types.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+
 
 // The main GUI window resides in this class, it is initialized by the StateManager at the very beggining of the game
 // Statemanager binds a keylistener to the GUI object it initilized and the keylistender functions are implemented in Statemanager.java

@@ -50,6 +50,10 @@ public class MainView extends View {
         g.drawString("2) Structure OverView",(int)(super.getWidth()*0.05),(int)(super.getHeight()*0.12));
         g.drawString("3) Unit Overview",(int)(super.getWidth()*0.05),(int)(super.getHeight()*0.14));
         g.drawString("4) Exit",(int)(super.getWidth()*0.05),(int)(super.getHeight()*0.16));
+
+        g.setFont(new Font("TimesRoman", Font.BOLD, (int)(super.getWidth()*0.06)));
+        g.drawString("Larry if you are reading ",(int)(super.getWidth()*0.2),(int)(super.getHeight()*0.8));
+        g.drawString("this, get to work",(int)(super.getWidth()*0.2),(int)(super.getHeight()*0.9));
     }
 
 

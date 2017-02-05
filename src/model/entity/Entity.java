@@ -68,17 +68,7 @@ abstract public class Entity extends ContainsActions {
         return true;   // canceling queue command wasn't successful, although why wouldn't it be amirite?
     }
 
-    public boolean decommission() {
-
-        if(entityType.equals(EntityType.UNIT)){
-            return player.removeUnit(this);
-        } else if(entityType.equals(EntityType.STRUCTURE)) {
-            return player.removeStructure(this);
-        } else if(entityType.equals(EntityType.ARMY)){
-            return player.removeArmy(this);
-        }
-        return false;
-    }
+    abstract public boolean decommission();
 
     public boolean powerUp() {
         return true;

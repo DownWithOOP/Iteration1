@@ -33,6 +33,15 @@ public abstract class Structure extends Entity{
         addAllActions(structureActions);
     }
 
+    /**
+     * Actions
+     */
+
+    @Override
+    public boolean decommission(){
+        return player.removeStructure(this);
+    }
+
     protected  void setStructureActions(){
         /**
          *         structureActions.put(TypeOfActions.powerUp,PowerUpAction(this));

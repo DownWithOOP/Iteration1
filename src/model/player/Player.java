@@ -151,17 +151,16 @@ public class Player extends ContainsActions {
         return false;
     }
 
-    public boolean removeStructure(Entity structure) {
+    public boolean removeStructure(Structure structure) {
         return structures.remove(structure) && allEntities.remove(structure);
     }
 
-    public boolean removeUnit(Entity unit) {
+    public boolean removeUnit(Unit unit) {
         return units.remove(unit) && allEntities.remove(unit);
     }
 
-    public boolean removeArmy(Entity army) {
+    public boolean removeArmy(Army army) {
         return armies.remove(army) && allEntities.remove(army);
-
     }
 
     /**

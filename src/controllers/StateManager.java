@@ -9,6 +9,7 @@ import controllers.types.gameControllers.WelcomeViewController;
 
 import controllers.types.gameControllers.WelcomeViewController;
 import model.actions.ActionModifiers;
+import model.map.Map;
 import view.View;
 import view.GUI;
 
@@ -82,8 +83,8 @@ public class StateManager implements KeyListener {
          * I initialized players in game model, so I hardcoded the playermap dimensions here - Cristian
          */
         activePlayers = new Player[2];
-        Player player1 = new Player("1", new boolean[3][3]);
-        Player player2 = new Player("2", new boolean[3][3]);
+        Player player1 = new Player("1", new Map());
+        Player player2 = new Player("2", new Map());
         activePlayers[0] = player1;
         activePlayers[1] = player2;
 

@@ -55,7 +55,7 @@ public class Player extends ContainsActions {
     private HashMap<Integer, Action> actionMap;
     private HashMap<TypeOfActions, Action> playerActionMap = new HashMap<>();                           // Where all the actions the player is going to perform are found
 
-    private boolean[][] playerMap;
+    private Map playerMap;
 
     /**
      * Resource levels
@@ -65,7 +65,7 @@ public class Player extends ContainsActions {
     private int researchLevel;
 
     /*TODO:Set player id*/
-    public Player(String playerId, boolean[][] playerMap) {
+    public Player(String playerId, Map playerMap) {
         allEntities = new EntityList<Entity>();
         units = new ArrayList<Unit>();
         structures = new ArrayList<Structure>();
@@ -203,7 +203,7 @@ public class Player extends ContainsActions {
         return researchLevel;
     }
 
-    public boolean[][] getPlayerMap(){
+    public Map getPlayerMap(){
         return playerMap;
     }
 
@@ -235,7 +235,7 @@ public class Player extends ContainsActions {
 
     }
 
-    public void setPlayerMap(boolean[][] playerMap){
+    public void setPlayerMap(Map playerMap){
         this.playerMap = playerMap;
     }
 

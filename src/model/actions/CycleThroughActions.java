@@ -7,6 +7,7 @@ import model.entity.Entity;
 import model.entity.army.Army;
 import model.entity.army.RallyPoint;
 import model.entity.unit.Colonist;
+import model.map.Map;
 import model.player.Player;
 
 /**
@@ -42,9 +43,9 @@ public class CycleThroughActions implements Action {
 
     public static void main(String[] args) {
         //Added new playermap argument - Cristian
-        Player player= new Player("hello", new boolean[3][3]);
+        Player player= new Player("hello", new Map());
         Location location= new Location(1,2);
-        RallyPoint rallyPoint= new RallyPoint(new Location(1,2), new Army(new Player("hello", new boolean[3][3]),new Location(1,2)));
+        RallyPoint rallyPoint= new RallyPoint(new Location(1,2), new Army(new Player("hello", new Map()),new Location(1,2)));
         Colonist colonist=new Colonist(player,location);
         Action cyrcleToRallypoint= new CycleThroughActions(rallyPoint);
         Action cyrcleTocolonist= new CycleThroughActions(rallyPoint);

@@ -14,6 +14,7 @@ import model.entity.unit.EntityType;
 import model.entity.unit.Explorer;
 import model.entity.unit.FighterUnit;
 import model.entity.unit.Ranged;
+import model.map.Map;
 import model.player.Player;
 
 import javax.swing.plaf.basic.BasicScrollPaneUI;
@@ -263,8 +264,8 @@ public class Army extends Entity implements Fighter {
         /**
          * I assume there are just for testing? player takes a boolean playermap now - Cristian
          */
-        Player play= new Player("helloWorld", new boolean[3][3]);
-        Player playEnemy= new Player("helloWorld1", new boolean[3][3]);
+        Player play= new Player("helloWorld", new Map());
+        Player playEnemy= new Player("helloWorld1", new Map());
 
         Explorer explorer= new Explorer(play,new Location(1,2));
         Ranged ranged= new Ranged(play,new Location(1,2));

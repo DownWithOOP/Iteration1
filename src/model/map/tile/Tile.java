@@ -1,8 +1,11 @@
 package model.map.tile;
 
 
-import model.map.tile.areaEffect.AreaEffect;
+import model.entity.unit.EntityType;
+import model.entity.unit.Explorer;
+import model.map.tile.areaeffect.AreaEffect;
 import model.map.tile.item.Item;
+import model.entity.Entity;
 
 /**
  * Created by cduica on 2/1/17.
@@ -16,7 +19,7 @@ public class Tile {
     private AreaEffect areaEffect;
     private Resource resource;
     private Item item;
-    private String entityId;
+    private Entity entity;
 
     public Tile(Terrain terrain, AreaEffect areaEffect, Resource resource, Item item){
         this.terrain = terrain;
@@ -28,15 +31,19 @@ public class Tile {
 
     /**
      * Assign or remove an entity from a Tile
-     * @param entityId
+     * @param entity
      */
-    public void setEntity(String entityId){
-        this.entityId = entityId;
+    public void setEntity(Entity entity){
+        this.entity = entity;
         this.hasEntity = true;
+        if (entity.getEntityID().getEntityType().equals(EntityType.EXPLORER.toString())) {
+            Explorer explorer = (Explorer) entity;
+            explorer.findResource();
+        }
     }
 
     public void removeEntity(){
-        this.entityId = null;
+        this.entity = null;
         this.hasEntity = false;
     }
 
@@ -67,8 +74,8 @@ public class Tile {
         return item;
     }
 
-    public String getEntityId() {
-        return entityId;
+    public Entity getEntity() {
+        return entity;
     }
 
 }

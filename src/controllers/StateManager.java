@@ -1,11 +1,13 @@
 package controllers;
 
 
-import controllers.types.PauseViewController;
+import controllers.types.gameControllers.PauseViewController;
 import controllers.types.gameControllers.MainViewController;
 import controllers.types.gameControllers.StructureViewController;
 import controllers.types.gameControllers.UnitViewController;
-import controllers.types.WelcomeViewController;
+import controllers.types.gameControllers.WelcomeViewController;
+
+import controllers.types.gameControllers.WelcomeViewController;
 import model.actions.ActionModifiers;
 import view.View;
 import view.GUI;
@@ -183,6 +185,12 @@ public class StateManager implements KeyListener {
             if(e.getKeyChar() == '1'){
                 this.changeController(TypeOfControllers.PauseViewController);
             }
+            else if(e.getKeyChar() == '2'){
+                this.changeController(TypeOfControllers.StructureViewController);
+            }
+            else if(e.getKeyChar() == '3'){
+                this.changeController(TypeOfControllers.UnitViewController);
+            }
             else if(e.getKeyChar() == '4'){
                 System.exit(0);
             }
@@ -194,6 +202,16 @@ public class StateManager implements KeyListener {
             }
             else if(e.getKeyChar() == '4'){
                 System.exit(0);
+            }
+        }
+        else if(activeController instanceof UnitViewController){
+            if(e.getKeyChar() == '1'){
+                this.changeController(TypeOfControllers.MainViewController);
+            }
+        }
+        else if(activeController instanceof StructureViewController){
+            if(e.getKeyChar() == '1'){
+                this.changeController(TypeOfControllers.MainViewController);
             }
         }
 

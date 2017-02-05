@@ -1,5 +1,6 @@
 package controllers.types.gameControllers;
 
+import view.types.StructureView;
 import controllers.Controller;
 import controllers.StateManager;
 import controllers.types.GameController;
@@ -12,39 +13,19 @@ import java.awt.event.KeyEvent;
  */
 public class StructureViewController extends GameController {
 
+    private StructureView structureView;
     public StructureViewController(StateManager stateManager) {
         super(stateManager);
     }
 
     @Override
-
     public void update() {
-
-    }
-//
-//    @Override
-//    protected void handleKeyPressed(KeyEvent e) {
-//
-//    }
-//
-//    @Override
-//    protected void handleKeyReleased(KeyEvent e) {
-//
-//    }
-
-
-    protected void initializeStructureView() {
 
     }
 
     @Override
     protected void setView() {
-
-    }
-
-
-    protected void setStructureViewControllerActions() {
-
+        this.structureView = new StructureView();
     }
 
     @Override
@@ -54,7 +35,7 @@ public class StructureViewController extends GameController {
 
     @Override
     public View returnViewToStateManager() {
-        return null;
+        return this.structureView;
     }
 
     @Override

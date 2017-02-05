@@ -10,6 +10,7 @@ import model.entity.Entity;
 import model.entity.army.Army;
 import model.entity.structure.Structure;
 import model.entity.unit.*;
+import model.map.Map;
 import utilities.EntityList;
 
 import java.util.ArrayList;
@@ -45,6 +46,8 @@ public class Player extends ContainsActions {
 
     private HashMap<Integer, Action> actionMap;
     private HashMap<TypeOfActions, Action> playerActionMap = new HashMap<>();                           // Where all the actions the player is going to perform are found
+
+    private Map playerMap;
 
     /**
      * Resource levels

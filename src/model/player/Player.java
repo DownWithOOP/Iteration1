@@ -106,20 +106,20 @@ public class Player extends ContainsActions {
 
     public boolean addUnit(Unit unit){
         if (units.size() < MAX_UNITS) {
-            switch(unit.getEntityType()){
-                case COLONIST:
+            switch(unit.getEntityID().getEntityType()){
+                case "COLONIST":
                     if(allEntities.numColonists() >= MAX_COLONISTS)
                         return false;
                     break;
-                case EXPLORER:
+                case "EXPLORER":
                     if(allEntities.numExplorers() >= MAX_EXPLORERS)
                         return false;
                     break;
-                case MELEE:
+                case "MELEE":
                     if(allEntities.numMelee() >= MAX_MELEE)
                         return false;
                     break;
-                case RANGED:
+                case "RANGED":
                     if(allEntities.numRanged() >= MAX_RANGED)
                         return false;
                     break;

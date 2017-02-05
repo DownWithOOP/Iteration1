@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Line2D;
 
+import model.common.Location;
+import model.common.RenderObject;
 import model.map.Map;
 import model.player.Player;
 import view.View;
@@ -16,9 +18,11 @@ public class MainView extends View {
 
     private AreaViewport areaViewport;
 
-    public MainView(){
-        areaViewport = new AreaViewport();
+    public MainView(RenderObject initialRenderInfo){
+        areaViewport = new AreaViewport(initialRenderInfo.getMap(), initialRenderInfo.getPlayer().getPlayerLocation());
         this.add(areaViewport);
+
+        this.setVisible(true);
     }
 
     @Override
@@ -36,8 +40,8 @@ public class MainView extends View {
 
     }
 
-    public void update(Player player, Map map) {
-        areaViewport.update(map);
+    public void update(RenderObject renderInfo) {
+        areaViewport.update(renderInfo.getMap(), renderInfo.getPlayer().getPlayerLocation());
         //statusViewport.update(player);
     }
 

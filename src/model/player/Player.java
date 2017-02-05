@@ -74,11 +74,12 @@ public class Player extends ContainsActions {
         this.playerMap = playerMap;
         //Each player starts the game with 2 Explorers and 1 Colonist
         //TODO:CHECKOUT THESE COORDINATES
-        units.add(new Explorer(this, new Location(0, 0)));
+        units.add(new Explorer(this, new Location(1, 1)));
         units.add(new Explorer(this, new Location(0, 0)));
         units.add(new Colonist(this, new Location(0, 0)));
         this.playerId = playerId;
         initializePlayer();                                         /** do not delete this */
+        selectedEntity = units.get(0); //TODO delet this
     }
 
 
@@ -193,6 +194,8 @@ public class Player extends ContainsActions {
 
     public Map getPlayerMap() {return playerMap;}
 
+    public Location getPlayerLocation() {return selectedEntity.getLocation();}
+
     public int catfoodResourceLevel() {
         return catfoodLevel;
     }
@@ -203,10 +206,6 @@ public class Player extends ContainsActions {
 
     public int researchResourceLevel() {
         return researchLevel;
-    }
-
-    public Map getPlayerMap(){
-        return playerMap;
     }
 
     /**

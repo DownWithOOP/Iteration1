@@ -30,13 +30,6 @@ public class Explorer extends FighterUnit {
     }
 
 
-    public void findResource() {
-        int xPos = this.getLocation().getxCoord();
-        int yPos = this.getLocation().getyCoord();
-
-
-    }
-
     private void setExplorerActions(){
         /**
          *         explorerActions.put(TypeOfActions.powerUp,PowerUpAction(this));

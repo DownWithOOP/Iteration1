@@ -6,6 +6,7 @@ public class Stats {
     private int armor;              // absorbs a fixed amount of damage
     private int health;             // when reaches zero, unit is destroyed
     private int upkeep;             // resources required to keep unit at full health
+    private final int defaultUpkeep;
     private int visionRadius;       // The amount of tiles on any side that an entity can see
 
     public Stats(int offensiveDamage, int defensiveDamage, int armor, int movement, int health, int upkeep, int visionRadius) {
@@ -14,6 +15,7 @@ public class Stats {
         this.armor = armor;
         this.health = health;
         this.upkeep = upkeep;
+        defaultUpkeep = upkeep;
         this.visionRadius = visionRadius;
     }
 
@@ -57,6 +59,8 @@ public class Stats {
         return upkeep;
     }
 
+    public int getDefaultUpkeep() { return defaultUpkeep; }
+
     public int getVisionRadius() {
         return visionRadius;
     }
@@ -64,6 +68,7 @@ public class Stats {
     public void setVisionRadius(int visionRadius) {
         this.visionRadius = visionRadius;
     }
+
 
 }
 

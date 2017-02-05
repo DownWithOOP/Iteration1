@@ -1,6 +1,8 @@
 package model;
 
 import model.actions.Action;
+import model.common.RenderObject;
+import model.map.Map;
 import model.player.Player;
 
 import java.util.HashMap;
@@ -13,10 +15,12 @@ public class GameModel {
     private Player activePlayer;
     private HashMap<Integer, Action> actionMap;
     private HashMap<String, Player> players;
+    private Map map;
 
     public GameModel(){
         actionMap = new HashMap<>();
         players = new HashMap<>();
+        map = new Map();
     }
 
     public void update(){
@@ -52,6 +56,13 @@ public class GameModel {
 
     public Player getActivePlayer(){
         return activePlayer;
+    }
+
+    /**
+     * Returns info from the model to be rendered.
+     */
+    public RenderObject getRenderObject(){
+        return new RenderObject(map, activePlayer);
     }
 
 }

@@ -76,10 +76,6 @@ abstract public class Entity extends ContainsActions {
 
     }
 
-    public void setEntityID(UUID entityID) {
-        this.entityID = entityID;
-    }
-
     public UUID getEntityID() {
         return entityID;
     }

@@ -2,6 +2,7 @@ package model.entity;
 
 import controllers.keyboardInputHandler.TypeOfActions;
 import model.actions.Action;
+import model.actions.ActionModifiers;
 import model.actions.ContainsActions;
 import model.common.Location;
 import model.player.Player;
@@ -21,6 +22,7 @@ abstract public class Entity extends ContainsActions {
     private EntityID entityID;                                                                      // Unique ID for each created Entity
     private Queue<Action> commandQueue;                                                          // Queue of user selected commands for each entity to perform in a # of turns
     protected final HashMap<TypeOfActions, Action> entityActions = new HashMap<>();                //add all the Actions of an entity here
+    private EntityType entityType;
 
 //TODO: we need player to get the PlayerResources of the player and see if we can perform an action
     public Entity(Player player, EntityType entityType) {
@@ -29,6 +31,7 @@ abstract public class Entity extends ContainsActions {
         initializeEntity();
         this.player = player;
         playerId=getPlayerId();
+        this.entityType = entityType;
     }
 
 
@@ -48,10 +51,6 @@ abstract public class Entity extends ContainsActions {
     abstract public void update();
     abstract public Location getLocation();
 
-    public boolean decommission() {
-        return true;
-    }
-
     public boolean addToQueue(Action action) {
         if (commandQueue.add(action) == true) {
             return true;
@@ -59,11 +58,26 @@ abstract public class Entity extends ContainsActions {
         return false;   // adding command to queue was not successful
     }
 
+    /**
+     * Actions :)
+     */
     public boolean cancelQueue() {
         while (!commandQueue.isEmpty()) {
             commandQueue.poll();
         }
-        return true;   // canceling queue command wasn't successful
+        return true;   // canceling queue command wasn't successful, although why wouldn't it be amirite?
+    }
+
+    public boolean decommission() {
+
+        if(entityType.equals(EntityType.UNIT)){
+            return player.removeUnit(this);
+        } else if(entityType.equals(EntityType.STRUCTURE)) {
+            return player.removeStructure(this);
+        } else if(entityType.equals(EntityType.ARMY)){
+            return player.removeArmy(this);
+        }
+        return false;
     }
 
     public boolean powerUp() {
@@ -85,6 +99,10 @@ abstract public class Entity extends ContainsActions {
 
     public String getPlayerId() {
         return player.getPlayerId();
+    }
+
+    public EntityType getEntityType(){
+        return entityType;
     }
 
     @Override

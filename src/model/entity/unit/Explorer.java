@@ -19,16 +19,10 @@ public class Explorer extends FighterUnit {
         this.initializeExplorer();
     }
 
-    @Override
-    public void update() {
-
-    }
-
     protected void initializeExplorer() {
         setExplorerActions();
         addAllActions(explorerActions);
     }
-
 
     public void findResource() {
 

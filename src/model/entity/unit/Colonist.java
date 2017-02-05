@@ -19,23 +19,16 @@ public class Colonist extends FighterUnit {
         initializeColonist();
     }
 
-    @Override
-    public void update() {
-
-    }
-
     protected void initializeColonist() {
         setColonistActions();
         addAllActions(colonistActions);
     }
-
 
     private void setColonistActions(){
         /**
          *         colonistActions.put(TypeOfActions.powerUp,PowerUpAction(this));
          * */
     }
-
 
 //    public Base buildStructure(int rowPosition, int columnPosition) {
 //        return new Base(new structureStats(),rowPosition, columnPosition);

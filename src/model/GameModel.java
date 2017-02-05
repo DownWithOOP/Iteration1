@@ -2,9 +2,11 @@ package model;
 
 import model.actions.Action;
 import model.common.RenderObject;
+import model.entity.Entity;
 import model.map.Map;
 import model.player.Player;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -26,7 +28,10 @@ public class GameModel {
     }
 
     public void update(){
-
+        ArrayList<Entity> activeEntities = activePlayer.getAllEntities();
+        for(int i = 0; i < activeEntities.size(); i++){
+            activeEntities.get(i).update();
+        }
     }
 
     public boolean passAction(String action){

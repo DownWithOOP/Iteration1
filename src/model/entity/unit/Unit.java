@@ -51,6 +51,11 @@ abstract public class Unit extends Entity {
         this.currentPath = currentPath;
     }
 
+    @Override
+    public void update(){
+        //lol
+    }
+
     public Location getCurrentLocation() {
         return currentLocation;
     }

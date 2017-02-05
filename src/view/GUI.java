@@ -3,10 +3,7 @@ package view;
 import java.util.*;
 import java.awt.*;
 import javax.swing.*;
-import view.View;
-import view.types.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+
 
 // The main GUI window resides in this class, it is initialized by the StateManager at the very beggining of the game
 // Statemanager binds a keylistener to the GUI object it initilized and the keylistender functions are implemented in Statemanager.java
@@ -40,6 +37,13 @@ public class GUI {
         this.frame.getContentPane().repaint();
         this.frame.setVisible(true);
         this.currentlyActiveView = addMe;
+    }
+
+    // this can be called after any of the views do some sort of manipulation and need to be rerendered
+    public void repaintCurrentView(){
+        this.frame.getContentPane().validate();
+        this.frame.getContentPane().repaint();
+        this.frame.setVisible(true);
     }
 
 

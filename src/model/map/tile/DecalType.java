@@ -5,5 +5,6 @@ package model.map.tile;
  */
 public enum DecalType {
     SKULLS_AND_CROSSBONES,
-    RED_CROSS
+    RED_CROSS,
+    EMPTY
 }

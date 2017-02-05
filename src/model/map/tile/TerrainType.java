@@ -7,5 +7,6 @@ public enum TerrainType {
     DIRT,
     CRATER,
     GRASS,
-    WATER
+    WATER,
+    EMPTY
 }

@@ -21,9 +21,9 @@ public class EntityList<Entity> extends ArrayList<Entity> {
      * Keeps track of numbers of different types of entities.
      */
     @Override
-    public boolean add(Entity e){
+    public boolean add(Entity e) {
 
-        if(e instanceof Structure){
+        if (e instanceof Structure) {
             numStructures++;
         } else {
             numUnits++;
@@ -48,7 +48,7 @@ public class EntityList<Entity> extends ArrayList<Entity> {
     @Override
     public boolean remove(Object o) {
 
-        if(super.remove(o)) {
+        if (super.remove(o)) {
             if (o instanceof Structure) {
                 numStructures--;
             } else {

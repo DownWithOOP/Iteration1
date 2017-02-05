@@ -1,4 +1,4 @@
-package model.map.tile.areaeffect;
+package model.map.tile.areaEffect;
 
 /**
  * Created by cduica on 2/2/17.

@@ -9,7 +9,7 @@ import model.GameModel;
  * used solely for controllers that interact with the game
  */
 public abstract class GameController extends Controller {
-    static protected GameModel gameModel;
+    static protected GameModel gameModel= new GameModel();
 
     protected GameController(StateManager stateManager) {
         super(stateManager);

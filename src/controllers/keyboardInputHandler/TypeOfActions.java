@@ -11,5 +11,6 @@ public enum TypeOfActions {
     /*Unit actions*/ moveUnit,
     /*FighterUnit actions*/ joinArmy, abandonArmy,
     /*Fighter action*/ attack, defend,
-    /*Directions*/ north,south,east,west,northEast,northWest,southEast,southWest
+    /*Directions*/ north,south,east,west,northEast,northWest,southEast,southWest,
+    /*RallyPoint*/ moveRallyPoint
     }

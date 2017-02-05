@@ -6,7 +6,7 @@ import model.player.Player;
 
 public class CycleCommandAction extends PlayerAction {
 
-    CycleCommandAction(Player player) {
+    public CycleCommandAction(Player player) {
         super(player);
     }
 
@@ -15,7 +15,7 @@ public class CycleCommandAction extends PlayerAction {
     }
 
     @Override
-    public void addToQueue(ActionModifiers actionModifier) {
+    public void applyModifier(ActionModifiers actionModifier) {
 
     }
 }

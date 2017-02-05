@@ -217,7 +217,7 @@ public class Army extends Entity implements Fighter {
     private void changeReinforcementsTargetLocation() {
 
     }
-
+//TODO: IMPLEMENT THIS METHOD, VERY IMPORTANT!!!!!!
     private void moveBattleGroup() {
 
     }

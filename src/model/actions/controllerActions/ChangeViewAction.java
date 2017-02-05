@@ -20,7 +20,7 @@ public class ChangeViewAction extends ControllerAction {
     }
 
     @Override
-    public void addToQueue(ActionModifiers actionModifier) {
+    public void applyModifier(ActionModifiers actionModifier) {
 
     }
 

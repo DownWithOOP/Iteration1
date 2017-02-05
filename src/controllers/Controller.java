@@ -2,9 +2,7 @@ package controllers;
 
 import controllers.keyboardInputHandler.KeyBoardMapManager;
 import controllers.keyboardInputHandler.TypeOfActions;
-import model.actions.Action;
 import model.actions.ActionModifiers;
-import model.actions.AvailableActions;
 import model.actions.ContainsActions;
 import model.actions.controllerActions.ChangeViewAction;
 import view.View;
@@ -14,11 +12,10 @@ import java.util.HashMap;
 
 abstract public class Controller extends ContainsActions {
 
-//TODO figure out the correct way to hide/show views upon resume/leaveController
+//TODO figure out the correct way to hide/show views upon resume/leave
 
     protected View view;
     protected StateManager stateManager;
-    protected static AvailableActions availableActions = new AvailableActions();
     protected static KeyBoardMapManager keyBoardMapManager=new KeyBoardMapManager();
 
     protected Controller(StateManager stateManager) {
@@ -44,7 +41,7 @@ abstract public class Controller extends ContainsActions {
 
     protected void initializeController() {
         setView();
-        resumeController();
+        resume();
     }
 
     protected void setActionsControllerActions() {
@@ -52,27 +49,20 @@ abstract public class Controller extends ContainsActions {
         actionsMap.put(TypeOfActions.changeView, changeViewAction);
     }
 
-    @Override
-    protected void addAvailableActions() {
-        availableActions.addActions(this);
-    }
+
 
     @Override
-    protected void removeAvailableActions() {
-        availableActions.removeActions(this);
-    }
-
-
-    public void resumeController() {
+    public void resume() {
         addAvailableActions();
     }
 
     protected void changeView(TypeOfControllers typeOfControllers){
-        leaveController();
+        leave();
         stateManager.changeController(typeOfControllers);
     }
 
-    protected void leaveController( ) {
+    @Override
+    public void leave( ) {
         removeAvailableActions();
     }
 

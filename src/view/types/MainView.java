@@ -4,6 +4,8 @@ package view.types;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Line2D;
+
 import javafx.scene.layout.Pane;
 import view.View;
 
@@ -39,13 +41,46 @@ public class MainView extends View {
         super.paintComponent(g);
         g.setFont(new Font("TimesRoman", Font.BOLD, 200));
         g.setColor(Color.BLACK);
-        g.drawString("Main View!!! HURRAH",(int)(super.getWidth()*0.2),(int)(super.getHeight()*0.8));
-        g.setFont(new Font("TimesRoman", Font.BOLD, 50));
-        g.setColor(Color.BLACK);
-        g.drawString("1) Pause View",(int)(super.getWidth()*0.7),(int)(super.getHeight()*0.2));
-        g.drawString("2) Structure Overview",(int)(super.getWidth()*0.7),(int)(super.getHeight()*0.3));
-        g.drawString("3) Unit Overview",(int)(super.getWidth()*0.7),(int)(super.getHeight()*0.4));
-        g.drawString("4) Exit ",(int)(super.getWidth()*0.7),(int)(super.getHeight()*0.5));
+        Toolkit tool = Toolkit.getDefaultToolkit();
+        Image image = tool.getImage("res/images/background1.jpg");
+        g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+        g.setFont(new Font("TimesRoman", Font.BOLD, (int)(super.getWidth()*0.05)));
+        g.setColor(Color.WHITE);
+
+        g.setFont(new Font("TimesRoman", Font.BOLD, (int)(super.getWidth()*0.01)));
+        g.drawString("-Main View-",(int)(super.getWidth()*0.03),(int)(super.getHeight()*0.08));
+        g.drawString("1) Pause",(int)(super.getWidth()*0.03),(int)(super.getHeight()*0.12));
+        g.drawString("2) Structure OverView",(int)(super.getWidth()*0.03),(int)(super.getHeight()*0.14));
+        g.drawString("3) Unit Overview",(int)(super.getWidth()*0.03),(int)(super.getHeight()*0.16));
+        g.drawString("4) Exit",(int)(super.getWidth()*0.03),(int)(super.getHeight()*0.18));
+
+        g.setFont(new Font("TimesRoman", Font.BOLD, (int)(super.getWidth()*0.06)));
+        g.drawString("Larry if you are reading ",(int)(super.getWidth()*0.2),(int)(super.getHeight()*0.8));
+        g.drawString("this, get to work",(int)(super.getWidth()*0.2),(int)(super.getHeight()*0.9));
+
+        // vertical line to the left
+        Graphics2D g2 = (Graphics2D) g;
+        Line2D line = new Line2D.Double(
+                (int)(super.getWidth()*0.15),
+                0,
+                (int)(super.getWidth()*0.15),
+                (int)(super.getHeight()));
+        g2.setStroke(new BasicStroke(10));
+        g2.draw(line);
+
+        // small horizontal line
+        Line2D line2 = new Line2D.Double(
+                0,
+                (int)(super.getHeight())*0.23,
+                (int)(super.getWidth()*0.15),
+                (int)(super.getHeight())*0.23);
+        g2.draw(line2);
+
+        g.setFont(new Font("TimesRoman", Font.BOLD, (int)(super.getWidth()*0.01)));
+        g.drawString("-Status ViewPort-",(int)(super.getWidth()*0.03),(int)(super.getHeight()*0.27));
+
+        g.drawString("-Area ViewPort-",(int)(super.getWidth()*0.45),(int)(super.getHeight()*0.05));
+
     }
 
 

@@ -6,6 +6,8 @@ import controllers.types.gameControllers.MainViewController;
 import controllers.types.gameControllers.StructureViewController;
 import controllers.types.gameControllers.UnitViewController;
 import controllers.types.gameControllers.WelcomeViewController;
+
+import controllers.types.gameControllers.WelcomeViewController;
 import model.actions.ActionModifiers;
 import view.View;
 import view.GUI;
@@ -16,6 +18,8 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import model.player.*;
+
 /**
  * Created by jordi on 2/1/2017.
  */
@@ -23,18 +27,15 @@ public class StateManager implements KeyListener {
 
     private HashMap<Integer,ActionModifiers> actionModifierMap=new HashMap<>();
     private int controlKey=0;
-    private int screenHeight;
-    private int screenWidth;
-
     private HashMap<TypeOfControllers, Controller> controllerMap = new HashMap<>();       //used for controller change, so that access is O(1)
     private boolean gameOn;
     public final long FPS = 30;                            //frames per second
     final long LOOP_TIME = 1000l / FPS;                   //how long an update should take 1000 miliseconds/ FPS
     private Controller activeController;
     public final GUI gui;
-    private ArrayList<View> initialzedViews; // keeps track of all the views from the controllers, whenever we want to
-    // switch to a new view, we get the disired view from here and call UpdateViewInGUI()
 
+    // TODO: made these active players just for testing
+    private Player[] activePlayers; // will keep track of the current players
 
     /**
      * when class is initialized the controllers are too and the WelcomeViewController is activated
@@ -72,7 +73,19 @@ public class StateManager implements KeyListener {
 
     public void startGame() {
         gameOn = true;
+        /**
+         * TODO: is this where the players are initialized?
+         * TODO: just for testing i made 2 player objects
+         */
+        activePlayers = new Player[2];
+        Player player1 = new Player("1");
+        Player player2 = new Player("2");
+        activePlayers[0] = player1;
+        activePlayers[1] = player2;
+
+        // TODO:
         startGameLoop();
+
     }
 
     /**
@@ -129,7 +142,7 @@ public class StateManager implements KeyListener {
         if (controllerMap.containsKey(typeOfControllers)) {
             Controller controller = controllerMap.get(typeOfControllers);
             activeController = controller;
-            controller.resumeController();
+            controller.resume();
             // when the controllers are changed, we also want to update the GUI
             this.UpdateViewInGUI(controllerMap.get(typeOfControllers).returnViewToStateManager());
         }

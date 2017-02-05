@@ -5,5 +5,5 @@ package model.actions;
  */
 public interface Action {
      void execute();
-     void addToQueue(ActionModifiers actionModifier);
+     void applyModifier(ActionModifiers actionModifier);
 }

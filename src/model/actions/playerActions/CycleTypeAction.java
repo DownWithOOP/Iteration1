@@ -6,14 +6,14 @@ import model.player.Player;
 
 public class CycleTypeAction extends PlayerAction {
 
-    CycleTypeAction(Player player) {
+    public CycleTypeAction(Player player) {
         super(player);
     }
 
     public void execute() {  }
 
     @Override
-    public void addToQueue(ActionModifiers actionModifier) {
+    public void applyModifier(ActionModifiers actionModifier) {
 
     }
 }

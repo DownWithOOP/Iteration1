@@ -2,8 +2,8 @@ package model.map;
 
 import model.common.Location;
 import model.map.tile.*;
-import model.map.tile.areaeffect.AreaEffect;
-import model.map.tile.areaeffect.AreaEffectFactory;
+import model.map.tile.areaEffect.AreaEffect;
+import model.map.tile.areaEffect.AreaEffectFactory;
 import model.map.tile.item.ObstacleItem;
 import utilities.PathFinder;
 import utilities.XMLParser;
@@ -19,7 +19,8 @@ public class Map {
 
     private final int GRID_HEIGHT = 3;
     private final int GRID_WIDTH = 3;
-    private final String MAP_XML_PATH = "/map/Map.xml";
+
+    private final String MAP_XML_PATH = "res/map/Map.xml";
 
     private Tile[][] tileArray;
     private boolean[][] obstacleGrid;
@@ -37,7 +38,7 @@ public class Map {
      * @return
      */
     public Tile getTile(int row, int col){
-        return tileArray[row][col];
+       return tileArray[row][col];
     }
 
     /**
@@ -67,9 +68,20 @@ public class Map {
         ArrayList<Tile> tiles = new ArrayList<>();
 
         for(int i = 0; i < tileList.size(); i++){
-            ResourceType resourceType = ResourceType.valueOf(tileList.get(i).get("Resource"));
-            TerrainType terrainType = TerrainType.valueOf(tileList.get(i).get("Terrain"));
-            DecalType decalType = DecalType.valueOf(tileList.get(i).get("Decal"));
+            HashMap<String , String > map= tileList.get(i);
+            ResourceType resourceType= ResourceType.EMPTY;
+            DecalType decalType= DecalType.EMPTY;
+            TerrainType terrainType= TerrainType.EMPTY;
+
+            if (!map.get("Resource").equals("")) {
+                resourceType = ResourceType.valueOf(map.get("Resource"));
+            }
+            if (!map.get("Terrain").equals("")) {
+                terrainType = TerrainType.valueOf(map.get("Terrain"));
+            }
+            if (!map.get("Decal").equals("")) {
+                decalType = DecalType.valueOf(map.get("Decal"));
+            }
 
             AreaEffectFactory areaEffectFactory = new AreaEffectFactory();
             AreaEffect areaEffect = areaEffectFactory.createAreaEffect(tileList.get(i).get("AreaEffect"));

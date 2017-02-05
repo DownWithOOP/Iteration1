@@ -19,7 +19,6 @@ public class XMLParser {
     private Document doc;
 
     public void loadDocument(String path) throws Exception{
-
         File xmlFile = new File(path);
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();

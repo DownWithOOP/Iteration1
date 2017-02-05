@@ -30,6 +30,12 @@ public class Map {
         createTileGrid(tiles);
     }
 
+    /**
+     * gets the tile of the map
+     * @param row
+     * @param col
+     * @return
+     */
     public Tile getTile(int row, int col){
         return tileArray[row][col];
     }

@@ -2,6 +2,7 @@ package model.entity.structure;
 
 import controllers.keyboardInputHandler.TypeOfActions;
 import model.actions.Action;
+import model.entity.army.Army;
 import model.entity.army.RallyPoint;
 import model.entity.unit.*;
 import model.common.Location;
@@ -77,8 +78,9 @@ public class Base extends Structure {
     }
 
     //TODO: account for an obstacle blocking the rally point
+    //TODO: FIX THIS
     private void setRallypoint(Location location){
-        unitsRallyPoint= new RallyPoint(location);
+        unitsRallyPoint= new RallyPoint(location,new Army(player,location));
     }
     //TODO: manage this so that no obstacle can block the rally point
     private void setDefaultRallypoint(){

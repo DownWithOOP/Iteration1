@@ -2,49 +2,58 @@ package model.entity.army;
 
 import model.actions.ActionModifiers;
 import model.common.Location;
+import model.map.Map;
 
 /**
  * Created by jordi on 2/4/2017.
  */
 public class RallyPoint {
     private Location location;
+    //TODO: PASS THE MAP OF THE PLAYER
+    Map map =new Map();
+    Army army;
 
-    public RallyPoint(Location location) {
+    public RallyPoint(Location location, Army army) {
         this.location = location;
+        this.army=army;
     }
 
     public Location getLocation() {
         return location;
     }
 
-    public void changeLocation(Location location) {
-        this.location = location;
-    }
+//    public void changeLocation(Location location) {
+//        this.location = location;
+//    }
 
-    public boolean moveRallyPoint(ActionModifiers actionModifiers) {
-        int xcoordinate = location.getxCoord();
-        int ycoordinate = location.getyCoord();
-        int previousX = xcoordinate;
-        int previousY = ycoordinate;
+    public void moveRallyPoint(ActionModifiers actionModifiers) {
+        int xCoordinate = location.getxCoord();
+        int yCoordinate = location.getyCoord();
+        int previousX = xCoordinate;
 
         if (actionModifiers.equals(ActionModifiers.up)) {
-            ycoordinate--;
+            yCoordinate--;
         }
         if (actionModifiers.equals(ActionModifiers.down)) {
-            ycoordinate++;
+            yCoordinate++;
         }
         if (actionModifiers.equals(ActionModifiers.right)) {
-            xcoordinate++;
+            xCoordinate++;
         }
         if (actionModifiers.equals(ActionModifiers.left)) {
-            xcoordinate--;
+            xCoordinate--;
         }
-        //TODO: MAP CHECK TO SEE IF IT WENT OUT OF BOUNDS OR IF ONE CAN MOVE THERE
-        if (xcoordinate != previousX) {
-            location.setxCoord(xcoordinate);
+
+        if (!map.getTile(xCoordinate,yCoordinate).isPassable()){
+            return;
+        }
+
+        if (xCoordinate != previousX) {
+            location.setxCoord(xCoordinate);
         } else {
-            location.setyCoord(ycoordinate);
+            location.setyCoord(yCoordinate);
         }
-        return true;
     }
+
+
 }

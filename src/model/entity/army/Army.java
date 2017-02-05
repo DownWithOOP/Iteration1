@@ -49,7 +49,7 @@ public class Army extends Entity implements Fighter {
     public Army(Player player, Location rallyPoint) {
         super(player);
         initializeArmy();
-        this.rallyPoint= new RallyPoint(rallyPoint);
+        this.rallyPoint= new RallyPoint(rallyPoint,this);
     }
 
     protected void initializeArmy() {
@@ -133,9 +133,9 @@ public class Army extends Entity implements Fighter {
 
     public boolean moveRallyPoint(ActionModifiers actionModifiers) {
 //      TODO:HERE I AM TOMORROW CONTINUE
-        boolean checkIfInvalidMovement = rallyPoint.moveRallyPoint(actionModifiers);
+        rallyPoint.moveRallyPoint(actionModifiers);
 
-        return checkIfInvalidMovement;
+        return true;
     }
 
     private void setBattleGroupStats(int attack, int defense, int health, int upkeep) {

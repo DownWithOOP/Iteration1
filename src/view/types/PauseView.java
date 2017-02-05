@@ -26,8 +26,8 @@ public class PauseView extends View  {
 
     }
 
-
     protected void render() {
+        Graphics g = super.getGraphics();
 
     }
 

@@ -3,6 +3,7 @@ package controllers.types;
 import controllers.Controller;
 import controllers.StateManager;
 import controllers.TypeOfControllers;
+import view.View;
 import view.types.WelcomeView;
 
 import java.awt.BorderLayout;
@@ -12,11 +13,11 @@ import java.awt.event.KeyEvent;
  * Created by jordi on 2/1/2017.
  */
 public class WelcomeViewController extends Controller {
-    private final WelcomeView welcomeView = new WelcomeView(new BorderLayout());
+
+    private WelcomeView welcomeView;
 
     public WelcomeViewController(StateManager stateManager) {
         super(stateManager);
-        setView();
     }
 
     @Override
@@ -36,7 +37,7 @@ public class WelcomeViewController extends Controller {
 
     @Override
     protected void setView() {
-        super.view = welcomeView;
+        this.welcomeView = new WelcomeView(); // the welcome view is initialized
     }
 
     protected void setWelcomeViewActions() {
@@ -47,4 +48,10 @@ public class WelcomeViewController extends Controller {
     protected void updateView() {
 
     }
+
+    @Override
+    public View returnViewToStateManager() {
+        return this.welcomeView;
+    }
+
 }

@@ -3,6 +3,7 @@ package controllers.types.gameControllers;
 import controllers.Controller;
 import controllers.StateManager;
 import controllers.types.GameController;
+import view.View;
 
 import java.awt.event.KeyEvent;
 
@@ -51,6 +52,11 @@ public class UnitViewController extends GameController {
     @Override
     protected void updateView() {
 
+    }
+
+    @Override
+    public View returnViewToStateManager() {
+        return null;
     }
 
 

@@ -9,6 +9,7 @@ import controllers.types.WelcomeViewController;
 import model.actions.Action;
 import model.actions.ActionModifiers;
 import view.View;
+import view.GUI;
 import view.types.MainView;
 import view.types.WelcomeView;
 
@@ -20,6 +21,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.security.Key;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -37,59 +39,31 @@ public class StateManager implements KeyListener {
     public final long FPS = 30;                            //frames per second
     final long LOOP_TIME = 1000l / FPS;                   //how long an update should take 1000 miliseconds/ FPS
     private Controller activeController;
-    private final JFrame gameFrame = new JFrame("Space Cats"); //frame to which all Views will be added
+    public final GUI gui;
+    private ArrayList<View> initialzedViews; // keeps track of all the views from the controllers, whenever we want to
+    // switch to a new view, we get the disired view from here and call UpdateViewInGUI()
 
-    //collection of all game view objects that gameFrame must contain. Each view should be added to corresponding controller
-    //TODO views should be final; think of better way to initialize
-    private View welcomeView;
-    private View mainView;
-    //private final UnitView unitView;
-    //private final StructureView structureView;
-    //private final PauseView pauseView;
 
     /**
      * when class is initialized the controllers are too and the WelcomeViewController is activated
      */
-    public StateManager() { // this is where the GUI is created
-        super(/*"Space Cats"*/);
+    public StateManager() {
+        gui = new GUI(); // this is where the GUI is created, runs in GUI.java which is in the views folder
+        gui.frame.addKeyListener(this); // we add the keylistener here so stateManager handles all input and
+        // then forwards it to the controller that is currently active, only 1 keylistener for the entire GUI
         fillActionModifiers();
-        initGui();
         // at this point the GUI is initialized
         initializeControllers();
         // at this point we have all the controllers intitialized
         activeController = controllerMap.get(TypeOfControllers.WelcomeViewController);
         // when the game starts, we want to be at the WelcomeViewController
+        // so we update the current view in the GUI to the welcomeView
+        this.UpdateViewInGUI(this.controllerMap.get(TypeOfControllers.WelcomeViewController).returnViewToStateManager());
     }
 
-    private void initGui() {
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        screenHeight = screenSize.height;
-        screenWidth = screenSize.width;
-        gameFrame.setSize(screenWidth,screenHeight);
-        gameFrame.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent windowEvent){
-                System.exit(0);
-            }
-        });
-        gameFrame.addKeyListener(this); // bind keylistener to the gui that is running
-
-        welcomeView = new WelcomeView();
-        mainView = new MainView();
-        //unitView = new UnitView();
-        //structureView = new StructureView();
-        //pauseView = new PauseView();
-
-        welcomeView.setVisible(true);
-        welcomeView.setFocusable(true);
-        welcomeView.addKeyListener(this);
-        gameFrame.add(welcomeView);
-
-        mainView.setVisible(false);
-        mainView.setFocusable(true);
-        mainView.addKeyListener(this);
-        gameFrame.add(mainView);
-
-        gameFrame.setVisible(true);
+    private void UpdateViewInGUI(View updateViewToThis){
+        // we take the currenly active view, and the target view, and pass that to GUI.java to update
+        this.gui.updateCurrentView(updateViewToThis);
     }
 
     /**
@@ -150,6 +124,7 @@ public class StateManager implements KeyListener {
         WelcomeViewController welcomeViewController = new WelcomeViewController(this);
         PauseViewController pauseViewController = new PauseViewController(this);
 //      TODO:CREATE TypeOfController.PauseView
+
         controllerMap.put(TypeOfControllers.MainViewController, mainViewController);
         controllerMap.put(TypeOfControllers.StructureViewController, structureViewController);
         controllerMap.put(TypeOfControllers.UnitViewController, unitViewController);
@@ -163,7 +138,10 @@ public class StateManager implements KeyListener {
             Controller controller = controllerMap.get(typeOfControllers);
             activeController = controller;
             controller.resumeController();
+            // when the controllers are changed, we also want to update the GUI
+            this.UpdateViewInGUI(controllerMap.get(typeOfControllers).returnViewToStateManager());
         }
+
     }
 
     private void fillActionModifiers(){
@@ -191,7 +169,43 @@ public class StateManager implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) { // all the input that is taken in gets handled here
         // we want to forward this to the currently active controller
-//        this.activeController.handleKeyPressed(e);
+        //this.activeController.handleKeyPressed(e);
+
+
+
+        System.out.println("INPUT detected in StateManager");
+        System.out.println("active controller is: " +activeController.toString());
+// these below are hardcoded, but it gives you an idea of how the views change
+
+        if(activeController instanceof  WelcomeViewController){
+            System.out.println("Welcome view");
+            if(e.getKeyChar() == '1'){
+                this.changeController(TypeOfControllers.MainViewController);
+            }
+            else if(e.getKeyChar() == '4'){
+                System.exit(0);
+            }
+        }
+        else if (activeController instanceof MainViewController){
+            System.out.println("Main View");
+            if(e.getKeyChar() == '1'){
+                this.changeController(TypeOfControllers.PauseViewController);
+            }
+            else if(e.getKeyChar() == '4'){
+                System.exit(0);
+            }
+        }
+        else if(activeController instanceof PauseViewController){
+            System.out.println("Pause View");
+            if(e.getKeyChar() == '1'){
+                this.changeController(TypeOfControllers.MainViewController);
+            }
+            else if(e.getKeyChar() == '4'){
+                System.exit(0);
+            }
+        }
+
+        /* Dunno what this does
         int keyPressed=e.getKeyCode();
 
         if (keyPressed!=KeyEvent.VK_CONTROL){
@@ -200,13 +214,14 @@ public class StateManager implements KeyListener {
         else{
             controlKey=keyPressed;
         }
-
+        */
         System.out.println("control: "+ controlKey);
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
 //        this.activeController.handleKeyReleased(e);
+
         if (e.getKeyCode()== KeyEvent.VK_CONTROL){
             controlKey=0;
         }

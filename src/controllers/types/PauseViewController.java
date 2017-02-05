@@ -5,6 +5,8 @@ import controllers.Controller;
 import controllers.StateManager;
 
 import controllers.TypeOfControllers;
+import view.View;
+import view.types.PauseView;
 
 import java.awt.event.KeyEvent;
 
@@ -12,6 +14,8 @@ import java.awt.event.KeyEvent;
  * Created by Konrad on 2/2/2017.
  */
 public class PauseViewController extends Controller {
+
+    private PauseView pauseView;
 
     public PauseViewController(StateManager stateManager) {
         super(stateManager);
@@ -24,10 +28,13 @@ public class PauseViewController extends Controller {
     protected void initializePauseViewController() {
 
     }
+    protected void handleInput(){
+
+    }
 
     @Override
     protected void setView() {
-
+        this.pauseView = new PauseView();
     }
 
     protected void setPauseViewControllerActions() {
@@ -37,5 +44,10 @@ public class PauseViewController extends Controller {
     @Override
     protected void updateView() {
 
+    }
+
+    @Override
+    public View returnViewToStateManager() {
+        return this.pauseView;
     }
 }

@@ -1,65 +1,52 @@
+
+
 package view.types;
-
-import model.common.GraphicsInfo;
-
-import view.View;
-import view.components.AreaViewport;
-import view.components.StatusViewport;
 
 import javax.swing.*;
 import java.awt.*;
+import javafx.scene.layout.Pane;
+import view.View;
+
 
 public class MainView extends View {
 
-    //Need to find out about Image type; just put int in for now
-    java.util.Map<GraphicsInfo, Integer> graphicsBuffer;
-
-    View areaViewport;
-    View statusViewport;
-
-    //Temporary
-    JLabel testName = new JLabel("Main view");
-    JTextField testTyping = new JTextField(300);
 
     public MainView(){
-        super();
-        start();
-    }
 
-    public MainView(LayoutManager layoutManager){
-        super(layoutManager);
-        start();
     }
 
     @Override
     public void start() {
-        setBackground(Color.black);
 
-        JPanel areaViewport = new AreaViewport();
-        JPanel statusViewport = new StatusViewport();
-
-        System.out.print("Main View startingggggggggggggggggggg\ngggggggg\ng\ng\ng\ng\ng.");
-
-        this.add(testName);
-        this.add(testTyping);
-        this.add(areaViewport);
-        this.add(statusViewport);
     }
 
     @Override
     protected void render() {
-        areaViewport.repaint();
-        statusViewport.repaint();
+
     }
 
     @Override
     public void update() {
-        setVisible(true);
+
     }
 
     @Override
-    public void close() { }
+    public void close() {
 
+    }
+
+    public void paintComponent(Graphics g){
+        super.paintComponent(g);
+        g.setFont(new Font("TimesRoman", Font.BOLD, 200));
+        g.setColor(Color.BLACK);
+        g.drawString("Main View!!! HURRAH",(int)(super.getWidth()*0.2),(int)(super.getHeight()*0.8));
+        g.setFont(new Font("TimesRoman", Font.BOLD, 50));
+        g.setColor(Color.BLACK);
+        g.drawString("1) Pause View",(int)(super.getWidth()*0.7),(int)(super.getHeight()*0.2));
+        g.drawString("2) Structure Overview",(int)(super.getWidth()*0.7),(int)(super.getHeight()*0.3));
+        g.drawString("3) Unit Overview",(int)(super.getWidth()*0.7),(int)(super.getHeight()*0.4));
+        g.drawString(" ^ not yet working",(int)(super.getWidth()*0.7),(int)(super.getHeight()*0.5));
+    }
 
 
 }

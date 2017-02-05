@@ -87,6 +87,10 @@ abstract public class Entity extends ContainsActions {
         return player.getPlayerId();
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+
     @Override
     public void resume(){
         addAvailableActions();

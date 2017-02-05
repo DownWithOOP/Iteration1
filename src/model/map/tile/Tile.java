@@ -6,6 +6,7 @@ import model.map.tile.areaeffect.AreaEffect;
 import model.map.tile.item.Item;
 import model.entity.Entity;
 
+import java.util.ArrayList;
 /**
  * Created by cduica on 2/1/17.
  */
@@ -39,7 +40,8 @@ public class Tile {
         this.hasEntity = true;
         if (entity.getEntityID().getEntityType().equals(EntityType.EXPLORER.toString())) {
             Explorer explorer = (Explorer) entity;
-            explorer.findResource();
+            ArrayList<Tile> adjacentTiles = getAdjacentTiles(this, explorer);
+            discoverResources(adjacentTiles,explorer);
         }
     }
 
@@ -89,5 +91,49 @@ public class Tile {
 
     public void setVisible(boolean isVisible){
         this.isVisible = isVisible;
+    }
+
+    public ArrayList<Tile> getAdjacentTiles(Tile currentTile, Entity entity) {
+        int row = entity.getLocation().getxCoord();
+        int col = entity.getLocation().getyCoord();
+        ArrayList<Tile> adjacentTiles = new ArrayList<Tile>();
+        adjacentTiles.add(currentTile);
+        if ((row + 1) < entity.getPlayer().getPlayerMap().getWidth()) {
+            Tile downTile = entity.getPlayer().getPlayerMap().getTile(row+1, col);
+            adjacentTiles.add(downTile);
+        }
+        if ((row - 1) > 0) {
+            Tile upTile = entity.getPlayer().getPlayerMap().getTile(row-1, col);
+            adjacentTiles.add(upTile);
+        }
+        if ((col + 1) < entity.getPlayer().getPlayerMap().getHeight()) {
+            Tile rightTile = entity.getPlayer().getPlayerMap().getTile(row, col+1);
+            adjacentTiles.add(rightTile);
+        }
+        if ((col - 1) > 0) {
+            Tile leftTile = entity.getPlayer().getPlayerMap().getTile(row, col-1);
+            adjacentTiles.add(leftTile);
+        }
+
+        return adjacentTiles;
+    }
+
+    public void discoverResources(ArrayList<Tile> adjacentTiles, Explorer explorer) {
+        for(Tile tile: adjacentTiles) {
+            int minedResources = 0;
+            if (tile.getResource() != null && tile.getResource().getResourceType().equals(ResourceType.CATFOOD.toString())) {
+                minedResources = getResource().mine();
+                explorer.getPlayer().setCatfoodResourceLevel(explorer.getPlayer().catfoodResourceLevel() + minedResources);
+
+            }
+            else if (tile.getResource() != null && tile.getResource().getResourceType().equals(ResourceType.CRYSTAL.toString())) {
+                minedResources = getResource().mine();
+                explorer.getPlayer().setCrystalResourceLevel(explorer.getPlayer().crystalResourceLevel() + minedResources);
+            }
+            else if (tile.getResource() != null && tile.getResource().getResourceType().equals(ResourceType.RESEARCH.toString())) {
+                minedResources = getResource().mine();
+                explorer.getPlayer().setResearchResourceLevel(explorer.getPlayer().crystalResourceLevel() + minedResources);
+            }
+        }
     }
 }

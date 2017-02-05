@@ -52,6 +52,18 @@ public class Map {
     }
 
     /**
+     * TODO
+     * @return
+     */
+    public int getWidth(){ return GRID_WIDTH; }
+
+    /**
+     * TODO
+     * @return
+     */
+    public int getHeight(){ return GRID_HEIGHT; }
+
+    /**
      * Obtains a list of tiles from an XML file.
      */
     private ArrayList<Tile> retrieveTileList(){

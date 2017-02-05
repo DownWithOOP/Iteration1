@@ -3,11 +3,17 @@ package model.player;
 
 import controllers.keyboardInputHandler.TypeOfActions;
 import model.actions.Action;
-import model.actions.AvailableActions;
+import model.actions.ActionModifiers;
 import model.actions.ContainsActions;
+import model.actions.playerActions.CycleCommandAction;
+import model.actions.playerActions.CycleInstanceAction;
+import model.actions.playerActions.CycleModeAction;
+import model.actions.playerActions.CycleTypeAction;
 import model.common.Location;
 import model.entity.Entity;
 import model.entity.army.Army;
+import model.entity.army.RallyPoint;
+import model.entity.structure.Base;
 import model.entity.structure.Structure;
 import model.entity.unit.*;
 import model.map.Map;
@@ -15,6 +21,7 @@ import utilities.EntityList;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by CRISTIAN aka Batman
@@ -41,6 +48,7 @@ public class Player extends ContainsActions {
     private ArrayList<Unit> units;
     private ArrayList<Structure> structures;
     private ArrayList<Army> armies;
+    private ArrayList<RallyPoint> rallyPoints;
 
     private Entity selectedEntity;
 
@@ -65,20 +73,14 @@ public class Player extends ContainsActions {
         actionMap = new HashMap<Integer, Action>();
 
         //Each player starts the game with 2 Explorers and 1 Colonist
+        //TODO:CHECKOUT THESE COORDINATES
         units.add(new Explorer(this, new Location(0, 0)));
         units.add(new Explorer(this, new Location(0, 0)));
         units.add(new Colonist(this, new Location(0, 0)));
         this.playerId = playerId;
+        initializePlayer();                                         /** do not delete this */
     }
 
-    /**
-     * Action related methods
-     */
-    @Override
-    public HashMap<TypeOfActions, Action> getActions() {
-
-        return null;
-    }
 
     @Override
     public void resume() {
@@ -91,11 +93,18 @@ public class Player extends ContainsActions {
     }
 
     protected void setPlayerActions() {
-
+        playerActionMap.put(TypeOfActions.abandonArmy.cycleCommand, new CycleCommandAction(this));
+        playerActionMap.put(TypeOfActions.abandonArmy.cycleCommand, new CycleInstanceAction(this));
+        playerActionMap.put(TypeOfActions.abandonArmy.cycleCommand, new CycleModeAction(this));
+        playerActionMap.put(TypeOfActions.abandonArmy.cycleCommand, new CycleTypeAction(this));
     }
 
+    /**
+     * do not touch this method
+     */
     protected void initializePlayer() {
-
+        setPlayerActions();
+        addAllActions(playerActionMap);
     }
 
     /**
@@ -208,4 +217,21 @@ public class Player extends ContainsActions {
     public void setResearchResourceLevel(int level) {
         this.researchLevel = level;
     }
+
+
+    public void cycleBetweenEntities(ActionModifiers actionModifier) {
+
+    }
+
+    public void cycleThroughEntityTypes(ActionModifiers actionModifier) {
+
+    }
+
+    public void cycleThroughSpecificEntities(ActionModifiers actionModifier) {
+
+    }
+
+
+
+
 }

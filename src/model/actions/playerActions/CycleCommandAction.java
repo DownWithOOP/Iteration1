@@ -6,7 +6,7 @@ import model.player.Player;
 
 public class CycleCommandAction extends PlayerAction {
 
-    CycleCommandAction(Player player) {
+    public CycleCommandAction(Player player) {
         super(player);
     }
 

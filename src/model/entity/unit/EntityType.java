@@ -9,5 +9,7 @@ public enum EntityType {
     MELEE,
     RANGED,
     BASE,
-    ARMY
+    ARMY,
+    UNIT,
+    STRUCTURE
 }

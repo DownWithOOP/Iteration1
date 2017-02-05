@@ -20,6 +20,9 @@ public class EntityID {
     public String getEntityType() {
         return entityType.toString();
     }
+    public EntityType getEntityType(int a) {
+        return entityType;
+    }
 
     public String getId() {
         return id;

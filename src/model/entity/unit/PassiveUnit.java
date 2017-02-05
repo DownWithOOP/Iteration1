@@ -17,6 +17,11 @@ public class PassiveUnit extends Unit {
     }
 
     @Override
+    public void update() {
+
+    }
+
+    @Override
     public Location getLocation() {
         return getCurrentLocation();
     }

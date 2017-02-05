@@ -5,10 +5,12 @@ import model.actions.Action;
 import model.actions.ActionModifiers;
 import model.common.Location;
 import model.entity.Entity;
+import model.entity.EntityID;
 import model.entity.Fighter;
 import model.entity.stats.DefaultArmyStats;
 import model.entity.stats.Stats;
 import model.entity.stats.UnitStats;
+import model.entity.unit.EntityType;
 import model.entity.unit.Explorer;
 import model.entity.unit.FighterUnit;
 import model.entity.unit.Ranged;
@@ -19,7 +21,7 @@ import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
+import model.entity.EntityID;
 
 /**
  * Created by jordi on 2/2/2017.
@@ -35,8 +37,8 @@ public class Army extends Entity implements Fighter {
             initialStats.armor, initialStats.movement, initialStats.health,
             initialStats.upkeep, initialStats.visionRadius,initialStats.range);
 
-    HashMap<UUID, FighterUnit> reinforcements = new HashMap<>();
-    HashMap<UUID, FighterUnit> battleGroup = new HashMap<>();
+    HashMap<EntityID, FighterUnit> reinforcements = new HashMap<>();
+    HashMap<EntityID, FighterUnit> battleGroup = new HashMap<>();
     private RallyPoint rallyPoint;
 
 //    private int
@@ -47,7 +49,7 @@ public class Army extends Entity implements Fighter {
 
 
     public Army(Player player, Location rallyPoint) {
-        super(player);
+        super(player, EntityType.ARMY);
         initializeArmy();
         this.rallyPoint= new RallyPoint(rallyPoint,this);
     }
@@ -79,7 +81,7 @@ public class Army extends Entity implements Fighter {
     }
 
     public void registerFighter(FighterUnit fighterUnit) {
-        UUID fighterEntityID = fighterUnit.getEntityID();
+        EntityID fighterEntityID = fighterUnit.getEntityID();
         Stats unitStats = fighterUnit.getUnitStats();
         int attack = unitStats.getOffensiveDamage();
 
@@ -101,7 +103,7 @@ public class Army extends Entity implements Fighter {
     }
 
     public void removeFighter(FighterUnit fighterUnit) {
-        UUID fighterEntityID = fighterUnit.getEntityID();
+        EntityID fighterEntityID = fighterUnit.getEntityID();
         Stats unitStats = fighterUnit.getUnitStats();
 
         int attack = unitStats.getOffensiveDamage() * (-1);

@@ -8,5 +8,6 @@ public enum EntityType {
     EXPLORER,
     MELEE,
     RANGED,
-    BASE
+    BASE,
+    ARMY
 }

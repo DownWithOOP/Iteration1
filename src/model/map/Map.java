@@ -25,7 +25,7 @@ public class Map {
     private boolean[][] obstacleGrid;
 
     public Map(){
-        tileArray = new Tile[GRID_HEIGHT][GRID_WIDTH];
+        this.tileArray = new Tile[GRID_HEIGHT][GRID_WIDTH];
         ArrayList<Tile> tiles = retrieveTileList();
         createTileGrid(tiles);
     }

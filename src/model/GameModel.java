@@ -22,6 +22,8 @@ public class GameModel {
         actionMap = new HashMap<>();
         players = new HashMap<>();
         map = new Map();
+        players.put("player1", new Player("player1", map));
+        players.put("player2", new Player("player2", map));
     }
 
     public void update(){

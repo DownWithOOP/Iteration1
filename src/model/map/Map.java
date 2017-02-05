@@ -41,6 +41,18 @@ public class Map {
     }
 
     /**
+     * TODO
+     * @return
+     */
+    public int getWidth(){ return GRID_WIDTH; }
+
+    /**
+     * TODO
+     * @return
+     */
+    public int getHeight(){ return GRID_HEIGHT; }
+
+    /**
      * Utilizes path finding algorithm to tell a unit how to get to a particular area.
      * @param startPoint
      * @param endPoint

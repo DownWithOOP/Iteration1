@@ -27,12 +27,13 @@ abstract public class Controller extends ContainsActions {
         intitializeC();
     }
 
-
     abstract public void update();
 
     abstract protected void setView();
 
     abstract protected void updateView();
+
+    abstract public View returnViewToStateManager();
 
 
     protected void intitializeC(){

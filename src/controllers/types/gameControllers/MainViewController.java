@@ -15,6 +15,7 @@ import model.common.Location;
 import model.entity.stats.StructureStats;
 import model.entity.structure.Base;
 import model.entity.structure.Structure;
+import view.View;
 import view.types.MainView;
 
 import java.awt.*;
@@ -27,20 +28,25 @@ import java.util.HashMap;
 public class MainViewController extends GameController {
     protected HashMap<TypeOfActions, Action> mainViewControllerActions = new HashMap<>();
 
-    private final MainView mainView = new MainView(new BorderLayout());
+    private MainView mainView;
 
     public MainViewController(StateManager stateManager) {
         super(stateManager);
+
+        /*
         startGameModel();
         initializeMainController();
         a = new ChangeViewAction(this);
+        */
     }
 
     protected void initializeMainController() {
         setMainViewControllerActions();
         addAllActions(mainViewControllerActions);
     }
+    protected void handleInput(){
 
+    }
 
     private void startGameModel() {
         gameModel = new GameModel();
@@ -48,15 +54,12 @@ public class MainViewController extends GameController {
 
     @Override
     protected void updateGameModel() {
-        gameModel.update();
+        //gameModel.update();
     }
-
-    Action a; //TODO used for testing purposes
 
     //TODO: change public modifier
     @Override
     public void update() {
-        a.execute();
         updateGameModel();
         updateView();
     }
@@ -64,13 +67,20 @@ public class MainViewController extends GameController {
 
     @Override
     protected void setView() {
-        super.view = mainView;
+        // this method is called when the class is initialized, we create our view that corresponds to the controller
+        this.mainView = new MainView();
+
     }
 
     //TODO: view.update
     @Override
     protected void updateView() {
-        mainView.update();
+
+    }
+
+    @Override
+    public View returnViewToStateManager() {
+        return this.mainView;
     }
 
 
@@ -79,24 +89,6 @@ public class MainViewController extends GameController {
 //        mainViewControllerActions.put(TypeOfActions.changeView, changeViewAction);
     }
 
-    //TODO: delete this one, take care of handleInput
-//    public static void main(String[] args) {
-//        StateManager stateManager = new StateManager();
-//        MainViewController mainViewController = new MainViewController(stateManager);
-//        KeyBoardMapManager keyBoardMapManager = new KeyBoardMapManager();
-//
-////        HashMap<TypeOfActions,String> playerInput= new HashMap<>();
-////        playerInput.put(TypeOfActions.changeView,"1");
-////
-////        keyBoardMapManager.populatePlayerInputHash("Player1",playerInput);
-////        keyBoardMapManager.updatePlayerId("Player1");
-////
-////        mainViewController.handleInput(keyBoardMapManager,"1", ActionModifiers.down);
-////        mainViewController.changeView(TypeOfControllers.MainViewController);
-//        StructureStats structureStats= new StructureStats(5,6,7,8,9,9,9,9);
-//        Base base=new Base(structureStats,5,7);
-//
-//    }
 }
 
 

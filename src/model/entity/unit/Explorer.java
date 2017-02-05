@@ -15,11 +15,14 @@ public class Explorer extends FighterUnit {
 
     public Explorer(Player player, Location location) {
 
-        super("Explorer",new UnitStats(2, 1, 0, 5, 50, 1, 5,1), player, location);
+        super(EntityType.EXPLORER,new UnitStats(2, 1, 0, 5, 50, 1, 5,1), player, location);
         this.initializeExplorer();
     }
 
+    @Override
+    public void update() {
 
+    }
 
     protected void initializeExplorer() {
         setExplorerActions();

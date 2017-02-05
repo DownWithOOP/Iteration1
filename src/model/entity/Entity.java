@@ -5,6 +5,8 @@ import model.actions.Action;
 import model.actions.ContainsActions;
 import model.common.Location;
 import model.player.Player;
+import model.entity.EntityID;
+import model.entity.unit.EntityType;
 
 import java.util.HashMap;
 import java.util.Queue;
@@ -16,13 +18,13 @@ abstract public class Entity extends ContainsActions {
 
     protected Player player;
     protected String playerId;
-    private UUID entityID;                                                                      // Unique ID for each created Entity
+    private EntityID entityID;                                                                      // Unique ID for each created Entity
     private Queue<Action> commandQueue;                                                          // Queue of user selected commands for each entity to perform in a # of turns
     protected final HashMap<TypeOfActions, Action> entityActions = new HashMap<>();                //add all the Actions of an entity here
 
 //TODO: we need player to get the PlayerResources of the player and see if we can perform an action
-    public Entity(Player player) {
-        entityID = UUID.randomUUID();
+    public Entity(Player player, EntityType entityType) {
+        entityID = new EntityID(entityType);
         commandQueue = new LinkedList<Action>();
         initializeEntity();
         this.player = player;
@@ -42,7 +44,8 @@ abstract public class Entity extends ContainsActions {
          * */
 
     }
-
+    //TODO: Entity will perform an action and update any necessary stats/operations if needed
+    abstract public void update();
     abstract public Location getLocation();
 
     public boolean decommission() {
@@ -76,10 +79,6 @@ abstract public class Entity extends ContainsActions {
 
     }
 
-    public UUID getEntityID() {
-        return entityID;
-    }
-
     @Override
     protected void addAvailableActions() {
 
@@ -88,6 +87,10 @@ abstract public class Entity extends ContainsActions {
     @Override
     protected void removeAvailableActions() {
 
+    }
+
+    public EntityID getEntityID() {
+        return entityID;
     }
 
     public String getPlayerId() {

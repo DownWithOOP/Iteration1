@@ -12,13 +12,15 @@ public class Melee extends FighterUnit {
 
     protected HashMap<TypeOfActions, Action> meleeActions = new HashMap<>();
 
-
     public Melee(Player player, Location location) {
-
-        super("Melee", new UnitStats(20, 3, 5, 2, 100, 3, 1, 1), player, location);
+        super(EntityType.MELEE, new UnitStats(20, 3, 5, 2, 100, 3, 1, 1), player, location);
         initializeMelee();
     }
 
+    @Override
+    public void update() {
+
+    }
 
     protected void initializeMelee() {
         setMeleeActions();

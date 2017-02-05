@@ -15,11 +15,14 @@ public class Colonist extends FighterUnit {
 
 
     public Colonist(Player player, Location location) {
-        super("Colonist", new UnitStats(2, 1, 0, 3, 50, 1, 5,1),player, location);
-
+        super(EntityType.COLONIST, new UnitStats(2, 1, 0, 3, 50, 1, 5,1),player, location);
         initializeColonist();
     }
 
+    @Override
+    public void update() {
+
+    }
 
     protected void initializeColonist() {
         setColonistActions();

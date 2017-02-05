@@ -106,7 +106,7 @@ public class Player extends ContainsActions {
 
     public boolean addUnit(Unit unit){
         if (units.size() < MAX_UNITS) {
-            switch(unit.getUnitType()){
+            switch(unit.getEntityType()){
                 case COLONIST:
                     if(allEntities.numColonists() >= MAX_COLONISTS)
                         return false;

@@ -12,13 +12,15 @@ public class Ranged extends FighterUnit {
 
     protected HashMap<TypeOfActions, Action> rangedActions = new HashMap<>();
 
-
     public Ranged(Player player, Location location) {
-
-        super("Ranged", new UnitStats(10, 3, 3, 3, 100, 3, 3, 2), player, location);
+        super(EntityType.RANGED, new UnitStats(10, 3, 3, 3, 100, 3, 3, 2), player, location);
         this.initializeRanged();
     }
 
+    @Override
+    public void update() {
+
+    }
 
     protected void initializeRanged() {
         setRangedActions();

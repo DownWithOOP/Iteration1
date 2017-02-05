@@ -27,13 +27,13 @@ public class EntityList<Entity> extends ArrayList<Entity> {
             numStructures++;
         } else {
             numUnits++;
-            if (((Unit) e).getUnitType().equals(UnitType.COLONIST)) {
+            if (((Unit) e).getEntityID().getId().equals(EntityType.COLONIST.toString())) {
                 numColonists++;
-            } else if (((Unit) e).getUnitType().equals(UnitType.EXPLORER)) {
+            } else if (((Unit) e).getEntityID().getId().equals(EntityType.EXPLORER.toString())) {
                 numExplorers++;
-            } else if (((Unit) e).getUnitType().equals(UnitType.MELEE)) {
+            } else if (((Unit) e).getEntityID().getId().equals(EntityType.MELEE.toString())) {
                 numMelee++;
-            } else if (((Unit) e).getUnitType().equals(UnitType.RANGED)) {
+            } else if (((Unit) e).getEntityID().getId().equals(EntityType.RANGED.toString())) {
                 numRanged++;
             }
         }
@@ -53,13 +53,13 @@ public class EntityList<Entity> extends ArrayList<Entity> {
                 numStructures--;
             } else {
                 numUnits--;
-                if (((Unit) o).getUnitType().equals(UnitType.COLONIST)) {
+                if (((Unit) o).getEntityID().getId().equals(EntityType.COLONIST)) {
                     numColonists--;
-                } else if (((Unit) o).getUnitType().equals(UnitType.EXPLORER)) {
+                } else if (((Unit) o).getEntityID().getId().equals(EntityType.EXPLORER)) {
                     numExplorers--;
-                } else if (((Unit) o).getUnitType().equals(UnitType.MELEE)) {
+                } else if (((Unit) o).getEntityID().getId().equals(EntityType.MELEE)) {
                     numMelee--;
-                } else if (((Unit) o).getUnitType().equals(UnitType.RANGED)) {
+                } else if (((Unit) o).getEntityID().getId().equals(EntityType.RANGED)) {
                     numRanged--;
                 }
             }

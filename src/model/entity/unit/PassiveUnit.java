@@ -6,8 +6,8 @@ import model.player.Player;
 
 public class PassiveUnit extends Unit {
 
-    public PassiveUnit(UnitStats passiveStats, Player player) {
-        super (null, passiveStats,player);
+    public PassiveUnit(UnitStats passiveStats, Player player, Location location) {
+        super (null, passiveStats,player, location);
     }
 
     @Override

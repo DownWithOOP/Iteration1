@@ -6,6 +6,7 @@ import model.entity.Entity;
 import model.entity.stats.UnitStats;
 import model.common.Location;
 import model.player.Player;
+import model.entity.unit.EntityType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,21 +16,17 @@ import java.util.HashMap;
 abstract public class Unit extends Entity {
 
     protected HashMap<TypeOfActions, Action> unitActions = new HashMap<>();
-
-
-    // currentPath stores each tile coordinate for the current path the unit is moving in
-    private ArrayList<Location> currentPath;
-
-    // stores the current position on the map of the unit
-    private Location currentLocation;
+    private ArrayList<Location> currentPath;                                // currentPath stores each tile coordinate for the current path the unit is moving in
+    private Location currentLocation;                                   // stores the current position on the map of the unit
     private UnitStats unitStats;
 
-    public Unit(EntityType entityType, UnitStats unitStats, Player player, int xPos, int yPos) {
+
+    public Unit(EntityType entityType, UnitStats unitStats, Player player, Location location) {
         super(player, entityType);
         initializeUnit();
         //this.entityType = entityType;
         this.unitStats = unitStats;
-        currentLocation = new Location(xPos, yPos);
+        currentLocation=location;
         currentPath = new ArrayList<Location>();
     }
 

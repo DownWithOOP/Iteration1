@@ -1,7 +1,6 @@
 package view.types;
 
 import java.awt.*;
-
 import view.View;
 
 import javax.swing.*;

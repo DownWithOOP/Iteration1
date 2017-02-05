@@ -4,6 +4,7 @@ package model.player;
 import controllers.keyboardInputHandler.TypeOfActions;
 import model.actions.Action;
 import model.actions.ContainsActions;
+import model.common.Location;
 import model.entity.Entity;
 import model.entity.army.Army;
 import model.entity.structure.Structure;
@@ -59,9 +60,9 @@ public class Player extends ContainsActions {
         actionMap   = new HashMap<Integer, Action>();
 
         //Each player starts the game with 2 Explorers and 1 Colonist
-        units.add(new Explorer(this));
-        units.add(new Explorer(this));
-        units.add(new Colonist(this));
+        units.add(new Explorer(this, new Location(0,0)));
+        units.add(new Explorer(this,new Location(0,0)));
+        units.add(new Colonist(this,new Location(0,0)));
         this.playerId = playerId;
     }
 

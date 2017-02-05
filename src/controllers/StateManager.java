@@ -1,6 +1,7 @@
 package controllers;
 
 
+import controllers.types.PauseViewController;
 import controllers.types.gameControllers.MainViewController;
 import controllers.types.gameControllers.StructureViewController;
 import controllers.types.gameControllers.UnitViewController;
@@ -147,11 +148,13 @@ public class StateManager implements KeyListener {
         StructureViewController structureViewController = new StructureViewController(this);
         UnitViewController unitViewController = new UnitViewController(this);
         WelcomeViewController welcomeViewController = new WelcomeViewController(this);
+        PauseViewController pauseViewController = new PauseViewController(this);
 //      TODO:CREATE TypeOfController.PauseView
         controllerMap.put(TypeOfControllers.MainViewController, mainViewController);
         controllerMap.put(TypeOfControllers.StructureViewController, structureViewController);
         controllerMap.put(TypeOfControllers.UnitViewController, unitViewController);
         controllerMap.put(TypeOfControllers.WelcomeViewController, welcomeViewController);
+        controllerMap.put(TypeOfControllers.PauseViewController, pauseViewController);
     }
 
     public void changeController(TypeOfControllers typeOfControllers) {

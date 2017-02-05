@@ -6,7 +6,11 @@ import model.actions.ActionModifiers;
 import model.common.Location;
 import model.entity.Entity;
 import model.entity.Fighter;
+import model.entity.stats.DefaultArmyStats;
+import model.entity.stats.Stats;
+import model.entity.unit.Explorer;
 import model.entity.unit.FighterUnit;
+import model.entity.unit.Ranged;
 import model.player.Player;
 
 import javax.swing.plaf.basic.BasicScrollPaneUI;
@@ -24,8 +28,11 @@ import java.util.UUID;
 public class Army extends Entity implements Fighter {
 
 
-    //add all the Actions of an army here
-    protected final HashMap<TypeOfActions, Action> armyActions = new HashMap<>();
+    protected final HashMap<TypeOfActions, Action> armyActions = new HashMap<>();                       //add all the Actions of an army here
+    private static DefaultArmyStats initialStats = new DefaultArmyStats();
+    private Stats armyStats = new Stats(initialStats.offensiveDamage, initialStats.defensiveDamage,
+            initialStats.armor, initialStats.movement, initialStats.health,
+            initialStats.upkeep, initialStats.visionRadius);
 
     private int visionRadius;
     HashMap<UUID, FighterUnit> reinforcements = new HashMap<>();
@@ -48,9 +55,10 @@ public class Army extends Entity implements Fighter {
 //    private int
 
 
-    public Army(Player player) {
+    public Army(Player player, Location rallyPoint) {
         super(player);
         initializeArmy();
+        this.rallyPoint= new RallyPoint(rallyPoint);
     }
 
     protected void initializeArmy() {
@@ -81,23 +89,42 @@ public class Army extends Entity implements Fighter {
 
     public void registerFighter(FighterUnit fighterUnit) {
         UUID fighterEntityID = fighterUnit.getEntityID();
+        Stats unitStats = fighterUnit.getUnitStats();
+        int attack = unitStats.getOffensiveDamage();
+
+        int defense = unitStats.getDefensiveDamage();
+
+        int upKeep = unitStats.getUpkeep();
+
+        int health = unitStats.getHealth();
 
         if (this.playerId == fighterUnit.getPlayerId()) {
             if (rallyPoint.getLocation().equals(fighterUnit.getLocation())) {
                 battleGroup.put(fighterEntityID, fighterUnit);
+                setBattleGroupStats(attack, defense, health, upKeep);
             } else {
                 reinforcements.put(fighterEntityID, fighterUnit);
                 //TODO: send the coordinates of the rally point to the unit
-                //TODO: attack and defense needed form the fighterUnit
             }
         }
     }
 
     public void removeFighter(FighterUnit fighterUnit) {
         UUID fighterEntityID = fighterUnit.getEntityID();
-        //TODO: get attack and defense, resource consumption,range of the fighterUnit
+        Stats unitStats = fighterUnit.getUnitStats();
+
+        int attack = unitStats.getOffensiveDamage() * (-1);
+
+        int defense = unitStats.getDefensiveDamage() * (-1);
+
+        int upKeep = unitStats.getUpkeep() * (-1);
+
+        int health = unitStats.getHealth() * (-1);
+
         if (battleGroup.containsKey(fighterEntityID)) {
             battleGroup.remove(fighterEntityID);
+            setBattleGroupStats(attack, defense, health, upKeep);
+
         }
         if (reinforcements.containsKey(fighterEntityID)) {
             reinforcements.remove(fighterEntityID);
@@ -120,30 +147,79 @@ public class Army extends Entity implements Fighter {
         return checkIfInvalidMovement;
     }
 
-    private void setTotalResourceConsumption() {
-
+    private void setBattleGroupStats(int attack, int defense, int health, int upkeep) {
+        setBattleGroupAttackPower(attack);
+        setBattleGroupDefensePower(defense);
+        setBattleGroupMovementSpeed();
+        setBattleGroupHealth(health);
+        setBattleGroupUpkeep(upkeep);
+        setBattleGroupVisionRadius();
     }
 
-    private void setBattleGroupAttackPower() {
-
+    private void setBattleGroupUpkeep(int upkeep) {
+        int currentUpkeep = armyStats.getUpkeep();
+        currentUpkeep += upkeep;
+        armyStats.setUpkeep(currentUpkeep + upkeep);
     }
 
-    private void setBattleGroupDefensePower() {
+    private void setBattleGroupAttackPower(int offensiveDmg) {
+        int currentAttackPower = armyStats.getOffensiveDamage();
+        currentAttackPower += offensiveDmg;
+        armyStats.setOffensiveDamage(currentAttackPower);
+    }
 
+    private void setBattleGroupDefensePower(int defensiveDmg) {
+        int currentDefensivePower = armyStats.getDefensiveDamage();
+        currentDefensivePower += defensiveDmg;
+        armyStats.setDefensiveDamage(currentDefensivePower);
+    }
+
+    private void setBattleGroupHealth(int health) {
+        int currentHealth = armyStats.getHealth();
+        currentHealth += health;
+        armyStats.setHealth(currentHealth);
     }
 
     private void setBattleGroupMovementSpeed() {
+        int slowestSpeed = Integer.MAX_VALUE;
+        for (FighterUnit fighterUnit :
+                battleGroup.values()) {
+            int temp = fighterUnit.getUnitStats().getMovement();
+            if (temp < slowestSpeed) {
+                armyStats.setMovement(temp);
+            }
+        }
+        if (battleGroup.isEmpty()){
+            armyStats.setMovement(0);
+        }
+    }
+
+    private void setBattleGroupVisionRadius() {
+        int currentVisionRadius = 0;
+        for (FighterUnit fighterUnit :
+                battleGroup.values()) {
+            int temp = fighterUnit.getUnitStats().getVisionRadius();
+            if (temp > currentVisionRadius) {
+                armyStats.setMovement(temp);
+            }
+        }
+        if (battleGroup.isEmpty()){
+            armyStats.setVisionRadius(0);
+        }
+    }
+
+    private void setBattleGroupAttackRange(){
 
     }
 
-    private int checkResourceLevel() {
-
-        return 5;
-    }
-
-    private void canActionBePerformed() {
-
-    }
+//    private int checkResourceLevel() {
+//
+//        return 5;
+//    }
+//
+//    private void canActionBePerformed() {
+//
+//    }
 
     private void changeReinforcementsTargetLocation() {
 
@@ -153,19 +229,24 @@ public class Army extends Entity implements Fighter {
 
     }
 
-    private void updateRange(int range) {
-        if (battleGroupAttackRange >= range) {
-            for (FighterUnit fighterUnit :
-                    battleGroup.values()) {
-//           TODO: ONCE THIS FUNCTION IS AVAILABLE UNCOMMENT
-//     fighterUnit.getRange();
-            }
+    public void arrivedRallyPoint(FighterUnit fighterUnit){
+        if (this.playerId == fighterUnit.getPlayerId()) {
+            reinforcements.remove(fighterUnit.getEntityID());
+            reinforcements.put(fighterUnit.getEntityID(),fighterUnit);
         }
     }
 
+
     @Override
     public boolean decommission() {
-
+        for (FighterUnit fighterUnit:
+             reinforcements.values()) {
+            fighterUnit.decommission();
+        }
+        for (FighterUnit fighterUnit:
+             battleGroup.values()) {
+            fighterUnit.decommission();
+        }
         return true;
     }
 
@@ -179,7 +260,31 @@ public class Army extends Entity implements Fighter {
 
     }
 
-    public void update(){
+    public void update() {
 
     }
+
+
+    public static void main(String[] args) {
+        Player play= new Player("helloWorld");
+        Player playEnemy= new Player("helloWorld1");
+
+        Explorer explorer= new Explorer(play,new Location(1,2));
+        Ranged ranged= new Ranged(play,new Location(1,2));
+        Ranged ranged1= new Ranged(play,new Location(2,2));
+        Ranged rangedEnemy= new Ranged(playEnemy,new Location(1,2));
+
+        Army arm= new Army(play, new Location(1,2));
+
+        explorer.joinArmy(arm);
+        ranged.joinArmy(arm);
+        ranged1.joinArmy(arm);
+        rangedEnemy.joinArmy(arm);
+        ranged.abandonArmy();
+        explorer.abandonArmy();
+        ranged1.setCurrentLocation(1,2);
+
+    }
+
+
 }

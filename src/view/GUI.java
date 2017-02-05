@@ -39,5 +39,12 @@ public class GUI {
         this.currentlyActiveView = addMe;
     }
 
+    // this can be called after any of the views do some sort of manipulation and need to be rerendered
+    public void repaintCurrentView(){
+        this.frame.getContentPane().validate();
+        this.frame.getContentPane().repaint();
+        this.frame.setVisible(true);
+    }
+
 
 }

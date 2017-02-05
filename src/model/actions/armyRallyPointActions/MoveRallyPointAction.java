@@ -25,11 +25,13 @@ public class MoveRallyPointAction implements Action {
     @Override
     public void applyModifier(ActionModifiers actionModifier) {
         this.actionModifier=actionModifier;
+        execute();
     }
 
     public static void main(String[] args) {
         RallyPoint rallyPoint= new RallyPoint(new Location(1,2), new Army(new Player("hello"),new Location(1,2)));
         MoveRallyPointAction moveRallyPointAction=new MoveRallyPointAction(rallyPoint);
         moveRallyPointAction.applyModifier(ActionModifiers.down);
+
     }
 }

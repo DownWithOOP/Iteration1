@@ -1,6 +1,7 @@
 package model.map.tile;
 
-import model.map.tile.areaeffect.AreaEffect;
+
+import model.map.tile.areaEffect.AreaEffect;
 import model.map.tile.item.Item;
 
 /**

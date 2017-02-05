@@ -9,5 +9,9 @@ import model.common.Location;
 public class ObstacleItem extends Item {
     public ObstacleItem(Location location) {
         super(location);
+        ObstacleItemEffect();
+    }
+    public ObstacleItemEffect(){
+        this.isPassable = false;
     }
 }

@@ -1,4 +1,4 @@
-package controllers.types;
+package controllers.types.gameControllers;
 
 import controllers.Controller;
 import controllers.StateManager;

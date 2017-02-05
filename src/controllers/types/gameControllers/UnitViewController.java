@@ -1,5 +1,6 @@
 package controllers.types.gameControllers;
 
+import view.types.UnitView;
 import controllers.Controller;
 import controllers.StateManager;
 import controllers.types.GameController;
@@ -12,6 +13,7 @@ import java.awt.event.KeyEvent;
  */
 public class UnitViewController extends GameController {
 
+    private UnitView unitView;
     public UnitViewController(StateManager stateManager) {
         super(stateManager);
 
@@ -22,31 +24,14 @@ public class UnitViewController extends GameController {
 
     }
 
-//    protected void handleKeyPressed(KeyEvent e) {
-//
-//    }
-//
-//    @Override
-//    protected void handleKeyReleased(KeyEvent e) {
-//
-//    }
-
     @Override
     public void update() {
 
     }
 
-    protected void initializeUnitViewController() {
-
-    }
-
     @Override
     protected void setView() {
-
-    }
-
-    protected void setUnitViewControlleActions() {
-
+        this.unitView = new UnitView();
     }
 
     @Override
@@ -56,7 +41,7 @@ public class UnitViewController extends GameController {
 
     @Override
     public View returnViewToStateManager() {
-        return null;
+        return this.unitView;
     }
 
 

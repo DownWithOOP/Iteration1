@@ -45,7 +45,7 @@ public class MainView extends View {
         g.drawString("1) Pause View",(int)(super.getWidth()*0.7),(int)(super.getHeight()*0.2));
         g.drawString("2) Structure Overview",(int)(super.getWidth()*0.7),(int)(super.getHeight()*0.3));
         g.drawString("3) Unit Overview",(int)(super.getWidth()*0.7),(int)(super.getHeight()*0.4));
-        g.drawString(" ^ not yet working",(int)(super.getWidth()*0.7),(int)(super.getHeight()*0.5));
+        g.drawString("4) Exit ",(int)(super.getWidth()*0.7),(int)(super.getHeight()*0.5));
     }
 
 

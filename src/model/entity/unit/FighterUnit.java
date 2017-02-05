@@ -88,7 +88,7 @@ public abstract class FighterUnit extends Unit implements Fighter{
     @Override
     public boolean decommission(){
         abandonArmy();
-        
+
         return true;
     }
 

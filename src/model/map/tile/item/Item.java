@@ -13,6 +13,9 @@ public abstract class Item {
 	public Item(Location location, int itemType){
 		this.location = location;
 		this.itemType = itemType;
+		if(itemType == 0){
+			this.ObstacleItem.ObstacleItemEffect;
+		}
 	}
 	
 	public Location getLocation(){

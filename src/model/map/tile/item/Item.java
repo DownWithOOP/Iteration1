@@ -23,4 +23,12 @@ public abstract class Item {
 		this.location.setxCoord(xPosition);
         	this.location.setyCoord(yPosition);
 	}
+	
+	public int getItemType(){
+		return itemType;
+	}
+	
+	public void setItemType(int itemType){
+		this.itemType = itemType;
+	}
 }

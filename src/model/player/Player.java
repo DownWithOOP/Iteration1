@@ -9,6 +9,7 @@ import model.entity.Entity;
 import model.entity.army.Army;
 import model.entity.structure.Structure;
 import model.entity.unit.*;
+import model.map.Map;
 import utilities.EntityList;
 
 import java.util.ArrayList;
@@ -43,6 +44,8 @@ public class Player extends ContainsActions {
     private Entity selectedEntity;
 
     private HashMap<Integer, Action> actionMap;
+
+    private Map playerMap;
 
     /**
      * Resource levels
@@ -84,7 +87,6 @@ public class Player extends ContainsActions {
     public void removeAvailableActions() {
 
     }
-
 
     protected void setPlayerActions() {
 

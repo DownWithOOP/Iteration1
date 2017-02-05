@@ -70,7 +70,7 @@ public class Assets {
 
             //decals
             RED_CROSS = imageLoader.loadImageFromPath("/images/redcross.png");
-            SKULL = imageLoader.loadImageFromPath("/images/skyll.png");
+            SKULL = imageLoader.loadImageFromPath("/images/skull.png");
 
             //structures
             BASE = imageLoader.loadImageFromPath("/images/base.png");

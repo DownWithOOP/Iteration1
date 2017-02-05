@@ -205,10 +205,6 @@ public class Player extends ContainsActions {
         return researchLevel;
     }
 
-    public Map getPlayerMap(){
-        return playerMap;
-    }
-
     /**
      * Setters
      */

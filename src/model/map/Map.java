@@ -63,17 +63,6 @@ public class Map {
         return pathFinder.findPath(startPoint, endPoint);
     }
 
-    /**
-     * TODO
-     * @return
-     */
-    public int getWidth(){ return GRID_WIDTH; }
-
-    /**
-     * TODO
-     * @return
-     */
-    public int getHeight(){ return GRID_HEIGHT; }
 
     /**
      * Obtains a list of tiles from an XML file.

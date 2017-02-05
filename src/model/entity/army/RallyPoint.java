@@ -18,7 +18,7 @@ import java.util.Queue;
 public class RallyPoint extends ContainsActions {
     private Location currentLocation;
     //TODO: PASS THE MAP OF THE PLAYER
-    Map map = new Map();
+    Map map = new Map(3, 3);
     Army army;
     Queue<Location> pathQueue = new LinkedList<>();
     protected final HashMap<TypeOfActions, Action> rallyPointActions = new HashMap<>();                //add all the Actions of an RallyPoint here

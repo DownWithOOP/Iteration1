@@ -16,16 +16,18 @@ import java.util.HashMap;
  */
 public class Map {
 
-    private final int GRID_HEIGHT = 3;
-    private final int GRID_WIDTH = 3;
+    private final int GRID_HEIGHT;
+    private final int GRID_WIDTH;
 
     private final String MAP_XML_PATH = "res/map/Map.xml";
 
     private Tile[][] tileArray;
     private boolean[][] obstacleGrid;
 
-    public Map(){
-        tileArray = new Tile[GRID_HEIGHT][GRID_WIDTH];
+    public Map(int MAP_HEIGHT, int MAP_WIDTH){
+        this.GRID_HEIGHT = MAP_HEIGHT;
+        this.GRID_WIDTH = MAP_WIDTH;
+        this.tileArray = new Tile[GRID_HEIGHT][GRID_WIDTH];
         ArrayList<Tile> tiles = retrieveTileList();
         createTileGrid(tiles);
     }

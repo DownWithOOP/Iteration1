@@ -55,7 +55,7 @@ public class Player extends ContainsActions {
     private HashMap<Integer, Action> actionMap;
     private HashMap<TypeOfActions, Action> playerActionMap = new HashMap<>();                           // Where all the actions the player is going to perform are found
 
-    private Map playerMap;
+    private boolean[][] playerMap;
 
     /**
      * Resource levels
@@ -65,13 +65,13 @@ public class Player extends ContainsActions {
     private int researchLevel;
 
     /*TODO:Set player id*/
-    public Player(String playerId) {
+    public Player(String playerId, boolean[][] playerMap) {
         allEntities = new EntityList<Entity>();
         units = new ArrayList<Unit>();
         structures = new ArrayList<Structure>();
         armies = new ArrayList<Army>();
         actionMap = new HashMap<Integer, Action>();
-
+        this.playerMap = playerMap;
         //Each player starts the game with 2 Explorers and 1 Colonist
         //TODO:CHECKOUT THESE COORDINATES
         units.add(new Explorer(this, new Location(0, 0)));
@@ -203,6 +203,10 @@ public class Player extends ContainsActions {
         return researchLevel;
     }
 
+    public boolean[][] getPlayerMap(){
+        return playerMap;
+    }
+
     /**
      * Setters
      */
@@ -231,7 +235,8 @@ public class Player extends ContainsActions {
 
     }
 
-
-
+    public void setPlayerMap(boolean[][] playerMap){
+        this.playerMap = playerMap;
+    }
 
 }

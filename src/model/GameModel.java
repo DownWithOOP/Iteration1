@@ -17,10 +17,15 @@ public class GameModel {
     private HashMap<String, Player> players;
     private Map map;
 
+    private final int MAP_HEIGHT = 3;
+    private final int MAP_WIDTH = 3;
+
     public GameModel(){
         actionMap = new HashMap<>();
         players = new HashMap<>();
-        map = new Map();
+        players.put("player1", new Player("player1", new boolean[MAP_HEIGHT][MAP_WIDTH]));
+        players.put("player2", new Player("player2", new boolean[MAP_HEIGHT][MAP_WIDTH]));
+        map = new Map(MAP_HEIGHT, MAP_WIDTH);
     }
 
     public void update(){

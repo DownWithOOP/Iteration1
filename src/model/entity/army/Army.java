@@ -259,8 +259,12 @@ public class Army extends Entity implements Fighter {
 
 
     public static void main(String[] args) {
-        Player play= new Player("helloWorld");
-        Player playEnemy= new Player("helloWorld1");
+
+        /**
+         * I assume there are just for testing? player takes a boolean playermap now - Cristian
+         */
+        Player play= new Player("helloWorld", new boolean[3][3]);
+        Player playEnemy= new Player("helloWorld1", new boolean[3][3]);
 
         Explorer explorer= new Explorer(play,new Location(1,2));
         Ranged ranged= new Ranged(play,new Location(1,2));

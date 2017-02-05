@@ -29,7 +29,7 @@ public class MoveRallyPointAction implements Action {
     }
 
     public static void main(String[] args) {
-        RallyPoint rallyPoint= new RallyPoint(new Location(1,2), new Army(new Player("hello"),new Location(1,2)));
+        RallyPoint rallyPoint= new RallyPoint(new Location(1,2), new Army(new Player("hello", new boolean[3][3]),new Location(1,2)));
         MoveRallyPointAction moveRallyPointAction=new MoveRallyPointAction(rallyPoint);
         moveRallyPointAction.applyModifier(ActionModifiers.down);
 

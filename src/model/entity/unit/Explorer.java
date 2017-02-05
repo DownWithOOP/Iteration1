@@ -12,13 +12,17 @@ public class Explorer extends FighterUnit {
     protected HashMap<TypeOfActions, Action> explorerActions = new HashMap<>();
 
 
-    public Explorer(Player player) {
+    public Explorer(Player player, int xPos, int yPos) {
 
-        super("Explorer",new UnitStats(2, 1, 0, 5, 50, 1, 5), player);
+        super(EntityType.EXPLORER,new UnitStats(2, 1, 0, 5, 50, 1, 5),
+                player, xPos, yPos);
         this.initializeExplorer();
     }
 
+    @Override
+    public void update() {
 
+    }
 
     protected void initializeExplorer() {
         setExplorerActions();

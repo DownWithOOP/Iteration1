@@ -13,12 +13,17 @@ public class Colonist extends FighterUnit {
     protected HashMap<TypeOfActions, Action> colonistActions = new HashMap<>();
 
 
-    public Colonist(Player player) {
-        super("Colonist", new UnitStats(2, 1, 0, 3, 50, 1, 5),player);
+    public Colonist(Player player, int xPos, int yPos) {
+        super(EntityType.COLONIST, new UnitStats(2, 1, 0, 3, 50, 1, 5),
+                player, xPos, yPos);
 
         initializeColonist();
     }
 
+    @Override
+    public void update() {
+
+    }
 
     protected void initializeColonist() {
         setColonistActions();

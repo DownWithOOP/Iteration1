@@ -13,13 +13,9 @@ import java.util.HashMap;
 public abstract class FighterUnit extends Unit implements Fighter{
     private Army army= null;
     protected final HashMap<TypeOfActions,Action> fighterActions= new HashMap<>();
-    private String fighterUnitType;
 
-    public FighterUnit(String fighterUnitType, UnitStats fighterStats, Player player) {
-        super(null,fighterStats, player);
-        initializeFighterUnit();
-        this.fighterUnitType = fighterUnitType;
-
+    public FighterUnit(EntityType fighterUnitType, UnitStats fighterStats, Player player, int xPos, int yPos) {
+        super(fighterUnitType,fighterStats, player, xPos, yPos);
     }
 
     protected void initializeFighterUnit() {
@@ -53,11 +49,6 @@ public abstract class FighterUnit extends Unit implements Fighter{
     @Override
     public Location getLocation() {
         return getCurrentLocation();
-    }
-
-
-    public String getFighterUnitType() {
-        return fighterUnitType;
     }
 
 

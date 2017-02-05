@@ -6,6 +6,7 @@ import model.entity.unit.*;
 import model.common.Location;
 import model.entity.stats.StructureStats;
 import model.player.Player;
+import model.entity.unit.EntityType;
 
 import java.util.HashMap;
 
@@ -16,8 +17,13 @@ public class Base extends Structure {
     protected HashMap<TypeOfActions, Action> baseActions = new HashMap<>();
 
     public Base(StructureStats baseStats, int xPosition, int yPosition, Player player) {
-        super(baseStats, xPosition, yPosition, player);
+        super(EntityType.BASE,baseStats, xPosition, yPosition, player);
         initializeBase();
+    }
+
+    @Override
+    public void update() {
+
     }
 
     @Override
@@ -43,23 +49,23 @@ public class Base extends Structure {
     //TODO: Player needs to obtain newly created unit
     //TODO: create unit command needs to be added to command queue
     // why not create an enum for the unitType
-    public boolean createUnit(String unitType, boolean isReinforcement) {
+    public boolean createUnit(String unitType, boolean isReinforcement, int xPos, int yPos) {
         Unit newUnit;
 
-        if (unitType.equals("COLONIST")) {
-            newUnit = new Colonist(player);
+        if (unitType.equals(EntityType.COLONIST.toString())) {
+            newUnit = new Colonist(player, xPos, yPos);
             return true;
         }
-        else if (unitType.equals("EXPLORER")) {
-            newUnit = new Explorer(player);
+        else if (unitType.equals(EntityType.EXPLORER.toString())) {
+            newUnit = new Explorer(player, xPos, yPos);
             return true;
         }
-        else if (unitType.equals("MELEE")) {
-            newUnit = new Melee(player);
+        else if (unitType.equals(EntityType.MELEE.toString())) {
+            newUnit = new Melee(player, xPos, yPos);
             return true;
         }
-        else if (unitType.equals("RANGED")) {
-            newUnit = new Ranged(player);
+        else if (unitType.equals(EntityType.RANGED.toString())) {
+            newUnit = new Ranged(player, xPos, yPos);
             return true;
         }
         else {

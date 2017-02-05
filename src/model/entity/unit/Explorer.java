@@ -2,6 +2,7 @@ package model.entity.unit;
 
 import controllers.keyboardInputHandler.TypeOfActions;
 import model.actions.Action;
+import model.common.Location;
 import model.entity.stats.UnitStats;
 import model.player.Player;
 
@@ -12,9 +13,9 @@ public class Explorer extends FighterUnit {
     protected HashMap<TypeOfActions, Action> explorerActions = new HashMap<>();
 
 
-    public Explorer(Player player) {
+    public Explorer(Player player, Location location) {
 
-        super("Explorer",new UnitStats(2, 1, 0, 5, 50, 1, 5), player);
+        super("Explorer",new UnitStats(2, 1, 0, 5, 50, 1, 5,1), player, location);
         this.initializeExplorer();
     }
 

@@ -15,22 +15,17 @@ import java.util.HashMap;
 abstract public class Unit extends Entity {
 
     protected HashMap<TypeOfActions, Action> unitActions = new HashMap<>();
-
-
-    // currentPath stores each tile coordinate for the current path the unit is moving in
-    private ArrayList<Location> currentPath;
-
-    // stores the current position on the map of the unit
-    private Location currentLocation;
+    private ArrayList<Location> currentPath;                                // currentPath stores each tile coordinate for the current path the unit is moving in
+    private Location currentLocation;                                   // stores the current position on the map of the unit
     private UnitStats unitStats;
-
     private UnitType unitType;
 
-    public Unit(UnitType unitType, UnitStats unitStats,Player player) {
+    public Unit(UnitType unitType, UnitStats unitStats,Player player, Location location) {
         super(player);
         initializeUnit();
         this.unitType = unitType;
         this.unitStats = unitStats;
+        currentLocation=location;
         currentPath = new ArrayList<Location>();
     }
 

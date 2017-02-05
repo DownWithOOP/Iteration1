@@ -2,6 +2,7 @@ package model.entity.unit;
 
 import controllers.keyboardInputHandler.TypeOfActions;
 import model.actions.Action;
+import model.common.Location;
 import model.entity.stats.UnitStats;
 import model.player.Player;
 
@@ -12,9 +13,9 @@ public class Ranged extends FighterUnit {
     protected HashMap<TypeOfActions, Action> rangedActions = new HashMap<>();
 
 
-    public Ranged(Player player) {
+    public Ranged(Player player, Location location) {
 
-        super ("Ranged",new UnitStats(10, 3, 3, 3, 100, 3, 3),player);
+        super("Ranged", new UnitStats(10, 3, 3, 3, 100, 3, 3, 2), player, location);
         this.initializeRanged();
     }
 
@@ -24,7 +25,7 @@ public class Ranged extends FighterUnit {
         addAllActions(rangedActions);
     }
 
-    private void setRangedActions(){
+    private void setRangedActions() {
         /**
          *         rangedActions.put(TypeOfActions.powerUp,PowerUpAction(this));
          * */

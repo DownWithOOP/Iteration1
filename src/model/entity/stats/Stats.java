@@ -74,5 +74,6 @@ public class Stats {
     public void setVisionRadius(int visionRadius) {
         this.visionRadius = visionRadius;
     }
+
 }
 

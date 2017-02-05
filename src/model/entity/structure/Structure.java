@@ -3,6 +3,7 @@ package model.entity.structure;
 import controllers.keyboardInputHandler.TypeOfActions;
 import model.actions.Action;
 import model.entity.Entity;
+import model.entity.army.RallyPoint;
 import model.entity.stats.StructureStats;
 import model.common.Location;
 import model.player.Player;
@@ -19,6 +20,7 @@ public abstract class Structure extends Entity{
 
     private final Location fixedLocation;
     private StructureStats structureStats;
+
 
     public Structure(StructureStats structureStats, int xPosition, int yPosition, Player player) {
         super(player);
@@ -47,4 +49,6 @@ public abstract class Structure extends Entity{
         this.fixedLocation.setxCoord(xPosition);
         this.fixedLocation.setyCoord(yPosition);
     }
+
+
 }

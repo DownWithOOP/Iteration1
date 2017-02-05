@@ -15,8 +15,8 @@ public abstract class FighterUnit extends Unit implements Fighter{
     protected final HashMap<TypeOfActions,Action> fighterActions= new HashMap<>();
     private String fighterUnitType;
 
-    public FighterUnit(String fighterUnitType, UnitStats fighterStats, Player player) {
-        super(null,fighterStats, player);
+    public FighterUnit(String fighterUnitType, UnitStats fighterStats, Player player, Location location) {
+        super(null,fighterStats, player, location);
         initializeFighterUnit();
         this.fighterUnitType = fighterUnitType;
 
@@ -29,9 +29,13 @@ public abstract class FighterUnit extends Unit implements Fighter{
 
     public void abandonArmy() {
         army.removeFighter(this);
+        //TODO: SET UNIT TO STANDBY
     }
 
     public void joinArmy(Army army) {
+        if(this.army!=null){
+            abandonArmy();
+        }
         if (playerId==army.getPlayerId()){
             this.army=army;
             army.registerFighter(this);
@@ -68,6 +72,15 @@ public abstract class FighterUnit extends Unit implements Fighter{
     @Override
     public void defend(){
 
+    }
+
+    //TODO: call this function when arrived to a rally point
+    private void arrivedToRallyPoint(){
+        army.arrivedRallyPoint(this);
+    }
+
+    public void changeTargetLocation(){
+        //TODO: run search algorithm there
     }
 
 }

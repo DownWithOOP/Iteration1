@@ -12,6 +12,7 @@ import model.actions.ActionModifiers;
 import model.actions.ContainsActions;
 import model.actions.controllerActions.ChangeViewAction;
 import model.common.Location;
+import model.common.RenderObject;
 import model.entity.stats.StructureStats;
 import model.entity.structure.Base;
 import model.entity.structure.Structure;
@@ -32,14 +33,15 @@ public class MainViewController extends GameController {
 
     private MainView mainView;
 
+    private GameModel gameModel;
+
     public MainViewController(StateManager stateManager) {
         super(stateManager);
 
-        /*
         startGameModel();
+        setView(gameModel.getRenderObject());
         initializeMainController();
-        a = new ChangeViewAction(this);
-        */
+        //a = new ChangeViewAction(this);
     }
 
     protected void initializeMainController() {
@@ -68,19 +70,23 @@ public class MainViewController extends GameController {
     @Override
     public void update() {
         updateGameModel();
-        //updateView(gameModel.getActivePlayer(), gameModel.getActivePlayer().getPlayerMap()); TODO use render object
+        updateView(gameModel.getRenderObject());
     }
-
 
     @Override
     protected void setView() {
-        // this method is called when the class is initialized, we create our view that corresponds to the controller
-        this.mainView = new MainView();
 
     }
 
-    protected void updateView(Player viewPlayer, Map viewMap) {
-        mainView.update(viewPlayer, viewMap);
+
+    protected void setView(RenderObject renderInfo) {
+        // this method is called when the class is initialized, we create our view that corresponds to the controller
+        this.mainView = new MainView(renderInfo);
+
+    }
+
+    protected void updateView(RenderObject renderInfo) {
+        mainView.update(renderInfo);
     }
 
     @Override

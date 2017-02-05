@@ -22,6 +22,9 @@ public class GameModel {
         actionMap = new HashMap<>();
         players = new HashMap<>();
         map = new Map();
+
+        //TODO remove this so it doesn't ruin everything for everyone
+        activePlayer = new Player("Dora");
     }
 
     public void update(){

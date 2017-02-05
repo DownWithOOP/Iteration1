@@ -42,8 +42,8 @@ abstract public class Entity extends ContainsActions {
         /**
          *         entityActions.put(TypeOfActions.powerUp,PowerUpAction(this));
          * */
-
     }
+
     //TODO: Entity will perform an action and update any necessary stats/operations if needed
     abstract public void update();
     abstract public Location getLocation();
@@ -79,22 +79,22 @@ abstract public class Entity extends ContainsActions {
 
     }
 
-    @Override
-    protected void addAvailableActions() {
-
-    }
-
-    @Override
-    protected void removeAvailableActions() {
-
-    }
-
     public EntityID getEntityID() {
         return entityID;
     }
 
     public String getPlayerId() {
         return player.getPlayerId();
+    }
+
+    @Override
+    public void resume(){
+        addAvailableActions();
+    }
+
+    @Override
+    public void leave(){
+        removeAvailableActions();
     }
 
 

@@ -15,7 +15,7 @@ public class CycleCommandAction extends PlayerAction {
     }
 
     @Override
-    public void addToQueue(ActionModifiers actionModifier) {
+    public void applyModifier(ActionModifiers actionModifier) {
 
     }
 }

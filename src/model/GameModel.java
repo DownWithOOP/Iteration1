@@ -1,6 +1,7 @@
 package model;
 
 import model.actions.Action;
+import model.actions.AvailableActions;
 import model.player.Player;
 
 import java.util.HashMap;

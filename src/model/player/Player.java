@@ -3,6 +3,7 @@ package model.player;
 
 import controllers.keyboardInputHandler.TypeOfActions;
 import model.actions.Action;
+import model.actions.AvailableActions;
 import model.actions.ContainsActions;
 import model.common.Location;
 import model.entity.Entity;
@@ -24,12 +25,12 @@ public class Player extends ContainsActions {
      * Max numbers
      */
     private final int MAX_STRUCTURES = 10;
-    private final int MAX_ARMIES     = 10;
-    private final int MAX_UNITS      = 25;
-    private final int MAX_COLONISTS  = 10;
-    private final int MAX_EXPLORERS  = 10;
-    private final int MAX_MELEE     = 10;
-    private final int MAX_RANGED     = 10;
+    private final int MAX_ARMIES = 10;
+    private final int MAX_UNITS = 25;
+    private final int MAX_COLONISTS = 10;
+    private final int MAX_EXPLORERS = 10;
+    private final int MAX_MELEE = 10;
+    private final int MAX_RANGED = 10;
 
     /**
      * Attributes
@@ -43,6 +44,7 @@ public class Player extends ContainsActions {
     private Entity selectedEntity;
 
     private HashMap<Integer, Action> actionMap;
+    private HashMap<TypeOfActions, Action> playerActionMap = new HashMap<>();                           // Where all the actions the player is going to perform are found
 
     /**
      * Resource levels
@@ -52,17 +54,17 @@ public class Player extends ContainsActions {
     private int researchLevel;
 
     /*TODO:Set player id*/
-    public Player(String playerId){
+    public Player(String playerId) {
         allEntities = new EntityList<Entity>();
-        units       = new ArrayList<Unit>();
-        structures  = new ArrayList<Structure>();
-        armies      = new ArrayList<Army>();
-        actionMap   = new HashMap<Integer, Action>();
+        units = new ArrayList<Unit>();
+        structures = new ArrayList<Structure>();
+        armies = new ArrayList<Army>();
+        actionMap = new HashMap<Integer, Action>();
 
         //Each player starts the game with 2 Explorers and 1 Colonist
-        units.add(new Explorer(this, new Location(0,0)));
-        units.add(new Explorer(this,new Location(0,0)));
-        units.add(new Colonist(this,new Location(0,0)));
+        units.add(new Explorer(this, new Location(0, 0)));
+        units.add(new Explorer(this, new Location(0, 0)));
+        units.add(new Colonist(this, new Location(0, 0)));
         this.playerId = playerId;
     }
 
@@ -76,15 +78,14 @@ public class Player extends ContainsActions {
     }
 
     @Override
-    public void addAvailableActions() {
-
+    public void resume() {
+        addAvailableActions();
     }
 
     @Override
-    public void removeAvailableActions() {
-
+    public void leave() {
+        removeAvailableActions();
     }
-
 
     protected void setPlayerActions() {
 
@@ -97,30 +98,30 @@ public class Player extends ContainsActions {
     /**
      * Methods for adding and removing entities
      */
-    public boolean addStructure(Structure structure){
+    public boolean addStructure(Structure structure) {
         if (structures.size() < MAX_STRUCTURES) {
             return structures.add(structure) && allEntities.add(structure);
         }
         return false;
     }
 
-    public boolean addUnit(Unit unit){
+    public boolean addUnit(Unit unit) {
         if (units.size() < MAX_UNITS) {
-            switch(unit.getEntityID().getEntityType()){
+            switch (unit.getEntityID().getEntityType()) {
                 case "COLONIST":
-                    if(allEntities.numColonists() >= MAX_COLONISTS)
+                    if (allEntities.numColonists() >= MAX_COLONISTS)
                         return false;
                     break;
                 case "EXPLORER":
-                    if(allEntities.numExplorers() >= MAX_EXPLORERS)
+                    if (allEntities.numExplorers() >= MAX_EXPLORERS)
                         return false;
                     break;
                 case "MELEE":
-                    if(allEntities.numMelee() >= MAX_MELEE)
+                    if (allEntities.numMelee() >= MAX_MELEE)
                         return false;
                     break;
                 case "RANGED":
-                    if(allEntities.numRanged() >= MAX_RANGED)
+                    if (allEntities.numRanged() >= MAX_RANGED)
                         return false;
                     break;
                 default:
@@ -131,22 +132,22 @@ public class Player extends ContainsActions {
         return false;
     }
 
-    public boolean addArmy(Army army){
+    public boolean addArmy(Army army) {
         if (armies.size() < MAX_ARMIES) {
             if (armies.add(army)) return true;
         }
         return false;
     }
 
-    public boolean removeStructure(Structure structure){
+    public boolean removeStructure(Structure structure) {
         return structures.remove(structure) && allEntities.remove(structure);
     }
 
-    public boolean removeUnit(Unit unit){
+    public boolean removeUnit(Unit unit) {
         return units.remove(unit) && allEntities.remove(unit);
     }
 
-    public boolean removeArmy(Army army){
+    public boolean removeArmy(Army army) {
         return armies.remove(army) && allEntities.remove(army);
 
     }
@@ -154,7 +155,7 @@ public class Player extends ContainsActions {
     /**
      * Getters
      */
-    public String getPlayerId(){
+    public String getPlayerId() {
         return playerId;
     }
 
@@ -178,30 +179,30 @@ public class Player extends ContainsActions {
         return selectedEntity;
     }
 
-    public int catfoodResourceLevel(){
+    public int catfoodResourceLevel() {
         return catfoodLevel;
     }
 
-    public int crystalResourceLevel(){
+    public int crystalResourceLevel() {
         return crystalLevel;
     }
 
-    public int researchResourceLevel(){
+    public int researchResourceLevel() {
         return researchLevel;
     }
 
     /**
      * Setters
      */
-    public void setCatfoodResourceLevel(int level){
+    public void setCatfoodResourceLevel(int level) {
         this.catfoodLevel = level;
     }
 
-    public void setCrystalResourceLevel(int level){
+    public void setCrystalResourceLevel(int level) {
         this.crystalLevel = level;
     }
 
-    public void setResearchResourceLevel(int level){
+    public void setResearchResourceLevel(int level) {
         this.researchLevel = level;
     }
 }

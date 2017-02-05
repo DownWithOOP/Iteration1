@@ -13,7 +13,7 @@ public class CycleModeAction extends PlayerAction {
     public void execute() { }
 
     @Override
-    public void addToQueue(ActionModifiers actionModifier) {
+    public void applyModifier(ActionModifiers actionModifier) {
 
     }
 }

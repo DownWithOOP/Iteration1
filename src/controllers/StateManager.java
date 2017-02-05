@@ -6,21 +6,13 @@ import controllers.types.gameControllers.MainViewController;
 import controllers.types.gameControllers.StructureViewController;
 import controllers.types.gameControllers.UnitViewController;
 import controllers.types.WelcomeViewController;
-import model.actions.Action;
 import model.actions.ActionModifiers;
 import view.View;
 import view.GUI;
-import view.types.MainView;
-import view.types.WelcomeView;
 
 
-import javax.swing.*;
-import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.security.Key;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -137,7 +129,7 @@ public class StateManager implements KeyListener {
         if (controllerMap.containsKey(typeOfControllers)) {
             Controller controller = controllerMap.get(typeOfControllers);
             activeController = controller;
-            controller.resumeController();
+            controller.resume();
             // when the controllers are changed, we also want to update the GUI
             this.UpdateViewInGUI(controllerMap.get(typeOfControllers).returnViewToStateManager());
         }

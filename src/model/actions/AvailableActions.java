@@ -1,8 +1,5 @@
 package model.actions;
-import controllers.TypeOfControllers;
 import controllers.keyboardInputHandler.TypeOfActions;
-import model.actions.playerActions.CycleModeAction;
-import model.player.Player;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,10 +11,10 @@ public class AvailableActions {
     private HashMap<TypeOfActions, Action> actionMap = new HashMap<>();
 
 
-    //Todo:fix addToQueue
+    //Todo:fix applyModifier
     public void executeAction(TypeOfActions typeOfAction, ActionModifiers actionModifiers) {
         if (actionMap.containsKey(typeOfAction)) {
-            actionMap.get(typeOfAction).addToQueue(actionModifiers);
+            actionMap.get(typeOfAction).applyModifier(actionModifiers);
             actionMap.get(typeOfAction).execute();
         }
     }

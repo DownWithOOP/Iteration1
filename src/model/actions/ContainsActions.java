@@ -11,15 +11,24 @@ import java.util.HashMap;
  */
 public abstract class ContainsActions {
     protected HashMap<TypeOfActions, Action> actionsMap = new HashMap<>();
-
+    protected static AvailableActions availableActions = new AvailableActions();
     protected ContainsActions(){
     }
 
     public HashMap<TypeOfActions,Action> getActions(){
         return actionsMap;
-    };
-    protected abstract void addAvailableActions();
-    protected abstract void removeAvailableActions();
+    }
+
+    protected void addAvailableActions() {
+        availableActions.addActions(this);
+    }
+
+    protected void removeAvailableActions() {
+        availableActions.removeActions(this);
+    }
+
+    abstract public void resume();
+    abstract public void leave();
 
 
     protected void addAllActions( HashMap<TypeOfActions,Action> actionsMap){

@@ -64,6 +64,7 @@ public class Map {
         return pathFinder.findPath(startPoint, endPoint);
     }
 
+
     /**
      * Obtains a list of tiles from an XML file.
      */

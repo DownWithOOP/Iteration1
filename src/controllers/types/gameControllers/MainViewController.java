@@ -36,8 +36,6 @@ public class MainViewController extends GameController {
 
     public MainViewController(StateManager stateManager) {
         super(stateManager);
-
-        setView(gameModel.getRenderObject());
         initializeMainController();
         //a = new ChangeViewAction(this);
     }
@@ -69,9 +67,8 @@ public class MainViewController extends GameController {
 
     @Override
     protected void setView() {
-
+        setView(gameModel.getRenderObject());
     }
-
 
     protected void setView(RenderObject renderInfo) {
         // this method is called when the class is initialized, we create our view that corresponds to the controller

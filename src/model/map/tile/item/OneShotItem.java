@@ -7,8 +7,8 @@ import model.entity.unit.Unit;
  * Created by cduica on 2/4/17.
  */
 public class OneShotItem extends Item {
-	public OneShotItem(Location location) {
-		super(location, 0);
+	public OneShotItem(Location location, ItemType itemType) {
+		super(location, itemType);
 	}
 	//public ItemEffect itemEffect;
 	

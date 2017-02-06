@@ -58,7 +58,6 @@ public abstract class Structure extends Entity{
         this.fixedLocation.setyCoord(yPosition);
     }
 
-
     public StructureStats getStructureStats() {
         return structureStats;
     }

@@ -49,9 +49,9 @@ public class StatusViewport extends JPanel {
 
 
         setPreferredSize(new Dimension((int)bounds.getWidth(),(int)bounds.getHeight()));
-        setBorder(BorderFactory.createLineBorder(Color.black, 50));
+        setBorder(BorderFactory.createLineBorder(Color.black, 5));
 
-        entityPanel = new TilePanel("", (int)bounds.getWidth(), (int)bounds.getHeight());
+        entityPanel = new TilePanel("", (int)bounds.getWidth(), (int)bounds.getHeight()/15);
 
         updatePlayerLabel(initialPlayer);
         updateResourceLabels(initialPlayer.getResourceLevels());
@@ -60,6 +60,8 @@ public class StatusViewport extends JPanel {
         addPlayerLabel();
         addResourceLabels();
         addStatLabels();
+        constraints.fill = GridBagConstraints.VERTICAL;
+        add(entityPanel, constraints);
     }
 
     private void addStatLabels() {
@@ -74,7 +76,6 @@ public class StatusViewport extends JPanel {
     private void addResourceLabels() {
         if (resourceLabels.length > 0) {
             for (int labelIndex = 0; labelIndex < resourceLabels.length; ++labelIndex) {
-                System.out.println(constraints.gridy);
                 add(resourceLabels[labelIndex], constraints);
                 this.constraints.gridy++;
             }
@@ -117,7 +118,6 @@ public class StatusViewport extends JPanel {
     }
 
     public void update(Player updatedPlayer){
-        System.out.println("STATUS UPDATE");
         updatePlayerLabel(updatedPlayer);
         updateResourceLabels(updatedPlayer.getResourceLevels());
         updateSelectedEntity(updatedPlayer);
@@ -200,6 +200,5 @@ public class StatusViewport extends JPanel {
 
     public void paintComponent(Graphics g){
         super.paintComponent(g);//do I need this??? IDK
-        System.out.println("PAINTING STATUS VIEWPORT");
     }
 }

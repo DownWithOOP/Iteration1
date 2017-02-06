@@ -1,6 +1,6 @@
 import controllers.StateManager;
 
-public class Game {
+public class RunGame {
 
     public static void main(String[] args) {
         StateManager sm= new StateManager();

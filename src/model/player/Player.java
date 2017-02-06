@@ -126,6 +126,7 @@ public class Player extends ContainsActions {
         complexDataStructure.addEntity(structure);
         if (structures.size() < MAX_STRUCTURES) {
             System.out.println("ADDED STRUCTURE");
+            getPlayerMap().getTile(structure.getFixedLocation().getxCoord(),structure.getFixedLocation().getyCoord()).setEntity(structure);
             return structures.add(structure) && allEntities.add(structure);
         }
         System.out.println("Too many structures!");
@@ -165,6 +166,7 @@ public class Player extends ContainsActions {
                     return false;
             }
             System.out.println("ADDED UNIT");
+            getPlayerMap().getTile(unit.getCurrentLocation().getxCoord(),unit.getCurrentLocation().getyCoord()).setEntity(unit);
             return units.add(unit) && allEntities.add(unit);
         }
         System.out.println("Too many Units!");

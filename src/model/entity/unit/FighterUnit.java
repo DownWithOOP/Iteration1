@@ -3,6 +3,7 @@ package model.entity.unit;
 import controllers.keyboardInputHandler.TypeOfActions;
 import model.actions.Action;
 import model.actions.ActionModifiers;
+import model.actions.MoveAction;
 import model.entity.Fighter;
 import model.entity.stats.UnitStats;
 import model.common.Location;
@@ -40,15 +41,6 @@ public abstract class FighterUnit extends Unit implements Fighter{
      * Actions
      */
 
-    @Override
-    public boolean moveUnit(int x, int y) {
-//        this.setCurrentLocation(x,y);
-//        setCurrentPath(this.getPlayer().getPlayerMap().findPath(getCurrentLocation(), new Location(x,y)));
-//        for(Location location: this.getCurrentPath()) {
-//           // this.addToQueue();
-//        }
-        return true;
-    }
 
     @Override
     public void attack(ActionModifiers actionModifier){

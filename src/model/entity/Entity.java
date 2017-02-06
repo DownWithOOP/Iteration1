@@ -54,7 +54,7 @@ abstract public class Entity extends ContainsActions {
      * handles executing of commands
      * assumes this gets called once a turn
      */
-    public void update(){
+    public void executeCommand(){
         //if the currentAction turn tracker is 0, execute and pop another action from the queue, else
         //decrement currentAction
 

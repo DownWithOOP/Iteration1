@@ -16,7 +16,7 @@ public class PauseView extends View  {
         Image image = tool.getImage("res/images/PauseCat.jpg");
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
         g.setFont(new Font("TimesRoman", Font.BOLD, (int)(super.getWidth()*0.05)));
-        g.setColor(Color.WHITE);
+        g.setColor(Color.CYAN);
         g.drawString("Game Paused",(int)(super.getWidth()*0.2),(int)(super.getHeight()*0.2));
         g.setFont(new Font("TimesRoman", Font.BOLD, 100));
         g.drawString("m) Resume Game",(int)(super.getWidth()*0.2),(int)(super.getHeight()*0.5));

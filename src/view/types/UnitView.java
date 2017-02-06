@@ -30,7 +30,7 @@ public class UnitView extends View  {
         Image image = tool.getImage("res/images/Tiger3.png");
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
         g.setFont(new Font("TimesRoman", Font.BOLD, (int)(super.getWidth()*0.04)));
-        g.setColor(Color.WHITE);
+        g.setColor(Color.CYAN);
         g.drawString("-Unit View-",(int)(super.getWidth()*0.1),(int)(super.getHeight()*0.1));
         g.setFont(new Font("TimesRoman", Font.BOLD, (int)(super.getWidth()*0.01)));
         g.drawString("m) Return to MainView",(int)(super.getWidth()*0.75),(int)(super.getHeight()*0.07));

@@ -28,7 +28,7 @@ public class GameModel {
         players.put("player2", new Player("player2", map));
 
         //TODO remove this so it doesn't ruin everything for everyone
-        activePlayer = players.get("player1");
+        changeActivePlayer("player1");
     }
 
     public void update(){
@@ -47,6 +47,7 @@ public class GameModel {
     public boolean changeActivePlayer(String playerId){
         if(players.containsKey(playerId)){
             activePlayer = players.get(playerId);
+            activePlayer.resume();
             return true;
         }
         return false;

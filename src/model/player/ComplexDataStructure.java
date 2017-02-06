@@ -44,6 +44,7 @@ public class ComplexDataStructure {
         unitList = new ArrayList<>(5);
         armyList = new ArrayList<>(10);
         structureList = new ArrayList<>(1);
+        rallyPointList= new ArrayList<>(20);
         initializeLists();
         changeMode(modeHolders[0]);
     }
@@ -65,7 +66,8 @@ public class ComplexDataStructure {
 
             if (armyList.size() < typeRestriction && !armyList.contains(entity)) {
                 armyList.add(((Army) entity));
-                rallyPointList.add(((Army) entity).getRallyPoint());
+                RallyPoint tempR=((Army) entity).getRallyPoint();
+                rallyPointList.add(tempR);
                 return true;
             }
             return false;

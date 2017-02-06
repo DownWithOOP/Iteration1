@@ -43,16 +43,12 @@ public class MainViewController extends GameController {
     }
 
     protected void initializeMainController() {
-        setMainViewControllerActions();
         addAllActions(mainViewControllerActions);
-    }
-    protected void handleInput(){
-
     }
 
     @Override
     protected void updateGameModel() {
-        //gameModel.update();
+        gameModel.update();
     }
 
     @Override
@@ -84,9 +80,4 @@ public class MainViewController extends GameController {
         return this.mainView;
     }
 
-
-    protected void setMainViewControllerActions() {
-//        ChangeViewAction changeViewAction = new ChangeViewAction(this);
-//        mainViewControllerActions.put(TypeOfActions.changeView, changeViewAction);
-    }
 }

@@ -27,6 +27,8 @@ import model.player.*;
 public class StateManager implements KeyListener {
 
     private HashMap<Integer,ActionModifiers> actionModifierMap=new HashMap<>();
+    private HashMap<Integer,TypeOfControllers> controllerModifier=new HashMap<>();
+
     private int controlKey=0;
     private HashMap<TypeOfControllers, Controller> controllerMap = new HashMap<>();       //used for controller change, so that access is O(1)
     private boolean gameOn;
@@ -156,6 +158,13 @@ public class StateManager implements KeyListener {
         actionModifierMap.put(KeyEvent.VK_7,ActionModifiers.seven);
         actionModifierMap.put(KeyEvent.VK_8,ActionModifiers.eight);
         actionModifierMap.put(KeyEvent.VK_9,ActionModifiers.nine);
+
+        actionModifierMap.put(KeyEvent.VK_M,ActionModifiers.one);
+        actionModifierMap.put(KeyEvent.VK_S,ActionModifiers.two);
+        actionModifierMap.put(KeyEvent.VK_U,ActionModifiers.three);
+        actionModifierMap.put(KeyEvent.VK_P,ActionModifiers.four);
+
+
     }
 
     @Override
@@ -174,60 +183,56 @@ public class StateManager implements KeyListener {
         System.out.println("active controller is: " +activeController.toString());
 // these below are hardcoded, but it gives you an idea of how the views change
 
-        if(activeController instanceof  WelcomeViewController){
-            System.out.println("Welcome view");
-            if(e.getKeyChar() == '1'){
-                this.changeController(TypeOfControllers.MainViewController);
-            }
-            else if(e.getKeyChar() == '4'){
-                System.exit(0);
-            }
-        }
-        else if (activeController instanceof MainViewController){
-            System.out.println("Main View");
-            if(e.getKeyChar() == '1'){
-                this.changeController(TypeOfControllers.PauseViewController);
-            }
-            else if(e.getKeyChar() == '2'){
-                this.changeController(TypeOfControllers.StructureViewController);
-            }
-            else if(e.getKeyChar() == '3'){
-                this.changeController(TypeOfControllers.UnitViewController);
-            }
-            else if(e.getKeyChar() == '4'){
-                System.exit(0);
-            }
-        }
-        else if(activeController instanceof PauseViewController){
-            System.out.println("Pause View");
-            if(e.getKeyChar() == '1'){
-                this.changeController(TypeOfControllers.MainViewController);
-            }
-            else if(e.getKeyChar() == '4'){
-                System.exit(0);
-            }
-        }
-        else if(activeController instanceof UnitViewController){
-            if(e.getKeyChar() == '1'){
-                this.changeController(TypeOfControllers.MainViewController);
-            }
-        }
-        else if(activeController instanceof StructureViewController){
-            if(e.getKeyChar() == '1'){
-                this.changeController(TypeOfControllers.MainViewController);
-            }
-        }
-
-        /* Dunno what this does
+//        if(activeController instanceof  WelcomeViewController){
+//            System.out.println("Welcome view");
+//            if(e.getKeyChar() == '1'){
+//                this.changeController(TypeOfControllers.MainViewController);
+//            }
+//            else if(e.getKeyChar() == '4'){
+//                System.exit(0);
+//            }
+//        }
+//        else if (activeController instanceof MainViewController){
+//            System.out.println("Main View");
+//            if(e.getKeyChar() == '1'){
+//                this.changeController(TypeOfControllers.PauseViewController);
+//            }
+//            else if(e.getKeyChar() == '2'){
+//                this.changeController(TypeOfControllers.StructureViewController);
+//            }
+//            else if(e.getKeyChar() == '3'){
+//                this.changeController(TypeOfControllers.UnitViewController);
+//            }
+//            else if(e.getKeyChar() == '4'){
+//                System.exit(0);
+//            }
+//        }
+//        else if(activeController instanceof PauseViewController){
+//            System.out.println("Pause View");
+//            if(e.getKeyChar() == '1'){
+//                this.changeController(TypeOfControllers.MainViewController);
+//            }
+//            else if(e.getKeyChar() == '4'){
+//                System.exit(0);
+//            }
+//        }
+//        else if(activeController instanceof UnitViewController){
+//            if(e.getKeyChar() == '1'){
+//                this.changeController(TypeOfControllers.MainViewController);
+//            }
+//        }
+//        else if(activeController instanceof StructureViewController){
+//            if(e.getKeyChar() == '1'){
+//                this.changeController(TypeOfControllers.MainViewController);
+//            }
+//        }
         int keyPressed=e.getKeyCode();
-
         if (keyPressed!=KeyEvent.VK_CONTROL){
             handleInput(keyPressed);
         }
         else{
             controlKey=keyPressed;
         }
-        */
         System.out.println("control: "+ controlKey);
     }
 
@@ -254,6 +259,9 @@ public class StateManager implements KeyListener {
         }
         if ((keyPressed==KeyEvent.VK_UP || keyPressed==KeyEvent.VK_DOWN) && controlKey==KeyEvent.VK_CONTROL){
             handledInput=KeyEvent.VK_CONTROL + "" + KeyEvent.VK_DOWN + "" + KeyEvent.VK_UP;
+        }
+        if (keyPressed==KeyEvent.VK_U || keyPressed==KeyEvent.VK_P || keyPressed==KeyEvent.VK_M ||keyPressed==KeyEvent.VK_S ){
+            handledInput=KeyEvent.VK_U+""+KeyEvent.VK_P+""+KeyEvent.VK_M+""+KeyEvent.VK_S;
         }
         if (actionModifierMap.containsKey(keyPressed)){
             actionModifier=actionModifierMap.get(keyPressed);

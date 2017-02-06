@@ -29,4 +29,8 @@ public class ChangeViewAction extends ControllerAction {
         execute();
     }
 
+    @Override
+    public String toString() {
+        return "Change View";
+    }
 }

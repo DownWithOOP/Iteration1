@@ -21,4 +21,8 @@ public class CycleCommandAction extends PlayerAction {
         }
     }
 
+    @Override
+    public String toString() {
+        return "Cycle Command";
+    }
 }

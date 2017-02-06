@@ -19,4 +19,9 @@ public class ActivateCommandAction extends PlayerAction {
             player.setSelectedAction(null);
         }
     }
+
+    @Override
+    public String toString() {
+        return "Activate Command";
+    }
 }

@@ -28,6 +28,12 @@ public class MoveRallyPointAction implements Action {
         this.actionModifier=actionModifier;
         moveRallyPoint();
     }
+
+    @Override
+    public String toString() {
+        return "Move Rally Point";
+    }
+
     private void moveRallyPoint(){
         rallyPoint.moveRallyPoint(actionModifier);
     }

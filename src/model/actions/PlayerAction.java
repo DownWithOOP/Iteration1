@@ -9,6 +9,7 @@ public abstract class PlayerAction implements Action {
     public PlayerAction(Player player) {
         this.player = player;
     }
+
     @Override
     public void applyModifier(ActionModifiers actionModifier) {
         this.actionModifier=actionModifier;

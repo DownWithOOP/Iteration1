@@ -41,7 +41,12 @@ public class CycleThroughActions implements Action {
         execute();
     }
 
-//    public static void main(String[] args) {
+    @Override
+    public String toString() {
+        return "Cycle Through Actions";
+    }
+
+    //    public static void main(String[] args) {
 //        //Added new playermap argument - Cristian
 //        Player player= new Player("hello", new Map());
 //        Location location= new Location(1,2);

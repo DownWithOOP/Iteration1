@@ -14,5 +14,8 @@ public class CycleTypeAction extends PlayerAction {
         player.cycleTypes(actionModifier);
     }
 
-
+    @Override
+    public String toString() {
+        return "Cycle Type";
+    }
 }

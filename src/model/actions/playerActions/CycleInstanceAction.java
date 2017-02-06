@@ -14,5 +14,8 @@ public class CycleInstanceAction extends PlayerAction {
         player.cycleInstance(actionModifier);
     }
 
-
+    @Override
+    public String toString() {
+        return "Cycle Instance";
+    }
 }

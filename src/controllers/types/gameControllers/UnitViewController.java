@@ -1,5 +1,6 @@
 package controllers.types.gameControllers;
 
+import model.common.RenderObject;
 import view.types.UnitView;
 import controllers.Controller;
 import controllers.StateManager;
@@ -31,7 +32,11 @@ public class UnitViewController extends GameController {
 
     @Override
     protected void setView() {
-        this.unitView = new UnitView();
+        this.setView(gameModel.getRenderObject());
+    }
+    protected void setView(RenderObject renderInfo) {
+        // this method is called when the class is initialized, we create our view that corresponds to the controller
+        this.unitView = new UnitView(renderInfo);
     }
 
     @Override

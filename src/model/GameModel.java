@@ -1,6 +1,7 @@
 package model;
 
 import model.actions.Action;
+import model.actions.AvailableActions;
 import model.common.RenderObject;
 import model.entity.Entity;
 import model.map.Map;
@@ -25,13 +26,13 @@ public class GameModel {
         map = new Map();
         players.put("player1", new Player("player1", map));
         players.put("player2", new Player("player2", map));
+
+        //TODO remove this so it doesn't ruin everything for everyone
+        activePlayer = players.get("player1");
     }
 
     public void update(){
-        ArrayList<Entity> activeEntities = activePlayer.getAllEntities();
-        for(int i = 0; i < activeEntities.size(); i++){
-            activeEntities.get(i).update();
-        }
+        //renderInfo.update(activePlayer, activePlayer.getPlayerMap());
     }
 
     public boolean passAction(String action){
@@ -59,10 +60,6 @@ public class GameModel {
     public boolean fillActionMap(HashMap<Integer, Action> actionMap){
         this.actionMap = actionMap;
         return true;
-    }
-
-    public Player getActivePlayer(){
-        return activePlayer;
     }
 
     /**

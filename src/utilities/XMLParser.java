@@ -36,15 +36,20 @@ public class XMLParser {
             if(node.getNodeType() == Node.ELEMENT_NODE){
                 Element element = (Element) node;
                 HashMap<String, String> temp = new HashMap<>();
-                temp.put("Terrain", element.getAttribute("Terrain"));
-                temp.put("Resource", element.getAttribute("Resource"));
-                temp.put("Decal", element.getAttribute("Decal"));
-                temp.put("Item", element.getAttribute("Item"));
-                temp.put("AreaEffect", element.getAttribute("AreaEffect"));
+                temp.put("Terrain", element.getElementsByTagName("Terrain").item(0).getTextContent());
+                temp.put("Resource", element.getElementsByTagName("Resource").item(0).getTextContent());
+                temp.put("Decal", element.getElementsByTagName("Decal").item(0).getTextContent());
+                temp.put("Item", element.getElementsByTagName("Item").item(0).getTextContent());
+                temp.put("AreaEffect", element.getElementsByTagName("AreaEffect").item(0).getTextContent());
                 tileList.add(temp);
             }
         }
         return tileList;
+    }
+
+    public String getMapAttribute(String attrName){
+        Node node = doc.getElementsByTagName("Map").item(0);
+        return  ((Element) node).getAttribute(attrName);
     }
 
 

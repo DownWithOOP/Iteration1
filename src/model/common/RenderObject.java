@@ -24,4 +24,5 @@ public class RenderObject {
     public Player getPlayer() {
         return player;
     }
+
 }

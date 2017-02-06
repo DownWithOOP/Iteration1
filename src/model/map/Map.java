@@ -16,8 +16,8 @@ import java.util.HashMap;
  */
 public class Map {
 
-    private final int GRID_HEIGHT = 3;
-    private final int GRID_WIDTH = 3;
+    private final int gridHeight;
+    private final int gridWidth;
 
     private final String MAP_XML_PATH = "res/map/Map.xml";
 
@@ -25,7 +25,10 @@ public class Map {
     private boolean[][] obstacleGrid;
 
     public Map(){
-        this.tileArray = new Tile[GRID_HEIGHT][GRID_WIDTH];
+        gridHeight = Integer.parseInt(getMapProperties("height"));
+        gridWidth = Integer.parseInt(getMapProperties("width"));
+        tileArray = new Tile[gridHeight][gridWidth];
+        obstacleGrid = new boolean[gridHeight][gridWidth];
         ArrayList<Tile> tiles = retrieveTileList();
         createTileGrid(tiles);
     }
@@ -41,14 +44,38 @@ public class Map {
     }
 
     /**
+     * TODO
+     * @return
+     */
+    public int getWidth(){ return gridWidth; }
+
+    /**
+     * TODO
+     * @return
+     */
+    public int getHeight(){ return gridHeight; }
+
+    /**
      * Utilizes path finding algorithm to tell a unit how to get to a particular area.
-     * @param startPoint
-     * @param endPoint
+     * @param startX
+     * @param startY
+     * @param endX
+     * @param endY
      * @return List of movements.
      */
-    public ArrayList<Location> findPath(Location startPoint, Location endPoint){
+    public ArrayList<Location> findPath(int startX, int startY, int endX, int endY){
         PathFinder pathFinder = new PathFinder(obstacleGrid);
-        return pathFinder.findPath(startPoint, endPoint);
+        return pathFinder.findPath(startX, startY, endX, endY);
+    }
+
+    private String getMapProperties(String propertyName){
+        XMLParser xmlParser = new XMLParser();
+        try {
+            xmlParser.loadDocument(MAP_XML_PATH);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return xmlParser.getMapAttribute(propertyName);
     }
 
     /**
@@ -104,8 +131,8 @@ public class Map {
      */
     private void createTileGrid(ArrayList<Tile> tiles){
         int k = 0;
-        for(int i = 0; i < GRID_HEIGHT; i++){
-            for(int j = 0; j < GRID_WIDTH; j++){
+        for(int i = 0; i < gridHeight; i++){
+            for(int j = 0; j < gridWidth; j++){
                 Tile tile = tiles.get(k);
                 tileArray[i][j] = tile;
                 if(tile.getItem() instanceof ObstacleItem || tile.getTerrain().getTerrainType() == TerrainType.WATER){

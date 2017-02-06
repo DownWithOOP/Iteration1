@@ -1,14 +1,20 @@
 package view.types;
 
+import model.common.RenderObject;
+import model.entity.structure.Structure;
 import view.View;
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class StructureView extends View  {
 
+    private RenderObject renderInfo;
+    private ArrayList<Structure> structures;
 
-    public void WelcomeView(){
-
+    public StructureView(RenderObject initialRenderInfo){
+        this.renderInfo = initialRenderInfo;
+        this.structures = this.renderInfo.getPlayer().getStructures(); // we get a list of all of the structures for the current player
     }
     public void setFrame(){
 
@@ -37,6 +43,7 @@ public class StructureView extends View  {
         g.drawString("Structure#",(int)(super.getWidth()*0.3),(int)(super.getHeight()*0.2));
         g.drawString("Stats",(int)(super.getWidth()*0.45),(int)(super.getHeight()*0.2));
         g.drawString("Missions",(int)(super.getWidth()*0.7),(int)(super.getHeight()*0.2));
+        g.drawString(this.structures.toString(), 100,100);
 
         // max 10 structures to display
         for(int i=1; i<11; i++){

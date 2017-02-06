@@ -9,6 +9,7 @@ import model.common.Location;
 import model.player.Player;
 import model.entity.EntityID;
 import model.entity.unit.EntityType;
+import model.entity.stats.Stats;
 
 import java.util.HashMap;
 import java.util.Queue;
@@ -18,6 +19,7 @@ import java.util.UUID;
 abstract public class Entity extends ContainsActions {
 
     protected Player player;
+    private boolean isPoweredDown;
     protected String playerId;
     private EntityID entityID;                                                                      // Unique ID for each created Entity
     private Queue<EntityAction> commandQueue;                                                          // Queue of user selected commands for each entity to perform in a # of turns
@@ -36,6 +38,8 @@ abstract public class Entity extends ContainsActions {
         playerId=getPlayerId();
         this.entityType = entityType;
         this.currentActionTurnTracker = 0;
+        isPoweredDown = false;
+
     }
 
 
@@ -109,18 +113,31 @@ abstract public class Entity extends ContainsActions {
 
     abstract public boolean decommission();
 
-    public boolean powerUp() {
-        return true;
+    public boolean powerUp(Stats entityStats) {
+        if (isPoweredDown == true) {
+            entityStats.setUpkeep(entityStats.getDefaultUpkeep());
+            isPoweredDown = false;
+            return true;
+        }
+        return false;
     }
 
-    public boolean powerDown() {
-        return true;
+    public boolean powerDown(Stats entityStats) {
+        if (isPoweredDown == false) {
+            int upkeep = entityStats.getUpkeep();
+            int loweredUpkeep = Math.round((int)(upkeep * .25));
+            entityStats.setUpkeep(loweredUpkeep);
+            isPoweredDown = true;
+            return true;
+        }
+        return false;
     }
 
     //do we need this method?
     public void changeStat(int stat, int statOffset) {
 
     }
+
 
     public EntityID getEntityID() {
         return entityID;
@@ -130,8 +147,11 @@ abstract public class Entity extends ContainsActions {
         return player.getPlayerId();
     }
 
-    public EntityType getEntityType(){
+    public EntityType getEntityType() {
         return entityType;
+    }
+    public Player getPlayer() {
+        return player;
     }
 
     @Override
@@ -144,5 +164,11 @@ abstract public class Entity extends ContainsActions {
         removeAvailableActions();
     }
 
+    public boolean isPoweredDown() {
+        return isPoweredDown;
+    }
 
+    public void setIsPoweredDown(boolean poweredDown) {
+        isPoweredDown = poweredDown;
+    }
 }

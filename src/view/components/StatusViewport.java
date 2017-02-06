@@ -17,9 +17,17 @@ import java.util.Map;
 
 public class StatusViewport extends JPanel {
 
+    private static final String armyImagePath = "res/images/army.png";
+    private static final String baseImagePath = "res/images/base.png";
+    private static final String colonistImagePath = "res/images/colonist.png";
+    private static final String explorerImagePath = "res/images/explorer.png";
+    private static final String meleeImagePath = "res/images/melee.png";
+    private static final String rangedImagePath = "res/images/ranged.png";
+
     private JLabel[] statsLabels;
     private JLabel[] resourceLabels;
     private JLabel playerLabel;
+    private TilePanel entityPanel;
 
     private Entity selectedEntity;
     private EntityType selectedEntityType;
@@ -43,6 +51,7 @@ public class StatusViewport extends JPanel {
         setPreferredSize(new Dimension((int)bounds.getWidth(),(int)bounds.getHeight()));
         setBorder(BorderFactory.createLineBorder(Color.black, 50));
 
+        entityPanel = new TilePanel("", (int)bounds.getWidth(), (int)bounds.getHeight());
 
         updatePlayerLabel(initialPlayer);
         updateResourceLabels(initialPlayer.getResourceLevels());
@@ -112,7 +121,43 @@ public class StatusViewport extends JPanel {
         updatePlayerLabel(updatedPlayer);
         updateResourceLabels(updatedPlayer.getResourceLevels());
         updateSelectedEntity(updatedPlayer);
+        updateEntityPanel();
         updateStatLabels(selectedEntityStats.getStatsMap());
+    }
+
+    private void updateEntityPanel() {
+        switch (selectedEntityType) {
+            case ARMY:
+                entityPanel.addEntityImage(armyImagePath);
+                break;
+            case UNIT:
+                entityPanel.addEntityImage(meleeImagePath);
+                break;
+            case STRUCTURE:
+                entityPanel.addEntityImage(baseImagePath);
+                break;
+            case MELEE:
+                entityPanel.addEntityImage(meleeImagePath);
+                break;
+            case RANGED:
+                entityPanel.addEntityImage(rangedImagePath);
+                break;
+            case EXPLORER:
+                entityPanel.addEntityImage(explorerImagePath);
+                break;
+            case COLONIST:
+                entityPanel.addEntityImage(colonistImagePath);
+                break;
+            case BASE:
+                entityPanel.addEntityImage(baseImagePath);
+                break;
+            case RALLYPOINT: //TODO ????
+                entityPanel.addEntityImage(null);
+                break;
+            default: //TODO ??
+                entityPanel.addEntityImage(null);
+                break;
+        }
     }
 
     private void updateSelectedEntity(Player updatedPlayer) {

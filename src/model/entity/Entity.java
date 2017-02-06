@@ -98,8 +98,8 @@ abstract public class Entity extends ContainsActions {
 
     abstract public Location getLocation();
 
-    public boolean addToQueue(Action action) {
-        return commandQueue.add((EntityAction) action);
+    public boolean addToQueue(EntityAction action) {
+        return commandQueue.add(action);
     }
 
     /**
@@ -139,6 +139,19 @@ abstract public class Entity extends ContainsActions {
 
     }
 
+    @Override
+    public void resume(){
+        addAvailableActions();
+    }
+
+    @Override
+    public void leave(){
+        removeAvailableActions();
+    }
+
+    /**
+     * Getters and setters
+     */
 
     public EntityID getEntityID() {
         return entityID;
@@ -151,18 +164,9 @@ abstract public class Entity extends ContainsActions {
     public EntityType getEntityType() {
         return entityType;
     }
+
     public Player getPlayer() {
         return player;
-    }
-
-    @Override
-    public void resume(){
-        addAvailableActions();
-    }
-
-    @Override
-    public void leave(){
-        removeAvailableActions();
     }
 
     public boolean isPoweredDown() {
@@ -171,6 +175,10 @@ abstract public class Entity extends ContainsActions {
 
     public void setIsPoweredDown(boolean poweredDown) {
         isPoweredDown = poweredDown;
+    }
+
+    public EntityAction getCurrentAction(){
+        return currentAction;
     }
 
 }

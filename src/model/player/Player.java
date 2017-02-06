@@ -13,6 +13,7 @@ import model.common.Location;
 import model.entity.Entity;
 import model.entity.army.Army;
 import model.entity.army.RallyPoint;
+import model.entity.stats.StructureStats;
 import model.entity.structure.Base;
 import model.entity.structure.Structure;
 import model.entity.unit.*;
@@ -75,7 +76,9 @@ public class Player extends ContainsActions {
         //TODO:CHECKOUT THESE COORDINATES
         addUnit(new Explorer(this, new Location(1, 1)));
         addUnit(new Explorer(this, new Location(0, 0)));
-        addUnit(new Colonist(this, new Location(0, 0)));
+        addStructure(new Base(new StructureStats(10, 7, 15, 100, 5, 3, 8),
+                new Location(2, 1),
+                this)); //TODO: Temporary structure -- delete later!
         this.playerId = playerId;
         initializePlayer();                                         /** do not delete this */
         selectedEntity = units.get(0); //TODO delet this

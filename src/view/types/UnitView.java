@@ -1,14 +1,19 @@
 package view.types;
 
+import model.common.RenderObject;
+import model.entity.unit.Unit;
 import view.View;
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class UnitView extends View  {
 
-
-    public void WelcomeView(){
-
+    private RenderObject renderInfo;
+    private ArrayList<Unit> units;
+    public UnitView(RenderObject initialRenderInfo){
+        this.renderInfo = initialRenderInfo;
+        this.units = this.renderInfo.getPlayer().getUnits();
     }
     public void setFrame(){
 
@@ -37,7 +42,7 @@ public class UnitView extends View  {
         g.drawString("Colonist Units ----",(int)(super.getWidth()*0.2),(int)(super.getHeight()*0.4));
         g.drawString("Melee Units -------",(int)(super.getWidth()*0.2),(int)(super.getHeight()*0.6));
         g.drawString("Ranged Units ------",(int)(super.getWidth()*0.2),(int)(super.getHeight()*0.8));
-
+        g.drawString(units.toString(), 100,100);
 
 
     }

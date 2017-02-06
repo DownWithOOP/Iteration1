@@ -1,5 +1,6 @@
 package controllers.types.gameControllers;
 
+import model.common.RenderObject;
 import view.types.StructureView;
 import controllers.Controller;
 import controllers.StateManager;
@@ -22,10 +23,14 @@ public class StructureViewController extends GameController {
     public void update() {
 
     }
-
     @Override
     protected void setView() {
-        this.structureView = new StructureView();
+        this.setView(gameModel.getRenderObject());
+    }
+
+    protected void setView(RenderObject renderInfo) {
+        // this method is called when the class is initialized, we create our view that corresponds to the controller
+        this.structureView = new StructureView(renderInfo);
     }
 
     @Override

@@ -33,12 +33,10 @@ public class MainViewController extends GameController {
 
     private MainView mainView;
 
-    private GameModel gameModel;
 
     public MainViewController(StateManager stateManager) {
         super(stateManager);
 
-        startGameModel();
         setView(gameModel.getRenderObject());
         initializeMainController();
         //a = new ChangeViewAction(this);
@@ -50,10 +48,6 @@ public class MainViewController extends GameController {
     }
     protected void handleInput(){
 
-    }
-
-    private void startGameModel() {
-        gameModel = new GameModel();
     }
 
     @Override
@@ -82,7 +76,6 @@ public class MainViewController extends GameController {
     protected void setView(RenderObject renderInfo) {
         // this method is called when the class is initialized, we create our view that corresponds to the controller
         this.mainView = new MainView(new GridBagLayout(), renderInfo);
-
     }
 
     protected void updateView(RenderObject renderInfo) {

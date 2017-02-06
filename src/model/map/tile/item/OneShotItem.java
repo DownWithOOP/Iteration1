@@ -1,5 +1,8 @@
 package model.map.tile.item;
 
+import model.common.Location;
+import model.entity.unit.Unit;
+
 /**
  * Created by cduica on 2/4/17.
  */

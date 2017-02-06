@@ -65,13 +65,13 @@ public class Player extends ContainsActions {
     private int researchLevel;
 
     /*TODO:Set player id*/
-    public Player(String playerId) {
+    public Player(String playerId, Map playerMap) {
         allEntities = new EntityList<Entity>();
         units = new ArrayList<Unit>();
         structures = new ArrayList<Structure>();
         armies = new ArrayList<Army>();
         actionMap = new HashMap<Integer, Action>();
-
+        this.playerMap = playerMap;
         //Each player starts the game with 2 Explorers and 1 Colonist
         //TODO:CHECKOUT THESE COORDINATES
         units.add(new Explorer(this, new Location(1, 1)));
@@ -236,7 +236,8 @@ public class Player extends ContainsActions {
 
     }
 
-
-
+    public void setPlayerMap(Map playerMap){
+        this.playerMap = playerMap;
+    }
 
 }

@@ -22,9 +22,11 @@ public class GameModel {
         actionMap = new HashMap<>();
         players = new HashMap<>();
         map = new Map();
+        players.put("player1", new Player("player1", map));
+        players.put("player2", new Player("player2", map));
 
         //TODO remove this so it doesn't ruin everything for everyone
-        activePlayer = new Player("Dora");
+        activePlayer = players.get("player1");
     }
 
     public void update(){

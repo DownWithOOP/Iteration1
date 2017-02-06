@@ -14,13 +14,13 @@ import model.entity.unit.EntityType;
 import model.entity.unit.Explorer;
 import model.entity.unit.FighterUnit;
 import model.entity.unit.Ranged;
+import model.map.Map;
 import model.player.Player;
 
 import javax.swing.plaf.basic.BasicScrollPaneUI;
 import java.lang.reflect.Modifier;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+
 import model.entity.EntityID;
 
 /**
@@ -259,8 +259,12 @@ public class Army extends Entity implements Fighter {
 
 
     public static void main(String[] args) {
-        Player play= new Player("helloWorld");
-        Player playEnemy= new Player("helloWorld1");
+
+        /**
+         * I assume there are just for testing? player takes a boolean playermap now - Cristian
+         */
+        Player play= new Player("helloWorld", new Map());
+        Player playEnemy= new Player("helloWorld1", new Map());
 
         Explorer explorer= new Explorer(play,new Location(1,2));
         Ranged ranged= new Ranged(play,new Location(1,2));
@@ -278,6 +282,38 @@ public class Army extends Entity implements Fighter {
         ranged1.setCurrentLocation(1,2);
 
     }
+
+     public List<Entity> getWholeArmy(){
+         List<Entity>reinforcements= getReinforcements();
+         List<Entity>battleGroup= getBattleGroup();
+         battleGroup.addAll(reinforcements);
+         return battleGroup;
+     }
+
+     public List<Entity> getList(HashMap<EntityID,FighterUnit>map){
+        List<Entity> temp= new ArrayList<>();
+         for (Entity entity:
+              map.values()) {
+             temp.add(entity);
+         }
+       return temp;
+     }
+
+    public List<Entity> getReinforcements(){
+         return getList(reinforcements);
+    }
+    public List<Entity> getBattleGroup(){
+        return getList(battleGroup);
+    }
+    public List<List<Entity>> getCircleTypeList(){
+        List<List<Entity>> circleTypeList= new ArrayList<>();
+        circleTypeList.add(0,getWholeArmy());                                                  //Whole=0, Battle=1, Reinf=2
+        circleTypeList.add(1,getBattleGroup());
+        circleTypeList.add(2,getReinforcements());
+
+        return  circleTypeList;
+    }
+
 
 
 }

@@ -8,6 +8,7 @@ public enum TypeOfControllers {
     StructureViewController,
     UnitViewController,
     WelcomeViewController,
-    PauseViewController
+    PauseViewController,
+    None
 
 }

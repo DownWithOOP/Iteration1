@@ -15,7 +15,6 @@ public class AvailableActions {
     public void executeAction(TypeOfActions typeOfAction, ActionModifiers actionModifiers) {
         if (actionMap.containsKey(typeOfAction)) {
             actionMap.get(typeOfAction).applyModifier(actionModifiers);
-            actionMap.get(typeOfAction).execute();
         }
     }
 

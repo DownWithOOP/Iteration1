@@ -47,6 +47,7 @@ public class TilePanel extends JPanel {
             tileImage = readAndResizeImage(filePath, tileWidth, tileHeight);
         }
         catch (IOException e){
+            tileImage = new BufferedImage(tileWidth, tileHeight, BufferedImage.TYPE_INT_ARGB);
             System.out.println(e.getMessage());
         }
     }
@@ -69,15 +70,17 @@ public class TilePanel extends JPanel {
 
         System.out.println(tileWidth + "," + tileHeight);
         g.drawImage(tileImage, 0, 0, tileWidth, tileHeight, null);
-        g.drawImage(tileImage, 0, 0, entityWidth, entityHeight, null);
+        g.drawImage(entityImage, 0, 0, entityWidth, entityHeight, null);
     }
 
     public void addEntityImage(String filePath) {
+        entityImage = null;
         //Get image
         try {
             entityImage = readAndResizeImage(filePath, entityWidth, entityHeight);
         }
         catch (IOException e){
+            entityImage = new BufferedImage(tileWidth, tileHeight, BufferedImage.TYPE_INT_ARGB);
             System.out.println(e.getMessage());
         }
     }

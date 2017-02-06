@@ -1,6 +1,7 @@
 package view.components;
 
 import model.common.Location;
+import model.entity.army.Army;
 import model.map.Map;
 import model.map.tile.Tile;
 
@@ -25,6 +26,7 @@ public class AreaViewport extends JPanel {
     private static final String explorerImagePath = "res/images/explorer.png";
     private static final String meleeImagePath = "res/images/melee.png";
     private static final String rangedImagePath = "res/images/ranged.png";
+    private static final String rallyPointImagePath = "res/images/rally_point.png";
 
     private static final String waterImagePath = "res/images/water.png";
     private static final String craterImagePath = "res/images/crater.png";
@@ -104,6 +106,9 @@ public class AreaViewport extends JPanel {
                     switch (currentTile.getEntity().getEntityID().getEntityType(0)){
                         case ARMY:
                             tiles[row][col].addEntityImage(armyImagePath);
+                            tiles[((Army)currentTile.getEntity()).getRallyPoint().getLocation().getxCoord()]
+                                    [((Army)currentTile.getEntity()).getRallyPoint().getLocation().getyCoord()]
+                                    .addEntityImage(rallyPointImagePath);
                             break;
                         case BASE:
                             tiles[row][col].addEntityImage(baseImagePath);

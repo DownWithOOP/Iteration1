@@ -32,7 +32,7 @@ public class Colonist extends FighterUnit {
          * */
     }
 
-    public boolean buildStructure(int rowPosition, int columnPosition) {
+    public boolean buildStructure() {
         int fixedX = this.getLocation().getxCoord();
         int fixedY = this.getLocation().getyCoord();
         Base base = new Base(new StructureStats(10, 7, 15, 100, 5, 3, 8),
@@ -50,7 +50,7 @@ public class Colonist extends FighterUnit {
         for (int i = 0; i < 12; i++) {
             Colonist colonist = new Colonist(player, new Location(0,0));
             player.addUnit(colonist);
-            colonist.buildStructure(0,0);
+            colonist.buildStructure();
         }
     }
 

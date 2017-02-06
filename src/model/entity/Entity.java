@@ -4,6 +4,7 @@ import controllers.keyboardInputHandler.TypeOfActions;
 import model.actions.Action;
 import model.actions.ActionModifiers;
 import model.actions.ContainsActions;
+import model.actions.playerActions.EntityAction;
 import model.common.Location;
 import model.player.Player;
 import model.entity.EntityID;
@@ -16,21 +17,20 @@ import java.util.UUID;
 
 abstract public class Entity extends ContainsActions {
 
-
     protected Player player;
     protected String playerId;
     private EntityID entityID;                                                                      // Unique ID for each created Entity
-    private Queue<Action> commandQueue;                                                          // Queue of user selected commands for each entity to perform in a # of turns
+    private Queue<EntityAction> commandQueue;                                                          // Queue of user selected commands for each entity to perform in a # of turns
     protected final HashMap<TypeOfActions, Action> entityActions = new HashMap<>();                //add all the Actions of an entity here
     private EntityType entityType;
 
-    private Action currentAction;
+    private EntityAction currentAction;
     private int currentActionTurnTracker;
 
 //TODO: we need player to get the PlayerResources of the player and see if we can perform an action
     public Entity(Player player, EntityType entityType) {
         entityID = new EntityID(entityType);
-        commandQueue = new LinkedList<Action>();
+        commandQueue = new LinkedList<>();
         initializeEntity();
         this.player = player;
         playerId=getPlayerId();
@@ -51,7 +51,8 @@ abstract public class Entity extends ContainsActions {
     }
 
     /**
-     * handles executing of commands lol
+     * handles executing of commands
+     * assumes this gets called once a turn
      */
     public void update(){
         //if the currentAction turn tracker is 0, execute and pop another action from the queue, else
@@ -93,7 +94,7 @@ abstract public class Entity extends ContainsActions {
     abstract public Location getLocation();
 
     public boolean addToQueue(Action action) {
-        return commandQueue.add(action);
+        return commandQueue.add((EntityAction) action);
     }
 
     /**

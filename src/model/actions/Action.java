@@ -6,6 +6,4 @@ package model.actions;
 public interface Action {
      void execute();
      void applyModifier(ActionModifiers actionModifier);
-     double getTurns();
-     void setTurns(double turns);
 }

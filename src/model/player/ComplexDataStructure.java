@@ -25,7 +25,7 @@ public class ComplexDataStructure {
     List<Army> armyList;          //Whole=0, Battle=1, Reinf=2
     List<List<Entity>> structureList;         //base=0
     List<List<Entity>> currentMode;
-    List<RallyPoint> rallyPointList;
+    List<RallyPoint> rallyPointList = new ArrayList<>();
     RallyPoint selectedRallyPoint=null;
     EntityType modeHolders[]={EntityType.UNIT,EntityType.STRUCTURE,EntityType.ARMY,EntityType.RALLYPOINT};
 

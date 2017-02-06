@@ -61,7 +61,6 @@ public class Army extends Entity implements Fighter {
 
     }
 
-
     /**
      * Actions
      */

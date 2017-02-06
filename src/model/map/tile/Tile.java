@@ -27,7 +27,7 @@ public class Tile {
         this.areaEffect = areaEffect;
         this.resource = resource;
         this.item = item;
-        this.isPassable = terrain.isPassable();
+        Tile.isPassable = terrain.isPassable();
         this.isVisible = false;
     }
 

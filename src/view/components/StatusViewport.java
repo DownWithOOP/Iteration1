@@ -3,6 +3,7 @@ package view.components;
 import model.entity.Entity;
 import model.entity.army.Army;
 import model.entity.stats.Stats;
+import model.entity.stats.StatsType;
 import model.entity.structure.Structure;
 import model.entity.unit.EntityType;
 import model.entity.unit.Unit;
@@ -24,79 +25,132 @@ public class StatusViewport extends JPanel {
     private EntityType selectedEntityType;
     private Stats selectedEntityStats;
 
+    private GridBagConstraints constraints;
+
     public StatusViewport(GridBagLayout layout, Rectangle bounds, Player initialPlayer){
         super(layout);
+        constraints = new GridBagConstraints();
+        constraints.gridx = 0;
+        constraints.gridy = 1;
         setOpaque(false);
 
+        updateSelectedEntity(initialPlayer);
+
+        //Get inital data
         playerLabel = new JLabel(initialPlayer.getPlayerId());
 
-        resourceLabels = new JLabel[initialPlayer.getResourceLevels().size()];
 
-        selectedEntity = initialPlayer.getSelectedEntity();
+        setPreferredSize(new Dimension((int)bounds.getWidth(),(int)bounds.getHeight()));
+        setBorder(BorderFactory.createLineBorder(Color.black, 50));
+
+
+        updatePlayerLabel(initialPlayer);
+        updateResourceLabels(initialPlayer.getResourceLevels());
+        updateStatLabels(selectedEntityStats.getStatsMap());
+
+        addPlayerLabel();
+        addResourceLabels();
+        addStatLabels();
+    }
+
+    private void addStatLabels() {
+        if (statsLabels.length > 0) {
+            for (int labelIndex = 0; labelIndex < statsLabels.length; ++labelIndex) {
+                add(statsLabels[labelIndex], constraints);
+                this.constraints.gridy++;
+            }
+        }
+    }
+
+    private void addResourceLabels() {
+        if (resourceLabels.length > 0) {
+            for (int labelIndex = 0; labelIndex < resourceLabels.length; ++labelIndex) {
+                System.out.println(constraints.gridy);
+                add(resourceLabels[labelIndex], constraints);
+                this.constraints.gridy++;
+            }
+        }
+    }
+
+    private void addPlayerLabel() {
+        add(playerLabel, constraints);
+        this.constraints.gridy++;
+    }
+
+    private void updatePlayerLabel(Player updatedPlayer) {
+        playerLabel.setText("Current Player: " + updatedPlayer.getPlayerId());
+        playerLabel.setForeground(Color.CYAN);
+    }
+
+    private void updateResourceLabels(Map<ResourceType, Integer> resourceLevels) {
+        resourceLabels = new JLabel[resourceLevels.size()];
+        Iterator resourceLevelsItr = resourceLevels.entrySet().iterator();
+        int labelIndex = 0;
+        while (resourceLevelsItr.hasNext()){
+            Map.Entry pair  = (Map.Entry)resourceLevelsItr.next();
+            resourceLabels[labelIndex] = new JLabel(pair.getKey().toString() + ": " + pair.getValue().toString());
+            resourceLabels[labelIndex].setForeground(Color.CYAN);
+            ++labelIndex;
+        }
+    }
+
+    private void updateStatLabels(Map<StatsType, Integer> stats) {
+        statsLabels = new JLabel[stats.size()];
+        Iterator statsItr = stats.entrySet().iterator();
+        int labelIndex = 0;
+        while (statsItr.hasNext()){
+            Map.Entry pair  = (Map.Entry)statsItr.next();
+            statsLabels[labelIndex] = new JLabel(pair.getKey().toString() + ": " + pair.getValue().toString());
+            statsLabels[labelIndex].setForeground(Color.CYAN);
+            playerLabel.setForeground(Color.CYAN);
+            ++labelIndex;
+        }
+    }
+
+    public void update(Player updatedPlayer){
+        System.out.println("STATUS UPDATE");
+        updatePlayerLabel(updatedPlayer);
+        updateResourceLabels(updatedPlayer.getResourceLevels());
+        updateSelectedEntity(updatedPlayer);
+        updateStatLabels(selectedEntityStats.getStatsMap());
+    }
+
+    private void updateSelectedEntity(Player updatedPlayer) {
+        selectedEntity = updatedPlayer.getSelectedEntity();
         selectedEntityType = selectedEntity.getEntityID().getEntityType(0);
 
         switch (selectedEntityType){
             case ARMY:
                 selectedEntityStats = ((Army) selectedEntity).getArmyStats();
-                statsLabels = new JLabel[selectedEntityStats.getSize()];
                 break;
             case UNIT:
-                statsLabels = new JLabel[((Unit) selectedEntity).getUnitStats().getSize()];
+                selectedEntityStats = ((Unit) selectedEntity).getUnitStats();
                 break;
             case STRUCTURE:
-                statsLabels = new JLabel[((Structure) selectedEntity).getStructureStats().getSize()];
+                selectedEntityStats = ((Structure) selectedEntity).getStructureStats();
                 break;
             case MELEE:
-                statsLabels = new JLabel[((Unit) selectedEntity).getUnitStats().getSize()];
+                selectedEntityStats = ((Unit) selectedEntity).getUnitStats();
                 break;
             case RANGED:
-                statsLabels = new JLabel[((Unit) selectedEntity).getUnitStats().getSize()];
+                selectedEntityStats = ((Unit) selectedEntity).getUnitStats();
                 break;
             case EXPLORER:
-                statsLabels = new JLabel[((Unit) selectedEntity).getUnitStats().getSize()];
+                selectedEntityStats = ((Unit) selectedEntity).getUnitStats();
                 break;
             case COLONIST:
-                statsLabels = new JLabel[((Unit) selectedEntity).getUnitStats().getSize()];
+                selectedEntityStats = ((Unit) selectedEntity).getUnitStats();
                 break;
             case BASE:
-                statsLabels = new JLabel[((Structure) selectedEntity).getStructureStats().getSize()];
+                selectedEntityStats = ((Structure) selectedEntity).getStructureStats();
                 break;
-            case RALLYPOINT:
-                statsLabels = new JLabel[1];
+            case RALLYPOINT: //TODO ????
+                selectedEntityStats = ((Structure) selectedEntity).getStructureStats();
                 break;
             default: //TODO ??
-                statsLabels = new JLabel[1];
+                selectedEntityStats = ((Structure) selectedEntity).getStructureStats();
                 break;
         }
-
-        setPreferredSize(new Dimension((int)bounds.getWidth(),(int)bounds.getHeight()));
-        setBorder(BorderFactory.createLineBorder(Color.black, 50));
-
-        updatePlayerLabel(initialPlayer);
-        updateResourceLabels(initialPlayer.getResourceLevels());
-        updateStatLabels(selectedEntityStats);
-
-    }
-
-    private void updatePlayerLabel(Player updatedPlayer) {
-        playerLabel.setText(updatedPlayer.getPlayerId());
-    }
-
-    private void updateResourceLabels(Map<ResourceType, Integer> resourceLevels) {
-        if (resourceLevels.size() > resourceLabels.length){
-            resourceLabels = new JLabel[resourceLevels.size()];
-        }
-        Iterator resourceLevelsItr = resourceLevels.entrySet().iterator();
-        int labelIndex = 0;
-        while (resourceLevelsItr.hasNext()){
-            Map.Entry pair  = (Map.Entry)resourceLevelsItr.next();
-            resourceLabels[labelIndex] = new JLabel(pair.getValue().toString());
-            ++labelIndex;
-        }
-    }
-
-    private void updateStatLabels(Stats updatedStats) {
-
     }
 
     public void paintComponent(Graphics g){

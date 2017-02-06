@@ -77,15 +77,12 @@ public class AreaViewport extends JPanel {
                     remove(tiles[row][col]);
                 }
                 //TODO handle when actualYCoord and actualXCoord go off of the map
-                System.out.println(mapCenter);
-                System.out.println("row: " + row + "col: " + col);
                 int actualXCoord = mapCenter.getxCoord() - ( NUM_TILE_COLS /2 - col);
                 int actualYCoord = mapCenter.getyCoord() - ( NUM_TILE_ROWS /2 - row);
                 if (actualXCoord < 0 || actualYCoord < 0){
                     actualXCoord = NUM_TILE_COLS /2;
                     actualYCoord = NUM_TILE_ROWS /2;
                 }
-                System.out.println("x: " + actualXCoord + "y: " + actualYCoord);
                 Tile currentTile = map.getTile(actualYCoord, actualXCoord);
                 switch (currentTile.getTerrain().getTerrainType()){
                     case DIRT:
@@ -143,9 +140,6 @@ public class AreaViewport extends JPanel {
     }
 
     public void update(Map updatedMap, Location updatedMapCenter){
-        System.out.println("SIZE IS HUUUUUUUUUUUUUUUGE" + getSize());
-        System.out.println("AREAVIEWPORT X LOCATION IS HUUUUUUUUUUUUUUUGE " + getX());
-        System.out.println("AREAVIEWPORT Y LOCATION IS HUUUUUUUUUUUUUUUGE " + getY());
         mapCenter = updatedMapCenter;
         updateTiles(updatedMap);
     }
@@ -153,6 +147,5 @@ public class AreaViewport extends JPanel {
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);//do I need this??? IDK
-        System.out.println("PAINTING AREA VIEWPORT");
     }
 }

@@ -89,23 +89,4 @@ public class MainViewController extends GameController {
 //        ChangeViewAction changeViewAction = new ChangeViewAction(this);
 //        mainViewControllerActions.put(TypeOfActions.changeView, changeViewAction);
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

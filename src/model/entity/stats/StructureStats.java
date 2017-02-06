@@ -8,6 +8,7 @@ public class StructureStats extends Stats {
                           int productionRates, int visionRadius) {
         super(offensiveDamage, defensiveDamage, armor, movement, health, upkeep, visionRadius);
         this.productionRates = productionRates;
+        ++size;
     }
 
     public void setProductionRates(int productionRates) {

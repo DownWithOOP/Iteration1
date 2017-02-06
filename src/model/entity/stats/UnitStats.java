@@ -12,10 +12,12 @@ public class UnitStats extends Stats {
                 movement, health, upkeep, visionRadius);
 
         this.range=range;
+        ++size;
     }
     public int getRange(){
         return this.range;
     }
+
     public void setRange(int range){
         this.range=range;
         this.movement = movement;
@@ -28,5 +30,6 @@ public class UnitStats extends Stats {
     public int getMovement() {
         return movement;
     }
+
 
 }

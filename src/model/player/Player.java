@@ -72,9 +72,9 @@ public class Player extends ContainsActions {
         this.playerMap = playerMap;
         //Each player starts the game with 2 Explorers and 1 Colonist
         //TODO:CHECKOUT THESE COORDINATES
-        units.add(new Explorer(this, new Location(1, 1)));
-        units.add(new Explorer(this, new Location(0, 0)));
-        units.add(new Colonist(this, new Location(0, 0)));
+        addUnit(new Explorer(this, new Location(1, 1)));
+        addUnit(new Explorer(this, new Location(0, 0)));
+        addUnit(new Colonist(this, new Location(0, 0)));
         this.playerId = playerId;
         initializePlayer();                                         /** do not delete this */
         selectedEntity = units.get(0); //TODO delet this
@@ -114,6 +114,7 @@ public class Player extends ContainsActions {
         if (structures.size() < MAX_STRUCTURES) {
             return structures.add(structure) && allEntities.add(structure);
         }
+        System.out.println("Too many structures!");
         return false;
     }
 
@@ -122,26 +123,37 @@ public class Player extends ContainsActions {
         if (units.size() < MAX_UNITS) {
             switch (unit.getEntityID().getEntityType()) {
                 case "COLONIST":
-                    if (allEntities.numColonists() >= MAX_COLONISTS)
+                    if (allEntities.numColonists() >= MAX_COLONISTS) {
+                        System.out.println("Too many colonists!");
                         return false;
+                    }
                     break;
                 case "EXPLORER":
-                    if (allEntities.numExplorers() >= MAX_EXPLORERS)
+                    if (allEntities.numExplorers() >= MAX_EXPLORERS) {
+                        System.out.println("Too many explorers!");
                         return false;
+                    }
                     break;
                 case "MELEE":
-                    if (allEntities.numMelee() >= MAX_MELEE)
+                    if (allEntities.numMelee() >= MAX_MELEE) {
+                        System.out.println("Too many melee!");
                         return false;
+                    }
                     break;
                 case "RANGED":
-                    if (allEntities.numRanged() >= MAX_RANGED)
+                    if (allEntities.numRanged() >= MAX_RANGED) {
+                        System.out.println("Too many ranged!");
                         return false;
+                    }
                     break;
                 default:
+                    System.out.println("FAIL");
                     return false;
             }
+            System.out.println("SUCCESS");
             return units.add(unit) && allEntities.add(unit);
         }
+        System.out.println("Too many Units!");
         return false;
     }
 
@@ -310,6 +322,16 @@ public class Player extends ContainsActions {
 
     public void setPlayerMap(Map playerMap) {
         this.playerMap = playerMap;
+    }
+
+    public static void main(String[] args) {
+        Player player = new Player("1", new Map());
+        for (int i = 0; i < 7; i++) {
+            player.addUnit(new Colonist(player, new Location(0,0)));
+            player.addUnit(new Explorer(player, new Location(0,0)));
+            player.addUnit(new Melee(player, new Location(0,0)));
+            player.addUnit(new Ranged(player, new Location(0,0)));
+        }
     }
 
 }

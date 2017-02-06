@@ -50,4 +50,7 @@ public abstract class Structure extends Entity{
     }
 
 
+    public StructureStats getStructureStats() {
+        return structureStats;
+    }
 }

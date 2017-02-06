@@ -13,6 +13,6 @@ public class ObstacleItem extends Item {
         ObstacleItemEffect();
     }
     public void ObstacleItemEffect(){
-        Tile.isPassable = false;
+        Tile.setIsPassable(false);
     }
 }

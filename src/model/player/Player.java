@@ -240,7 +240,12 @@ public class Player extends ContainsActions {
 
     public Map getPlayerMap() {return playerMap;}
 
-    public Location getPlayerLocation() {return selectedEntity.getLocation();}
+    public Location getPlayerLocation() {
+        if (selectedEntity!=null) {
+            return selectedEntity.getLocation();
+        }
+        return null;
+    }
 
     public int catfoodResourceLevel() {
         return resourceLevelsMap.get(ResourceType.CATFOOD);
@@ -274,11 +279,13 @@ public class Player extends ContainsActions {
     public void cycleMode(ActionModifiers actionModifier) {
         ArrayAction tempArrayAction=getArrayActionUpDown(actionModifier);
         selectedEntity=complexDataStructure.circleMode(tempArrayAction);
-        if (selectedEntity==null){
+        if (selectedEntity==null&& selectedRallyPoint!= null){
             selectedRallyPoint=complexDataStructure.getRallypoint();
             selectedRallyPoint.resume();
         }else{
-            selectedEntity.resume();
+            if (selectedEntity!=null) {
+                selectedEntity.resume();
+            }
         }
 
     }

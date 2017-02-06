@@ -12,10 +12,12 @@ public class CycleCommandAction extends PlayerAction {
 
     @Override
     public void execute() {
-        if (player.getSelectedRallyPoint()!=null) {
+        if (player.getSelectedRallyPoint()!=null && player.getSelectedEntity()!= null) {
             player.setSelectedAction( player.getSelectedEntity().cycleThroughActions(actionModifier));
         }else{
-            player.setSelectedAction(player.getSelectedRallyPoint().cycleThroughActions(actionModifier));
+            if (player.getSelectedRallyPoint()!=  null) {
+                player.setSelectedAction(player.getSelectedRallyPoint().cycleThroughActions(actionModifier));
+            }
         }
     }
 

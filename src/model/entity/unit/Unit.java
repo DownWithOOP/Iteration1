@@ -23,7 +23,7 @@ abstract public class Unit extends Entity {
 
 
     public Unit(EntityType entityType, UnitStats unitStats, Player player, Location location) {
-        super(player, entityType);
+        super(player, entityType,location);
         initializeUnit();
         //this.entityType = entityType;
         this.unitStats = unitStats;

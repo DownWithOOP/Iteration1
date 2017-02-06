@@ -27,12 +27,12 @@ abstract public class Entity extends ContainsActions {
     private Queue<EntityAction> commandQueue;                                                          // Queue of user selected commands for each entity to perform in a # of turns
     protected final HashMap<TypeOfActions, Action> entityActions = new HashMap<>();                //add all the Actions of an entity here
     private EntityType entityType;
-
+    private Location currentLocation;
     protected EntityAction currentAction;
     protected int currentActionTurnTracker;
 
 //TODO: we need player to get the PlayerResources of the player and see if we can perform an action
-    public Entity(Player player, EntityType entityType) {
+    public Entity(Player player, EntityType entityType, Location location) {
         entityID = new EntityID(entityType);
         commandQueue = new LinkedList<>();
         initializeEntity();
@@ -101,7 +101,9 @@ abstract public class Entity extends ContainsActions {
 
     protected abstract void handleEmptyQueue();
 
-    abstract public Location getLocation();
+    public Location getLocation() {
+        return currentLocation;
+    }
 
     public boolean addToQueue(EntityAction action) {
         return commandQueue.add(action);

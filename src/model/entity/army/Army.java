@@ -47,7 +47,7 @@ public class Army extends Entity implements Fighter {
 
 
     public Army(Player player, Location rallyPointStartingLocation) {
-        super(player, EntityType.ARMY);
+        super(player, EntityType.ARMY, rallyPointStartingLocation);
         initializeArmy();
         this.rallyPoint= new RallyPoint(rallyPointStartingLocation,this,player.getPlayerMap());
     }

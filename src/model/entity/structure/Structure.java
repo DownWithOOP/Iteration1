@@ -22,7 +22,7 @@ public abstract class Structure extends Entity{
     private StructureStats structureStats;
 
     public Structure(EntityType entityType, StructureStats structureStats, Location fixedLocation, Player player) {
-        super(player, entityType);
+        super(player, entityType, fixedLocation);
         initializeStructure();
         this.structureStats = structureStats;
         this.fixedLocation = fixedLocation;

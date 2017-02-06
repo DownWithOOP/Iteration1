@@ -19,10 +19,8 @@ public class MainView extends View {
     private AreaViewport areaViewport;
 
     public MainView(RenderObject initialRenderInfo){
-        areaViewport = new AreaViewport(initialRenderInfo.getMap(), initialRenderInfo.getPlayer().getPlayerLocation());
+        areaViewport = new AreaViewport(new GridBagLayout(), initialRenderInfo.getMap(), initialRenderInfo.getPlayer().getPlayerLocation());
         this.add(areaViewport);
-
-        this.setVisible(true);
     }
 
     @Override

@@ -13,7 +13,6 @@ import model.common.Location;
 import model.entity.Entity;
 import model.entity.army.Army;
 import model.entity.army.RallyPoint;
-import model.entity.structure.Base;
 import model.entity.structure.Structure;
 import model.entity.unit.*;
 import model.map.Map;
@@ -48,8 +47,9 @@ public class Player extends ContainsActions {
     private ArrayList<Unit> units;
     private ArrayList<Structure> structures;
     private ArrayList<Army> armies;
-    private ComplexDataStructure complexDataStructure= new ComplexDataStructure();
-    private Entity selectedEntity;
+    private ComplexDataStructure complexDataStructure = new ComplexDataStructure();
+    private Entity selectedEntity = null;
+    private RallyPoint selectedRallyPoint = null;
 
     private HashMap<Integer, Action> actionMap;
     private HashMap<TypeOfActions, Action> playerActionMap = new HashMap<>();                           // Where all the actions the player is going to perform are found
@@ -155,18 +155,20 @@ public class Player extends ContainsActions {
 
     //todo:add complexStructure remove methods
     public boolean removeStructure(Structure structure) {
+        complexDataStructure.removeEntity(structure);
         return structures.remove(structure) && allEntities.remove(structure);
     }
 
     public boolean removeUnit(Unit unit) {
+        complexDataStructure.removeEntity(unit);
         return units.remove(unit) && allEntities.remove(unit);
     }
 
     public boolean removeArmy(Army army) {
+        complexDataStructure.removeEntity(army);
         return armies.remove(army) && allEntities.remove(army);
 
     }
-
 
 
     /**
@@ -184,7 +186,7 @@ public class Player extends ContainsActions {
         return units;
     }
 
-    public List<Army> getArmy(){
+    public List<Army> getArmy() {
         return complexDataStructure.getArmy();
     }
 
@@ -200,9 +202,13 @@ public class Player extends ContainsActions {
         return selectedEntity;
     }
 
-    public Map getPlayerMap() {return playerMap;}
+    public Map getPlayerMap() {
+        return playerMap;
+    }
 
-    public Location getPlayerLocation() {return selectedEntity.getLocation();}
+    public Location getPlayerLocation() {
+        return selectedEntity.getLocation();
+    }
 
     public int catfoodResourceLevel() {
         return catfoodLevel;
@@ -232,19 +238,77 @@ public class Player extends ContainsActions {
     }
 
 
-    public void cycleBetweenEntities(ActionModifiers actionModifier) {
-
+    public void cycleMode(ActionModifiers actionModifier) {
+        ArrayAction tempArrayAction=getArrayActionUpDown(actionModifier);
+        selectedEntity=complexDataStructure.circleMode(tempArrayAction);
+        if (selectedEntity==null){
+            selectedRallyPoint=complexDataStructure.getRallypoint();
+        }
     }
 
-    public void cycleThroughEntityTypes(ActionModifiers actionModifier) {
+    public void cycleTypes(ActionModifiers actionModifier) {
+        Entity tempentity = null;
+        ArrayAction tempArrayAction = getArrayActionLeftRight(actionModifier);
 
+        if (complexDataStructure.getRallypoint() == null) {
+            tempentity = complexDataStructure.circleType(tempArrayAction);
+            setSelectedEntity(tempentity);
+        }
     }
 
-    public void cycleThroughSpecificEntities(ActionModifiers actionModifier) {
+    public void cycleInstance(ActionModifiers actionModifier) {
+        ArrayAction tempArrayAction = getArrayActionLeftRight(actionModifier);
+        Entity tempEntity = null;
+        RallyPoint tempRallyPoint = null;
+        if (complexDataStructure.getRallypoint() == null) {
 
+            tempEntity = complexDataStructure.circleInstances(tempArrayAction);
+            setSelectedEntity(tempEntity);
+
+        } else {
+            tempRallyPoint = complexDataStructure.circleInstancesRallyPoint(tempArrayAction);
+            if (tempRallyPoint != null) {
+                selectedRallyPoint = tempRallyPoint;
+                selectedRallyPoint.resume();
+            }
+        }
     }
 
-    public void setPlayerMap(Map playerMap){
+    //TODO: ARMY TO CALL THIS, THIS IS ONLY AN ACTION ARMY CAN PERFORM
+    public void switchBetweenArmies(ActionModifiers actionModifier){
+        complexDataStructure.switchArmy(actionModifier);
+    }
+
+    private void setSelectedEntity(Entity tempEntity) {
+        if (tempEntity != null) {
+            selectedEntity = tempEntity;
+            selectedEntity.resume();
+        }
+    }
+
+    private ArrayAction getArrayActionLeftRight(ActionModifiers actionModifier) {
+        ArrayAction temp = ArrayAction.increment;
+        if (actionModifier == ActionModifiers.right) {
+            temp = ArrayAction.increment;
+        }
+        if (actionModifier == ActionModifiers.left) {
+            temp = ArrayAction.decrement;
+        }
+        return temp;
+    }
+
+    private ArrayAction getArrayActionUpDown(ActionModifiers actionModifier) {
+        ArrayAction temp = ArrayAction.increment;
+        if (actionModifier == ActionModifiers.up) {
+            temp = ArrayAction.increment;
+        }
+        if (actionModifier == ActionModifiers.down) {
+            temp = ArrayAction.decrement;
+        }
+        return temp;
+    }
+
+    public void setPlayerMap(Map playerMap) {
         this.playerMap = playerMap;
     }
 

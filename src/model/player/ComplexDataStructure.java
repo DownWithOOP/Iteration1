@@ -27,6 +27,7 @@ public class ComplexDataStructure {
     List<List<Entity>> currentMode;
     List<RallyPoint> rallyPointList;
     RallyPoint selectedRallyPoint=null;
+    EntityType modeHolders[]={EntityType.UNIT,EntityType.STRUCTURE,EntityType.ARMY,EntityType.RALLYPOINT};
 
     int typeRestriction = 10;
     int unitCap = 25;
@@ -44,7 +45,7 @@ public class ComplexDataStructure {
         armyList = new ArrayList<>(10);
         structureList = new ArrayList<>(1);
         initializeLists();
-        currentMode = unitList;
+        changeMode(modeHolders[0]);
     }
 
     private void initializeLists() {
@@ -141,7 +142,7 @@ public class ComplexDataStructure {
     int circleTypeIndex = 0;
     int circleInstancesIndex = 0;
     int selectedArmyIndex = 0;
-
+    int circleModeIndex=0;
     public Entity circleType(ArrayAction arrayAction) {
         circleInstancesIndex = 0;
         Entity temp = null;
@@ -217,7 +218,17 @@ public class ComplexDataStructure {
 
     }
 
-    public Entity changeMode(EntityType entityType) {
+    public Entity circleMode(ArrayAction arrayAction){
+        if (arrayAction==ArrayAction.increment){
+            circleModeIndex=next(modeHolders.length,circleModeIndex);
+        }
+        if (arrayAction==ArrayAction.decrement){
+            circleModeIndex=previous(modeHolders.length,circleModeIndex);
+        }
+        return changeMode(modeHolders[circleModeIndex]);
+    }
+
+    private Entity changeMode(EntityType entityType) {
         resetIndexes();
         switch (entityType) {
             case ARMY:
@@ -243,7 +254,7 @@ public class ComplexDataStructure {
         return defineEntityReturned();
     }
 
-    public Entity changeArmy(ActionModifiers actionModifier) {
+    public Entity switchArmy(ActionModifiers actionModifier) {
         if (selectedArmy != null) {
             if (actionModifier.getValue() >= 0 && armyList.size() > actionModifier.getValue() + 1) {
                 selectedArmy = armyList.get(actionModifier.getValue());
@@ -379,7 +390,7 @@ public class ComplexDataStructure {
 
         Entity enti3 = complexDataStructure.changeMode(EntityType.STRUCTURE);
 
-        complexDataStructure.changeArmy(ActionModifiers.one);
+        complexDataStructure.switchArmy(ActionModifiers.one);
     }
 
 }

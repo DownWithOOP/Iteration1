@@ -29,7 +29,7 @@ public class AreaViewport extends JPanel {
     public AreaViewport(GridBagLayout layout, Map initialMap, Location initialLocation){
         super(layout);
 
-        //setOpaque(false);
+        setOpaque(false);
         //TODO remove hard coded dimensions
         setPreferredSize(new Dimension(500,500));
 
@@ -88,7 +88,7 @@ public class AreaViewport extends JPanel {
                 constraints.gridx = row;
                 constraints.gridy = col;
                 constraints.insets = new Insets(5,0,5,0);
-                constraints.fill = GridBagConstraints.VERTICAL;
+                constraints.fill = GridBagConstraints.BOTH;
                 constraints.weightx = 0.5;
                 constraints.weighty = 0.5;
                 add(tiles[row][col], constraints);

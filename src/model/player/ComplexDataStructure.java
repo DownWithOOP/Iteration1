@@ -9,6 +9,7 @@ import model.entity.structure.Base;
 import model.entity.unit.EntityType;
 import model.entity.unit.Explorer;
 import model.entity.unit.Melee;
+import model.map.Map;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -283,18 +284,18 @@ public class ComplexDataStructure {
 
     public static void main(String[] args) {
         ComplexDataStructure complexDataStructure = new ComplexDataStructure();
-        Army army = new Army(new Player("hello"), new Location(1, 2));
-        Army army1 = new Army(new Player("world"), new Location(3, 2));
-        Melee melee = new Melee(new Player("hello"), new Location(1, 2));
-        Melee melee1 = new Melee(new Player("hello"), new Location(1, 2));
-        Melee melee2 = new Melee(new Player("hello"), new Location(1, 2));
-        Melee melee3 = new Melee(new Player("hello"), new Location(1, 2));
-        Melee melee4 = new Melee(new Player("hello"), new Location(1, 2));
-        Explorer explorer1 = new Explorer(new Player("hello"), new Location(1, 2));
+        Army army = new Army(new Player("hello", new Map()), new Location(1, 2));
+        Army army1 = new Army(new Player("world", new Map()), new Location(3, 2));
+        Melee melee = new Melee(new Player("hello", new Map()), new Location(1, 2));
+        Melee melee1 = new Melee(new Player("hello", new Map()), new Location(1, 2));
+        Melee melee2 = new Melee(new Player("hello", new Map()), new Location(1, 2));
+        Melee melee3 = new Melee(new Player("hello", new Map()), new Location(1, 2));
+        Melee melee4 = new Melee(new Player("hello", new Map()), new Location(1, 2));
+        Explorer explorer1 = new Explorer(new Player("hello", new Map()), new Location(1, 2));
         melee.joinArmy(army);
         melee1.joinArmy(army);
         melee2.joinArmy(army);
-        Base base = new Base(new StructureStats(5, 5, 5, 5, 5, 5, 5, 5), new Location(3, 1), new Player("hello"));
+        Base base = new Base(new StructureStats(5, 5, 5, 5, 5, 5, 5, 5), new Location(3, 1), new Player("hello", new Map()));
 
         boolean check = false;
         check = complexDataStructure.addEntity(explorer1);

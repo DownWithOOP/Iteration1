@@ -85,6 +85,7 @@ public class Player extends ContainsActions {
         this.playerId = playerId;
         initializePlayer();                                         /** do not delete this */
         selectedEntity = units.get(0); //TODO delet this
+        //testing only
     }
 
     private void initializeResourceMap() {
@@ -130,7 +131,7 @@ public class Player extends ContainsActions {
         complexDataStructure.addEntity(structure);
         if (structures.size() < MAX_STRUCTURES) {
             System.out.println("ADDED STRUCTURE");
-            getPlayerMap().getTile(structure.getFixedLocation().getxCoord(),structure.getFixedLocation().getyCoord()).setEntity(structure);
+            playerMap.getTile(structure.getFixedLocation().getxCoord(),structure.getFixedLocation().getyCoord()).setEntity(structure);
             return structures.add(structure) && allEntities.add(structure);
         }
         System.out.println("Too many structures!");
@@ -180,7 +181,10 @@ public class Player extends ContainsActions {
     public boolean addArmy(Army army) {
         complexDataStructure.addEntity(army);
         if (armies.size() < MAX_ARMIES) {
-            if (armies.add(army)) return true;
+            if (armies.add(army)) {
+                playerMap.getTile(army.getLocation().getxCoord(),army.getLocation().getyCoord()).setEntity(army);
+                return true;
+            }
         }
         return false;
     }

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Tile {
 
     private boolean hasEntity;
-    private boolean isPassable;
+    private static boolean isPassable;
     private boolean isVisible;
 
     private Terrain terrain;
@@ -91,6 +91,10 @@ public class Tile {
 
     public void setVisible(boolean isVisible){
         this.isVisible = isVisible;
+    }
+    
+    public static void setIsPassable(boolean Passable){
+    	isPassable = Passable;
     }
 
     public ArrayList<Tile> getAdjacentTiles(Tile currentTile, Entity entity) {

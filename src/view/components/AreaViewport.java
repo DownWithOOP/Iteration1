@@ -109,8 +109,7 @@ public class AreaViewport extends JPanel {
                         case ARMY:
                             tiles[row][col].addEntityImage(armyImagePath);
                             tiles[((Army)currentTile.getEntity()).getRallyPoint().getLocation().getxCoord()]
-                                    [((Army)currentTile.getEntity()).getRallyPoint().getLocation().getyCoord()]
-                                    .addEntityImage(rallyPointImagePath);
+                                    [((Army)currentTile.getEntity()).getRallyPoint().getLocation().getyCoord()].addEntityImage(rallyPointImagePath);
                             break;
                         case BASE:
                             tiles[row][col].addEntityImage(baseImagePath);

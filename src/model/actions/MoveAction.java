@@ -14,7 +14,7 @@ public class MoveAction extends EntityAction {
     Location location;
 
     public MoveAction(Entity entity, Location location){
-        super(entity, 1);
+        super(entity, 0);
         this.location = location;
     }
 

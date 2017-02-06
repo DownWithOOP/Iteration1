@@ -29,20 +29,22 @@ public class AreaViewport extends JPanel {
     public AreaViewport(GridBagLayout layout, Map initialMap, Location initialLocation){
         super(layout);
 
-        setOpaque(false);
+        //setOpaque(false);
+        //TODO remove hard coded dimensions
         setPreferredSize(new Dimension(500,500));
 
         constraints = new GridBagConstraints();
 
         //TODO find way to either get bounds properly or work around the fact that we don't know bounds
-        numTileRows = 3; //(int) bounds.getHeight() / get;
-        numTileCols = 3; //(int) bounds.getWidth();
+        numTileRows = initialMap.getWidth(); //(int) bounds.getHeight() / get;
+        numTileCols = initialMap.getHeight(); //(int) bounds.getWidth();
 
         tiles = new TilePanel[numTileRows][numTileCols];
 
         mapCenter = initialLocation;
 
         updateTiles(initialMap);
+
         setVisible(true);
     }
 
@@ -54,8 +56,15 @@ public class AreaViewport extends JPanel {
                     remove(tiles[row][col]);
                 }
                 //TODO handle when actualYCoord and actualXCoord go off of the map
-                int actualYCoord = mapCenter.getyCoord() - ( numTileRows/2 - row);
+                System.out.println(mapCenter);
+                System.out.println("row: " + row + "col: " + col);
                 int actualXCoord = mapCenter.getxCoord() - ( numTileCols/2 - col);
+                int actualYCoord = mapCenter.getyCoord() - ( numTileRows/2 - row);
+                if (actualXCoord < 0 || actualYCoord < 0){
+                    actualXCoord = numTileCols/2;
+                    actualYCoord = numTileRows/2;
+                }
+                System.out.println("x: " + actualXCoord + "y: " + actualYCoord);
                 Tile currentTile = map.getTile(actualYCoord, actualXCoord);
                 switch (currentTile.getTerrain().getTerrainType()) {
                     case DIRT:
@@ -78,6 +87,10 @@ public class AreaViewport extends JPanel {
                 //TODO get entityID from tile and parse
                 constraints.gridx = row;
                 constraints.gridy = col;
+                constraints.insets = new Insets(5,0,5,0);
+                constraints.fill = GridBagConstraints.VERTICAL;
+                constraints.weightx = 0.5;
+                constraints.weighty = 0.5;
                 add(tiles[row][col], constraints);
             }
         }

@@ -40,7 +40,6 @@ public class MainView extends View {
         constraints.gridx = 1;
         constraints.gridy = 0;
         this.add(areaViewport, constraints);
-
     }
 
     @Override

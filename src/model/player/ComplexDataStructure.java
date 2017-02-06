@@ -4,11 +4,14 @@ import model.actions.ActionModifiers;
 import model.common.Location;
 import model.entity.Entity;
 import model.entity.army.Army;
+import model.entity.army.RallyPoint;
 import model.entity.stats.StructureStats;
 import model.entity.structure.Base;
+import model.entity.structure.Structure;
 import model.entity.unit.EntityType;
 import model.entity.unit.Explorer;
 import model.entity.unit.Melee;
+import model.entity.unit.Unit;
 import model.map.Map;
 
 import java.util.ArrayList;
@@ -22,6 +25,8 @@ public class ComplexDataStructure {
     List<Army> armyList;          //Whole=0, Battle=1, Reinf=2
     List<List<Entity>> structureList;         //base=0
     List<List<Entity>> currentMode;
+    List<RallyPoint> rallyPointList;
+    RallyPoint selectedRallyPoint=null;
 
     int typeRestriction = 10;
     int unitCap = 25;
@@ -59,6 +64,7 @@ public class ComplexDataStructure {
 
             if (armyList.size() < typeRestriction && !armyList.contains(entity)) {
                 armyList.add(((Army) entity));
+                rallyPointList.add(((Army) entity).getRallyPoint());
                 return true;
             }
             return false;
@@ -197,6 +203,20 @@ public class ComplexDataStructure {
         return currentMode.get(circleTypeIndex).get(circleInstancesIndex);
     }
 
+    public RallyPoint circleInstancesRallyPoint(ArrayAction arrayAction){
+        if (rallyPointList == null) {
+            return null;
+        }
+        if (arrayAction == ArrayAction.increment) {
+            circleInstancesIndex = next(rallyPointList.size(),circleInstancesIndex);
+        }
+        if (arrayAction == ArrayAction.decrement) {
+            circleInstancesIndex = previous(rallyPointList.size(), circleInstancesIndex);
+        }
+        return rallyPointList.get(circleInstancesIndex);
+
+    }
+
     public Entity changeMode(EntityType entityType) {
         resetIndexes();
         switch (entityType) {
@@ -205,12 +225,19 @@ public class ComplexDataStructure {
                 if (selectedArmy != null) {
                     currentMode = selectedArmy.getCircleTypeList();
                 }
+                selectedRallyPoint=null;
                 break;
             case UNIT:
                 currentMode = unitList;
+                selectedRallyPoint= null;
                 break;
             case STRUCTURE:
                 currentMode = structureList;
+                selectedRallyPoint=null;
+                break;
+            case RALLYPOINT:
+                selectedRallyPoint=rallyPointList.get(0);
+                currentMode=null;
                 break;
         }
         return defineEntityReturned();
@@ -228,19 +255,11 @@ public class ComplexDataStructure {
         return defineEntityReturned();
     }
 
-//    private boolean checkForEmptyList() {
-//
-//        for (int i = 0; i < currentMode.size(); i++) {
-//            if (currentMode.get(i).size() > 0) {
-//                circleTypeIndex = i;
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-
+    public RallyPoint getRallypoint(){
+        return selectedRallyPoint;
+    }
     private Entity defineEntityReturned() {
-        if (!currentMode.isEmpty()) {
+        if (currentMode != null &&!currentMode.isEmpty()) {
             for (int i = 0; i < currentMode.size(); i++) {
                 if (!currentMode.get(i).isEmpty()) {
                     circleTypeIndex = i;
@@ -262,6 +281,7 @@ public class ComplexDataStructure {
         switch (entityType){
             case ARMY:
                 armyList.remove(entity);
+                rallyPointList.remove(((Army)entity).getRallyPoint());
                 break;
             case BASE:
                 structureList.get(0).remove(entity);
@@ -279,6 +299,36 @@ public class ComplexDataStructure {
                 unitList.get(meleeIndex).remove(entity);
                 break;
         }
+    }
+
+    public List<Unit> getUnit(){
+        List<Unit> renderList= new ArrayList<>();
+        for (List<Entity> list:
+                unitList) {
+            for (Entity ent:
+                    list) {
+                Unit temp=(Unit)ent;
+                renderList.add(temp);
+            }
+        }
+        return renderList;
+    }
+
+    public List<Structure> getStructure(){
+        List<Structure> renderList= new ArrayList<>();
+        for (List<Entity> list:
+                structureList) {
+            for (Entity ent:
+                    list) {
+                Structure temp=(Structure)ent;
+                renderList.add(temp);
+            }
+        }
+        return renderList;
+    }
+
+    public List<Army> getArmy(){
+        return armyList;
     }
 
 

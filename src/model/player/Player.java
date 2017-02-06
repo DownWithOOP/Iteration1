@@ -48,8 +48,7 @@ public class Player extends ContainsActions {
     private ArrayList<Unit> units;
     private ArrayList<Structure> structures;
     private ArrayList<Army> armies;
-    private ArrayList<RallyPoint> rallyPoints;
-
+    private ComplexDataStructure complexDataStructure= new ComplexDataStructure();
     private Entity selectedEntity;
 
     private HashMap<Integer, Action> actionMap;
@@ -64,7 +63,6 @@ public class Player extends ContainsActions {
     private int crystalLevel;
     private int researchLevel;
 
-    /*TODO:Set player id*/
     public Player(String playerId, Map playerMap) {
         allEntities = new EntityList<Entity>();
         units = new ArrayList<Unit>();
@@ -112,6 +110,7 @@ public class Player extends ContainsActions {
      * Methods for adding and removing entities
      */
     public boolean addStructure(Structure structure) {
+        complexDataStructure.addEntity(structure);
         if (structures.size() < MAX_STRUCTURES) {
             return structures.add(structure) && allEntities.add(structure);
         }
@@ -119,6 +118,7 @@ public class Player extends ContainsActions {
     }
 
     public boolean addUnit(Unit unit) {
+        complexDataStructure.addEntity(unit);
         if (units.size() < MAX_UNITS) {
             switch (unit.getEntityID().getEntityType()) {
                 case "COLONIST":
@@ -146,12 +146,14 @@ public class Player extends ContainsActions {
     }
 
     public boolean addArmy(Army army) {
+        complexDataStructure.addEntity(army);
         if (armies.size() < MAX_ARMIES) {
             if (armies.add(army)) return true;
         }
         return false;
     }
 
+    //todo:add complexStructure remove methods
     public boolean removeStructure(Structure structure) {
         return structures.remove(structure) && allEntities.remove(structure);
     }
@@ -164,6 +166,8 @@ public class Player extends ContainsActions {
         return armies.remove(army) && allEntities.remove(army);
 
     }
+
+
 
     /**
      * Getters
@@ -178,6 +182,10 @@ public class Player extends ContainsActions {
 
     public ArrayList<Unit> getUnits() {
         return units;
+    }
+
+    public List<Army> getArmy(){
+        return complexDataStructure.getArmy();
     }
 
     public ArrayList<Structure> getStructures() {

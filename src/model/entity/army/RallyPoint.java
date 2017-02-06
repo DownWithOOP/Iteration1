@@ -56,6 +56,7 @@ public class RallyPoint extends ContainsActions {
             xCoordinate--;
         }
 
+        //TODO: RallyPoint to get location, fix this
         if (!map.getTile(xCoordinate, yCoordinate).isPassable()) {
             return;
         }

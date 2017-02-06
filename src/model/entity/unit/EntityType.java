@@ -11,5 +11,6 @@ public enum EntityType {
     BASE,
     ARMY,
     UNIT,
-    STRUCTURE
+    STRUCTURE,
+    RALLYPOINT
 }

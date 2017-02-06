@@ -12,22 +12,31 @@ import java.util.ArrayList;
  */
 public class Tile {
 
-    private static boolean hasEntity;
-    private static boolean isPassable;
+    private boolean hasEntity;
+    private boolean isPassable;
     private boolean isVisible;
 
     private Terrain terrain;
     private AreaEffect areaEffect;
     private Resource resource;
-    private static Item item;
-    private static Entity entity;
+    private Item item;
+    private Entity entity;
+
+    public Tile(){
+        this.terrain = null;
+        this.areaEffect = null;
+        this.resource = null;
+        this.item = null;
+        this.isPassable = true;
+        this.isVisible = false;
+    }
 
     public Tile(Terrain terrain, AreaEffect areaEffect, Resource resource, Item item){
         this.terrain = terrain;
         this.areaEffect = areaEffect;
         this.resource = resource;
-        Tile.item = item;
-        Tile.isPassable = terrain.isPassable();
+        this.item = item;
+        this.isPassable = terrain.isPassable();
         this.isVisible = false;
     }
 
@@ -51,7 +60,7 @@ public class Tile {
     }
     
     public static void removeItem(){//add to iteration1
-    	item = null;
+    	//item = null;
     }
 
     /**
@@ -98,7 +107,7 @@ public class Tile {
     }
     
     public static void setIsPassable(boolean Passable){
-    	isPassable = Passable;
+    	//isPassable = Passable;
     }
 
     public ArrayList<Tile> getAdjacentTiles(Tile currentTile, Entity entity) {

@@ -9,25 +9,23 @@ public class UnitStats extends Stats {
                      int armor, int movement, int health,
                      int upkeep, int visionRadius, int range) {
         super(offensiveDamage, defensiveDamage, armor, health, upkeep, visionRadius);
-        this.movement = movement;
-        this.range=range;
-        ++size;
+        this.statsMap.put(StatsType.MOVEMENT, movement);
+        this.statsMap.put(StatsType.RANGE, range);
     }
     public int getRange(){
-        return this.range;
+        return statsMap.get(StatsType.RANGE);
     }
 
     public void setRange(int range){
-        this.range=range;
-        this.movement = movement;
+        this.statsMap.put(StatsType.RANGE, range);
     }
 
     public void setMovement(int movement) {
-        this.movement = movement;
+        this.statsMap.put(StatsType.MOVEMENT, movement);
     }
 
     public int getMovement() {
-        return movement;
+        return statsMap.get(StatsType.MOVEMENT);
     }
 
 

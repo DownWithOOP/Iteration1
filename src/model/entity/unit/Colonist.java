@@ -32,12 +32,17 @@ public class Colonist extends FighterUnit {
          * */
     }
 
-    public boolean buildStructure(int rowPosition, int columnPosition) {
-//        if (getPlayer().getPlayerMap().getTile(getCurrentLocation().getxCoord(), getC))
+    public boolean buildStructure() {
+        int fixedX = this.getLocation().getxCoord();
+        int fixedY = this.getLocation().getyCoord();
         Base base = new Base(new StructureStats(10, 7, 15, 100, 5, 3, 8),
-                             new Location(rowPosition, columnPosition),
+                             new Location(fixedX, fixedY),
                              getPlayer());
-        return getPlayer().addStructure(base);
+        if (getPlayer().addStructure(base)) {
+            this.decommission(); //remove unit
+            return true;
+        }
+        return false;
     }
 
     public static void main(String[] args) {
@@ -45,7 +50,7 @@ public class Colonist extends FighterUnit {
         for (int i = 0; i < 12; i++) {
             Colonist colonist = new Colonist(player, new Location(0,0));
             player.addUnit(colonist);
-            colonist.buildStructure(0,0);
+            colonist.buildStructure();
         }
     }
 

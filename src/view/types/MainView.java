@@ -62,7 +62,7 @@ public class MainView extends View {
 
     public void update(RenderObject renderInfo) {
         areaViewport.update(renderInfo.getMap(), renderInfo.getPlayer().getPlayerLocation());
-        //statusViewport.update(player);
+        statusViewport.update(renderInfo.getPlayer());
     }
 
     @Override

@@ -3,6 +3,7 @@ package controllers.keyboardInputHandler;
 import model.actions.AvailableActions;
 
 import java.awt.event.KeyEvent;
+import java.security.Key;
 import java.util.HashMap;
 
 /**
@@ -86,6 +87,7 @@ public class KeyBoardMapManager {
         defaultKeyMap.put(KeyEvent.VK_NUMPAD3+"",TypeOfActions.southEast);
         defaultKeyMap.put(KeyEvent.VK_NUMPAD1+"",TypeOfActions.southWest);
         defaultKeyMap.put(KeyEvent.VK_NUMPAD5+"",TypeOfActions.activateCommand);
+        defaultKeyMap.put(KeyEvent.VK_U+""+KeyEvent.VK_P+""+KeyEvent.VK_M+""+KeyEvent.VK_S,TypeOfActions.changeView);
 //TODO: ADD THE NORMAL NUMBERS OF KEYBOARD
     }
 }

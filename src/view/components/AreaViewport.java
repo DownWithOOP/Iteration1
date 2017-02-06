@@ -45,7 +45,6 @@ public class AreaViewport extends JPanel {
         constraints = new GridBagConstraints();
 
         //TODO find way to either get bounds properly or work around the fact that we don't know bounds
-        System.out.println(initialMap.getWidth() + "," + initialMap.getHeight());
         TILE_WIDTH = (int) bounds.getWidth()/NUM_TILE_COLS;
         TILE_HEIGHT = (int) bounds.getHeight()/NUM_TILE_ROWS;
 
@@ -70,23 +69,20 @@ public class AreaViewport extends JPanel {
     }
 
     private void updateTiles(Map map) {
-        System.out.println("SIZE IS HUUUUUUUUUUUUUUUGE" + getSize());
+        int actualYCoord = getActualStartingY(mapCenter);
         for (int row = 0; row < NUM_TILE_ROWS; ++row){
+            int actualXCoord = getActualStartingX(mapCenter);
             for (int col = 0; col < NUM_TILE_COLS; ++col){
                 if(tiles[row][col] != null) {
                     remove(tiles[row][col]);
                 }
-                //TODO handle when actualYCoord and actualXCoord go off of the map
-                System.out.println(mapCenter);
-                System.out.println("row: " + row + "col: " + col);
-                int actualXCoord = mapCenter.getxCoord() - ( NUM_TILE_COLS /2 - col);
-                int actualYCoord = mapCenter.getyCoord() - ( NUM_TILE_ROWS /2 - row);
-                if (actualXCoord < 0 || actualYCoord < 0){
-                    actualXCoord = NUM_TILE_COLS /2;
-                    actualYCoord = NUM_TILE_ROWS /2;
+                Tile currentTile = new Tile();
+                try {
+                    currentTile = map.getTile(actualYCoord, actualXCoord);
                 }
-                System.out.println("x: " + actualXCoord + "y: " + actualYCoord);
-                Tile currentTile = map.getTile(actualYCoord, actualXCoord);
+                catch (ArrayIndexOutOfBoundsException e){
+                    System.out.println(e.getMessage());
+                }
                 switch (currentTile.getTerrain().getTerrainType()){
                     case DIRT:
                         tiles[row][col] = new TilePanel(dirtImagePath, TILE_WIDTH, TILE_HEIGHT);
@@ -125,12 +121,10 @@ public class AreaViewport extends JPanel {
                             tiles[row][col].addEntityImage(rangedImagePath);
                             break;
                         default:
-                            tiles[row][col].addEntityImage(meleeImagePath);
+                            tiles[row][col].addEntityImage("");
                     }
                 }
 
-                //TODO look up image based on tile type
-                //TODO get entityID from tile and parse
                 constraints.gridx = row+1;
                 constraints.gridy = col+1;
                 constraints.insets = new Insets(1,1,1,1);
@@ -138,14 +132,38 @@ public class AreaViewport extends JPanel {
                 constraints.weightx = 0.5;
                 constraints.weighty = 0.5;
                 add(tiles[row][col], constraints);
+
+                ++actualXCoord;
             }
+            ++actualYCoord;
+        }
+    }
+
+    private int getActualStartingX(Location mapCenter) {
+        if (mapCenter.getxCoord() < NUM_TILE_COLS/2){
+            return getActualStartingX(new Location(mapCenter.getxCoord() + 1, mapCenter.getyCoord()));
+        }
+        else if (mapCenter.getxCoord() + NUM_TILE_COLS/2 > NUM_TILE_COLS){
+            return getActualStartingX(new Location(mapCenter.getxCoord() - 1, mapCenter.getyCoord()));
+        }
+        else{
+            return mapCenter.getxCoord() - NUM_TILE_COLS/2 - 1;
+        }
+    }
+
+    private int getActualStartingY(Location mapCenter) {
+        if (mapCenter.getyCoord() < NUM_TILE_ROWS/2){
+            return getActualStartingY(new Location(mapCenter.getxCoord(), mapCenter.getyCoord() + 1));
+        }
+        else if (mapCenter.getyCoord() + NUM_TILE_ROWS/2 > NUM_TILE_ROWS){
+            return getActualStartingX(new Location(mapCenter.getxCoord() - 1, mapCenter.getyCoord()));
+        }
+        else{
+            return mapCenter.getyCoord() - NUM_TILE_ROWS/2;
         }
     }
 
     public void update(Map updatedMap, Location updatedMapCenter){
-        System.out.println("SIZE IS HUUUUUUUUUUUUUUUGE" + getSize());
-        System.out.println("AREAVIEWPORT X LOCATION IS HUUUUUUUUUUUUUUUGE " + getX());
-        System.out.println("AREAVIEWPORT Y LOCATION IS HUUUUUUUUUUUUUUUGE " + getY());
         mapCenter = updatedMapCenter;
         updateTiles(updatedMap);
     }
@@ -153,6 +171,5 @@ public class AreaViewport extends JPanel {
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);//do I need this??? IDK
-        System.out.println("PAINTING AREA VIEWPORT");
     }
 }

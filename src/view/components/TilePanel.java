@@ -47,6 +47,7 @@ public class TilePanel extends JPanel {
             tileImage = readAndResizeImage(filePath, tileWidth, tileHeight);
         }
         catch (IOException e){
+            tileImage = new BufferedImage(tileWidth, tileHeight, BufferedImage.TYPE_INT_ARGB);
             System.out.println(e.getMessage());
         }
     }
@@ -67,9 +68,9 @@ public class TilePanel extends JPanel {
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
 
-        System.out.println(tileWidth + "," + tileHeight);
+        System.out.println(entityWidth + "," + entityHeight);
         g.drawImage(tileImage, 0, 0, tileWidth, tileHeight, null);
-        g.drawImage(tileImage, 0, 0, entityWidth, entityHeight, null);
+        g.drawImage(entityImage, 0, 0, entityWidth, entityHeight, null);
     }
 
     public void addEntityImage(String filePath) {
@@ -78,6 +79,7 @@ public class TilePanel extends JPanel {
             entityImage = readAndResizeImage(filePath, entityWidth, entityHeight);
         }
         catch (IOException e){
+            entityImage = new BufferedImage(tileWidth, tileHeight, BufferedImage.TYPE_INT_ARGB);
             System.out.println(e.getMessage());
         }
     }

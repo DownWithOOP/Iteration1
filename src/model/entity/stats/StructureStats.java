@@ -7,15 +7,14 @@ public class StructureStats extends Stats {
     public StructureStats(int offensiveDamage, int defensiveDamage, int armor, int health, int upkeep,
                           int productionRates, int visionRadius) {
         super(offensiveDamage, defensiveDamage, armor, health, upkeep, visionRadius);
-        this.productionRates = productionRates;
-        ++size;
+        this.statsMap.put(StatsType.PRODUCTION_RATES, productionRates);
     }
 
     public void setProductionRates(int productionRates) {
-        this.productionRates = productionRates;
+        this.statsMap.put(StatsType.PRODUCTION_RATES, productionRates);
     }
 
     public int getProductionRates() {
-        return productionRates;
+        return this.statsMap.get(StatsType.PRODUCTION_RATES);
     }
 }

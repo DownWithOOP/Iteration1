@@ -37,11 +37,11 @@ abstract public class Controller extends ContainsActions {
         setActionsControllerActions();
         addAllActions(actionsMap);
         initializeController();
+        addAvailableActions();
     }
 
     protected void initializeController() {
         setView();
-        resume();
     }
 
     protected void setActionsControllerActions() {
@@ -53,12 +53,27 @@ abstract public class Controller extends ContainsActions {
 
     @Override
     public void resume() {
-        addAvailableActions();
+        intitializeC();
     }
 
-    protected void changeView(TypeOfControllers typeOfControllers){
+    public void changeView(ActionModifiers actionModifier){
+        TypeOfControllers typeOfController=TypeOfControllers.None;
+        switch (actionModifier){
+            case one:
+                typeOfController=TypeOfControllers.MainViewController;
+                break;
+            case two:
+                typeOfController=TypeOfControllers.StructureViewController;
+                break;
+            case three:
+                typeOfController=TypeOfControllers.UnitViewController;
+                break;
+            case four:
+                typeOfController=TypeOfControllers.PauseViewController;
+                break;
+        }
         leave();
-        stateManager.changeController(typeOfControllers);
+        stateManager.changeController(typeOfController);
     }
 
     @Override

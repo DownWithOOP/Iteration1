@@ -74,12 +74,10 @@ public class Player extends ContainsActions {
 
         //Each player starts the game with 2 Explorers and 1 Colonist
         //TODO:CHECKOUT THESE COORDINATES
-        addUnit(new Explorer(this, new Location(1, 1)));
-        addUnit(new Explorer(this, new Location(0, 0)));
-        addUnit(new Colonist(this, new Location(0, 0)));
-        addStructure(new Base(new StructureStats(10, 7, 15, 100, 5, 3, 8),
-                     new Location(2, 1),
-                     this)); //TODO: Temporary structure -- delete later!
+
+        addUnit(new Explorer(this, new Location(3, 1)));
+        addUnit(new Explorer(this, new Location(4, 4)));
+        addUnit(new Colonist(this, new Location(2, 2)));
         this.playerId = playerId;
         initializePlayer();                                         /** do not delete this */
         selectedEntity = units.get(0); //TODO delet this
@@ -127,6 +125,7 @@ public class Player extends ContainsActions {
         complexDataStructure.addEntity(structure);
         if (structures.size() < MAX_STRUCTURES) {
             System.out.println("ADDED STRUCTURE");
+            getPlayerMap().getTile(structure.getFixedLocation().getxCoord(),structure.getFixedLocation().getyCoord()).setEntity(structure);
             return structures.add(structure) && allEntities.add(structure);
         }
         System.out.println("Too many structures!");
@@ -166,6 +165,7 @@ public class Player extends ContainsActions {
                     return false;
             }
             System.out.println("ADDED UNIT");
+            getPlayerMap().getTile(unit.getCurrentLocation().getxCoord(),unit.getCurrentLocation().getyCoord()).setEntity(unit);
             return units.add(unit) && allEntities.add(unit);
         }
         System.out.println("Too many Units!");

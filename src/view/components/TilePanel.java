@@ -14,6 +14,8 @@ public class TilePanel extends JPanel {
     private BufferedImage entityImage;
     private Rectangle bounds;
 
+    private boolean isSelected;
+
     private final int tileWidth;
     private final int tileHeight;
 
@@ -70,6 +72,11 @@ public class TilePanel extends JPanel {
 
         g.drawImage(tileImage, 0, 0, tileWidth, tileHeight, null);
         g.drawImage(entityImage, 0, 0, entityWidth, entityHeight, null);
+        if (isSelected){
+            int alpha = 127; // 50% transparent
+            g.setColor(new Color(255, 0, 0, alpha));
+            g.fillRect(0, 0, tileWidth, tileHeight);
+        }
     }
 
     public void addEntityImage(String filePath) {
@@ -81,6 +88,14 @@ public class TilePanel extends JPanel {
             entityImage = new BufferedImage(tileWidth, tileHeight, BufferedImage.TYPE_INT_ARGB);
             System.out.println(e.getMessage());
         }
+    }
+
+    public void addCursor() {
+        isSelected = true;
+    }
+
+    public void removeCursor() {
+        isSelected = false;
     }
 }
 

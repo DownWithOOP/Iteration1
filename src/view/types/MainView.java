@@ -61,7 +61,8 @@ public class MainView extends View {
     }
 
     public void update(RenderObject renderInfo) {
-        areaViewport.update(renderInfo.getMap(), renderInfo.getPlayer().getPlayerLocation());
+        areaViewport.update(renderInfo.getMap(), renderInfo.getPlayer().getPlayerLocation(),
+                renderInfo.getPlayer().getSelectedEntity().getLocation());
         statusViewport.update(renderInfo.getPlayer());
     }
 

@@ -10,10 +10,13 @@ import java.awt.*;
 
 public class AreaViewport extends JPanel {
 
-    private TilePanel[][] tiles;
     private Rectangle bounds;
+    private GridBagConstraints constraints;
+
+    private TilePanel[][] tiles;
 
     private Location mapCenter;
+    private Location cursorLocation;
 
     private static final int NUM_TILE_ROWS = 5;
     private static final int NUM_TILE_COLS = 5;
@@ -33,7 +36,6 @@ public class AreaViewport extends JPanel {
     private static final String grassImagePath = "res/images/grass.png";
     private static final String dirtImagePath = "res/images/dirt.png";
 
-    private GridBagConstraints constraints;
 
 
     public AreaViewport(GridBagLayout layout, Rectangle mainViewBounds, Map initialMap, Location initialLocation){
@@ -168,9 +170,30 @@ public class AreaViewport extends JPanel {
         }
     }
 
-    public void update(Map updatedMap, Location updatedMapCenter){
+    public void update(Map updatedMap, Location updatedMapCenter, Location selectedLocation){
         mapCenter = updatedMapCenter;
         updateTiles(updatedMap);
+        if (selectedLocation != null){
+            updateCursor(selectedLocation);
+        }
+    }
+
+    private void updateCursor(Location selectedLocation) {
+        if (cursorLocation == null){
+            tiles[selectedLocation.getxCoord()][selectedLocation.getyCoord()].addCursor();
+            cursorLocation = selectedLocation;
+        }
+        else if (cursorLocation.getxCoord() == selectedLocation.getxCoord() &&
+                cursorLocation.getyCoord() == selectedLocation.getyCoord()){
+            tiles[selectedLocation.getxCoord()][selectedLocation.getyCoord()].addCursor();
+            return;
+        }
+        else {
+            System.out.print("Remove old cursor");
+            tiles[cursorLocation.getxCoord()][cursorLocation.getyCoord()].removeCursor();
+            tiles[selectedLocation.getxCoord()][selectedLocation.getyCoord()].addCursor();
+            cursorLocation = selectedLocation;
+        }
     }
 
     @Override

@@ -6,7 +6,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.Buffer;
 import javax.imageio.ImageIO;
-import javax.swing.JPanel;
+import javax.swing.*;
+import javax.swing.border.BevelBorder;
 
 public class TilePanel extends JPanel {
 
@@ -18,8 +19,18 @@ public class TilePanel extends JPanel {
 
     public TilePanel(String filename) {
 
+        //Make tile is displayed at right size
         setPreferredSize(new Dimension(TILE_WIDTH,TILE_HEIGHT));
+
+        //Make bgrd not show
         setOpaque(false);
+
+        //Create tile borders
+        Color highlightOuter = new Color(69, 69, 69);
+        Color highlightInner = new Color(0, 0, 0);
+        Color shadowOuter = new Color(175, 175, 175);
+        Color shadowInner = new Color(255, 255, 255);
+        setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, highlightOuter, highlightInner, shadowOuter, shadowInner));
 
         //Get image
         try {

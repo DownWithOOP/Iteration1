@@ -46,5 +46,8 @@ public class GUI {
         this.frame.setVisible(true);
     }
 
+    public int getScreenHeight(){ return screenHeight;}
+
+    public int getScreenWidth(){ return screenWidth;}
 
 }

@@ -54,6 +54,7 @@ public abstract class FighterUnit extends Unit implements Fighter{
     public void abandonArmy() {
         army.removeFighter(this);
         //TODO: SET UNIT TO STANDBY
+        //TODO: ADD CONDITIONAL STATEMENT TO CHECK IF ENTITY IS PART OF AN ARMY--RECEIVES NULLPOINTEREXCEPTION OTHERWISE
     }
 
     public void joinArmy(Army army) {

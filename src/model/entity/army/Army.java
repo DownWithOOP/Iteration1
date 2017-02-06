@@ -322,6 +322,7 @@ public class Army extends Entity implements Fighter {
         return rallyPoint;
     }
 
-
-
+    public UnitStats getArmyStats() {
+        return armyStats;
+    }
 }

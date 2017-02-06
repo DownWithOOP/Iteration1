@@ -9,14 +9,24 @@ public class Stats {
     private final int defaultUpkeep;
     private int visionRadius;       // The amount of tiles on any side that an entity can see
 
+    protected int size;
+
     public Stats(int offensiveDamage, int defensiveDamage, int armor, int movement, int health, int upkeep, int visionRadius) {
+        size = 0;
         this.offensiveDamage = offensiveDamage;
+        ++size;
         this.defensiveDamage = defensiveDamage;
+        ++size;
         this.armor = armor;
+        ++size;
         this.health = health;
+        ++size;
         this.upkeep = upkeep;
+        ++size;
         defaultUpkeep = upkeep;
+        ++size;
         this.visionRadius = visionRadius;
+        ++size;
     }
 
     public void setOffensiveDamage(int offensiveDamage) {
@@ -69,6 +79,7 @@ public class Stats {
         this.visionRadius = visionRadius;
     }
 
+    public int getSize() {return size;}
 
 }
 

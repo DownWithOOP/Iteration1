@@ -16,6 +16,7 @@ import model.entity.army.RallyPoint;
 import model.entity.structure.Structure;
 import model.entity.unit.*;
 import model.map.Map;
+import model.map.tile.ResourceType;
 import utilities.EntityList;
 
 import java.util.ArrayList;
@@ -51,25 +52,25 @@ public class Player extends ContainsActions {
     private Entity selectedEntity = null;
     private RallyPoint selectedRallyPoint = null;
 
-    private HashMap<Integer, Action> actionMap;
-    private HashMap<TypeOfActions, Action> playerActionMap = new HashMap<>();                           // Where all the actions the player is going to perform are found
+    private java.util.HashMap<Integer, Action> actionMap = new HashMap<>();
+    private java.util.HashMap<TypeOfActions, Action> playerActionMap = new HashMap<>();                           // Where all the actions the player is going to perform are found
 
     private Map playerMap;
 
     /**
      * Resource levels
      */
-    private int catfoodLevel;
-    private int crystalLevel;
-    private int researchLevel;
+    private java.util.Map<ResourceType, Integer> resourceLevelsMap = new HashMap<>();
 
     public Player(String playerId, Map playerMap) {
         allEntities = new EntityList<Entity>();
         units = new ArrayList<Unit>();
         structures = new ArrayList<Structure>();
         armies = new ArrayList<Army>();
-        actionMap = new HashMap<Integer, Action>();
         this.playerMap = playerMap;
+
+        initializeResourceMap();
+
         //Each player starts the game with 2 Explorers and 1 Colonist
         //TODO:CHECKOUT THESE COORDINATES
         addUnit(new Explorer(this, new Location(1, 1)));
@@ -80,10 +81,19 @@ public class Player extends ContainsActions {
         selectedEntity = units.get(0); //TODO delet this
     }
 
+    private void initializeResourceMap() {
+        resourceLevelsMap.put(ResourceType.CATFOOD, 0);
+        resourceLevelsMap.put(ResourceType.CRYSTAL, 0);
+        resourceLevelsMap.put(ResourceType.RESEARCH, 0);
+    }
+
 
     @Override
     public void resume() {
         addAvailableActions();
+        for(int i = 0; i < allEntities.size(); i++){
+            allEntities.get(i).executeCommand();
+        }
     }
 
     @Override
@@ -112,6 +122,7 @@ public class Player extends ContainsActions {
     public boolean addStructure(Structure structure) {
         complexDataStructure.addEntity(structure);
         if (structures.size() < MAX_STRUCTURES) {
+            System.out.println("ADDED STRUCTURE");
             return structures.add(structure) && allEntities.add(structure);
         }
         System.out.println("Too many structures!");
@@ -147,10 +158,10 @@ public class Player extends ContainsActions {
                     }
                     break;
                 default:
-                    System.out.println("FAIL");
+                    System.out.println("FAILED TO ADD UNIT");
                     return false;
             }
-            System.out.println("SUCCESS");
+            System.out.println("ADDED UNIT");
             return units.add(unit) && allEntities.add(unit);
         }
         System.out.println("Too many Units!");
@@ -179,7 +190,6 @@ public class Player extends ContainsActions {
     public boolean removeArmy(Army army) {
         complexDataStructure.removeEntity(army);
         return armies.remove(army) && allEntities.remove(army);
-
     }
 
 
@@ -223,30 +233,30 @@ public class Player extends ContainsActions {
     }
 
     public int catfoodResourceLevel() {
-        return catfoodLevel;
+        return resourceLevelsMap.get(ResourceType.CATFOOD);
     }
 
     public int crystalResourceLevel() {
-        return crystalLevel;
+        return resourceLevelsMap.get(ResourceType.CRYSTAL);
     }
 
     public int researchResourceLevel() {
-        return researchLevel;
+        return resourceLevelsMap.get(ResourceType.RESEARCH);
     }
 
     /**
      * Setters
      */
     public void setCatfoodResourceLevel(int level) {
-        this.catfoodLevel = level;
+        this.resourceLevelsMap.put(ResourceType.CATFOOD, level);
     }
 
     public void setCrystalResourceLevel(int level) {
-        this.crystalLevel = level;
+        this.resourceLevelsMap.put(ResourceType.CRYSTAL, level);
     }
 
     public void setResearchResourceLevel(int level) {
-        this.researchLevel = level;
+        this.resourceLevelsMap.put(ResourceType.RESEARCH, level);
     }
 
 
@@ -322,6 +332,10 @@ public class Player extends ContainsActions {
 
     public void setPlayerMap(Map playerMap) {
         this.playerMap = playerMap;
+    }
+
+    public java.util.Map<ResourceType, Integer> getResourceLevels() {
+        return resourceLevelsMap;
     }
 
     public static void main(String[] args) {

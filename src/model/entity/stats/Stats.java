@@ -1,6 +1,11 @@
 package model.entity.stats;
 
+import model.map.Map;
+
+import java.util.HashMap;
+
 public class Stats {
+    private java.util.Map<StatsType, Integer> statsMap = new HashMap<>();
     private int offensiveDamage;    // damage dealt when attacking
     private int defensiveDamage;    // damage dealt when fending off an attack
     private int armor;              // absorbs a fixed amount of damage
@@ -11,7 +16,7 @@ public class Stats {
 
     protected int size;
 
-    public Stats(int offensiveDamage, int defensiveDamage, int armor, int movement, int health, int upkeep, int visionRadius) {
+    public Stats(int offensiveDamage, int defensiveDamage, int armor, int health, int upkeep, int visionRadius) {
         size = 0;
         this.offensiveDamage = offensiveDamage;
         ++size;

@@ -13,6 +13,7 @@ public class ObstacleItem extends Item {
         ObstacleItemEffect();
     }
     public void ObstacleItemEffect(){
-        //Tile.setIsPassable(false); Until isPassable in Tile can be changed to static and setfcn added
+        Tile.setIsPassable(false);
     }
 }
+

@@ -68,6 +68,9 @@ public class Army extends Entity implements Fighter {
         return null;
     }
 
+    /**
+     * Actions
+     */
 
     public void disbandArmy() {
         for (FighterUnit fighterUnit :
@@ -245,23 +248,18 @@ public class Army extends Entity implements Fighter {
              battleGroup.values()) {
             fighterUnit.decommission();
         }
-        return true;
+        return player.removeArmy(this);
     }
 
     @Override
-    public void attack() {
+    public void attack(ActionModifiers actionModifier) {
 
     }
 
     @Override
-    public void defend() {
+    public void defend(ActionModifiers actionModifiers) {
 
     }
-
-    public void update() {
-
-    }
-
 
     public static void main(String[] args) {
 
@@ -325,4 +323,5 @@ public class Army extends Entity implements Fighter {
     public UnitStats getArmyStats() {
         return armyStats;
     }
+
 }

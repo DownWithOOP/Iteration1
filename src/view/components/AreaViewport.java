@@ -14,8 +14,10 @@ public class AreaViewport extends JPanel {
 
     private Location mapCenter;
 
-    private int numTileRows;
-    private int numTileCols;
+    private static final int NUM_TILE_ROWS = 5;
+    private static final int NUM_TILE_COLS = 5;
+    private final int TILE_HEIGHT;
+    private final int TILE_WIDTH;
 
     private static final String armyImagePath = "res/images/army.png";
     private static final String baseImagePath = "res/images/base.png";
@@ -32,20 +34,22 @@ public class AreaViewport extends JPanel {
     private GridBagConstraints constraints;
 
 
-    public AreaViewport(GridBagLayout layout, Rectangle bounds, Map initialMap, Location initialLocation){
+    public AreaViewport(GridBagLayout layout, Rectangle mainViewBounds, Map initialMap, Location initialLocation){
         super(layout);
 
         setOpaque(false);
-        //TODO remove hard coded dimensions
+
+        this.bounds = mainViewBounds;
         setPreferredSize(new Dimension((int)bounds.getWidth(),(int)bounds.getHeight()));
 
         constraints = new GridBagConstraints();
 
         //TODO find way to either get bounds properly or work around the fact that we don't know bounds
-        numTileRows = initialMap.getWidth(); //(int) bounds.getHeight() / get;
-        numTileCols = initialMap.getHeight(); //(int) bounds.getWidth();
+        System.out.println(initialMap.getWidth() + "," + initialMap.getHeight());
+        TILE_WIDTH = (int) bounds.getWidth()/NUM_TILE_COLS;
+        TILE_HEIGHT = (int) bounds.getHeight()/NUM_TILE_ROWS;
 
-        tiles = new TilePanel[numTileRows][numTileCols];
+        tiles = new TilePanel[NUM_TILE_ROWS][NUM_TILE_COLS];
 
         mapCenter = initialLocation;
 
@@ -67,37 +71,37 @@ public class AreaViewport extends JPanel {
 
     private void updateTiles(Map map) {
         System.out.println("SIZE IS HUUUUUUUUUUUUUUUGE" + getSize());
-        for (int row = 0; row < numTileRows; ++row){
-            for (int col = 0; col < numTileCols; ++col){
+        for (int row = 0; row < NUM_TILE_ROWS; ++row){
+            for (int col = 0; col < NUM_TILE_COLS; ++col){
                 if(tiles[row][col] != null) {
                     remove(tiles[row][col]);
                 }
                 //TODO handle when actualYCoord and actualXCoord go off of the map
                 System.out.println(mapCenter);
                 System.out.println("row: " + row + "col: " + col);
-                int actualXCoord = mapCenter.getxCoord() - ( numTileCols/2 - col);
-                int actualYCoord = mapCenter.getyCoord() - ( numTileRows/2 - row);
+                int actualXCoord = mapCenter.getxCoord() - ( NUM_TILE_COLS /2 - col);
+                int actualYCoord = mapCenter.getyCoord() - ( NUM_TILE_ROWS /2 - row);
                 if (actualXCoord < 0 || actualYCoord < 0){
-                    actualXCoord = numTileCols/2;
-                    actualYCoord = numTileRows/2;
+                    actualXCoord = NUM_TILE_COLS /2;
+                    actualYCoord = NUM_TILE_ROWS /2;
                 }
                 System.out.println("x: " + actualXCoord + "y: " + actualYCoord);
                 Tile currentTile = map.getTile(actualYCoord, actualXCoord);
                 switch (currentTile.getTerrain().getTerrainType()){
                     case DIRT:
-                        tiles[row][col] = new TilePanel(dirtImagePath);
+                        tiles[row][col] = new TilePanel(dirtImagePath, TILE_WIDTH, TILE_HEIGHT);
                         break;
                     case CRATER:
-                        tiles[row][col] = new TilePanel(craterImagePath);
+                        tiles[row][col] = new TilePanel(craterImagePath, TILE_WIDTH, TILE_HEIGHT);
                         break;
                     case GRASS:
-                        tiles[row][col] = new TilePanel(grassImagePath);
+                        tiles[row][col] = new TilePanel(grassImagePath, TILE_WIDTH, TILE_HEIGHT);
                         break;
                     case WATER:
-                        tiles[row][col] = new TilePanel(waterImagePath);
+                        tiles[row][col] = new TilePanel(waterImagePath, TILE_WIDTH, TILE_HEIGHT);
                         break;
                     default:
-                        tiles[row][col] = new TilePanel(dirtImagePath);
+                        tiles[row][col] = new TilePanel(dirtImagePath, TILE_WIDTH, TILE_HEIGHT);
                         break;
                 }
                 if (currentTile.hasEntity()){

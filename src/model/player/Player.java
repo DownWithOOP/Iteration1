@@ -86,6 +86,9 @@ public class Player extends ContainsActions {
     @Override
     public void resume() {
         addAvailableActions();
+        for(int i = 0; i < allEntities.size(); i++){
+            allEntities.get(i).executeCommand();
+        }
     }
 
     @Override

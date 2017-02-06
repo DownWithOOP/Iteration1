@@ -6,6 +6,8 @@ import model.actions.ActionModifiers;
 import model.actions.ContainsActions;
 import model.actions.playerActions.EntityAction;
 import model.common.Location;
+import model.entity.unit.Explorer;
+import model.map.Map;
 import model.player.Player;
 import model.entity.EntityID;
 import model.entity.unit.EntityType;
@@ -59,8 +61,6 @@ abstract public class Entity extends ContainsActions {
      * assumes this gets called once a turn
      */
     public void executeCommand(){
-        //if the currentAction turn tracker is 0, execute and pop another action from the queue, else
-        //decrement currentAction
 
         if (currentAction == null){
             pollAction();
@@ -70,6 +70,7 @@ abstract public class Entity extends ContainsActions {
             currentAction.execute();
             currentAction = null;
             pollAction();
+            currentActionTurnTracker--;
         } else if(currentActionTurnTracker > 0) {
             currentActionTurnTracker--;
         }
@@ -171,4 +172,5 @@ abstract public class Entity extends ContainsActions {
     public void setIsPoweredDown(boolean poweredDown) {
         isPoweredDown = poweredDown;
     }
+
 }

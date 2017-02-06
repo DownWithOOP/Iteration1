@@ -345,7 +345,7 @@ public class ComplexDataStructure {
         melee.joinArmy(army);
         melee1.joinArmy(army);
         melee2.joinArmy(army);
-        Base base = new Base(new StructureStats(5, 5, 5, 5, 5, 5, 5, 5), new Location(3, 1), new Player("hello", new Map()));
+        Base base = new Base(new StructureStats(5, 5, 5, 5, 5, 5, 5), new Location(3, 1), new Player("hello", new Map()));
 
         boolean check = false;
         check = complexDataStructure.addEntity(explorer1);

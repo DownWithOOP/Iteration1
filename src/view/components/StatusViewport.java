@@ -46,8 +46,26 @@ public class StatusViewport extends JPanel {
             case STRUCTURE:
                 statsLabels = new JLabel[((Structure) selectedEntity).getStructureStats().getSize()];
                 break;
-            default: //TODO ??
+            case MELEE:
+                statsLabels = new JLabel[((Unit) selectedEntity).getUnitStats().getSize()];
+                break;
+            case RANGED:
+                statsLabels = new JLabel[((Unit) selectedEntity).getUnitStats().getSize()];
+                break;
+            case EXPLORER:
+                statsLabels = new JLabel[((Unit) selectedEntity).getUnitStats().getSize()];
+                break;
+            case COLONIST:
+                statsLabels = new JLabel[((Unit) selectedEntity).getUnitStats().getSize()];
+                break;
+            case BASE:
                 statsLabels = new JLabel[((Structure) selectedEntity).getStructureStats().getSize()];
+                break;
+            case RALLYPOINT:
+                statsLabels = new JLabel[1];
+                break;
+            default: //TODO ??
+                statsLabels = new JLabel[1];
                 break;
         }
 
@@ -72,7 +90,7 @@ public class StatusViewport extends JPanel {
         int labelIndex = 0;
         while (resourceLevelsItr.hasNext()){
             Map.Entry pair  = (Map.Entry)resourceLevelsItr.next();
-            resourceLabels[labelIndex].setText(pair.getValue().toString());
+            resourceLabels[labelIndex] = new JLabel(pair.getValue().toString());
             ++labelIndex;
         }
     }

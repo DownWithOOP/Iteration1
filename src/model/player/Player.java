@@ -52,22 +52,21 @@ public class Player extends ContainsActions {
     private ComplexDataStructure complexDataStructure= new ComplexDataStructure();
     private Entity selectedEntity;
 
-    private HashMap<Integer, Action> actionMap;
-    private HashMap<TypeOfActions, Action> playerActionMap = new HashMap<>();                           // Where all the actions the player is going to perform are found
+    private java.util.HashMap<Integer, Action> actionMap = new HashMap<>();
+    private java.util.HashMap<TypeOfActions, Action> playerActionMap = new HashMap<>();                           // Where all the actions the player is going to perform are found
 
     private Map playerMap;
 
     /**
      * Resource levels
      */
-    private HashMap<ResourceType, Integer> resourceLevelsMap;
+    private java.util.Map<ResourceType, Integer> resourceLevelsMap = new HashMap<>();
 
     public Player(String playerId, Map playerMap) {
         allEntities = new EntityList<Entity>();
         units = new ArrayList<Unit>();
         structures = new ArrayList<Structure>();
         armies = new ArrayList<Army>();
-        actionMap = new HashMap<Integer, Action>();
         this.playerMap = playerMap;
 
         initializeResourceMap();

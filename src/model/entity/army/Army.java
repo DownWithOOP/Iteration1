@@ -61,10 +61,6 @@ public class Army extends Entity implements Fighter {
 
     }
 
-    @Override
-    public Location getLocation() {
-        return null;
-    }
 
     /**
      * Actions
@@ -359,6 +355,10 @@ public class Army extends Entity implements Fighter {
              Location tempLocation = pathqueue.poll();
             moveBattleGroup(tempLocation);
         }
+    }
+    @Override
+    public Location getLocation(){
+        return rallyPoint.getLocation();
     }
 
 

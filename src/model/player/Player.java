@@ -80,7 +80,7 @@ public class Player extends ContainsActions {
         addUnit(new Explorer(this, new Location(3, 1)));
         addUnit(new Explorer(this, new Location(4, 4)));
         addUnit(new Colonist(this, new Location(2, 2)));
-        complexDataStructure.addEntity(new Army(this,new Location(0,0)));
+        addArmy(new Army(this,new Location(0,0)));
 
         this.playerId = playerId;
         initializePlayer();                                         /** do not delete this */

@@ -136,6 +136,11 @@ public class Army extends Entity implements Fighter {
 
     }
 
+    //TODO:IMPLEMENT THIS METHOD
+    public void createArmy(){
+
+    }
+
     public boolean moveRallyPoint(ActionModifiers actionModifiers) {
 //      TODO:HERE I AM TOMORROW CONTINUE
         rallyPoint.moveRallyPoint(actionModifiers);
@@ -305,11 +310,18 @@ public class Army extends Entity implements Fighter {
     }
     public List<List<Entity>> getCircleTypeList(){
         List<List<Entity>> circleTypeList= new ArrayList<>();
-        circleTypeList.add(0,getWholeArmy());                                                  //Whole=0, Battle=1, Reinf=2
+        circleTypeList.add(0,getWholeArmy());
         circleTypeList.add(1,getBattleGroup());
         circleTypeList.add(2,getReinforcements());
 
         return  circleTypeList;
+    }
+    public RallyPoint getRallyPoint(){
+        return rallyPoint;
+    }
+
+    public UnitStats getArmyStats() {
+        return armyStats;
     }
 
 }

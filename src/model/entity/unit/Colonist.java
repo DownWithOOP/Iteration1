@@ -3,8 +3,10 @@ package model.entity.unit;
 import controllers.keyboardInputHandler.TypeOfActions;
 import model.actions.Action;
 import model.common.Location;
+import model.entity.stats.StructureStats;
 import model.entity.stats.UnitStats;
 import model.entity.structure.Base;
+import model.map.Map;
 import model.player.Player;
 
 import java.util.HashMap;
@@ -30,8 +32,21 @@ public class Colonist extends FighterUnit {
          * */
     }
 
-//    public Base buildStructure(int rowPosition, int columnPosition) {
-//        return new Base(new structureStats(),rowPosition, columnPosition);
-//    }
+    public boolean buildStructure(int rowPosition, int columnPosition) {
+//        if (getPlayer().getPlayerMap().getTile(getCurrentLocation().getxCoord(), getC))
+        Base base = new Base(new StructureStats(10, 7, 15, 100, 5, 3, 8),
+                             new Location(rowPosition, columnPosition),
+                             getPlayer());
+        return getPlayer().addStructure(base);
+    }
+
+    public static void main(String[] args) {
+        Player player = new Player("1", new Map());
+        for (int i = 0; i < 12; i++) {
+            Colonist colonist = new Colonist(player, new Location(0,0));
+            player.addUnit(colonist);
+            colonist.buildStructure(0,0);
+        }
+    }
 
 }

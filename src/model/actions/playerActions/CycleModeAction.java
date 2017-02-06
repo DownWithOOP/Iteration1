@@ -10,10 +10,8 @@ public class CycleModeAction extends PlayerAction {
         super(player);
     }
 
-    public void execute() { }
-
-    @Override
-    public void applyModifier(ActionModifiers actionModifier) {
-
+    public void execute() {
+        player.cycleMode(actionModifier);
     }
+
 }

@@ -40,6 +40,7 @@ public class Army extends Entity implements Fighter {
     HashMap<EntityID, FighterUnit> reinforcements = new HashMap<>();
     HashMap<EntityID, FighterUnit> battleGroup = new HashMap<>();
     private RallyPoint rallyPoint;
+    private Queue<Location> pathqueue=new LinkedList<>();
 
 //    private int
 //    private int
@@ -136,6 +137,10 @@ public class Army extends Entity implements Fighter {
 
     }
 
+    public void setPathQueue(Queue<Location> queue){
+        pathqueue=queue;
+    }
+
     //TODO:IMPLEMENT THIS METHOD
     public void createArmy(){
 
@@ -226,8 +231,11 @@ public class Army extends Entity implements Fighter {
 
     }
 //TODO: IMPLEMENT THIS METHOD, VERY IMPORTANT!!!!!!
-    private void moveBattleGroup() {
-
+    private void moveBattleGroup(Location nextTile) {
+        for (FighterUnit fighterUnit:
+             battleGroup.values()) {
+            fighterUnit.moveUnitArmy(nextTile);
+        }
     }
 
     public void arrivedRallyPoint(FighterUnit fighterUnit){
@@ -323,5 +331,21 @@ public class Army extends Entity implements Fighter {
     public UnitStats getArmyStats() {
         return armyStats;
     }
+
+    @Override
+    public void executeCommand(){
+        if (!pathqueue.isEmpty()){
+            moveArmy();
+        }
+    }
+
+    private void moveArmy(){
+        for (int i=0; i<armyStats.getMovement(); i++) {
+             Location tempLocation = pathqueue.poll();
+            moveBattleGroup(tempLocation);
+        }
+
+    }
+
 
 }

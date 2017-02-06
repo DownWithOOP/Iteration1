@@ -124,14 +124,14 @@ public class ComplexDataStructure {
     }
 
 
-    public int next(int size, int index) {
+    public static int next(int size, int index) {
         index++;
         index %= size;
 
         return index;
     }
 
-    public int previous(int size, int index) {
+    public static int previous(int size, int index) {
         index--;
         if (index < 0) {
             index = size - 1;

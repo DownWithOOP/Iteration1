@@ -78,6 +78,9 @@ public class RallyPoint extends ContainsActions {
         }
     }
 
+    public void selectLocation(){
+        army.setPathQueue(pathQueue);
+    }
 
     @Override
     public void resume() {

@@ -40,14 +40,9 @@ public abstract class FighterUnit extends Unit implements Fighter{
      * Actions
      */
 
-    @Override
-    public boolean moveUnit(int x, int y) {
-//        this.setCurrentLocation(x,y);
-//        setCurrentPath(this.getPlayer().getPlayerMap().findPath(getCurrentLocation(), new Location(x,y)));
-//        for(Location location: this.getCurrentPath()) {
-//           // this.addToQueue();
-//        }
-        return true;
+
+    public void moveUnitArmy(Location nextTile) {
+        this.setCurrentLocation(nextTile.getxCoord(),nextTile.getyCoord());
     }
 
     @Override

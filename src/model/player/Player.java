@@ -51,6 +51,7 @@ public class Player extends ContainsActions {
     private ComplexDataStructure complexDataStructure = new ComplexDataStructure();
     private Entity selectedEntity = null;
     private RallyPoint selectedRallyPoint = null;
+    private Action selectedAction=null;
 
     private java.util.HashMap<Integer, Action> actionMap = new HashMap<>();
     private java.util.HashMap<TypeOfActions, Action> playerActionMap = new HashMap<>();                           // Where all the actions the player is going to perform are found
@@ -223,6 +224,9 @@ public class Player extends ContainsActions {
     public Entity getSelectedEntity() {
         return selectedEntity;
     }
+    public RallyPoint getSelectedRallyPoint(){
+        return selectedRallyPoint;
+    }
 
     public Map getPlayerMap() {
         return playerMap;
@@ -265,7 +269,11 @@ public class Player extends ContainsActions {
         selectedEntity=complexDataStructure.circleMode(tempArrayAction);
         if (selectedEntity==null){
             selectedRallyPoint=complexDataStructure.getRallypoint();
+            selectedRallyPoint.resume();
+        }else{
+            selectedEntity.resume();
         }
+
     }
 
     public void cycleTypes(ActionModifiers actionModifier) {
@@ -347,5 +355,17 @@ public class Player extends ContainsActions {
             player.addUnit(new Ranged(player, new Location(0,0)));
         }
     }
+
+    public void setSelectedAction(Action action){
+        selectedAction= action;
+    }
+    public Action getSelectedAction(){
+        return selectedAction;
+    }
+    public void performSelectedAction(){
+        selectedAction.execute();
+    }
+
+
 
 }

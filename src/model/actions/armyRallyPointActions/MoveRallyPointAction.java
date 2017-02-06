@@ -29,6 +29,10 @@ public class MoveRallyPointAction implements Action {
         execute();
     }
 
+    public void selectLocation(){
+        rallyPoint.selectLocation();
+    }
+
     public static void main(String[] args) {
         RallyPoint rallyPoint= new RallyPoint(new Location(1,2), new Army(new Player("hello", new Map()),new Location(1,2)));
         MoveRallyPointAction moveRallyPointAction=new MoveRallyPointAction(rallyPoint);

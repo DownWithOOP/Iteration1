@@ -10,11 +10,9 @@ public class CycleInstanceAction extends PlayerAction {
             super(player);
     }
 
-    public void execute() {  }
-
-    @Override
-    public void applyModifier(ActionModifiers actionModifier) {
-
+    public void execute() {
+        player.cycleInstance(actionModifier);
     }
+
 
 }

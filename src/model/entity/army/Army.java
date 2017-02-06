@@ -65,7 +65,7 @@ public class Army extends Entity implements Fighter {
 
     @Override
     public Location getLocation() {
-        return null;
+        return rallyPoint.getLocation();
     }
 
     /**

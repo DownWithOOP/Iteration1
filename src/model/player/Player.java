@@ -74,12 +74,11 @@ public class Player extends ContainsActions {
 
         //Each player starts the game with 2 Explorers and 1 Colonist
         //TODO:CHECKOUT THESE COORDINATES
+
         addUnit(new Explorer(this, new Location(3, 1)));
         addUnit(new Explorer(this, new Location(4, 4)));
         addUnit(new Colonist(this, new Location(2, 2)));
-        //addStructure(new Base(new StructureStats(10, 7, 15, 100, 5, 3, 8),
-                //new Location(2, 1),
-                //this)); //TODO: Temporary structure -- delete later!
+
         this.playerId = playerId;
         initializePlayer();                                         /** do not delete this */
         selectedEntity = units.get(0); //TODO delet this

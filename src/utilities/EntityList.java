@@ -10,12 +10,12 @@ import java.util.ArrayList;
  */
 public class EntityList<Entity> extends ArrayList<Entity> {
 
-    private int numUnits;
-    private int numStructures;
-    private int numColonists;
-    private int numExplorers;
-    private int numMelee;
-    private int numRanged;
+    private int numUnits = 0;
+    private int numStructures = 0;
+    private int numColonists = 0;
+    private int numExplorers = 0;
+    private int numMelee = 0;
+    private int numRanged = 0;
 
     /**
      * Keeps track of numbers of different types of entities.
@@ -27,13 +27,13 @@ public class EntityList<Entity> extends ArrayList<Entity> {
             numStructures++;
         } else {
             numUnits++;
-            if (((Unit) e).getEntityID().getId().equals(EntityType.COLONIST.toString())) {
+            if (((Unit) e).getEntityID().getEntityType().equals(EntityType.COLONIST.toString())) {
                 numColonists++;
-            } else if (((Unit) e).getEntityID().getId().equals(EntityType.EXPLORER.toString())) {
+            } else if (((Unit) e).getEntityID().getEntityType().equals(EntityType.EXPLORER.toString())) {
                 numExplorers++;
-            } else if (((Unit) e).getEntityID().getId().equals(EntityType.MELEE.toString())) {
+            } else if (((Unit) e).getEntityID().getEntityType().equals(EntityType.MELEE.toString())) {
                 numMelee++;
-            } else if (((Unit) e).getEntityID().getId().equals(EntityType.RANGED.toString())) {
+            } else if (((Unit) e).getEntityID().getEntityType().equals(EntityType.RANGED.toString())) {
                 numRanged++;
             }
         }

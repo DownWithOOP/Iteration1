@@ -47,5 +47,10 @@ public class XMLParser {
         return tileList;
     }
 
+    public String getMapAttribute(String attrName){
+        Node node = doc.getElementsByTagName("Map").item(0);
+        return  ((Element) node).getAttribute(attrName);
+    }
+
 
 }

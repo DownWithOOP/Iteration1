@@ -127,6 +127,7 @@ public class ComplexDataStructure {
 
 
     public static int next(int size, int index) {
+
         index++;
         index %= size;
 
@@ -194,7 +195,7 @@ public class ComplexDataStructure {
 
     public Entity circleInstances(ArrayAction arrayAction) {
 
-        if (currentMode == null) {
+        if (currentMode == null || currentMode.get(circleTypeIndex).size()==0) {
             return null;
         }
         if (arrayAction == ArrayAction.increment) {

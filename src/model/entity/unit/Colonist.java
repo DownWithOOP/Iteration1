@@ -3,6 +3,7 @@ package model.entity.unit;
 import controllers.keyboardInputHandler.TypeOfActions;
 import model.actions.Action;
 import model.common.Location;
+import model.entity.stats.StructureStats;
 import model.entity.stats.UnitStats;
 import model.entity.structure.Base;
 import model.player.Player;
@@ -38,7 +39,7 @@ public class Colonist extends FighterUnit {
 
 
 //    public Base buildStructure(int rowPosition, int columnPosition) {
-//        return new Base(new structureStats(),rowPosition, columnPosition);
+//        return new Base(new StructureStats(),rowPosition, columnPosition);
 //    }
 
 }

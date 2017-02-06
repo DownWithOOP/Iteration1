@@ -120,6 +120,7 @@ public class Player extends ContainsActions {
     public boolean addStructure(Structure structure) {
         complexDataStructure.addEntity(structure);
         if (structures.size() < MAX_STRUCTURES) {
+            System.out.println("ADDED STRUCTURE");
             return structures.add(structure) && allEntities.add(structure);
         }
         System.out.println("Too many structures!");
@@ -155,10 +156,10 @@ public class Player extends ContainsActions {
                     }
                     break;
                 default:
-                    System.out.println("FAIL");
+                    System.out.println("FAILED TO ADD UNIT");
                     return false;
             }
-            System.out.println("SUCCESS");
+            System.out.println("ADDED UNIT");
             return units.add(unit) && allEntities.add(unit);
         }
         System.out.println("Too many Units!");

@@ -11,7 +11,7 @@ public class Stats {
 
     protected int size;
 
-    public Stats(int offensiveDamage, int defensiveDamage, int armor, int movement, int health, int upkeep, int visionRadius) {
+    public Stats(int offensiveDamage, int defensiveDamage, int armor, int health, int upkeep, int visionRadius) {
         size = 0;
         this.offensiveDamage = offensiveDamage;
         ++size;

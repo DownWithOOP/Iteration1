@@ -13,8 +13,8 @@ public class TilePanel extends JPanel {
     private BufferedImage tileImage;
     private Rectangle bounds;
 
-    private static final int TILE_WIDTH = 250;
-    private static final int TILE_HEIGHT = 250;
+    private static final int TILE_WIDTH = 200;
+    private static final int TILE_HEIGHT = 200;
 
     public TilePanel(String filename) {
 

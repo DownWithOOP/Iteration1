@@ -12,15 +12,35 @@ import model.map.Map;
 import model.player.Player;
 import view.View;
 import view.components.AreaViewport;
+import view.components.StatusViewport;
 
 
 public class MainView extends View {
 
     private AreaViewport areaViewport;
+    private StatusViewport statusViewport;
 
-    public MainView(RenderObject initialRenderInfo){
+    public MainView(GridBagLayout layout, RenderObject initialRenderInfo){
+        super(layout);
+        setOpaque(false);
+
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.anchor = GridBagConstraints.NORTHWEST;
+        constraints.fill = GridBagConstraints.VERTICAL;
+        constraints.weighty = 1;
+
+        statusViewport = new StatusViewport();
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        this.add(statusViewport, constraints);
+
         areaViewport = new AreaViewport(new GridBagLayout(), initialRenderInfo.getMap(), initialRenderInfo.getPlayer().getPlayerLocation());
-        this.add(areaViewport);
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.weightx = 0.65;
+        constraints.gridx = 1;
+        constraints.gridy = 0;
+        this.add(areaViewport, constraints);
+
     }
 
     @Override
@@ -49,12 +69,16 @@ public class MainView extends View {
     }
 
     public void paintComponent(Graphics g){
+
         super.paintComponent(g);
+        //areaViewport.paintComponent(g);
+        //statusViewport.paintComponent(g);
+
         g.setFont(new Font("TimesRoman", Font.BOLD, 200));
         g.setColor(Color.BLACK);
         Toolkit tool = Toolkit.getDefaultToolkit();
         Image image = tool.getImage("res/images/background1.jpg"); //TODO wrap file opening in try catch
-        g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+        g.drawImage(image, 0, 0, this);
         g.setFont(new Font("TimesRoman", Font.BOLD, (int)(super.getWidth()*0.05)));
         g.setColor(Color.WHITE);
 
@@ -92,8 +116,6 @@ public class MainView extends View {
 
         g.drawString("-Area ViewPort-",(int)(super.getWidth()*0.45),(int)(super.getHeight()*0.05));
 
-        areaViewport.paintComponent(g);
-        //statusViewport.paintComponent(g);
     }
 
 

@@ -20,13 +20,16 @@ public class MoveRallyPointAction implements Action {
 
     @Override
     public void execute() {
-        rallyPoint.moveRallyPoint(actionModifier);
+        selectLocation();
     }
 
     @Override
     public void applyModifier(ActionModifiers actionModifier) {
         this.actionModifier=actionModifier;
-        execute();
+        moveRallyPoint();
+    }
+    private void moveRallyPoint(){
+        rallyPoint.moveRallyPoint(actionModifier);
     }
 
     public void selectLocation(){

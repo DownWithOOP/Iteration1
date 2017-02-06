@@ -9,13 +9,25 @@ import java.util.Map;
  */
 public class AvailableActions {
     private HashMap<TypeOfActions, Action> actionMap = new HashMap<>();
-
+    Action selectedAction=null;
 
     //Todo:fix applyModifier
     public void executeAction(TypeOfActions typeOfAction, ActionModifiers actionModifiers) {
+
+        if (typeOfAction==TypeOfActions.north|| typeOfAction== TypeOfActions.south|| typeOfAction== TypeOfActions.east ||typeOfAction== TypeOfActions.west){
+            selectedAction.applyModifier(actionModifiers);
+        }
+
         if (actionMap.containsKey(typeOfAction)) {
             actionMap.get(typeOfAction).applyModifier(actionModifiers);
         }
+    }
+
+    public void addSelectedAction(Action selectedAction){
+        this.selectedAction=selectedAction;
+    }
+    public void removeSelectedAction(){
+        selectedAction=null;
     }
 
     public void addActions(ContainsActions actionRelatedClasses) {

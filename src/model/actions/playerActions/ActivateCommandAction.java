@@ -18,8 +18,5 @@ public class ActivateCommandAction extends PlayerAction {
             player.getSelectedAction().execute();
             player.setSelectedAction(null);
         }
-        else{
-
-        }
     }
 }

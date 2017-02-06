@@ -5,10 +5,7 @@ import controllers.keyboardInputHandler.TypeOfActions;
 import model.actions.Action;
 import model.actions.ActionModifiers;
 import model.actions.ContainsActions;
-import model.actions.playerActions.CycleCommandAction;
-import model.actions.playerActions.CycleInstanceAction;
-import model.actions.playerActions.CycleModeAction;
-import model.actions.playerActions.CycleTypeAction;
+import model.actions.playerActions.*;
 import model.common.Location;
 import model.entity.Entity;
 import model.entity.army.Army;
@@ -109,10 +106,11 @@ public class Player extends ContainsActions {
     }
 
     protected void setPlayerActions() {
-        playerActionMap.put(TypeOfActions.abandonArmy.cycleCommand, new CycleCommandAction(this));
-        playerActionMap.put(TypeOfActions.abandonArmy.cycleCommand, new CycleInstanceAction(this));
-        playerActionMap.put(TypeOfActions.abandonArmy.cycleCommand, new CycleModeAction(this));
-        playerActionMap.put(TypeOfActions.abandonArmy.cycleCommand, new CycleTypeAction(this));
+        playerActionMap.put(TypeOfActions.cycleCommand, new CycleCommandAction(this));
+        playerActionMap.put(TypeOfActions.cycleTypeInstance, new CycleInstanceAction(this));
+        playerActionMap.put(TypeOfActions.cycleMode, new CycleModeAction(this));
+        playerActionMap.put(TypeOfActions.cycleType, new CycleTypeAction(this));
+        playerActionMap.put(TypeOfActions.activateCommand, new ActivateCommandAction(this));
     }
 
     /**
@@ -361,12 +359,19 @@ public class Player extends ContainsActions {
 
     public void setSelectedAction(Action action){
         selectedAction= action;
+        availableActions.addSelectedAction(selectedAction);
+
     }
     public Action getSelectedAction(){
         return selectedAction;
     }
     public void performSelectedAction(){
         selectedAction.execute();
+        deleteSelectedAction();
+    }
+    public void deleteSelectedAction(){
+        availableActions.removeSelectedAction();
+        selectedAction=null;
     }
 
 

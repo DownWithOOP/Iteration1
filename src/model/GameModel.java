@@ -2,6 +2,8 @@ package model;
 
 import model.actions.Action;
 import model.actions.AvailableActions;
+import model.common.RenderObject;
+import model.map.Map;
 import model.player.Player;
 
 import java.util.HashMap;
@@ -14,14 +16,21 @@ public class GameModel {
     private Player activePlayer;
     private HashMap<Integer, Action> actionMap;
     private HashMap<String, Player> players;
+    private Map map;
 
     public GameModel(){
         actionMap = new HashMap<>();
         players = new HashMap<>();
+        map = new Map();
+        players.put("player1", new Player("player1", map));
+        players.put("player2", new Player("player2", map));
+
+        //TODO remove this so it doesn't ruin everything for everyone
+        activePlayer = players.get("player1");
     }
 
     public void update(){
-
+        //graphicsInfo.update(activePlayer, activePlayer.getPlayerMap());
     }
 
     public boolean passAction(String action){
@@ -51,8 +60,11 @@ public class GameModel {
         return true;
     }
 
-    public Player getActivePlayer(){
-        return activePlayer;
+    /**
+     * Returns info from the model to be rendered.
+     */
+    public RenderObject getRenderObject(){
+        return new RenderObject(map, activePlayer);
     }
 
 }

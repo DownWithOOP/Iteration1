@@ -2,13 +2,12 @@ package model.map;
 
 import model.common.Location;
 import model.map.tile.*;
-import model.map.tile.areaEffect.AreaEffect;
-import model.map.tile.areaEffect.AreaEffectFactory;
+import model.map.tile.areaeffect.AreaEffect;
+import model.map.tile.areaeffect.AreaEffectFactory;
 import model.map.tile.item.ObstacleItem;
 import utilities.PathFinder;
 import utilities.XMLParser;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -27,6 +26,7 @@ public class Map {
 
     public Map(){
         tileArray = new Tile[GRID_HEIGHT][GRID_WIDTH];
+        obstacleGrid = new boolean[GRID_HEIGHT][GRID_WIDTH];
         ArrayList<Tile> tiles = retrieveTileList();
         createTileGrid(tiles);
     }
@@ -42,6 +42,18 @@ public class Map {
     }
 
     /**
+     * TODO
+     * @return
+     */
+    public int getWidth(){ return GRID_WIDTH; }
+
+    /**
+     * TODO
+     * @return
+     */
+    public int getHeight(){ return GRID_HEIGHT; }
+
+    /**
      * Utilizes path finding algorithm to tell a unit how to get to a particular area.
      * @param startPoint
      * @param endPoint
@@ -51,6 +63,7 @@ public class Map {
         PathFinder pathFinder = new PathFinder(obstacleGrid);
         return pathFinder.findPath(startPoint, endPoint);
     }
+
 
     /**
      * Obtains a list of tiles from an XML file.

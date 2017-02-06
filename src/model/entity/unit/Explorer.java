@@ -30,14 +30,12 @@ public class Explorer extends FighterUnit {
     }
 
 
-    public void findResource() {
-
-    }
-
     private void setExplorerActions(){
         /**
          *         explorerActions.put(TypeOfActions.powerUp,PowerUpAction(this));
          * */
     }
+
+
 
 }

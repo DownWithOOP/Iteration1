@@ -12,9 +12,12 @@ import model.actions.ActionModifiers;
 import model.actions.ContainsActions;
 import model.actions.controllerActions.ChangeViewAction;
 import model.common.Location;
+import model.common.RenderObject;
 import model.entity.stats.StructureStats;
 import model.entity.structure.Base;
 import model.entity.structure.Structure;
+import model.map.Map;
+import model.player.Player;
 import view.View;
 import view.types.MainView;
 
@@ -30,14 +33,15 @@ public class MainViewController extends GameController {
 
     private MainView mainView;
 
+    private GameModel gameModel;
+
     public MainViewController(StateManager stateManager) {
         super(stateManager);
 
-        /*
         startGameModel();
+        setView(gameModel.getRenderObject());
         initializeMainController();
-        a = new ChangeViewAction(this);
-        */
+        //a = new ChangeViewAction(this);
     }
 
     protected void initializeMainController() {
@@ -57,25 +61,32 @@ public class MainViewController extends GameController {
         //gameModel.update();
     }
 
+    @Override
+    protected void updateView() {
+
+    }
+
     //TODO: change public modifier
     @Override
     public void update() {
         updateGameModel();
-        updateView();
+        updateView(gameModel.getRenderObject());
     }
-
 
     @Override
     protected void setView() {
-        // this method is called when the class is initialized, we create our view that corresponds to the controller
-        this.mainView = new MainView();
 
     }
 
-    //TODO: view.update
-    @Override
-    protected void updateView() {
 
+    protected void setView(RenderObject renderInfo) {
+        // this method is called when the class is initialized, we create our view that corresponds to the controller
+        this.mainView = new MainView(new GridBagLayout(), renderInfo);
+
+    }
+
+    protected void updateView(RenderObject renderInfo) {
+        mainView.update(renderInfo);
     }
 
     @Override

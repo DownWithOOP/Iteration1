@@ -16,7 +16,7 @@ public class Resource {
     /**
      * Returns the specific resource
      */
-    private String getResourceType(){
+    public String getResourceType(){
         return resourceType.toString();
     }
 

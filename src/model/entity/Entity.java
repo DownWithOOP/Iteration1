@@ -24,6 +24,9 @@ abstract public class Entity extends ContainsActions {
     protected final HashMap<TypeOfActions, Action> entityActions = new HashMap<>();                //add all the Actions of an entity here
     private EntityType entityType;
 
+    private Action currentAction;
+    private int currentActionTurnTracker;
+
 //TODO: we need player to get the PlayerResources of the player and see if we can perform an action
     public Entity(Player player, EntityType entityType) {
         entityID = new EntityID(entityType);
@@ -32,6 +35,7 @@ abstract public class Entity extends ContainsActions {
         this.player = player;
         playerId=getPlayerId();
         this.entityType = entityType;
+        this.currentActionTurnTracker = 0;
     }
 
 
@@ -40,22 +44,56 @@ abstract public class Entity extends ContainsActions {
         addAllActions(entityActions);
     }
 
-
     protected void setEntityActions() {
         /**
          *         entityActions.put(TypeOfActions.powerUp,PowerUpAction(this));
          * */
     }
 
-    //TODO: Entity will perform an action and update any necessary stats/operations if needed
-    abstract public void update();
+    /**
+     * handles executing of commands lol
+     */
+    public void update(){
+        //if the currentAction turn tracker is 0, execute and pop another action from the queue, else
+        //decrement currentAction
+
+        if (currentAction == null){
+            pollAction();
+        }
+
+        if(currentActionTurnTracker == 0 && currentAction != null){
+            currentAction.execute();
+            currentAction = null;
+            pollAction();
+        } else if(currentActionTurnTracker > 0) {
+            currentActionTurnTracker--;
+        }
+    }
+
+    /**
+     * OOOH Jesus this is a little bad, basically we're assuming turns can either be integers or increments of 0.5
+     * so that being said, an action that takes 1.5 turns will finish executing by the second turn, but if
+     * there are two actions such as 1.5 and 2.5, the first one will finish by the second turn and the second
+     * one will finish by the 4th turn.
+     */
+    private void pollAction(){
+        if(!commandQueue.isEmpty()) {
+            currentAction = commandQueue.poll();
+            double numTurns = Math.ceil(currentAction.getTurns());
+            //if the current action has a half turn, and the next one has half a turn, take floor of next action turn
+            if(!commandQueue.isEmpty()) {
+                if (numTurns != currentAction.getTurns() && Math.ceil(commandQueue.peek().getTurns()) != commandQueue.peek().getTurns()) {
+                    commandQueue.peek().setTurns(Math.floor(commandQueue.peek().getTurns()));
+                }
+            }
+            currentActionTurnTracker = (int) Math.ceil(currentAction.getTurns());
+        }
+    }
+
     abstract public Location getLocation();
 
     public boolean addToQueue(Action action) {
-        if (commandQueue.add(action) == true) {
-            return true;
-        }
-        return false;   // adding command to queue was not successful
+        return commandQueue.add(action);
     }
 
     /**

@@ -244,24 +244,18 @@ public class Army extends Entity implements Fighter {
              battleGroup.values()) {
             fighterUnit.decommission();
         }
-        player.removeArmy(this);
-        return true;
+        return player.removeArmy(this);
     }
 
     @Override
-    public void attack() {
+    public void attack(ActionModifiers actionModifier) {
 
     }
 
     @Override
-    public void defend() {
+    public void defend(ActionModifiers actionModifiers) {
 
     }
-
-    public void update() {
-
-    }
-
 
     public static void main(String[] args) {
 
@@ -287,6 +281,5 @@ public class Army extends Entity implements Fighter {
         ranged1.setCurrentLocation(1,2);
 
     }
-
 
 }

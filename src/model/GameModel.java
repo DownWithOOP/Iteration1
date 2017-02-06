@@ -3,9 +3,11 @@ package model;
 import model.actions.Action;
 import model.actions.AvailableActions;
 import model.common.RenderObject;
+import model.entity.Entity;
 import model.map.Map;
 import model.player.Player;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**

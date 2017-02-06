@@ -17,11 +17,6 @@ public class Ranged extends FighterUnit {
         this.initializeRanged();
     }
 
-    @Override
-    public void update() {
-
-    }
-
     protected void initializeRanged() {
         setRangedActions();
         addAllActions(rangedActions);

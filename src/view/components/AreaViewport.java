@@ -17,6 +17,12 @@ public class AreaViewport extends JPanel {
     private int numTileRows;
     private int numTileCols;
 
+    private static final String armyImagePath = "res/images/army.png";
+    private static final String baseImagePath = "res/images/base.png";
+    private static final String colonistImagePath = "res/images/colonist.png";
+    private static final String explorerImagePath = "res/images/explorer.png";
+    private static final String meleeImagePath = "res/images/melee.png";
+    private static final String rangedImagePath = "res/images/ranged.png";
 
     private static final String waterImagePath = "res/images/water.png";
     private static final String craterImagePath = "res/images/crater.png";
@@ -77,7 +83,7 @@ public class AreaViewport extends JPanel {
                 }
                 System.out.println("x: " + actualXCoord + "y: " + actualYCoord);
                 Tile currentTile = map.getTile(actualYCoord, actualXCoord);
-                switch (currentTile.getTerrain().getTerrainType()) {
+                switch (currentTile.getTerrain().getTerrainType()){
                     case DIRT:
                         tiles[row][col] = new TilePanel(dirtImagePath);
                         break;
@@ -94,6 +100,31 @@ public class AreaViewport extends JPanel {
                         tiles[row][col] = new TilePanel(dirtImagePath);
                         break;
                 }
+                if (currentTile.hasEntity()){
+                    switch (currentTile.getEntity().getEntityID().getEntityType(0)){
+                        case ARMY:
+                            tiles[row][col].addEntityImage(armyImagePath);
+                            break;
+                        case BASE:
+                            tiles[row][col].addEntityImage(baseImagePath);
+                            break;
+                        case COLONIST:
+                            tiles[row][col].addEntityImage(colonistImagePath);
+                            break;
+                        case EXPLORER:
+                            tiles[row][col].addEntityImage(explorerImagePath);
+                            break;
+                        case MELEE:
+                            tiles[row][col].addEntityImage(meleeImagePath);
+                            break;
+                        case RANGED:
+                            tiles[row][col].addEntityImage(rangedImagePath);
+                            break;
+                        default:
+                            tiles[row][col].addEntityImage(meleeImagePath);
+                    }
+                }
+
                 //TODO look up image based on tile type
                 //TODO get entityID from tile and parse
                 constraints.gridx = row+1;

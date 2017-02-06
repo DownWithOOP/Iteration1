@@ -57,14 +57,15 @@ public class Map {
 
     /**
      * Utilizes path finding algorithm to tell a unit how to get to a particular area.
-     * @param startPoint
-     * @param endPoint
+     * @param startX
+     * @param startY
+     * @param endX
+     * @param endY
      * @return List of movements.
      */
-    public ArrayList<Location> findPath(Location startPoint, Location endPoint){
+    public ArrayList<Location> findPath(int startX, int startY, int endX, int endY){
         PathFinder pathFinder = new PathFinder(obstacleGrid);
-        //return pathFinder.findPath(startPoint, endPoint);
-        return null;
+        return pathFinder.findPath(startX, startY, endX, endY);
     }
 
     private String getMapProperties(String propertyName){

@@ -33,7 +33,7 @@ public class UnitView extends View  {
         g.setColor(Color.WHITE);
         g.drawString("-Unit View-",(int)(super.getWidth()*0.1),(int)(super.getHeight()*0.1));
         g.setFont(new Font("TimesRoman", Font.BOLD, (int)(super.getWidth()*0.01)));
-        g.drawString("1) Return to MainView",(int)(super.getWidth()*0.75),(int)(super.getHeight()*0.07));
+        g.drawString("m) Return to MainView",(int)(super.getWidth()*0.75),(int)(super.getHeight()*0.07));
         g.drawString("2) Assemble Army (TODO)",(int)(super.getWidth()*0.75),(int)(super.getHeight()*0.09));
         g.drawString("3) Disband Army (TODO)",(int)(super.getWidth()*0.75),(int)(super.getHeight()*0.11));
         g.drawString("Number of Units: "+units.size(),(int)(super.getWidth()*0.35),(int)(super.getHeight()*0.07));

@@ -4,7 +4,7 @@ import model.common.Location;
 import model.map.Map;
 import model.map.tile.Tile;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.*;
 
 public class AreaViewport extends JPanel {
@@ -17,6 +17,12 @@ public class AreaViewport extends JPanel {
     private int numTileRows;
     private int numTileCols;
 
+    private static final String armyImagePath = "res/images/army.png";
+    private static final String baseImagePath = "res/images/base.png";
+    private static final String colonistImagePath = "res/images/colonist.png";
+    private static final String explorerImagePath = "res/images/explorer.png";
+    private static final String meleeImagePath = "res/images/melee.png";
+    private static final String rangedImagePath = "res/images/ranged.png";
 
     private static final String waterImagePath = "res/images/water.png";
     private static final String craterImagePath = "res/images/crater.png";
@@ -26,12 +32,12 @@ public class AreaViewport extends JPanel {
     private GridBagConstraints constraints;
 
 
-    public AreaViewport(GridBagLayout layout, Map initialMap, Location initialLocation){
+    public AreaViewport(GridBagLayout layout, Rectangle bounds, Map initialMap, Location initialLocation){
         super(layout);
 
         setOpaque(false);
         //TODO remove hard coded dimensions
-        setPreferredSize(new Dimension(500,500));
+        setPreferredSize(new Dimension((int)bounds.getWidth(),(int)bounds.getHeight()));
 
         constraints = new GridBagConstraints();
 
@@ -43,8 +49,19 @@ public class AreaViewport extends JPanel {
 
         mapCenter = initialLocation;
 
+        //Fill to left of tiles
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.gridx = 0;
+        constraints.weightx = 1;
+        add(Box.createGlue(), constraints);
+
+        //Set up tiles
         updateTiles(initialMap);
 
+        //Fill to right of tiles
+        constraints.gridx +=1;
+        constraints.weightx =1;
+        add(Box.createGlue(), constraints);
         setVisible(true);
     }
 
@@ -66,7 +83,7 @@ public class AreaViewport extends JPanel {
                 }
                 System.out.println("x: " + actualXCoord + "y: " + actualYCoord);
                 Tile currentTile = map.getTile(actualYCoord, actualXCoord);
-                switch (currentTile.getTerrain().getTerrainType()) {
+                switch (currentTile.getTerrain().getTerrainType()){
                     case DIRT:
                         tiles[row][col] = new TilePanel(dirtImagePath);
                         break;
@@ -83,11 +100,36 @@ public class AreaViewport extends JPanel {
                         tiles[row][col] = new TilePanel(dirtImagePath);
                         break;
                 }
+                if (currentTile.hasEntity()){
+                    switch (currentTile.getEntity().getEntityID().getEntityType(0)){
+                        case ARMY:
+                            tiles[row][col].addEntityImage(armyImagePath);
+                            break;
+                        case BASE:
+                            tiles[row][col].addEntityImage(baseImagePath);
+                            break;
+                        case COLONIST:
+                            tiles[row][col].addEntityImage(colonistImagePath);
+                            break;
+                        case EXPLORER:
+                            tiles[row][col].addEntityImage(explorerImagePath);
+                            break;
+                        case MELEE:
+                            tiles[row][col].addEntityImage(meleeImagePath);
+                            break;
+                        case RANGED:
+                            tiles[row][col].addEntityImage(rangedImagePath);
+                            break;
+                        default:
+                            tiles[row][col].addEntityImage(meleeImagePath);
+                    }
+                }
+
                 //TODO look up image based on tile type
                 //TODO get entityID from tile and parse
-                constraints.gridx = row;
-                constraints.gridy = col;
-                constraints.insets = new Insets(5,0,5,0);
+                constraints.gridx = row+1;
+                constraints.gridy = col+1;
+                constraints.insets = new Insets(1,1,1,1);
                 constraints.fill = GridBagConstraints.BOTH;
                 constraints.weightx = 0.5;
                 constraints.weighty = 0.5;

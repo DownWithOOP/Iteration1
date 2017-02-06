@@ -52,10 +52,10 @@ public class StateManager implements KeyListener {
         activeController = controllerMap.get(TypeOfControllers.WelcomeViewController);
         // when the game starts, we want to be at the WelcomeViewController
         // so we update the current view in the GUI to the welcomeView
-        this.UpdateViewInGUI(this.controllerMap.get(TypeOfControllers.WelcomeViewController).returnViewToStateManager());
+        this.updateViewInGUI(this.controllerMap.get(TypeOfControllers.WelcomeViewController).returnViewToStateManager());
     }
 
-    private void UpdateViewInGUI(View updateViewToThis){
+    private void updateViewInGUI(View updateViewToThis){
         // we take the currenly active view, and the target view, and pass that to GUI.java to update
         this.gui.updateCurrentView(updateViewToThis);
     }
@@ -74,20 +74,6 @@ public class StateManager implements KeyListener {
 
     public void startGame() {
         gameOn = true;
-        /**
-         * TODO: is this where the players are initialized?
-         * TODO: just for testing i made 2 player objects
-         */
-
-        /**
-         * I initialized players in game model, so I hardcoded the playermap dimensions here - Cristian
-         */
-        activePlayers = new Player[2];
-        Player player1 = new Player("1", new Map());
-        Player player2 = new Player("2", new Map());
-        activePlayers[0] = player1;
-        activePlayers[1] = player2;
-
         // TODO:
         startGameLoop();
 
@@ -116,6 +102,7 @@ public class StateManager implements KeyListener {
      */
     private void update() {
         activeController.update();
+        gui.repaintCurrentView();
     }
 
 
@@ -128,7 +115,7 @@ public class StateManager implements KeyListener {
      * it uses the enum TypeOfControllers for the key
      */
     private void initializeControllers() {
-        MainViewController mainViewController = new MainViewController(this);
+        MainViewController mainViewController = new MainViewController(this, gui.getScreenWidth(), gui.getScreenHeight());
         StructureViewController structureViewController = new StructureViewController(this);
         UnitViewController unitViewController = new UnitViewController(this);
         WelcomeViewController welcomeViewController = new WelcomeViewController(this);
@@ -149,7 +136,7 @@ public class StateManager implements KeyListener {
             activeController = controller;
             controller.resume();
             // when the controllers are changed, we also want to update the GUI
-            this.UpdateViewInGUI(controllerMap.get(typeOfControllers).returnViewToStateManager());
+            this.updateViewInGUI(controllerMap.get(typeOfControllers).returnViewToStateManager());
         }
 
     }

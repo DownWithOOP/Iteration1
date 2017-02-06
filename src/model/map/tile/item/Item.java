@@ -8,9 +8,9 @@ import model.common.Location;
  */
 public abstract class Item {
 	public Location location;
-	public int itemType; //0 for ObstacleItem, 1 for OneShotItem
+	public ItemType itemType; //enums!
 	
-	public Item(Location location, int itemType){
+	public Item(Location location, ItemType itemType){
 		this.location = location;
 		this.itemType = itemType;
 	}
@@ -24,12 +24,11 @@ public abstract class Item {
         	this.location.setyCoord(yPosition);
 	}
 	
-	public int getItemType(){
+	public ItemType getItemType(){
 		return itemType;
 	}
 	
-	public void setItemType(int itemType){
+	public void setItemType(ItemType itemType){
 		this.itemType = itemType;
 	}
-
 }

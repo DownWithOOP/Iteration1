@@ -30,7 +30,7 @@ public class GameModel {
     }
 
     public void update(){
-        //graphicsInfo.update(activePlayer, activePlayer.getPlayerMap());
+        //renderInfo.update(activePlayer, activePlayer.getPlayerMap());
     }
 
     public boolean passAction(String action){

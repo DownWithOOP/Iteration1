@@ -10,10 +10,12 @@ public class CycleTypeAction extends PlayerAction {
         super(player);
     }
 
-    public void execute() {  }
+    public void execute() {
+        player.cycleTypes(actionModifier);
+    }
 
     @Override
-    public void applyModifier(ActionModifiers actionModifier) {
-
+    public String toString() {
+        return "Cycle Type";
     }
 }

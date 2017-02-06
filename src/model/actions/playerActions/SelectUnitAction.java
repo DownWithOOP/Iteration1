@@ -23,4 +23,9 @@ public class SelectUnitAction extends PlayerAction {
     public void applyModifier(ActionModifiers actionModifier) {
 
     }
+
+    @Override
+    public String toString() {
+        return "Select Unit";
+    }
 }

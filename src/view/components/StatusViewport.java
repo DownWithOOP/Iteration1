@@ -1,5 +1,7 @@
 package view.components;
 
+import model.actions.*;
+import model.actions.Action;
 import model.entity.Entity;
 import model.entity.army.Army;
 import model.entity.stats.Stats;
@@ -27,6 +29,7 @@ public class StatusViewport extends JPanel {
     private JLabel[] statsLabels;
     private JLabel[] resourceLabels;
     private JLabel playerLabel;
+    private JLabel actionLabel;
     private TilePanel entityPanel;
 
     private Entity selectedEntity;
@@ -44,22 +47,36 @@ public class StatusViewport extends JPanel {
 
         updateSelectedEntity(initialPlayer);
 
-        //Get inital data
         playerLabel = new JLabel(initialPlayer.getPlayerId());
-
+        //playerLabel. TODO change text size
+        if (initialPlayer.getSelectedAction() != null){
+            actionLabel = new JLabel("CurrentAction: " + initialPlayer.getSelectedAction().toString());
+        }
+        else{
+            actionLabel = new JLabel("No Action Selected");
+        }
 
         setPreferredSize(new Dimension((int)bounds.getWidth(),(int)bounds.getHeight()));
-        setBorder(BorderFactory.createLineBorder(Color.black, 50));
+        setBorder(BorderFactory.createLineBorder(Color.black, 5));
 
-        entityPanel = new TilePanel("", (int)bounds.getWidth(), (int)bounds.getHeight());
+        entityPanel = new TilePanel("", (int)bounds.getWidth(), (int)bounds.getHeight()/15);
 
         updatePlayerLabel(initialPlayer);
+        updateActionLabel(initialPlayer.getSelectedAction());
         updateResourceLabels(initialPlayer.getResourceLevels());
         updateStatLabels(selectedEntityStats.getStatsMap());
 
         addPlayerLabel();
+        addActionLabel();
         addResourceLabels();
         addStatLabels();
+        constraints.fill = GridBagConstraints.VERTICAL;
+        add(entityPanel, constraints);
+    }
+
+    private void addActionLabel() {
+        add(actionLabel, constraints);
+        constraints.gridy++;
     }
 
     private void addStatLabels() {
@@ -74,7 +91,6 @@ public class StatusViewport extends JPanel {
     private void addResourceLabels() {
         if (resourceLabels.length > 0) {
             for (int labelIndex = 0; labelIndex < resourceLabels.length; ++labelIndex) {
-                System.out.println(constraints.gridy);
                 add(resourceLabels[labelIndex], constraints);
                 this.constraints.gridy++;
             }
@@ -89,6 +105,16 @@ public class StatusViewport extends JPanel {
     private void updatePlayerLabel(Player updatedPlayer) {
         playerLabel.setText("Current Player: " + updatedPlayer.getPlayerId());
         playerLabel.setForeground(Color.CYAN);
+    }
+
+    private void updateActionLabel(Action selectedAction) {
+        if (selectedAction != null){
+            actionLabel.setText("Current Action:" + selectedAction.toString());
+        }
+        else{
+            actionLabel.setText("No Action Selected");
+        }
+        actionLabel.setForeground(Color.CYAN);
     }
 
     private void updateResourceLabels(Map<ResourceType, Integer> resourceLevels) {
@@ -117,8 +143,8 @@ public class StatusViewport extends JPanel {
     }
 
     public void update(Player updatedPlayer){
-        System.out.println("STATUS UPDATE");
         updatePlayerLabel(updatedPlayer);
+        updateActionLabel(updatedPlayer.getSelectedAction());
         updateResourceLabels(updatedPlayer.getResourceLevels());
         updateSelectedEntity(updatedPlayer);
         updateEntityPanel();
@@ -200,6 +226,5 @@ public class StatusViewport extends JPanel {
 
     public void paintComponent(Graphics g){
         super.paintComponent(g);//do I need this??? IDK
-        System.out.println("PAINTING STATUS VIEWPORT");
     }
 }

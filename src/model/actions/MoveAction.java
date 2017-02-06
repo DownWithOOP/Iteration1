@@ -27,4 +27,9 @@ public class MoveAction extends EntityAction {
     public void applyModifier(ActionModifiers actionModifier) {
 
     }
+
+    @Override
+    public String toString() {
+        return "Move";
+    }
 }

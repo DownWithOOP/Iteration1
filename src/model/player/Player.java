@@ -5,10 +5,7 @@ import controllers.keyboardInputHandler.TypeOfActions;
 import model.actions.Action;
 import model.actions.ActionModifiers;
 import model.actions.ContainsActions;
-import model.actions.playerActions.CycleCommandAction;
-import model.actions.playerActions.CycleInstanceAction;
-import model.actions.playerActions.CycleModeAction;
-import model.actions.playerActions.CycleTypeAction;
+import model.actions.playerActions.*;
 import model.common.Location;
 import model.entity.Entity;
 import model.entity.army.Army;
@@ -50,8 +47,13 @@ public class Player extends ContainsActions {
     private ArrayList<Unit> units;
     private ArrayList<Structure> structures;
     private ArrayList<Army> armies;
+
+    private RallyPoint selectedRallyPoint = null;
+    private Action selectedAction=null;
+
     private ComplexDataStructure complexDataStructure= new ComplexDataStructure();
     private Entity selectedEntity;
+
 
     private java.util.HashMap<Integer, Action> actionMap = new HashMap<>();
     private java.util.HashMap<TypeOfActions, Action> playerActionMap = new HashMap<>();                           // Where all the actions the player is going to perform are found
@@ -74,14 +76,16 @@ public class Player extends ContainsActions {
 
         //Each player starts the game with 2 Explorers and 1 Colonist
         //TODO:CHECKOUT THESE COORDINATES
-        addUnit(new Explorer(this, new Location(1, 1)));
-        addUnit(new Explorer(this, new Location(0, 0)));
-        addStructure(new Base(new StructureStats(10, 7, 15, 100, 5, 3, 8),
-                new Location(2, 1),
-                this)); //TODO: Temporary structure -- delete later!
+
+        addUnit(new Explorer(this, new Location(3, 1)));
+        addUnit(new Explorer(this, new Location(4, 4)));
+        addUnit(new Colonist(this, new Location(2, 2)));
+        addArmy(new Army(this,new Location(0,0)));
+
         this.playerId = playerId;
         initializePlayer();                                         /** do not delete this */
         selectedEntity = units.get(0); //TODO delet this
+        //testing only
     }
 
     private void initializeResourceMap() {
@@ -105,10 +109,11 @@ public class Player extends ContainsActions {
     }
 
     protected void setPlayerActions() {
-        playerActionMap.put(TypeOfActions.abandonArmy.cycleCommand, new CycleCommandAction(this));
-        playerActionMap.put(TypeOfActions.abandonArmy.cycleCommand, new CycleInstanceAction(this));
-        playerActionMap.put(TypeOfActions.abandonArmy.cycleCommand, new CycleModeAction(this));
-        playerActionMap.put(TypeOfActions.abandonArmy.cycleCommand, new CycleTypeAction(this));
+        playerActionMap.put(TypeOfActions.cycleCommand, new CycleCommandAction(this));
+        playerActionMap.put(TypeOfActions.cycleTypeInstance, new CycleInstanceAction(this));
+        playerActionMap.put(TypeOfActions.cycleMode, new CycleModeAction(this));
+        playerActionMap.put(TypeOfActions.cycleType, new CycleTypeAction(this));
+        playerActionMap.put(TypeOfActions.activateCommand, new ActivateCommandAction(this));
     }
 
     /**
@@ -126,7 +131,7 @@ public class Player extends ContainsActions {
         complexDataStructure.addEntity(structure);
         if (structures.size() < MAX_STRUCTURES) {
             System.out.println("ADDED STRUCTURE");
-            getPlayerMap().getTile(structure.getFixedLocation().getxCoord(),structure.getFixedLocation().getyCoord()).setEntity(structure);
+            playerMap.getTile(structure.getFixedLocation().getxCoord(),structure.getFixedLocation().getyCoord()).setEntity(structure);
             return structures.add(structure) && allEntities.add(structure);
         }
         System.out.println("Too many structures!");
@@ -176,7 +181,10 @@ public class Player extends ContainsActions {
     public boolean addArmy(Army army) {
         complexDataStructure.addEntity(army);
         if (armies.size() < MAX_ARMIES) {
-            if (armies.add(army)) return true;
+            if (armies.add(army)) {
+                playerMap.getTile(army.getLocation().getxCoord(),army.getLocation().getyCoord()).setEntity(army);
+                return true;
+            }
         }
         return false;
     }
@@ -226,10 +234,18 @@ public class Player extends ContainsActions {
     public Entity getSelectedEntity() {
         return selectedEntity;
     }
+    public RallyPoint getSelectedRallyPoint(){
+        return selectedRallyPoint;
+    }
 
     public Map getPlayerMap() {return playerMap;}
 
-    public Location getPlayerLocation() {return selectedEntity.getLocation();}
+    public Location getPlayerLocation() {
+        if (selectedEntity!=null) {
+            return selectedEntity.getLocation();
+        }
+        return null;
+    }
 
     public int catfoodResourceLevel() {
         return resourceLevelsMap.get(ResourceType.CATFOOD);
@@ -259,16 +275,81 @@ public class Player extends ContainsActions {
     }
 
 
-    public void cycleBetweenEntities(ActionModifiers actionModifier) {
+
+    public void cycleMode(ActionModifiers actionModifier) {
+        ArrayAction tempArrayAction=getArrayActionUpDown(actionModifier);
+        selectedEntity=complexDataStructure.circleMode(tempArrayAction);
+        if (selectedEntity==null&& selectedRallyPoint!= null){
+            selectedRallyPoint=complexDataStructure.getRallypoint();
+            selectedRallyPoint.resume();
+        }else{
+            if (selectedEntity!=null) {
+                selectedEntity.resume();
+            }
+        }
 
     }
 
-    public void cycleThroughEntityTypes(ActionModifiers actionModifier) {
+    public void cycleTypes(ActionModifiers actionModifier) {
+        Entity tempentity = null;
+        ArrayAction tempArrayAction = getArrayActionLeftRight(actionModifier);
 
+        if (complexDataStructure.getRallypoint() == null) {
+            tempentity = complexDataStructure.circleType(tempArrayAction);
+            setSelectedEntity(tempentity);
+        }
     }
 
-    public void cycleThroughSpecificEntities(ActionModifiers actionModifier) {
+    public void cycleInstance(ActionModifiers actionModifier) {
+        ArrayAction tempArrayAction = getArrayActionLeftRight(actionModifier);
+        Entity tempEntity = null;
+        RallyPoint tempRallyPoint = null;
+        if (complexDataStructure.getRallypoint() == null) {
 
+            tempEntity = complexDataStructure.circleInstances(tempArrayAction);
+            setSelectedEntity(tempEntity);
+
+        } else {
+            tempRallyPoint = complexDataStructure.circleInstancesRallyPoint(tempArrayAction);
+            if (tempRallyPoint != null) {
+                selectedRallyPoint = tempRallyPoint;
+                selectedRallyPoint.resume();
+            }
+        }
+    }
+
+    //TODO: ARMY TO CALL THIS, THIS IS ONLY AN ACTION ARMY CAN PERFORM
+    public void switchBetweenArmies(ActionModifiers actionModifier){
+        complexDataStructure.switchArmy(actionModifier);
+    }
+
+    private void setSelectedEntity(Entity tempEntity) {
+        if (tempEntity != null) {
+            selectedEntity = tempEntity;
+            selectedEntity.resume();
+        }
+    }
+
+    private ArrayAction getArrayActionLeftRight(ActionModifiers actionModifier) {
+        ArrayAction temp = ArrayAction.increment;
+        if (actionModifier == ActionModifiers.right) {
+            temp = ArrayAction.increment;
+        }
+        if (actionModifier == ActionModifiers.left) {
+            temp = ArrayAction.decrement;
+        }
+        return temp;
+    }
+
+    private ArrayAction getArrayActionUpDown(ActionModifiers actionModifier) {
+        ArrayAction temp = ArrayAction.increment;
+        if (actionModifier == ActionModifiers.up) {
+            temp = ArrayAction.increment;
+        }
+        if (actionModifier == ActionModifiers.down) {
+            temp = ArrayAction.decrement;
+        }
+        return temp;
     }
 
     public void setPlayerMap(Map playerMap){
@@ -288,5 +369,24 @@ public class Player extends ContainsActions {
             player.addUnit(new Ranged(player, new Location(0,0)));
         }
     }
+
+    public void setSelectedAction(Action action){
+        selectedAction= action;
+        availableActions.addSelectedAction(selectedAction);
+
+    }
+    public Action getSelectedAction(){
+        return selectedAction;
+    }
+    public void performSelectedAction(){
+        selectedAction.execute();
+        deleteSelectedAction();
+    }
+    public void deleteSelectedAction(){
+        availableActions.removeSelectedAction();
+        selectedAction=null;
+    }
+
+
 
 }

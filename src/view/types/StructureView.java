@@ -34,10 +34,10 @@ public class StructureView extends View  {
         Image image = tool.getImage("res/images/Space2Cat.jpg");
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
         g.setFont(new Font("TimesRoman", Font.BOLD, (int)(super.getWidth()*0.05)));
-        g.setColor(Color.WHITE);
+        g.setColor(Color.CYAN);
         g.drawString("-Structure View-",(int)(super.getWidth()*0.1),(int)(super.getHeight()*0.1));
         g.setFont(new Font("TimesRoman", Font.BOLD, (int)(super.getWidth()*0.01)));
-        g.drawString("1) Return to MainView",(int)(super.getWidth()*0.85),(int)(super.getHeight()*0.06));
+        g.drawString("m) Return to MainView",(int)(super.getWidth()*0.85),(int)(super.getHeight()*0.06));
         g.drawString("2) Group (TODO)",(int)(super.getWidth()*0.85),(int)(super.getHeight()*0.08));
         g.drawString("3) Un-Group (TODO)",(int)(super.getWidth()*0.85),(int)(super.getHeight()*0.10));
         g.drawString("3) Do Something",(int)(super.getWidth()*0.85),(int)(super.getHeight()*0.12));

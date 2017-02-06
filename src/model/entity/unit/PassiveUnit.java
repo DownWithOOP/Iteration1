@@ -17,6 +17,11 @@ public class PassiveUnit extends Unit {
     }
 
     @Override
+    protected void handleEmptyQueue() {
+
+    }
+
+    @Override
     public Location getLocation() {
         return getCurrentLocation();
     }

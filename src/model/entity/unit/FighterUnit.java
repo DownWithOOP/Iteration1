@@ -15,6 +15,7 @@ import java.util.HashMap;
 public abstract class FighterUnit extends Unit implements Fighter{
     private Army army= null;
     protected final HashMap<TypeOfActions,Action> fighterActions= new HashMap<>();
+    private boolean inArmy = false;
 
     public FighterUnit(EntityType fighterUnitType, UnitStats fighterStats, Player player, Location location) {
         super(fighterUnitType,fighterStats, player, location);
@@ -42,6 +43,12 @@ public abstract class FighterUnit extends Unit implements Fighter{
      */
 
 
+
+    public void moveUnitArmy(Location nextTile) {
+        this.setCurrentLocation(nextTile.getxCoord(),nextTile.getyCoord());
+    }
+
+
     @Override
     public void attack(ActionModifiers actionModifier){
         //TODO: Add attack code
@@ -53,7 +60,9 @@ public abstract class FighterUnit extends Unit implements Fighter{
 
     public void abandonArmy() {
         army.removeFighter(this);
+        inArmy = false;
         //TODO: SET UNIT TO STANDBY
+        //TODO: ADD CONDITIONAL STATEMENT TO CHECK IF ENTITY IS PART OF AN ARMY--RECEIVES NULLPOINTEREXCEPTION OTHERWISE
     }
 
     public void joinArmy(Army army) {
@@ -63,6 +72,7 @@ public abstract class FighterUnit extends Unit implements Fighter{
         if (playerId==army.getPlayerId()){
             this.army=army;
             army.registerFighter(this);
+            inArmy = true;
         }
     }
 
@@ -80,6 +90,13 @@ public abstract class FighterUnit extends Unit implements Fighter{
     public boolean decommission(){
         abandonArmy();
         return super.decommission();
+    }
+
+    @Override
+    protected void handleEmptyQueue(){
+        if (inArmy){
+            arrivedToRallyPoint();
+        }
     }
 
 }

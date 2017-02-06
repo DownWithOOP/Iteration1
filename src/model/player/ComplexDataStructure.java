@@ -25,7 +25,7 @@ public class ComplexDataStructure {
     List<Army> armyList;          //Whole=0, Battle=1, Reinf=2
     List<List<Entity>> structureList;         //base=0
     List<List<Entity>> currentMode;
-    List<RallyPoint> rallyPointList;
+    List<RallyPoint> rallyPointList = new ArrayList<>();
     RallyPoint selectedRallyPoint=null;
     EntityType modeHolders[]={EntityType.UNIT,EntityType.STRUCTURE,EntityType.ARMY,EntityType.RALLYPOINT};
 
@@ -44,6 +44,7 @@ public class ComplexDataStructure {
         unitList = new ArrayList<>(5);
         armyList = new ArrayList<>(10);
         structureList = new ArrayList<>(1);
+        rallyPointList= new ArrayList<>(20);
         initializeLists();
         changeMode(modeHolders[0]);
     }
@@ -65,7 +66,8 @@ public class ComplexDataStructure {
 
             if (armyList.size() < typeRestriction && !armyList.contains(entity)) {
                 armyList.add(((Army) entity));
-                rallyPointList.add(((Army) entity).getRallyPoint());
+                RallyPoint tempR=((Army) entity).getRallyPoint();
+                rallyPointList.add(tempR);
                 return true;
             }
             return false;
@@ -124,14 +126,15 @@ public class ComplexDataStructure {
     }
 
 
-    public int next(int size, int index) {
+    public static int next(int size, int index) {
+
         index++;
         index %= size;
 
         return index;
     }
 
-    public int previous(int size, int index) {
+    public static int previous(int size, int index) {
         index--;
         if (index < 0) {
             index = size - 1;
@@ -192,7 +195,7 @@ public class ComplexDataStructure {
 
     public Entity circleInstances(ArrayAction arrayAction) {
 
-        if (currentMode == null) {
+        if (currentMode == null || currentMode.get(circleTypeIndex).size()==0) {
             return null;
         }
         if (arrayAction == ArrayAction.increment) {

@@ -1,6 +1,7 @@
 package view.components;
 
 import model.common.Location;
+import model.entity.army.Army;
 import model.map.Map;
 import model.map.tile.Tile;
 
@@ -9,10 +10,13 @@ import java.awt.*;
 
 public class AreaViewport extends JPanel {
 
-    private TilePanel[][] tiles;
     private Rectangle bounds;
+    private GridBagConstraints constraints;
+
+    private TilePanel[][] tiles;
 
     private Location mapCenter;
+    private Location cursorLocation;
 
     private static final int NUM_TILE_ROWS = 5;
     private static final int NUM_TILE_COLS = 5;
@@ -25,13 +29,13 @@ public class AreaViewport extends JPanel {
     private static final String explorerImagePath = "res/images/explorer.png";
     private static final String meleeImagePath = "res/images/melee.png";
     private static final String rangedImagePath = "res/images/ranged.png";
+    private static final String rallyPointImagePath = "res/images/rally_point.png";
 
     private static final String waterImagePath = "res/images/water.png";
     private static final String craterImagePath = "res/images/crater.png";
     private static final String grassImagePath = "res/images/grass.png";
     private static final String dirtImagePath = "res/images/dirt.png";
 
-    private GridBagConstraints constraints;
 
 
     public AreaViewport(GridBagLayout layout, Rectangle mainViewBounds, Map initialMap, Location initialLocation){
@@ -45,7 +49,6 @@ public class AreaViewport extends JPanel {
         constraints = new GridBagConstraints();
 
         //TODO find way to either get bounds properly or work around the fact that we don't know bounds
-        System.out.println(initialMap.getWidth() + "," + initialMap.getHeight());
         TILE_WIDTH = (int) bounds.getWidth()/NUM_TILE_COLS;
         TILE_HEIGHT = (int) bounds.getHeight()/NUM_TILE_ROWS;
 
@@ -70,20 +73,20 @@ public class AreaViewport extends JPanel {
     }
 
     private void updateTiles(Map map) {
-        System.out.println("SIZE IS HUUUUUUUUUUUUUUUGE" + getSize());
+        int actualYCoord = getActualStartingY(mapCenter);
         for (int row = 0; row < NUM_TILE_ROWS; ++row){
+            int actualXCoord = getActualStartingX(mapCenter);
             for (int col = 0; col < NUM_TILE_COLS; ++col){
                 if(tiles[row][col] != null) {
                     remove(tiles[row][col]);
                 }
-                //TODO handle when actualYCoord and actualXCoord go off of the map
-                int actualXCoord = mapCenter.getxCoord() - ( NUM_TILE_COLS /2 - col);
-                int actualYCoord = mapCenter.getyCoord() - ( NUM_TILE_ROWS /2 - row);
-                if (actualXCoord < 0 || actualYCoord < 0){
-                    actualXCoord = NUM_TILE_COLS /2;
-                    actualYCoord = NUM_TILE_ROWS /2;
+                Tile currentTile = new Tile();
+                try {
+                    currentTile = map.getTile(actualYCoord, actualXCoord);
                 }
-                Tile currentTile = map.getTile(actualYCoord, actualXCoord);
+                catch (ArrayIndexOutOfBoundsException e){
+                    System.out.println(e.getMessage());
+                }
                 switch (currentTile.getTerrain().getTerrainType()){
                     case DIRT:
                         tiles[row][col] = new TilePanel(dirtImagePath, TILE_WIDTH, TILE_HEIGHT);
@@ -105,6 +108,9 @@ public class AreaViewport extends JPanel {
                     switch (currentTile.getEntity().getEntityID().getEntityType(0)){
                         case ARMY:
                             tiles[row][col].addEntityImage(armyImagePath);
+                            tiles[((Army)currentTile.getEntity()).getRallyPoint().getLocation().getxCoord()]
+                                    [((Army)currentTile.getEntity()).getRallyPoint().getLocation().getyCoord()]
+                                    .addEntityImage(rallyPointImagePath);
                             break;
                         case BASE:
                             tiles[row][col].addEntityImage(baseImagePath);
@@ -122,12 +128,10 @@ public class AreaViewport extends JPanel {
                             tiles[row][col].addEntityImage(rangedImagePath);
                             break;
                         default:
-                            tiles[row][col].addEntityImage(meleeImagePath);
+                            tiles[row][col].addEntityImage("");
                     }
                 }
 
-                //TODO look up image based on tile type
-                //TODO get entityID from tile and parse
                 constraints.gridx = row+1;
                 constraints.gridy = col+1;
                 constraints.insets = new Insets(1,1,1,1);
@@ -135,13 +139,61 @@ public class AreaViewport extends JPanel {
                 constraints.weightx = 0.5;
                 constraints.weighty = 0.5;
                 add(tiles[row][col], constraints);
+
+                ++actualXCoord;
             }
+            ++actualYCoord;
         }
     }
 
-    public void update(Map updatedMap, Location updatedMapCenter){
+    private int getActualStartingX(Location mapCenter) {
+        if (mapCenter.getxCoord() < NUM_TILE_COLS/2){
+            return getActualStartingX(new Location(mapCenter.getxCoord() + 1, mapCenter.getyCoord()));
+        }
+        else if (mapCenter.getxCoord() + NUM_TILE_COLS/2 > NUM_TILE_COLS){
+            return getActualStartingX(new Location(mapCenter.getxCoord() - 1, mapCenter.getyCoord()));
+        }
+        else{
+            return mapCenter.getxCoord() - NUM_TILE_COLS/2 - 1;
+        }
+    }
+
+    private int getActualStartingY(Location mapCenter) {
+        if (mapCenter.getyCoord() < NUM_TILE_ROWS/2){
+            return getActualStartingY(new Location(mapCenter.getxCoord(), mapCenter.getyCoord() + 1));
+        }
+        else if (mapCenter.getyCoord() + NUM_TILE_ROWS/2 > NUM_TILE_ROWS){
+            return getActualStartingX(new Location(mapCenter.getxCoord() - 1, mapCenter.getyCoord()));
+        }
+        else{
+            return mapCenter.getyCoord() - NUM_TILE_ROWS/2;
+        }
+    }
+
+    public void update(Map updatedMap, Location updatedMapCenter, Location selectedLocation){
         mapCenter = updatedMapCenter;
         updateTiles(updatedMap);
+        if (selectedLocation != null){
+            updateCursor(selectedLocation);
+        }
+    }
+
+    private void updateCursor(Location selectedLocation) {
+        if (cursorLocation == null){
+            tiles[selectedLocation.getxCoord()][selectedLocation.getyCoord()].addCursor();
+            cursorLocation = selectedLocation;
+        }
+        else if (cursorLocation.getxCoord() == selectedLocation.getxCoord() &&
+                cursorLocation.getyCoord() == selectedLocation.getyCoord()){
+            tiles[selectedLocation.getxCoord()][selectedLocation.getyCoord()].addCursor();
+            return;
+        }
+        else {
+            System.out.print("Remove old cursor");
+            tiles[cursorLocation.getxCoord()][cursorLocation.getyCoord()].removeCursor();
+            tiles[selectedLocation.getxCoord()][selectedLocation.getyCoord()].addCursor();
+            cursorLocation = selectedLocation;
+        }
     }
 
     @Override

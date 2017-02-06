@@ -1,6 +1,7 @@
 package model.actions;
 
 import controllers.keyboardInputHandler.TypeOfActions;
+import model.player.ComplexDataStructure;
 
 import java.util.*;
 
@@ -43,22 +44,18 @@ public abstract class ContainsActions {
         }
     }
 
-    public TypeOfActions cycleThroughActions(ActionModifiers actionModifiers) {
+    public Action cycleThroughActions(ActionModifiers actionModifiers) {
         if (isListCreated == false) {
             createList();
             isListCreated = true;
         }
         if (actionModifiers == ActionModifiers.left) {
-            if (listIndex-- >= 0) {
-                listIndex--;
-            }
+            listIndex= ComplexDataStructure.previous(actionList.size(),listIndex);
         }
         if (actionModifiers == ActionModifiers.right) {
-            if (listIndex+1 < actionList.size()) {
-                listIndex++;
-            }
+           listIndex= ComplexDataStructure.next(actionList.size(),listIndex);
         }
-        return actionList.get(listIndex);
+        return actionsMap.get( actionList.get(listIndex));
     }
 
     private void createList() {

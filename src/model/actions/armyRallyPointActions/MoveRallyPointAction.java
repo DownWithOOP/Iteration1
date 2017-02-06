@@ -20,19 +20,32 @@ public class MoveRallyPointAction implements Action {
 
     @Override
     public void execute() {
-        rallyPoint.moveRallyPoint(actionModifier);
+        selectLocation();
     }
 
     @Override
     public void applyModifier(ActionModifiers actionModifier) {
         this.actionModifier=actionModifier;
-        execute();
+        moveRallyPoint();
     }
 
-    public static void main(String[] args) {
+    @Override
+    public String toString() {
+        return "Move Rally Point";
+    }
+
+    private void moveRallyPoint(){
+        rallyPoint.moveRallyPoint(actionModifier);
+    }
+
+    public void selectLocation(){
+        rallyPoint.selectLocation();
+    }
+
+   /* public static void main(String[] args) {
         RallyPoint rallyPoint= new RallyPoint(new Location(1,2), new Army(new Player("hello", new Map()),new Location(1,2)));
         MoveRallyPointAction moveRallyPointAction=new MoveRallyPointAction(rallyPoint);
         moveRallyPointAction.applyModifier(ActionModifiers.down);
 
-    }
+    }*/
 }

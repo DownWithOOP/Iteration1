@@ -28,8 +28,8 @@ abstract public class Entity extends ContainsActions {
     protected final HashMap<TypeOfActions, Action> entityActions = new HashMap<>();                //add all the Actions of an entity here
     private EntityType entityType;
 
-    private EntityAction currentAction;
-    private int currentActionTurnTracker;
+    protected EntityAction currentAction;
+    protected int currentActionTurnTracker;
 
 //TODO: we need player to get the PlayerResources of the player and see if we can perform an action
     public Entity(Player player, EntityType entityType) {
@@ -94,7 +94,12 @@ abstract public class Entity extends ContainsActions {
             }
             currentActionTurnTracker = (int) Math.ceil(currentAction.getTurns());
         }
+        else{
+            handleEmptyQueue();
+        }
     }
+
+    protected abstract void handleEmptyQueue();
 
     abstract public Location getLocation();
 

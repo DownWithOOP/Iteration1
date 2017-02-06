@@ -17,11 +17,8 @@ import model.entity.unit.Ranged;
 import model.map.Map;
 import model.player.Player;
 
-import javax.swing.plaf.basic.BasicScrollPaneUI;
-import java.lang.reflect.Modifier;
 import java.util.*;
-
-import model.entity.EntityID;
+import java.util.Queue;
 
 /**
  * Created by jordi on 2/2/2017.
@@ -40,6 +37,7 @@ public class Army extends Entity implements Fighter {
     HashMap<EntityID, FighterUnit> reinforcements = new HashMap<>();
     HashMap<EntityID, FighterUnit> battleGroup = new HashMap<>();
     private RallyPoint rallyPoint;
+    private Queue<Location> pathqueue=new LinkedList<>();
 
 //    private int
 //    private int
@@ -48,10 +46,10 @@ public class Army extends Entity implements Fighter {
 //    private int
 
 
-    public Army(Player player, Location rallyPoint) {
+    public Army(Player player, Location rallyPointStartingLocation) {
         super(player, EntityType.ARMY);
         initializeArmy();
-        this.rallyPoint= new RallyPoint(rallyPoint,this);
+        this.rallyPoint= new RallyPoint(rallyPointStartingLocation,this,player.getPlayerMap());
     }
 
     protected void initializeArmy() {
@@ -136,17 +134,27 @@ public class Army extends Entity implements Fighter {
 
     }
 
-    //TODO:IMPLEMENT THIS METHOD
-    public void createArmy(){
-
+    public void setPathQueue(Queue<Location> queue){
+        pathqueue=queue;
+        updateTargetLocationReinforcements(queue);
     }
 
-    public boolean moveRallyPoint(ActionModifiers actionModifiers) {
-//      TODO:HERE I AM TOMORROW CONTINUE
-        rallyPoint.moveRallyPoint(actionModifiers);
-
-        return true;
+    private void updateTargetLocationReinforcements(Queue<Location>locationQueue){
+        Location tempLocation=null;
+        Queue<Location> tempQueue= locationQueue;
+        while (!tempQueue.isEmpty()){
+            tempLocation=tempQueue.poll();
+        }
+        notifyReinforcementsRallyPointChange(tempLocation);
     }
+
+    private void notifyReinforcementsRallyPointChange(Location location){
+        for (FighterUnit fighterUnit:
+             reinforcements.values()) {
+            fighterUnit.moveUnit(location.getxCoord(),location.getyCoord());
+        }
+    }
+
 
     private void setBattleGroupStats(int attack, int defense, int health, int upkeep) {
         setBattleGroupAttackPower(attack);
@@ -225,15 +233,22 @@ public class Army extends Entity implements Fighter {
     private void changeReinforcementsTargetLocation() {
 
     }
-//TODO: IMPLEMENT THIS METHOD, VERY IMPORTANT!!!!!!
-    private void moveBattleGroup() {
 
+    private void moveBattleGroup(Location nextTile) {
+        for (FighterUnit fighterUnit:
+             battleGroup.values()) {
+            fighterUnit.moveUnit(nextTile.getxCoord(),nextTile.getyCoord());
+        }
     }
 
     public void arrivedRallyPoint(FighterUnit fighterUnit){
         if (this.playerId == fighterUnit.getPlayerId()) {
             reinforcements.remove(fighterUnit.getEntityID());
-            reinforcements.put(fighterUnit.getEntityID(),fighterUnit);
+            battleGroup.put(fighterUnit.getEntityID(),fighterUnit);
+            setBattleGroupStats(fighterUnit.getUnitStats().getOffensiveDamage(),
+                    fighterUnit.getUnitStats().getDefensiveDamage(),
+                    fighterUnit.getUnitStats().getHealth(),
+                    fighterUnit.getUnitStats().getUpkeep());
         }
     }
 
@@ -305,9 +320,11 @@ public class Army extends Entity implements Fighter {
     public List<Entity> getReinforcements(){
          return getList(reinforcements);
     }
+
     public List<Entity> getBattleGroup(){
         return getList(battleGroup);
     }
+
     public List<List<Entity>> getCircleTypeList(){
         List<List<Entity>> circleTypeList= new ArrayList<>();
         circleTypeList.add(0,getWholeArmy());
@@ -316,12 +333,32 @@ public class Army extends Entity implements Fighter {
 
         return  circleTypeList;
     }
+
     public RallyPoint getRallyPoint(){
         return rallyPoint;
     }
 
     public UnitStats getArmyStats() {
         return armyStats;
+    }
+
+    @Override
+    public void executeCommand(){
+        if (!pathqueue.isEmpty()){
+            moveArmy();
+        }
+    }
+
+    @Override
+    protected void handleEmptyQueue() {
+
+    }
+
+    private void moveArmy(){
+        for (int i=0; i<armyStats.getMovement(); i++) {
+             Location tempLocation = pathqueue.poll();
+            moveBattleGroup(tempLocation);
+        }
     }
 
 }

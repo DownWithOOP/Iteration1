@@ -9,11 +9,11 @@ import model.map.tile.Tile;
  */
 public class ObstacleItem extends Item {
     public ObstacleItem(Location location) {
-        super(location);
+        super(location, 0);
         ObstacleItemEffect();
     }
-    public ObstacleItemEffect(){
-        this.isPassable = false;
+    public void ObstacleItemEffect(){
+        //this.isPassable = false;
     }
 
 }

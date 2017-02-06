@@ -12,21 +12,21 @@ import java.util.ArrayList;
  */
 public class Tile {
 
-    private boolean hasEntity;
+    private static boolean hasEntity;
     private static boolean isPassable;
     private boolean isVisible;
 
     private Terrain terrain;
     private AreaEffect areaEffect;
     private Resource resource;
-    private Item item;
-    private Entity entity;
+    private static Item item;
+    private static Entity entity;
 
     public Tile(Terrain terrain, AreaEffect areaEffect, Resource resource, Item item){
         this.terrain = terrain;
         this.areaEffect = areaEffect;
         this.resource = resource;
-        this.item = item;
+        Tile.item = item;
         Tile.isPassable = terrain.isPassable();
         this.isVisible = false;
     }
@@ -48,6 +48,10 @@ public class Tile {
     public void removeEntity(){
         this.entity = null;
         this.hasEntity = false;
+    }
+    
+    public static void removeItem(){//add to iteration1
+    	item = null;
     }
 
     /**

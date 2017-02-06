@@ -29,8 +29,8 @@ public class MainView extends View {
         constraints.weighty = 1;
 
         Rectangle statusBounds = new Rectangle(width / 2, height);
-        System.out.print(statusBounds);
-        statusViewport = new StatusViewport(statusBounds);
+
+        statusViewport = new StatusViewport(new GridBagLayout(), statusBounds, initialRenderInfo.getPlayer());
         constraints.weightx = 0.15;
         constraints.gridx = 0;
         constraints.gridy = 0;
@@ -38,7 +38,6 @@ public class MainView extends View {
 
         Rectangle areaBounds = new Rectangle(width / 2, height);
 
-        System.out.print(areaBounds);
         areaViewport = new AreaViewport(new GridBagLayout(), areaBounds, initialRenderInfo.getMap(), initialRenderInfo.getPlayer().getPlayerLocation());
         constraints.weightx = 0.85;
         constraints.gridx = 1;

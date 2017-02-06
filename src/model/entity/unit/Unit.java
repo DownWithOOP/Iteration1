@@ -41,7 +41,15 @@ abstract public class Unit extends Entity {
          * */
     }
 
+    /**
+     * Actions
+     */
     abstract public boolean moveUnit(int x, int y);
+
+    @Override
+    public boolean decommission(){
+        return player.removeUnit(this);
+    }
 
     public ArrayList<Location> getCurrentPath() {
         return currentPath;

@@ -2,6 +2,7 @@ package model.entity.unit;
 
 import controllers.keyboardInputHandler.TypeOfActions;
 import model.actions.Action;
+import model.actions.ActionModifiers;
 import model.entity.Fighter;
 import model.entity.stats.UnitStats;
 import model.common.Location;
@@ -24,6 +25,40 @@ public abstract class FighterUnit extends Unit implements Fighter{
         addAllActions(fighterActions);
     }
 
+    private void setFighterUnitActions(){
+        /**
+         *         entityAction.put(TypeOfActions.powerUp,PowerUpAction(this));
+         * */
+    }
+
+    @Override
+    public Location getLocation() {
+        return getCurrentLocation();
+    }
+
+    /**
+     * Actions
+     */
+
+    @Override
+    public boolean moveUnit(int x, int y) {
+//        this.setCurrentLocation(x,y);
+//        setCurrentPath(this.getPlayer().getPlayerMap().findPath(getCurrentLocation(), new Location(x,y)));
+//        for(Location location: this.getCurrentPath()) {
+//           // this.addToQueue();
+//        }
+        return true;
+    }
+
+    @Override
+    public void attack(ActionModifiers actionModifier){
+        //TODO: Add attack code
+    }
+    @Override
+    public void defend(ActionModifiers actionModifier){
+        //TODO: Add defend code
+    }
+
     public void abandonArmy() {
         army.removeFighter(this);
         //TODO: SET UNIT TO STANDBY
@@ -39,37 +74,6 @@ public abstract class FighterUnit extends Unit implements Fighter{
         }
     }
 
-    private void setFighterUnitActions(){
-        /**
-         *         entityAction.put(TypeOfActions.powerUp,PowerUpAction(this));
-         * */
-    }
-
-    @Override
-    public boolean moveUnit(int x, int y) {
-//        this.setCurrentLocation(x,y);
-//        setCurrentPath(this.getPlayer().getPlayerMap().findPath(getCurrentLocation(), new Location(x,y)));
-//        for(Location location: this.getCurrentPath()) {
-//           // this.addToQueue();
-//        }
-        return true;
-    }
-
-    @Override
-    public Location getLocation() {
-        return getCurrentLocation();
-    }
-
-
-    @Override
-    public void attack(){
-
-    }
-    @Override
-    public void defend(){
-
-    }
-
     //TODO: call this function when arrived to a rally point
     private void arrivedToRallyPoint(){
         army.arrivedRallyPoint(this);
@@ -79,13 +83,11 @@ public abstract class FighterUnit extends Unit implements Fighter{
         //TODO: run search algorithm there
     }
 
-
     //TODO: apply the same function of decommission here
     @Override
     public boolean decommission(){
         abandonArmy();
-
-        return true;
+        return super.decommission();
     }
 
 }

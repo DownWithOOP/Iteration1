@@ -26,11 +26,6 @@ public class Base extends Structure {
     }
 
     @Override
-    public void update() {
-
-    }
-
-    @Override
     public Location getLocation() {
         return getFixedLocation();
     }

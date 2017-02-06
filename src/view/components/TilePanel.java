@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.Buffer;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -15,15 +14,23 @@ public class TilePanel extends JPanel {
     private BufferedImage entityImage;
     private Rectangle bounds;
 
-    private static final int TILE_WIDTH = 200;
-    private static final int TILE_HEIGHT = 200;
-    private static final int ENTITY_WIDTH = TILE_WIDTH - 50;
-    private static final int ENTITY_HEIGHT = TILE_HEIGHT - 50;
+    private final int tileWidth;
+    private final int tileHeight;
 
-    public TilePanel(String filePath) {
+    private final int entityWidth;
+    private final int entityHeight;
+    private final int entityBorder;
+
+    public TilePanel(String filePath, int tileWidth, int tileHeight) {
+        this.tileWidth = tileWidth;
+        this.tileHeight = tileHeight;
+
+        entityBorder = (int)0.1 * tileWidth;
+        entityWidth = tileWidth - entityBorder;
+        entityHeight = tileHeight - entityBorder;
 
         //Make tile is displayed at right size
-        setPreferredSize(new Dimension(TILE_WIDTH,TILE_HEIGHT));
+        setPreferredSize(new Dimension(tileWidth,tileHeight));
 
         //Make bgrd not show
         setOpaque(false);
@@ -37,7 +44,7 @@ public class TilePanel extends JPanel {
 
         //Get image
         try {
-            tileImage = readAndResizeImage(filePath, TILE_WIDTH, TILE_HEIGHT);
+            tileImage = readAndResizeImage(filePath, tileWidth, tileHeight);
         }
         catch (IOException e){
             System.out.println(e.getMessage());
@@ -60,14 +67,15 @@ public class TilePanel extends JPanel {
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
 
-        g.drawImage(tileImage, 0, 0, TILE_WIDTH, TILE_HEIGHT, null);
-        g.drawImage(tileImage, 0, 0, ENTITY_WIDTH, ENTITY_HEIGHT, null);
+        System.out.println(tileWidth + "," + tileHeight);
+        g.drawImage(tileImage, 0, 0, tileWidth, tileHeight, null);
+        g.drawImage(tileImage, 0, 0, entityWidth, entityHeight, null);
     }
 
     public void addEntityImage(String filePath) {
         //Get image
         try {
-            entityImage = readAndResizeImage(filePath, ENTITY_WIDTH, ENTITY_HEIGHT);
+            entityImage = readAndResizeImage(filePath, entityWidth, entityHeight);
         }
         catch (IOException e){
             System.out.println(e.getMessage());

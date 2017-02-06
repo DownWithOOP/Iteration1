@@ -16,4 +16,5 @@ public class CycleInstanceAction extends PlayerAction {
     public void applyModifier(ActionModifiers actionModifier) {
 
     }
+
 }

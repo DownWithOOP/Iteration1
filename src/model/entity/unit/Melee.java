@@ -17,16 +17,10 @@ public class Melee extends FighterUnit {
         initializeMelee();
     }
 
-    @Override
-    public void update() {
-
-    }
-
     protected void initializeMelee() {
         setMeleeActions();
         addAllActions(meleeActions);
     }
-
 
     protected void setMeleeActions() {
         /**

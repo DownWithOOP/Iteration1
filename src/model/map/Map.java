@@ -63,7 +63,8 @@ public class Map {
      */
     public ArrayList<Location> findPath(Location startPoint, Location endPoint){
         PathFinder pathFinder = new PathFinder(obstacleGrid);
-        return pathFinder.findPath(startPoint, endPoint);
+        //return pathFinder.findPath(startPoint, endPoint);
+        return null;
     }
 
     private String getMapProperties(String propertyName){

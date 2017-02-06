@@ -59,6 +59,7 @@ public class MainViewController extends GameController {
     @Override
     public void update() {
         updateGameModel();
+        updateView(gameModel.getRenderObject());
     }
 
     @Override

@@ -2,6 +2,7 @@ package model.entity.unit;
 
 import controllers.keyboardInputHandler.TypeOfActions;
 import model.actions.Action;
+import model.actions.MoveAction;
 import model.entity.Entity;
 import model.entity.stats.UnitStats;
 import model.common.Location;
@@ -44,7 +45,21 @@ abstract public class Unit extends Entity {
     /**
      * Actions
      */
-    abstract public boolean moveUnit(int x, int y);
+
+    public boolean moveUnit(int x, int y) {
+        int oldX = this.getCurrentLocation().getxCoord();
+        int oldY = this.getCurrentLocation().getyCoord();
+        int distance = (int)(Math.sqrt(Math.pow(x-oldX,2) + Math.pow(y-oldY,2)));
+        if (distance <= this.getUnitStats().getMovement()) {
+            //this.setCurrentLocation(x,y);
+            setCurrentPath((this.getPlayer().getPlayerMap().findPath(oldX,oldY,x,y)));
+            for (Location location : this.getCurrentPath()) {
+                this.addToQueue(new MoveAction(this, location));
+            }
+            return true;
+        }
+        return false;
+    }
 
     @Override
     public boolean decommission(){

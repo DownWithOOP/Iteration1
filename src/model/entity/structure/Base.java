@@ -81,7 +81,7 @@ public class Base extends Structure {
     //TODO: account for an obstacle blocking the rally point
     //TODO: FIX THIS
     private void setRallypoint(Location location){
-        unitsRallyPoint= new RallyPoint(location,new Army(player,location));
+        unitsRallyPoint= new RallyPoint(location,new Army(player,location),player.getPlayerMap());
     }
     //TODO: manage this so that no obstacle can block the rally point
     private void setDefaultRallypoint(){

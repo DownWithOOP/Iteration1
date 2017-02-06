@@ -13,6 +13,8 @@ import model.common.Location;
 import model.entity.Entity;
 import model.entity.army.Army;
 import model.entity.army.RallyPoint;
+import model.entity.stats.StructureStats;
+import model.entity.structure.Base;
 import model.entity.structure.Structure;
 import model.entity.unit.*;
 import model.map.Map;
@@ -48,10 +50,13 @@ public class Player extends ContainsActions {
     private ArrayList<Unit> units;
     private ArrayList<Structure> structures;
     private ArrayList<Army> armies;
-    private ComplexDataStructure complexDataStructure = new ComplexDataStructure();
-    private Entity selectedEntity = null;
+
     private RallyPoint selectedRallyPoint = null;
     private Action selectedAction=null;
+
+    private ComplexDataStructure complexDataStructure= new ComplexDataStructure();
+    private Entity selectedEntity;
+
 
     private java.util.HashMap<Integer, Action> actionMap = new HashMap<>();
     private java.util.HashMap<TypeOfActions, Action> playerActionMap = new HashMap<>();                           // Where all the actions the player is going to perform are found
@@ -76,7 +81,10 @@ public class Player extends ContainsActions {
         //TODO:CHECKOUT THESE COORDINATES
         addUnit(new Explorer(this, new Location(1, 1)));
         addUnit(new Explorer(this, new Location(0, 0)));
-        addUnit(new Colonist(this, new Location(0, 0)));
+        addUnit(new Colonist(this,new Location(0,1)));
+        addStructure(new Base(new StructureStats(10, 7, 15, 100, 5, 3, 8),
+                new Location(2, 1),
+                this)); //TODO: Temporary structure -- delete later!
         this.playerId = playerId;
         initializePlayer();                                         /** do not delete this */
         selectedEntity = units.get(0); //TODO delet this
@@ -124,6 +132,7 @@ public class Player extends ContainsActions {
         complexDataStructure.addEntity(structure);
         if (structures.size() < MAX_STRUCTURES) {
             System.out.println("ADDED STRUCTURE");
+            getPlayerMap().getTile(structure.getFixedLocation().getxCoord(),structure.getFixedLocation().getyCoord()).setEntity(structure);
             return structures.add(structure) && allEntities.add(structure);
         }
         System.out.println("Too many structures!");
@@ -163,6 +172,7 @@ public class Player extends ContainsActions {
                     return false;
             }
             System.out.println("ADDED UNIT");
+            getPlayerMap().getTile(unit.getCurrentLocation().getxCoord(),unit.getCurrentLocation().getyCoord()).setEntity(unit);
             return units.add(unit) && allEntities.add(unit);
         }
         System.out.println("Too many Units!");
@@ -179,19 +189,17 @@ public class Player extends ContainsActions {
 
     //todo:add complexStructure remove methods
     public boolean removeStructure(Structure structure) {
-        complexDataStructure.removeEntity(structure);
         return structures.remove(structure) && allEntities.remove(structure);
     }
 
     public boolean removeUnit(Unit unit) {
-        complexDataStructure.removeEntity(unit);
         return units.remove(unit) && allEntities.remove(unit);
     }
 
     public boolean removeArmy(Army army) {
-        complexDataStructure.removeEntity(army);
         return armies.remove(army) && allEntities.remove(army);
     }
+
 
 
     /**
@@ -209,7 +217,7 @@ public class Player extends ContainsActions {
         return units;
     }
 
-    public List<Army> getArmy() {
+    public List<Army> getArmy(){
         return complexDataStructure.getArmy();
     }
 
@@ -228,13 +236,9 @@ public class Player extends ContainsActions {
         return selectedRallyPoint;
     }
 
-    public Map getPlayerMap() {
-        return playerMap;
-    }
+    public Map getPlayerMap() {return playerMap;}
 
-    public Location getPlayerLocation() {
-        return selectedEntity.getLocation();
-    }
+    public Location getPlayerLocation() {return selectedEntity.getLocation();}
 
     public int catfoodResourceLevel() {
         return resourceLevelsMap.get(ResourceType.CATFOOD);
@@ -262,6 +266,7 @@ public class Player extends ContainsActions {
     public void setResearchResourceLevel(int level) {
         this.resourceLevelsMap.put(ResourceType.RESEARCH, level);
     }
+
 
 
     public void cycleMode(ActionModifiers actionModifier) {
@@ -338,7 +343,7 @@ public class Player extends ContainsActions {
         return temp;
     }
 
-    public void setPlayerMap(Map playerMap) {
+    public void setPlayerMap(Map playerMap){
         this.playerMap = playerMap;
     }
 

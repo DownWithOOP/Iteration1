@@ -32,13 +32,11 @@ public class StateManager implements KeyListener {
     private int controlKey=0;
     private HashMap<TypeOfControllers, Controller> controllerMap = new HashMap<>();       //used for controller change, so that access is O(1)
     private boolean gameOn;
-    public final long FPS = 30;                            //frames per second
+    public final long FPS = 1;                            //frames per second
     final long LOOP_TIME = 1000l / FPS;                   //how long an update should take 1000 miliseconds/ FPS
     private Controller activeController;
     public final GUI gui;
 
-    // TODO: made these active players just for testing
-    private Player[] activePlayers; // will keep track of the current players
 
     /**
      * when class is initialized the controllers are too and the WelcomeViewController is activated
@@ -106,6 +104,7 @@ public class StateManager implements KeyListener {
         activeController.update();
         gui.repaintCurrentView();
     }
+
 
 
     public void stopGame() {

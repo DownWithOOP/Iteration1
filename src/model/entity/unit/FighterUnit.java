@@ -3,6 +3,7 @@ package model.entity.unit;
 import controllers.keyboardInputHandler.TypeOfActions;
 import model.actions.Action;
 import model.actions.ActionModifiers;
+import model.actions.MoveAction;
 import model.entity.Fighter;
 import model.entity.stats.UnitStats;
 import model.common.Location;
@@ -41,9 +42,11 @@ public abstract class FighterUnit extends Unit implements Fighter{
      */
 
 
+
     public void moveUnitArmy(Location nextTile) {
         this.setCurrentLocation(nextTile.getxCoord(),nextTile.getyCoord());
     }
+
 
     @Override
     public void attack(ActionModifiers actionModifier){

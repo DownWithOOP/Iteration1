@@ -11,9 +11,10 @@ import model.map.tile.Tile;
 public class OneShotItem extends Item {
 	public OneShotItem(Location location, ItemType itemType) {
 		super(location, itemType);
+		/*
 		if(Tile.hasEntity()){			//if Tile has entity 
 			affectUnit(Tile.getEntity());	//activate OneShot
-		}
+		} */
 	}
 	
   	public void affectUnit(Entity entity){

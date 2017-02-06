@@ -62,6 +62,14 @@ public class GameModel {
         return true;
     }
 
+    public void switchPlayers(){
+        if(activePlayer.getPlayerId().equals("player1")){
+            activePlayer = players.get("player2");
+        } else {
+            activePlayer = players.get("player1");
+        }
+    }
+
     /**
      * Returns info from the model to be rendered.
      */

@@ -9,8 +9,8 @@ import model.entity.Entity;
  */
 public abstract class EntityAction implements Action {
 
-    Entity entity;
-    double numTurns;
+    protected Entity entity;
+    protected double numTurns;
 
     public EntityAction(Entity entity, double numTurns){
         this.entity = entity;

@@ -81,7 +81,7 @@ public class MainViewController extends GameController {
 
     protected void setView(RenderObject renderInfo) {
         // this method is called when the class is initialized, we create our view that corresponds to the controller
-        this.mainView = new MainView(renderInfo);
+        this.mainView = new MainView(new GridBagLayout(), renderInfo);
 
     }
 

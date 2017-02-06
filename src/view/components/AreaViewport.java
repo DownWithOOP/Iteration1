@@ -14,8 +14,6 @@ public class AreaViewport extends JPanel {
 
     private Location mapCenter;
 
-    private int tileHeight;
-    private int tileWidth;
     private int numTileRows;
     private int numTileCols;
 
@@ -25,28 +23,27 @@ public class AreaViewport extends JPanel {
     private static final String grassImagePath = "res/images/grass.png";
     private static final String dirtImagePath = "res/images/dirt.png";
 
+    private GridBagConstraints constraints;
 
-    public AreaViewport(LayoutManager layout, Map initialMap, Location initialLocation){
+
+    public AreaViewport(GridBagLayout layout, Map initialMap, Location initialLocation){
         super(layout);
-        setBackground(Color.black);
-        setVisible(true);
 
-        System.out.println("SIZE IS HUUUUUUUUUUUUUUUGE" + getSize());
+        setOpaque(false);
+        setPreferredSize(new Dimension(500,500));
 
-        bounds = new Rectangle(getSize());
+        constraints = new GridBagConstraints();
 
         //TODO find way to either get bounds properly or work around the fact that we don't know bounds
         numTileRows = 3; //(int) bounds.getHeight() / get;
         numTileCols = 3; //(int) bounds.getWidth();
-
-        tileHeight = (int) bounds.getHeight()/numTileRows;
-        tileWidth = (int) bounds.getWidth()/numTileCols;
 
         tiles = new TilePanel[numTileRows][numTileCols];
 
         mapCenter = initialLocation;
 
         updateTiles(initialMap);
+        setVisible(true);
     }
 
     private void updateTiles(Map map) {
@@ -79,7 +76,9 @@ public class AreaViewport extends JPanel {
                 }
                 //TODO look up image based on tile type
                 //TODO get entityID from tile and parse
-                add(tiles[row][col]);
+                constraints.gridx = row;
+                constraints.gridy = col;
+                add(tiles[row][col], constraints);
             }
         }
     }
@@ -88,8 +87,6 @@ public class AreaViewport extends JPanel {
         System.out.println("SIZE IS HUUUUUUUUUUUUUUUGE" + getSize());
         System.out.println("AREAVIEWPORT X LOCATION IS HUUUUUUUUUUUUUUUGE " + getX());
         System.out.println("AREAVIEWPORT Y LOCATION IS HUUUUUUUUUUUUUUUGE " + getY());
-        tileHeight = (int) bounds.getHeight()/numTileRows;
-        tileWidth = (int) bounds.getWidth()/numTileCols;
         mapCenter = updatedMapCenter;
         updateTiles(updatedMap);
     }

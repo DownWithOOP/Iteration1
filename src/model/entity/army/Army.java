@@ -244,7 +244,11 @@ public class Army extends Entity implements Fighter {
     public void arrivedRallyPoint(FighterUnit fighterUnit){
         if (this.playerId == fighterUnit.getPlayerId()) {
             reinforcements.remove(fighterUnit.getEntityID());
-            reinforcements.put(fighterUnit.getEntityID(),fighterUnit);
+            battleGroup.put(fighterUnit.getEntityID(),fighterUnit);
+            setBattleGroupStats(fighterUnit.getUnitStats().getOffensiveDamage(),
+                    fighterUnit.getUnitStats().getDefensiveDamage(),
+                    fighterUnit.getUnitStats().getHealth(),
+                    fighterUnit.getUnitStats().getUpkeep());
         }
     }
 
@@ -343,6 +347,11 @@ public class Army extends Entity implements Fighter {
         if (!pathqueue.isEmpty()){
             moveArmy();
         }
+    }
+
+    @Override
+    protected void handleEmptyQueue() {
+
     }
 
     private void moveArmy(){

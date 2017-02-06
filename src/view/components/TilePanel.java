@@ -68,7 +68,6 @@ public class TilePanel extends JPanel {
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
 
-        System.out.println(entityWidth + "," + entityHeight);
         g.drawImage(tileImage, 0, 0, tileWidth, tileHeight, null);
         g.drawImage(entityImage, 0, 0, entityWidth, entityHeight, null);
     }

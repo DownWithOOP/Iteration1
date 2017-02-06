@@ -4,7 +4,7 @@ import model.common.Location;
 import model.map.Map;
 import model.map.tile.Tile;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.*;
 
 public class AreaViewport extends JPanel {
@@ -26,12 +26,12 @@ public class AreaViewport extends JPanel {
     private GridBagConstraints constraints;
 
 
-    public AreaViewport(GridBagLayout layout, Map initialMap, Location initialLocation){
+    public AreaViewport(GridBagLayout layout, Rectangle bounds, Map initialMap, Location initialLocation){
         super(layout);
 
         setOpaque(false);
         //TODO remove hard coded dimensions
-        setPreferredSize(new Dimension(500,500));
+        setPreferredSize(new Dimension((int)bounds.getWidth(),(int)bounds.getHeight()));
 
         constraints = new GridBagConstraints();
 
@@ -43,8 +43,19 @@ public class AreaViewport extends JPanel {
 
         mapCenter = initialLocation;
 
+        //Fill to left of tiles
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.gridx = 0;
+        constraints.weightx = 1;
+        add(Box.createGlue(), constraints);
+
+        //Set up tiles
         updateTiles(initialMap);
 
+        //Fill to right of tiles
+        constraints.gridx +=1;
+        constraints.weightx =1;
+        add(Box.createGlue(), constraints);
         setVisible(true);
     }
 
@@ -85,9 +96,9 @@ public class AreaViewport extends JPanel {
                 }
                 //TODO look up image based on tile type
                 //TODO get entityID from tile and parse
-                constraints.gridx = row;
-                constraints.gridy = col;
-                constraints.insets = new Insets(5,0,5,0);
+                constraints.gridx = row+1;
+                constraints.gridy = col+1;
+                constraints.insets = new Insets(1,1,1,1);
                 constraints.fill = GridBagConstraints.BOTH;
                 constraints.weightx = 0.5;
                 constraints.weighty = 0.5;

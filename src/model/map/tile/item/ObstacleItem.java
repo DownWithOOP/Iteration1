@@ -8,12 +8,11 @@ import model.map.tile.Tile;
  * Created by cduica on 2/4/17.
  */
 public class ObstacleItem extends Item {
-    public ObstacleItem(Location location) {
-        super(location, 0);
+    public ObstacleItem(Location location, ItemType itemType) {
+        super(location, itemType);
         ObstacleItemEffect();
     }
     public void ObstacleItemEffect(){
-        //this.isPassable = false;
+        Tile.setIsPassable(false);
     }
-
 }
